@@ -1,3 +1,6 @@
+import java.util.Hashtable;
+import java.util.Set;
+
 public class Board {
     private String board[][];
 
@@ -51,6 +54,32 @@ public class Board {
 
     public void setBoard(String[][] board) {
         this.board = board;
+    }
+
+    /**
+     *  Adds piece to the board
+     * 
+     *  @param player player playing the piece
+     *  @param piece piece being placed
+     *  @param dest_x x coordinate of piece origin
+     *  @param dest_y y coordinate of piece origin
+     */
+    public void addPiece(Player player, Hashtable<String, int[]> piece, int dest_x, int dest_y) {
+        Set<String> setOfKeys = piece.keySet();
+        for (String s : setOfKeys) {
+            board[dest_x + piece.get(s)[0]][dest_y + piece.get(s)[1]] = player.getColor();
+        }
+        board[dest_x][dest_y] = player.getColor();
+    }
+
+    /**
+     * returns false if square is out of bounds
+     * 
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    public boolean contains(int x, int y) {
+        return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
     }
 
     public static void main( String[] args) {
