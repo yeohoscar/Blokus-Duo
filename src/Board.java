@@ -3,8 +3,12 @@ import java.util.Set;
 
 public class Board {
     private String board[][];
+    private Player one;
+    private Player two;
 
-    public Board() {
+    public Board(Player one, Player two) {
+        this.one = one;
+        this.two = two;
         this.board = new String[14][14];
         // initialize the board
         for (int i = 0; i < board.length; i++ ) {
@@ -29,7 +33,6 @@ public class Board {
                 System.out.print("\n "+row+" ");
             }
             row--;
-
             // every square
             for (int j = 0; j < board.length; j++) {
                 /*TODO: print board + numbers*/
@@ -46,6 +49,12 @@ public class Board {
                 System.out.print(i+" ");
             }
         }
+
+        // available pieces for each player
+        System.out.println("Player "+one.getName()+"(X) gamepieces: "+ pieces);
+
+        System.out.println("Player "+two.getName()+"(O) gamepieces: "+ pieces);
+
     }
 
     public String[][] getBoard() {
@@ -56,6 +65,7 @@ public class Board {
         this.board = board;
     }
 
+<<<<<<< HEAD
     /**
      *  Adds piece to the board
      * 
@@ -86,4 +96,6 @@ public class Board {
         Board b1 = new Board();
         b1.printBoard();
     }
+=======
+>>>>>>> main
 }
