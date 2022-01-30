@@ -6,8 +6,7 @@ public class Main {
     }
 
     public void gameStart() {
-        Board board = new Board();
-        
+
         Scanner s = new Scanner(System.in);
         System.out.println("Enter Player 1 name: ");
         String tmp = s.nextLine();
@@ -17,6 +16,8 @@ public class Main {
         tmp = s.nextLine();
         Player Two = new Player(tmp);
         s.close();
+
+        Board board = new Board(One, Two);
     }
 }
 
