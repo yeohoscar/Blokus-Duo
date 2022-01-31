@@ -51,9 +51,9 @@ public class Board {
         }
 
         // available pieces for each player
-        System.out.println("Player "+one.getName()+"(X) gamepieces: "+ pieces);
+        System.out.println("Player "+one.getName()+"(X) gamepieces: " + one.getStock());
 
-        System.out.println("Player "+two.getName()+"(O) gamepieces: "+ pieces);
+        System.out.println("Player "+two.getName()+"(O) gamepieces: " + one.getStock());
 
     }
 
@@ -65,7 +65,6 @@ public class Board {
         this.board = board;
     }
 
-<<<<<<< HEAD
     /**
      *  Adds piece to the board
      * 
@@ -74,10 +73,9 @@ public class Board {
      *  @param dest_x x coordinate of piece origin
      *  @param dest_y y coordinate of piece origin
      */
-    public void addPiece(Player player, Hashtable<String, int[]> piece, int dest_x, int dest_y) {
-        Set<String> setOfKeys = piece.keySet();
-        for (String s : setOfKeys) {
-            board[dest_x + piece.get(s)[0]][dest_y + piece.get(s)[1]] = player.getColor();
+    public void addPiece(Player player, Piece piece, int dest_x, int dest_y) {
+        for (int[] block : piece.getBlocks()) {
+            board[dest_x + block[1]][dest_y + block[0]] = player.getColor();
         }
         board[dest_x][dest_y] = player.getColor();
     }
@@ -91,11 +89,4 @@ public class Board {
     public boolean contains(int x, int y) {
         return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
     }
-
-    public static void main( String[] args) {
-        Board b1 = new Board();
-        b1.printBoard();
-    }
-=======
->>>>>>> main
 }

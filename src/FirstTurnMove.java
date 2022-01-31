@@ -1,10 +1,23 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class FirstTurnMove {
-    
+    private final Player player;
+    private final Board board;
+    private final Piece piece;
+    private final int dest_x;
+    private final int dest_y;
 
-
-
+    public FirstTurnMove(Player player, Board board, Piece piece, ArrayList<Integer> coord) {
+        if (player == null || board == null || piece == null) {
+            throw new IllegalArgumentException();
+        }
+        this.player = player;
+        this.board = board;
+        this.piece = piece;
+        this.dest_x = coord.get(0);
+        this.dest_y = coord.get(1); 
+    }
 
     /**
      * returns true if any square in piece is on either of the starting points
@@ -13,8 +26,8 @@ public class FirstTurnMove {
      * @param dest_x x coordinate of the block origin
      * @param dest_y y cooridnate of the block origin
      */
-    public static boolean isValidFirstMove(Hashtable<String, int[]> piece, int dest_x, int dest_y) {
-        return piece.values().stream().anyMatch(offset -> isOnFirstMoveSquare(offset, dest_x, dest_y));
+    private static boolean isValidFirstMove(Piece piece, int dest_x, int dest_y) {
+        return piece.getBlocks().stream().anyMatch(offset -> isOnFirstMoveSquare(offset, dest_x, dest_y));
     }
 
     /**
@@ -24,17 +37,15 @@ public class FirstTurnMove {
      * @param dest_x x coordinate of the block origin
      * @param dest_y y coordinate of the block origin
      */
-    public static boolean isOnFirstMoveSquare(int[] offset, int dest_x, int dest_y) {
+    private static boolean isOnFirstMoveSquare(int[] offset, int dest_x, int dest_y) {
         return (offset[0] + dest_x == 9 && offset[1] + dest_y == 4 || offset[0] + dest_x == 4 && offset[1] + dest_y == 9);
     }
 
-    public static void main(String[] args) {
-        Hashtable<String, int[]> piece = new Hashtable<>();
-
-        piece.put("0", new int[] {0, 0});
-        piece.put("1", new int[] {0, 1});
-        piece.put("2", new int[] {1, 0});
-
-        System.out.println(isValidFirstMove(piece, 8, 4));
+    public boolean executeMove() {
+        if (!isValidFirstMove(piece, dest_x, dest_y)) {
+            return false;
+        }
+        board.addPiece(player, piece, dest_x, dest_x);
+        return true;
     }
 }
