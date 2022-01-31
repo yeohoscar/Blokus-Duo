@@ -2,7 +2,7 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class Board {
-    private String board[][];
+    private String[][] board;
     private Player one;
     private Player two;
 
@@ -53,7 +53,7 @@ public class Board {
         // available pieces for each player
         System.out.println("Player "+one.getName()+"(X) gamepieces: " + one.getStock());
 
-        System.out.println("Player "+two.getName()+"(O) gamepieces: " + one.getStock());
+        System.out.println("Player "+two.getName()+"(O) gamepieces: " + two.getStock());
 
     }
 
