@@ -5,6 +5,10 @@ public class Game {
          *      -> check all available spaces for current orientation of piece
          */
         
-         
+
+         */ 
+
+        selectPiece();
+        putPiece();
     }
 }

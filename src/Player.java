@@ -9,6 +9,14 @@ public class Player {
         this.name = name;
         score = 0;
         this.pieces = //init pieces
+        this.stock = new Stock();
+    }
+
+    public static Player initPlayer(String color, Scanner s) {
+        System.out.println("Enter Player name: ");
+        String tmp = s.nextLine();
+        Player p = new Player(tmp, color);
+        return p;
     }
 
     public String getName() {
