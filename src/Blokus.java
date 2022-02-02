@@ -33,8 +33,7 @@ public class Blokus {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.nextLine();
-        s.nextLine();
+        String tmp = s.useDelimiter("\\n").nextLine();
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
@@ -43,20 +42,17 @@ public class Blokus {
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece.");
-            tmp = s.nextLine();
-            s.nextLine();
+            tmp = s.useDelimiter("\\n").nextLine();
         }
     }
 
     public ArrayList<Integer> selectSquare(Scanner s) {
         ArrayList<Integer> coord = new ArrayList<>();
         System.out.print("Enter x coordinate of square: ");
-        coord.add(Integer.parseInt(s.nextLine()));
-        s.nextLine();
+        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
 
         System.out.print("Enter y coordinate of square: ");
-        coord.add(Integer.parseInt(s.nextLine()));
-        s.nextLine();
+        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
         return coord;
     }
 
@@ -81,7 +77,7 @@ public class Blokus {
     }
 
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
+        Scanner s = new Scanner(System.in).useDelimiter("\\n");
         Blokus b = new Blokus(s);
         
         if (b.isFirstTurn()) {
@@ -90,6 +86,7 @@ public class Blokus {
             b.setCurrentPlayer(b.getPlayers().get(1));
             b.board.printBoard();
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));
+            b.board.printBoard();
             b.setState(State.MIDGAME); 
         }
     }

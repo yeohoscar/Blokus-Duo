@@ -17,8 +17,7 @@ public class Player {
 
     public static Player initPlayer(String color, Scanner s) {
         System.out.println("Enter Player name: ");
-        String tmp = s.nextLine();
-        s.nextLine();
+        String tmp = s.useDelimiter("\\n").nextLine();
         Player p = new Player(tmp, color);
         return p;
     }

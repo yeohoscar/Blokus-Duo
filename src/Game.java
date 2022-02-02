@@ -6,6 +6,6 @@ public class Game {
          */ 
 
         selectPiece();
-        putPiece()
+        putPiece();
     }
 }

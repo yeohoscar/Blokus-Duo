@@ -49,11 +49,12 @@ public class Board {
                 System.out.print(i+" ");
             }
         }
+        System.out.println();
 
         // available pieces for each player
-        System.out.println("Player "+one.getName()+"(X) gamepieces: " + one.getStock());
+        System.out.println("Player " + one.getName() + "(X) gamepieces: " + one.getStock());
 
-        System.out.println("Player "+two.getName()+"(O) gamepieces: " + one.getStock());
+        System.out.println("Player " + two.getName() + "(O) gamepieces: " + one.getStock());
 
     }
 
