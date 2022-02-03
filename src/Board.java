@@ -49,10 +49,6 @@ public class Board {
         System.out.println();
 
         // available pieces for each player
-        System.out.println("Player " + one.getName() + "(X) gamepieces: " + one.getStock());
-
-        System.out.println("Player "+two.getName()+"(O) gamepieces: " + two.getStock());
-
         System.out.println("\nPlayer "+one.getName()+"(X) gamepieces:\n" + one.getStock());
 
         System.out.println("Player "+two.getName()+"(O) gamepieces:\n" + two.getStock());
