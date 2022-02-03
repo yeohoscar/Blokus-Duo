@@ -76,18 +76,32 @@ public class Blokus {
         this.state = state;
     }
 
+    public void printUI() {
+        System.out.println(getCurrentPlayer().getName() + "'s turn\n");
+        getBoard().printBoard();
+    }
+
+    public void nextPlayer() {
+        if (currentPlayer == getPlayers().get(0)) {
+            setCurrentPlayer(getPlayers().get(1));
+            return;
+        }
+        setCurrentPlayer(getPlayers().get(0));
+    }
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in).useDelimiter("\\n");
         Blokus b = new Blokus(s);
         
         if (b.isFirstTurn()) {
-            b.board.printBoard();
+            b.printUI();
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));
-            b.setCurrentPlayer(b.getPlayers().get(1));
-            b.board.printBoard();
+            b.nextPlayer();
+            b.printUI();
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));
-            b.board.printBoard();
+            b.printUI();
             b.setState(State.MIDGAME); 
+            b.nextPlayer();
         }
     }
 }
