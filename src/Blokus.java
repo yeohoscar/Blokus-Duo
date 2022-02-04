@@ -38,6 +38,7 @@ public class Blokus {
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
+                    currentPlayer.getStock().getPieces().remove(p);// remove the piece selected from list
                     return p;
                 }
             }
