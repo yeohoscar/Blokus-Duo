@@ -10,7 +10,7 @@ public class Stock {
     /**
      * Initialises pieces and adds to arraylist
      */
-    public void setPieces() {
+    private void setPieces() {
         int[] ori = new int[] {0, 0};
         int[] up1 = new int[] {0, 1};
         int[] up2 = new int[] {0, 2};

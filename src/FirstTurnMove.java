@@ -45,6 +45,7 @@ public class FirstTurnMove {
             return false;
         }
         board.addPiece(player, piece, dest_x, dest_y);
+        player.getStock().getPieces().remove(piece);
         return true;
     }
 }

@@ -1,11 +1,7 @@
 public class Board {
     private String[][] board;
-    private Player one;
-    private Player two;
 
-    public Board(Player one, Player two) {
-        this.one = one;
-        this.two = two;
+    public Board() {
         this.board = new String[14][14];
         // initialize the board
         for (int i = 0; i < board.length; i++ ) {
@@ -47,11 +43,6 @@ public class Board {
             }
         }
         System.out.println();
-
-        // available pieces for each player
-        System.out.println("\nPlayer "+one.getName()+"(X) gamepieces:\n" + one.getStock());
-        System.out.println("Player "+two.getName()+"(O) gamepieces:\n" + two.getStock());
-
     }
 
     public String[][] getBoard() {

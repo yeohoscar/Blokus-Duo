@@ -6,10 +6,9 @@ public class Blokus {
     private Player currentPlayer;
     private State state;
 
-
     public Blokus(Scanner s) {
         this.players = new ArrayList<>(Arrays.asList(Player.initPlayer("X", s), Player.initPlayer("O", s)));
-        this.board = new Board(players.get(0), players.get(1));
+        this.board = new Board();
         this.currentPlayer = players.get(0);
         this.state = State.FIRST;
     }
@@ -19,16 +18,6 @@ public class Blokus {
     }
 
     public Piece selectPiece(Scanner s) {
-        /**
-         * TODO:
-         * check if pieces remain -> pieces.size != 0
-         * if (pieces contains piece named "piece") {
-         *      return piece
-         * } else {
-         *      throw error -> piece doesnt exist
-         * }
-         */
-
         if (currentPlayer.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
@@ -38,7 +27,6 @@ public class Blokus {
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
-                    currentPlayer.getStock().getPieces().remove(p);// remove the piece selected from list
                     return p;
                 }
             }
@@ -54,6 +42,7 @@ public class Blokus {
 
         System.out.print("Enter y coordinate of square: ");
         coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
+
         return coord;
     }
 
@@ -80,6 +69,7 @@ public class Blokus {
     public void printUI() {
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
         getBoard().printBoard();
+        System.out.println(getCurrentPlayer().getName()+"(X) gamepieces:\n" + getCurrentPlayer().getStock());
     }
 
     public void nextPlayer() {
@@ -96,7 +86,7 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove())) {System.out.println("Invalid move");};
             b.nextPlayer();
             b.printUI();
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));

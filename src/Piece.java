@@ -17,8 +17,9 @@ public class Piece {
         return blocks;
     }
 
-    //putPiece();
-
+    /**
+     * TODO: implement rotation
+     */
     public void rotatePieceClockwise(Piece p) {
         int count = p.getBlocks().size();
 
@@ -57,7 +58,7 @@ public class Piece {
         }
     }
 
-    public void swap(int x, int y) {
+    private void swap(int x, int y) {
         int tmp = x;
         x = y;
         y = tmp;
