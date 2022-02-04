@@ -37,14 +37,14 @@ public class FirstTurnMove {
      * @param dest_y y coordinate of the block origin
      */
     private static boolean isOnFirstMoveSquare(int[] offset, int dest_x, int dest_y) {
-        return (offset[0] + dest_x == 9 && offset[1] + dest_y == 4 || offset[0] + dest_x == 4 && offset[1] + dest_y == 9);
+        return (13 - offset[0] + dest_x == 9 && offset[1] + dest_y == 4 || offset[0] + dest_x == 4 && offset[1] + dest_y == 9);
     }
 
     public boolean executeMove() {
         if (!isValidFirstMove(piece, dest_x, dest_y)) {
             return false;
         }
-        board.addPiece(player, piece, dest_x, dest_x);
+        board.addPiece(player, piece, dest_x, dest_y);
         return true;
     }
 }

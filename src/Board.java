@@ -73,9 +73,8 @@ public class Board {
      */
     public void addPiece(Player player, Piece piece, int dest_x, int dest_y) {
         for (int[] block : piece.getBlocks()) {
-            board[dest_x + block[1]][dest_y + block[0]] = player.getColor();
+            board[13 - dest_y - block[1]][dest_x + block[0]] = player.getColor();
         }
-        board[dest_x][dest_y] = player.getColor();
     }
 
     /**
