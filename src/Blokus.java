@@ -30,7 +30,7 @@ public class Blokus {
                     return p;
                 }
             }
-            System.out.println("Piece not in stock.\nSelect a piece.");
+            System.out.println("Piece not in stock.\nSelect a piece");
             tmp = s.useDelimiter("\\n").nextLine();
         }
     }
@@ -86,10 +86,10 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove())) {System.out.println("Invalid move");};
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove())) {System.out.println("Invalid move");}
             b.nextPlayer();
             b.printUI();
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove()));
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), b.selectPiece(s), b.selectSquare(s)).executeMove())) {System.out.println("Invalid move");}
             b.printUI();
             b.setState(State.MIDGAME); 
             b.nextPlayer();
