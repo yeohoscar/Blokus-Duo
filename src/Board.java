@@ -82,11 +82,6 @@ public class Board {
             throw new IllegalArgumentException("Position out of bound");
         }
 
-        /*System.out.println(offset[0] + " " + offset[1]);
-        System.out.println((13 - offset[1] - dest_y) + " " + (offset[0] + dest_x));
-        boolean f = (board[13 - offset[1] - dest_y][offset[0] + dest_x] != "X");
-        boolean g = board[13 - offset[1] - dest_y][offset[0] + dest_x] != "O";
-        System.out.println(f + " " + g);*/
         return (board[13 - offset[1] - dest_y][offset[0] + dest_x] != "X" && board[13 - offset[1] - dest_y][offset[0] + dest_x] != "O");
     }
 
