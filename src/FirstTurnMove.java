@@ -41,7 +41,7 @@ public class FirstTurnMove {
     }
 
     public boolean executeMove() {
-        if (!isValidFirstMove(piece, dest_x, dest_y)) {
+        if (!isValidFirstMove(piece, dest_x, dest_y) || !board.isEmptyAt(dest_x, dest_y)) {
             return false;
         }
         board.addPiece(player, piece, dest_x, dest_y);

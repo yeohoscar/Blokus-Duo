@@ -14,10 +14,10 @@ public class Player {
     }
 
     public static Player initPlayer(String color, Scanner s) {
-        System.out.println("Enter Player("+color+") name: ");
+        System.out.println("Enter Player(" + color + ") name: ");
         String tmp = s.useDelimiter("\\n").nextLine();
         while(tmp == null || tmp.trim().isEmpty()) {
-            System.out.println("Player name cannot be null\nEnter Player("+color+") name:");
+            System.out.println("Player name cannot be null\n Enter Player(" + color + ") name:");
             tmp = s.useDelimiter("\\n").nextLine();
         }
         Player p = new Player(tmp, color);

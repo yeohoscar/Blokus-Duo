@@ -15,21 +15,21 @@ public class Board {
     }
 
     public void printBoard() {
-        int row = board.length-1;
+        int row = board.length - 1;
         System.out.print("BLOKUS DUO\n");
 
         for (int i = 0; i < board[0].length; i++) {
             // column index
             if( row > 9) {
-                System.out.print("\n"+row+" ");
+                System.out.print("\n" + row + " ");
             } else {
-                System.out.print("\n "+row+" ");
+                System.out.print("\n " + row + " ");
             }
             row--;
             // every square
             for (int j = 0; j < board.length; j++) {
                 /*TODO: print board + numbers*/
-                System.out.print(board[i][j]+" ");
+                System.out.print(board[i][j] + " ");
             }
         }
 
@@ -39,7 +39,7 @@ public class Board {
             if (i > 9) {
                 System.out.print(i);
             } else {
-                System.out.print(i+" ");
+                System.out.print(i + " ");
             }
         }
         System.out.println();
@@ -75,5 +75,28 @@ public class Board {
      */
     public boolean contains(int x, int y) {
         return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
+    }
+
+    public boolean isEmptyAt(int row, int col) {
+        if(!contains(row, col)) {
+            throw new IllegalArgumentException("Position out of bound");
+        }
+
+        return (board[row][13 - col] != "X" && board[row][13 - col] != "O");
+    }
+
+    /**
+     * returns true if the board does not contains a piece
+     */
+    public boolean isEmpty() {
+        for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board.length; j++) {
+                if(!isEmptyAt(i, j)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
