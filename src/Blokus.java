@@ -96,9 +96,9 @@ public class Blokus {
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
             }
-            b.printUI();
-            b.setState(State.MIDGAME); 
             b.nextPlayer();
+            b.printUI();
+            b.setState(State.MIDGAME);
         }
     }
 }
