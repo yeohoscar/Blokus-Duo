@@ -67,6 +67,7 @@ public class Blokus {
     }
 
     public void printUI() {
+        System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
         getBoard().printBoard();
         System.out.println(getCurrentPlayer().getName()+"(X) gamepieces:\n" + getCurrentPlayer().getStock());
