@@ -99,7 +99,11 @@ public class Blokus {
             }
             b.nextPlayer();
             b.printUI();
+<<<<<<< HEAD
             b.setState(State.MIDGAME); 
+=======
+            b.setState(State.MIDGAME);
+>>>>>>> f6912159b9ff2d69f938a25bbdc79d1ac8e90336
         }
     }
 }
