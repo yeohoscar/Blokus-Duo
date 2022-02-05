@@ -67,6 +67,7 @@ public class Blokus {
     }
 
     public void printUI() {
+        System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
         getBoard().printBoard();
         System.out.println(getCurrentPlayer().getName()+"(X) gamepieces:\n" + getCurrentPlayer().getStock());
@@ -96,9 +97,9 @@ public class Blokus {
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
             }
+            b.nextPlayer();
             b.printUI();
             b.setState(State.MIDGAME); 
-            b.nextPlayer();
         }
     }
 }

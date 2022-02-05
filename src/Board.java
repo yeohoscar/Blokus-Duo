@@ -77,12 +77,17 @@ public class Board {
         return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
     }
 
-    public boolean isEmptyAt(int row, int col) {
-        if(!contains(row, col)) {
+    public boolean isEmptyAt(int[] offset, int dest_x, int dest_y) {
+        if(!contains(offset[0] + dest_x, offset[1] + dest_y)) {
             throw new IllegalArgumentException("Position out of bound");
         }
 
-        return (board[row][13 - col] != "X" && board[row][13 - col] != "O");
+        /*System.out.println(offset[0] + " " + offset[1]);
+        System.out.println((13 - offset[1] - dest_y) + " " + (offset[0] + dest_x));
+        boolean f = (board[13 - offset[1] - dest_y][offset[0] + dest_x] != "X");
+        boolean g = board[13 - offset[1] - dest_y][offset[0] + dest_x] != "O";
+        System.out.println(f + " " + g);*/
+        return (board[13 - offset[1] - dest_y][offset[0] + dest_x] != "X" && board[13 - offset[1] - dest_y][offset[0] + dest_x] != "O");
     }
 
     /**
@@ -91,12 +96,16 @@ public class Board {
     public boolean isEmpty() {
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board.length; j++) {
-                if(!isEmptyAt(i, j)) {
+                if(board[i][j] == "X" || board[i][j] == "O") {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
+        return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
     }
 }
