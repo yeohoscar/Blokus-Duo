@@ -1,5 +1,16 @@
 import java.util.Scanner;
 
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Player class
+ *  - represents Blokus player
+ *  - holds player name, colour and pieces
+ */
+
 public class Player {
     private final String name; //Player name
     private int score; //Player score -> calculate at end

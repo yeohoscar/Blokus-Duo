@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Board class
+ *  - represents Blokus board
+ */
+
 public class Board {
     private String[][] board;
 
@@ -58,12 +68,12 @@ public class Board {
      * 
      *  @param player player playing the piece
      *  @param piece piece being placed
-     *  @param dest_x x coordinate of piece origin
-     *  @param dest_y y coordinate of piece origin
+     *  @param originX x coordinate originY piece origin
+     *  @param originY y coordinate of piece origin
      */
-    public void addPiece(Player player, Piece piece, int dest_x, int dest_y) {
+    public void addPiece(Player player, Piece piece, int originX, int originY) {
         for (int[] block : piece.getBlocks()) {
-            board[13 - dest_y - block[1]][dest_x + block[0]] = player.getColor();
+            board[13 - originY - block[1]][originX + block[originY]] = player.getColor();
         }
     }
 

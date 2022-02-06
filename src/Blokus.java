@@ -1,5 +1,15 @@
 import java.util.*;
 
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Main class
+ *  - runs game
+ */
+
 public class Blokus {
     private final List<Player> players;
     private final Board board;
@@ -89,13 +99,16 @@ public class Blokus {
             b.printUI();
             Piece p = b.selectPiece(s);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");                
+                System.out.println("Invalid move");   
+                p = b.selectPiece(s);             
             }
             b.nextPlayer();
             b.printUI();
+
             p = b.selectPiece(s);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
+                p = b.selectPiece(s);
             }
             b.nextPlayer();
             b.printUI();

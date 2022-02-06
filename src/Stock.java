@@ -1,5 +1,15 @@
 import java.util.*;
 
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Auxillary class of Piece
+ *  - holds and initialises all the pieces the player has
+ */
+
 public class Stock {
     private List<Piece> pieces = new ArrayList<>();
 
