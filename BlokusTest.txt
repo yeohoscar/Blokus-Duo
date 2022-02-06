@@ -1,3 +1,12 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Test cases
+ */
+
 1. Entering a null name or empty name for players
 Enter Player(X) name:
 
