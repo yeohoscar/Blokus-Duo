@@ -99,8 +99,7 @@ public class Blokus {
             b.printUI();
             Piece p = b.selectPiece(s);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");   
-                p = b.selectPiece(s);             
+                System.out.println("Invalid move");            
             }
             b.nextPlayer();
             b.printUI();
@@ -108,7 +107,6 @@ public class Blokus {
             p = b.selectPiece(s);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
-                p = b.selectPiece(s);
             }
             b.nextPlayer();
             b.printUI();
