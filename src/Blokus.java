@@ -16,8 +16,8 @@ public class Blokus {
     private Player currentPlayer;
     private State state;
 
-    public Blokus(Scanner s) {
-        this.players = new ArrayList<>(Arrays.asList(Player.initPlayer("X", s), Player.initPlayer("O", s)));
+    public Blokus(Scanner s, String firstColor, String secondColor) {
+        this.players = new ArrayList<>(Arrays.asList(Player.initPlayer(firstColor, s), Player.initPlayer(secondColor, s)));
         this.board = new Board();
         this.currentPlayer = players.get(0);
         this.state = State.FIRST;
@@ -93,7 +93,27 @@ public class Blokus {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in).useDelimiter("\\n");
-        Blokus b = new Blokus(s);
+        Blokus b;
+
+        if (args.length != 1) {
+            if (args[1] == "-X") {
+                b = new Blokus(s, "X", "O");
+            } else if (args[1] == "-O") {
+                b = new Blokus(s, "O", "X");
+            } else { 
+                if (new Random().nextInt(2) == 0) {
+                    b = new Blokus(s, "X", "O");
+                } else {
+                    b = new Blokus(s, "O", "X");
+                }
+            }
+        } else {
+            if (new Random().nextInt(2) == 0) {
+                b = new Blokus(s, "X", "O");
+            } else {
+                b = new Blokus(s, "O", "X");
+            }
+        }
         
         if (b.isFirstTurn()) {
             b.printUI();
