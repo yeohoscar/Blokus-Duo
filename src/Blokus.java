@@ -32,7 +32,7 @@ public class Blokus {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.useDelimiter("\\n").nextLine();
+        String tmp = s.useDelimiter("\\n| ").next();
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
@@ -41,17 +41,17 @@ public class Blokus {
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = s.useDelimiter("\\n").nextLine();
+            tmp = s.useDelimiter("\\n| ").next();
         }
     }
 
     public ArrayList<Integer> selectSquare(Scanner s) {
         ArrayList<Integer> coord = new ArrayList<>();
         System.out.print("Enter x coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
+        coord.add(Integer.parseInt(s.useDelimiter("\\n| ").next()));
 
         System.out.print("Enter y coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
+        coord.add(Integer.parseInt(s.useDelimiter("\\n| ").next()));
 
         return coord;
     }
@@ -92,10 +92,10 @@ public class Blokus {
     }
 
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in).useDelimiter("\\n");
+        Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         Blokus b;
 
-        if (args.length != 1) {
+        if (args.length != 0) {
             if (args[1] == "-X") {
                 b = new Blokus(s, "X", "O");
             } else if (args[1] == "-O") {
