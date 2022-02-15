@@ -31,48 +31,51 @@ public class Piece {
     /**
      * TODO: implement rotation
      */
-    public void rotatePieceClockwise(Piece p) {
-        int count = p.getBlocks().size();
+    public void rotatePieceClockwise() {
+        int count = getBlocks().size()-1;
 
-        while(count != 0) {
-            int x = p.getBlocks().get(count)[0];
-            int y = p.getBlocks().get(count)[1];
+        while(count <= 0) {
+            int x = getBlocks().get(count)[0];
+            int y = getBlocks().get(count)[1];
 
-            if(x != 0) {
-                x *= -1;
-                swap(x, y);
+            if ( x == 0 && y != 0) {
+                swap(count);
             }
+
+            if ( x != 0 && y == 0) {
+                blocks.get(count)[0]*=-1;
+                swap(count);
+            }
+
+            if ( x == y) {
+                blocks.get(count)[1]*=-1;
+            }
+
             else {
-                swap(x, y);
+                blocks.get(count)[0]*=-1;
             }
 
             count--;
         }
     }
 
-    public void rotatePieceAntiClockwise(Piece p) {
-        int count = p.getBlocks().size();
 
-        while(count != 0) {
-            int x = p.getBlocks().get(count)[0];
-            int y = p.getBlocks().get(count)[1];
 
-            if(x == 0) {
-                y *= -1;
-                swap(x, y);
-            }
-            else {
-                swap(x, y);
-            }
-
-            count--;
-        }
+    private void swap(int index) {
+        int tmp = blocks.get(index)[0];
+        blocks.get(index)[0] = blocks.get(index)[1];
+        blocks.get(index)[1] = tmp;
     }
 
-    private void swap(int x, int y) {
-        int tmp = x;
-        x = y;
-        y = tmp;
+    public void flipPiece() {
+        int count = getBlocks().size()-1;
+
+        while(count <= 0) {
+            if ( blocks.get(count)[0] != 0) {
+                blocks.get(count)[1]*=-1;
+            }
+            count--;
+        }
     }
 }
  

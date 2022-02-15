@@ -80,7 +80,7 @@ public class Blokus {
         System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
         getBoard().printBoard();
-        System.out.println(getCurrentPlayer().getName()+"(X) gamepieces:\n" + getCurrentPlayer().getStock());
+        System.out.println(getCurrentPlayer().getName()+"("+getCurrentPlayer().getColor()+") gamepieces:\n" + getCurrentPlayer().getStock());
     }
 
     public void nextPlayer() {
