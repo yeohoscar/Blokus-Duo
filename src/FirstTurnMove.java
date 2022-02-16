@@ -28,6 +28,14 @@ public class FirstTurnMove {
         this.originY = coord.get(1); 
     }
 
+    public int getX() {
+        return originX;
+    }
+
+    public int getY() {
+        return originY;
+    }
+
     /**
      * returns true if any square in piece is on either of the starting points
      * 
@@ -60,6 +68,7 @@ public class FirstTurnMove {
         }
         board.addPiece(player, piece, originX, originY);
         player.getStock().getPieces().remove(piece);
+        new Game(player, board).getMove(piece.getBlocks(), originX, originY);
         return true;
     }
 
