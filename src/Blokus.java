@@ -45,6 +45,69 @@ public class Blokus {
         }
     }
 
+    public static boolean allElementsTheSame(int[] array) {
+        if (array.length == 0) {
+            return true;
+        } else {
+            int first = array[0];
+            for (int element : array) {
+                if (element != first) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public void printPiece( Piece p) {
+        int[][] displayPiece = new int[9][9];
+        for (int i = 0; i < displayPiece.length; i++) {
+            for (int j = 0 ; j < displayPiece[0].length; j++) {
+                displayPiece[i][j] = 0;
+            }
+        }
+
+        for (int[] block : p.getBlocks()) {
+            int x = block[0];
+            int y = block[1];
+            displayPiece[4+x][4-y] = 1;
+        }
+
+        for ( int[] line: displayPiece) {
+            if (allElementsTheSame(line)) {
+                continue;
+            }
+            for ( int val: line) {
+                if( val == 1) System.out.println(currentPlayer.getColor());
+                    else System.out.println(" ");
+            }
+            System.out.println("\n");
+        }
+
+    }
+
+
+    public void manipulation( Piece p) {
+        printPiece(p);
+        while (true) {
+            Scanner x = new Scanner(System.in);
+            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepeiece:");
+            String instruct = x.nextLine();
+            switch (instruct) {
+                case "r":
+                    p.rotatePieceClockwise();printPiece(p);
+                    return;
+                case "f":
+                    p.flipPiece();printPiece(p);
+                    return;
+                case "p":
+                    return;
+                default:
+                    System.out.println("Invalid instruction");
+            }
+        }
+    }
+
     public ArrayList<Integer> selectSquare(Scanner s) {
         ArrayList<Integer> coord = new ArrayList<>();
         System.out.print("Enter x coordinate of square: ");
@@ -118,6 +181,7 @@ public class Blokus {
         if (b.isFirstTurn()) {
             b.printUI();
             Piece p = b.selectPiece(s);
+            b.manipulation(p);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");            
             }
@@ -125,6 +189,7 @@ public class Blokus {
             b.printUI();
 
             p = b.selectPiece(s);
+            b.manipulation(p);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
             }
