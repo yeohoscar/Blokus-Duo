@@ -60,6 +60,7 @@ public class Blokus {
     }
 
     public void printPiece( Piece p) {
+        // store piece's info into a 2D array
         int[][] displayPiece = new int[9][9];
         for (int i = 0; i < displayPiece.length; i++) {
             for (int j = 0 ; j < displayPiece[0].length; j++) {
@@ -70,18 +71,19 @@ public class Blokus {
         for (int[] block : p.getBlocks()) {
             int x = block[0];
             int y = block[1];
-            displayPiece[4+x][4-y] = 1;
+            displayPiece[4-y][4+x] = 1;
         }
 
+        // print the piece via 2D array
         for ( int[] line: displayPiece) {
             if (allElementsTheSame(line)) {
                 continue;
             }
             for ( int val: line) {
-                if( val == 1) System.out.println(currentPlayer.getColor());
-                    else System.out.println(" ");
+                if( val == 1) System.out.print(currentPlayer.getColor());
+                    else System.out.print(" ");
             }
-            System.out.println("\n");
+            System.out.println();
         }
 
     }
@@ -96,10 +98,10 @@ public class Blokus {
             switch (instruct) {
                 case "r":
                     p.rotatePieceClockwise();printPiece(p);
-                    return;
+                    break;
                 case "f":
                     p.flipPiece();printPiece(p);
-                    return;
+                    break;
                 case "p":
                     return;
                 default:
