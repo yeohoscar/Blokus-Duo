@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+
+//karyen
 public class Game {
     private final Player player;
     private final Board board;
@@ -22,13 +24,13 @@ public class Game {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(offset, dest_x, dest_y));
     }
 
-    public boolean isContain(int[] offset, int dest_x, int dest_y) {
-        int[] input = new int[] {offset[0] + dest_x, offset[1] + dest_y};
+    public boolean isContain(Block offset, int dest_x, int dest_y) {
+        int[] input = new int[] {offset.getX() + dest_x, offset.getY() + dest_y};
         System.out.println(input[0] + " check " + input[1]);
 
         for(int[] m : player.getValidMove()) {
             System.out.println(m[0] + " m " + m[1]);
-            if(m[0] == offset[0] + dest_x && m[1] == offset[1] + dest_y) {
+            if(m[0] == offset.getX() + dest_x && m[1] == offset.getY() + dest_y) {
                 System.out.println("!!!");
                 return true;
             }
@@ -37,57 +39,56 @@ public class Game {
         return false;
     }
 
-    public void addMove(int[] offset, int dest_x, int dest_y) {
-        int[] coor = new int[] {dest_x + offset[0], dest_y + offset[1]};
+    public void addMove(Block offset, int dest_x, int dest_y) {
+        int[] coor = new int[] {dest_x + offset.getX(), dest_y + offset.getY()};
 
-        if(board.contains(dest_x + offset[0], dest_y + offset[1])) {
+        if(board.contains(dest_x + offset.getX(), dest_y + offset.getY())) {
             if(board.isEmptyAt(offset, dest_x, dest_y)) {
                 // Need to check? Because it will remove all from line 42
                 if(!player.getValidMove().contains(coor)) {
                     player.getValidMove().add(coor);
                 }
-                //System.out.print(dest_x + offset[0]);
+                //System.out.print(dest_x + offset.getX());
                 //System.out.print(" zzz ");
-                //System.out.println(dest_y + offset[1]);
+                //System.out.println(dest_y + offset.getY());
             }
         }
     }
 
-    public void updateMove(int[] input, int[] offset, int dest_x, int dest_y) {
-        int[] zero = new int[] {0, 0};
+    public void updateMove(int[] input, Block offset, int dest_x, int dest_y) {
 
         player.getValidMove().removeIf(n -> (n.equals(input)));
 
         addMove(offset, dest_x, dest_y);
 
         for(int i = 0; i < player.getValidMove().size(); i++) {
-            if(board.isAtSide(player.getColor(), zero, player.getValidMove().get(i)[0], player.getValidMove().get(i)[1])) {
+            if(board.isAtSide(player.getColor(), new Block(0, 0), player.getValidMove().get(i)[0], player.getValidMove().get(i)[1])) {
                 player.getValidMove().remove(i);
             }
         }
     }
 
-    public void getMove(ArrayList<int[]> block, int dest_x, int dest_y) {
+    public void getMove(ArrayList<Block> arrayList, int dest_x, int dest_y) {
         ArrayList<int[]> dir = new ArrayList<int[]>();
         int[] input = new int[] {dest_x, dest_y};
 
-        for(int i = 0; i < block.size(); i++) {
-            if(board.isCornerPiece(block, i, dir)) {
+        for(int i = 0; i < arrayList.size(); i++) {
+            if(board.isCornerPiece(arrayList, i, dir)) {
                 System.out.println("yes");
                 if(dir.get(i)[0] != 0) {
                     if(dir.get(i)[2] != 0) {
-                        updateMove(input, block.get(i), dest_x - 1, dest_y - 1);
+                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
                         System.out.println(i + " a " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                     }
                     else if(dir.get(i)[3] != 0) {
-                        updateMove(input, block.get(i), dest_x + 1, dest_y - 1);
+                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
                         System.out.println(i + " b " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                     }
                     else {
-                        updateMove(input, block.get(i), dest_x - 1, dest_y - 1);
-                        updateMove(input, block.get(i), dest_x + 1, dest_y - 1);
+                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
+                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
                         System.out.println(i + " c " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
@@ -95,42 +96,42 @@ public class Game {
                 }
                 else if(dir.get(i)[1] != 0) {
                     if(dir.get(i)[2] != 0) {
-                        updateMove(input, block.get(i), dest_x - 1, dest_y + 1);
+                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
                         //System.out.println(i + " d " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                     }
                     else if(dir.get(i)[3] != 0) {
-                        updateMove(input, block.get(i), dest_x + 1, dest_y + 1);
+                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
                         //System.out.println(i + " e " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     }
                     else {
-                        updateMove(input, block.get(i), dest_x - 1, dest_y + 1);
-                        updateMove(input, block.get(i), dest_x + 1, dest_y + 1);
+                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
+                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
                         //System.out.println(i + " f " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                        // move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     }
                 }
                 else if(dir.get(i)[2] != 0) {
-                    updateMove(input, block.get(i), dest_x - 1, dest_y + 1);
-                    updateMove(input, block.get(i), dest_x - 1, dest_y - 1);
+                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
+                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
                     //System.out.println(i + " g " + dest_x + " " + dest_y);
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                 }
                 else if(dir.get(i)[3] != 0) {
-                    updateMove(input, block.get(i), dest_x + 1, dest_y + 1);
-                    updateMove(input, block.get(i), dest_x + 1, dest_y - 1);
+                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
+                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
                     //System.out.println(i + " h " + dest_x + " " + dest_y);
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                 }
                 else {
-                    updateMove(input, block.get(i), dest_x + 1, dest_y + 1);
-                    updateMove(input, block.get(i), dest_x + 1, dest_y - 1);
-                    updateMove(input, block.get(i), dest_x - 1, dest_y + 1);
-                    updateMove(input, block.get(i), dest_x - 1, dest_y - 1);
+                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
+                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
+                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
+                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});

@@ -13,9 +13,9 @@ import java.util.*;
 
 public class Piece {
     private String name;
-    private ArrayList<int[]> blocks;
+    private ArrayList<Block> blocks;
 
-    public Piece(String name, ArrayList<int[]> blocks) {
+    public Piece(String name, ArrayList<Block> blocks) {
         this.name = name;
         this.blocks = blocks;
     }
@@ -24,51 +24,104 @@ public class Piece {
         return name;
     }
 
-    public ArrayList<int[]> getBlocks() {
+    public ArrayList<Block> getBlocks() {
         return blocks;
     }
 
-    /**
-     * TODO: implement rotation
-     */
     public void rotatePieceClockwise() {
-        int count = getBlocks().size()-1;
+        int count = getBlocks().size() - 1;
 
         while(count >= 0) {
-            int x = getBlocks().get(count)[0];
-            int y = getBlocks().get(count)[1];
-
-            if ( x == 0 && y != 0) {
+            if (getBlocks().get(count).getX() != 0) {
+                getBlocks().get(count).invertX();
                 swap(count);
-            } else if ( x != 0 && y == 0) {
-                blocks.get(count)[0]*=-1;
+            }
+            else {
                 swap(count);
-            } else if ( x == y) {
-                blocks.get(count)[1]*=-1;
-            } else {
-                blocks.get(count)[0]*=-1;
             }
 
             count--;
         }
     }
 
-
-
     private void swap(int index) {
-        int tmp = blocks.get(index)[0];
-        blocks.get(index)[0] = blocks.get(index)[1];
-        blocks.get(index)[1] = tmp;
+        int tmp = blocks.get(index).getX();
+        blocks.get(index).setX(blocks.get(index).getY());
+        blocks.get(index).setY(tmp);
     }
 
     public void flipPiece() {
-        int count = getBlocks().size()-1;
+        int count = getBlocks().size() - 1;
 
-        while(count >= 0) {
-            if ( blocks.get(count)[0] != 0) {
-                blocks.get(count)[0]*=-1;
+        while (count >= 0) {
+            if (blocks.get(count).getX() != 0) {
+                blocks.get(count).invertX();
             }
             count--;
+        }
+    }
+
+    public void printPiece(String colour) {
+        // store piece's info into a 2D array
+        int[][] displayPiece = new int[9][9];
+        for (int i = 0; i < displayPiece.length; i++) {
+            for (int j = 0 ; j < displayPiece[0].length; j++) {
+                displayPiece[i][j] = 0;
+            }
+        }
+    
+        for (Block block : blocks) {
+            int x = block.getX();
+            int y = block.getY();
+            displayPiece[4-y][4+x] = 1;
+        }
+    
+        // print the piece via 2D array
+        for (int[] line: displayPiece) {
+            if (allElementsTheSame(line)) {
+                continue;
+            }
+            for ( int val: line) {
+                if (val == 1) System.out.print(colour);
+                    else System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static boolean allElementsTheSame(int[] array) {
+        if (array.length == 0) {
+            return true;
+        } else {
+            int first = array[0];
+            for (int element : array) {
+                if (element != first) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public void manipulation(Scanner s, String color) {
+        printPiece(color);
+        while (true) {
+            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
+            String instruct = s.useDelimiter("\\n").nextLine();
+            switch (instruct) {
+                case "r":
+                    rotatePieceClockwise();
+                    printPiece(color);
+                    break;
+                case "f":
+                    flipPiece();
+                    printPiece(color);
+                    break;
+                case "p":
+                    return;
+                default:
+                    System.out.println("Invalid instruction");
+            }
         }
     }
 }

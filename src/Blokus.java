@@ -33,91 +33,27 @@ public class Blokus {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.useDelimiter("\\n| ").next();
+        String tmp = s.useDelimiter("\\n").nextLine();
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
-                    return p;
+                    p.manipulation(s, getCurrentPlayer().getColor());
+                    return p;                                
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = s.useDelimiter("\\n| ").next();
-        }
-    }
-
-    public static boolean allElementsTheSame(int[] array) {
-        if (array.length == 0) {
-            return true;
-        } else {
-            int first = array[0];
-            for (int element : array) {
-                if (element != first) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
-    public void printPiece( Piece p) {
-        // store piece's info into a 2D array
-        int[][] displayPiece = new int[9][9];
-        for (int i = 0; i < displayPiece.length; i++) {
-            for (int j = 0 ; j < displayPiece[0].length; j++) {
-                displayPiece[i][j] = 0;
-            }
-        }
-
-        for (int[] block : p.getBlocks()) {
-            int x = block[0];
-            int y = block[1];
-            displayPiece[4-y][4+x] = 1;
-        }
-
-        // print the piece via 2D array
-        for ( int[] line: displayPiece) {
-            if (allElementsTheSame(line)) {
-                continue;
-            }
-            for ( int val: line) {
-                if( val == 1) System.out.print(currentPlayer.getColor());
-                    else System.out.print(" ");
-            }
-            System.out.println();
-        }
-
-    }
-
-
-    public void manipulation( Piece p) {
-        printPiece(p);
-        while (true) {
-            Scanner x = new Scanner(System.in);
-            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepeiece:");
-            String instruct = x.nextLine();
-            switch (instruct) {
-                case "r":
-                    p.rotatePieceClockwise();printPiece(p);
-                    break;
-                case "f":
-                    p.flipPiece();printPiece(p);
-                    break;
-                case "p":
-                    return;
-                default:
-                    System.out.println("Invalid instruction");
-            }
+            tmp = s.useDelimiter("\\n").nextLine();
         }
     }
 
     public ArrayList<Integer> selectSquare(Scanner s) {
         ArrayList<Integer> coord = new ArrayList<>();
         System.out.print("Enter x coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n| ").next()));
+        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
 
         System.out.print("Enter y coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n| ").next()));
+        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
 
         return coord;
     }
@@ -146,11 +82,7 @@ public class Blokus {
         System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
         getBoard().printBoard();
-<<<<<<< HEAD
         System.out.println(getCurrentPlayer().getName() + "(" + getCurrentPlayer().getColor() + ") gamepieces:\n" + getCurrentPlayer().getStock());
-=======
-        System.out.println(getCurrentPlayer().getName()+"("+getCurrentPlayer().getColor()+") gamepieces:\n" + getCurrentPlayer().getStock());
->>>>>>> 504c1c7697f23cdecc89902607ff2f34018c9919
     }
 
     public void nextPlayer() {
@@ -165,13 +97,8 @@ public class Blokus {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         Blokus b;
 
-<<<<<<< HEAD
-        if (args.length == 1) {
-            if (args[0].equals("-X")) {
-=======
         if (args.length != 0) {
             if (args[1] == "-X") {
->>>>>>> 504c1c7697f23cdecc89902607ff2f34018c9919
                 b = new Blokus(s, "X", "O");
             } else if (args[0].equals("-O")) {
                 b = new Blokus(s, "O", "X");
@@ -193,7 +120,6 @@ public class Blokus {
         if (b.isFirstTurn()) {
             b.printUI();
             Piece p = b.selectPiece(s);
-            b.manipulation(p);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");            
             }
@@ -203,7 +129,6 @@ public class Blokus {
             b.printUI();
 
             p = b.selectPiece(s);
-            b.manipulation(p);
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
             }
@@ -214,6 +139,7 @@ public class Blokus {
             b.setState(State.MIDGAME);
         }
 
+        //KarYen test
         Piece p = b.selectPiece(s);
         ArrayList<Integer> coor;
         int x, y;

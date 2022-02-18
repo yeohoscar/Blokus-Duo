@@ -54,11 +54,11 @@ public class FirstTurnMove {
      * @param originX x coordinate of the block origin
      * @param originY y coordinate of the block origin
      */
-    private boolean isOnFirstMoveSquare(int[] offset, int originX, int originY) {
+    private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
         if (player.getColor() == "O") {
-            return (offset[0] + originX == 9 && offset[1] + originY == 4);
+            return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
         } else {
-            return (offset[0] + originX == 4 && offset[1] + originY == 9);
+            return (offset.getX() + originX == 4 && offset.getY() + originY == 9);
         }
     }
 
@@ -68,7 +68,6 @@ public class FirstTurnMove {
         }
         board.addPiece(player, piece, originX, originY);
         player.getStock().getPieces().remove(piece);
-        new Game(player, board).getMove(piece.getBlocks(), originX, originY);
         return true;
     }
 
