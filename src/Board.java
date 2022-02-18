@@ -178,65 +178,68 @@ public class Board {
     /**
      * 
      * @param color
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
+    public boolean isSameColor(String color, int dest_x, int dest_y) {
+        return board[dest_x][dest_y].equals(color);
+    }
+
+    /**
+     * 
+     * @param color
      * @param offset
      * @param dest_x
      * @param dest_y
      * @return
      */
     public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
-        //System.out.println(offset.getX() + " off " + offset.getY());
-        if((13 - offset.getY() - dest_y + 1) >= board.length) {
-            if((offset.getX() + dest_x + 1) >= board[0].length) {
-                return board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-                       board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
-            }
-
-            if((offset.getX() + dest_x - 1) < 0) {
-                return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-                       board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
-            }
-
-            return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
+        System.out.println(offset.getX() + " off " + offset.getY());
+        if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x + 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) || 
+                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        }
+        else if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x - 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        }       
+        else if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
         }
 
-        if((13 - offset.getY() - dest_y - 1) < 0) {
-            if((offset.getX() + dest_x + 1) >= board[0].length) {
-                return board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-                       board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color);
-            }
-    
-            if((offset.getX() + dest_x - 1) < 0) {
-                return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-                       board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color);
-            }
-
-            return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color);
+        if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x + 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
+        }
+        else if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x - 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
+        }
+        else if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
         }
 
-        if((offset.getX() + dest_x + 1) >= board[0].length) {
-            return board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color) ||
-                   board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
+        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x + 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
         }
 
-        if((offset.getX() + dest_x - 1) < 0) {
-            return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-                   board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color) ||
-                   board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
+        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x - 1)) {
+            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
+                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
         }
-        
-        return board[13 - offset.getY() - dest_y][offset.getX() + dest_x + 1].equals(color) ||
-               board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
-               board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x].equals(color) ||
-               board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x].equals(color);
-               /*board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x + 1].equals(color) ||
-               board[13 - offset.getY() - dest_y + 1][offset.getX() + dest_x - 1].equals(color) ||
-               board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x + 1].equals(color) ||
-               board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x - 1].equals(color);*/
+
+        return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
+               isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
+               isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
+               isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
     }
 
     /**

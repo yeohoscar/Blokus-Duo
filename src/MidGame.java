@@ -20,6 +20,10 @@ public class MidGame {
         this.originY = coord.get(1); 
     }
 
+    /**
+     * 
+     */
+    @Override
     public String toString() {
         String s = "";
         for(int[] m : player.getValidMove()) {
@@ -30,14 +34,36 @@ public class MidGame {
     }
 
     public boolean hasAvailablePiece() { 
-
+        int count = 0;
+        for(int[] move : player.getValidMove()) {
+            for(Piece piece : player.getStock().getPieces()) {
+                if(!isValidMove(piece, move[0], move[1]) || board.isSide(player, piece, move[0], move[1])) {
+                    count++;
+                    piece.rotatePieceClockwise();
+                }
+            }
+        }
         return true;   
     }
 
+    /**
+     * 
+     * @param piece
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isValidMove(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(offset, dest_x, dest_y));
     }
 
+    /**
+     * 
+     * @param offset
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isContain(Block offset, int dest_x, int dest_y) {
         //System.out.println(input[0] + " check1 " + input[1]);
         for(int[] m : player.getValidMove()) {
@@ -51,6 +77,12 @@ public class MidGame {
         return false;
     }
 
+    /**
+     * 
+     * @param offset
+     * @param dest_x
+     * @param dest_y
+     */
     public void addMove(Block offset, int dest_x, int dest_y) {
         int[] coor = new int[] {dest_x + offset.getX(), dest_y + offset.getY()};
 
@@ -61,6 +93,13 @@ public class MidGame {
         }
     }
 
+    /**
+     * 
+     * @param input
+     * @param offset
+     * @param dest_x
+     * @param dest_y
+     */
     public void updateMove(int[] input, Block offset, int dest_x, int dest_y) {
 
         player.getValidMove().removeIf(n -> (n.equals(input)));

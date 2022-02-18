@@ -33,9 +33,13 @@ public class Blokus {
     }
 
     public void isGameOver() {
-        if (players.get(0).getValidMove().size() == 0 && players.get(1).getValidMove().size() == 0 || players.get(0).getStock().getPieces().size() == 0 && players.get(1).getStock().getPieces().size() == 0) {
+        if (players.get(0).getValidMove().size() == 0 && players.get(1).getValidMove().size() == 0 || outOfPiece()) {
             setState(State.OVER);
         }
+    }
+
+    public boolean outOfPiece() {
+        return players.get(0).getStock().getPieces().size() == 0 && players.get(1).getStock().getPieces().size() == 0;
     }
 
     public ArrayList<Object> selectPiece(Scanner s) {
@@ -161,6 +165,7 @@ public class Blokus {
             System.out.println();
             b.nextPlayer();
             b.printUI();
+            b.isGameOver();
 
             arr = b.selectPiece(s);
             while(!(new MidGame(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
