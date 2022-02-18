@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 //karyen
-public class MidGame {
+public class MidGame implements Move {
     private final Player player;
     private final Board board;
     private final Piece piece;
@@ -140,7 +140,7 @@ public class MidGame {
     }
 
     public boolean executeMove() {
-        if (!board.isEmptyForPiece(piece, originX, originY)  || board.isSide(player, piece, originX, originY) || !isValidMove(piece, originX, originY)) {
+        if (!board.isEmptyForPiece(piece, originX, originY) || board.isSide(player, piece, originX, originY) || !isValidMove(piece, originX, originY)) {
             return false;
         }
 

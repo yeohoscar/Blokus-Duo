@@ -38,34 +38,6 @@ public class Blokus {
         }
     }
 
-    public ArrayList<Object> selectPiece(Scanner s) {
-        if (currentPlayer.getStock().getPieces().size() == 0) {
-            System.out.println("No more pieces left.");
-        }
-        System.out.println("Select a piece");
-        String tmp = s.useDelimiter("\\n").nextLine();
-        
-        while(true) {
-            for (Piece p : currentPlayer.getStock().getPieces()) {
-                if (p.getName().equals(tmp)) {
-                    return new ArrayList<>(Arrays.asList(p, p.manipulation(s, getCurrentPlayer().getColor())));                                
-                }
-            }
-            System.out.println("Piece not in stock.\n Select a piece");
-            tmp = s.useDelimiter("\\n").nextLine();
-        }
-    }
-
-    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
-        ArrayList<Integer> coord = new ArrayList<>();
-
-        coord.add(Integer.parseInt(arr.get(0)));
-        coord.add(Integer.parseInt(arr.get(1)));
-        System.out.println(coord.get(0) + " coor " + coord.get(1));
-
-        return coord;
-    }
-
     public Board getBoard() {
         return board;
     }
@@ -129,25 +101,21 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            arr = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
-                System.out.println("Invalid move. Please enter the coordinate: ");            
-                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));          
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
+                System.out.println("Invalid move.");     
             }
             b.nextPlayer();
             b.printUI();
 
-            arr = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
-                System.out.println("Invalid move. Please enter the coordinate: ");            
-                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
+                System.out.println("Invalid move.");
             }
             b.nextPlayer();
             b.printUI();
             b.setState(State.MIDGAME);
         }
 
-        
+        /*
         while (b.isMidGame()) {
             b.printUI();
             arr = b.selectPiece(s);
@@ -174,7 +142,7 @@ public class Blokus {
             b.nextPlayer();
             b.printUI();
             b.isGameOver();
-        }
+        }*/
     }
 }
 
