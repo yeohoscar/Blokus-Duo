@@ -38,7 +38,7 @@ public class Blokus {
         }
     }
 
-    public Piece selectPiece(Scanner s) {
+    public ArrayList<Object> selectPiece(Scanner s) {
         if (currentPlayer.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
@@ -48,8 +48,7 @@ public class Blokus {
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
-                    p.manipulation(s, getCurrentPlayer().getColor());
-                    return p;                                
+                    return new ArrayList<>(Arrays.asList(p, p.manipulation(s, getCurrentPlayer().getColor())));                                
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
@@ -57,13 +56,11 @@ public class Blokus {
         }
     }
 
-    public ArrayList<Integer> selectSquare(Scanner s) {
+    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
         ArrayList<Integer> coord = new ArrayList<>();
-        System.out.print("Enter x coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
 
-        System.out.print("Enter y coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
+        coord.add(Integer.parseInt(arr.get(0)));
+        coord.add(Integer.parseInt(arr.get(1)));
 
         return coord;
     }
@@ -129,8 +126,9 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            Piece p = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
+            ArrayList<Object> arr = b.selectPiece(s);
+
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
                 System.out.println("Invalid move");            
             }
             //new Game(b.getCurrentPlayer(), b.getBoard());
@@ -138,8 +136,8 @@ public class Blokus {
             b.nextPlayer();
             b.printUI();
 
-            p = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
+            arr = b.selectPiece(s);
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
                 System.out.println("Invalid move");
             }
             //Game move2 = new Game(b.getCurrentPlayer(), b.getBoard());
@@ -149,10 +147,11 @@ public class Blokus {
             b.setState(State.MIDGAME);
         }
 
+        /*
         while (b.isMidGame()) {
             b.printUI();
             Piece p = b.selectPiece(s);
-            while () {
+            while (b.isMidGame()) {
                 System.out.println("Invalid move");            
             }
 
@@ -166,8 +165,9 @@ public class Blokus {
 
             b.nextPlayer();
             b.printUI();
-        }
+        }*/
 
+        /*
         //KarYen test
         Piece p = b.selectPiece(s);
         ArrayList<Integer> coor;
@@ -177,7 +177,7 @@ public class Blokus {
             coor = b.selectSquare(s);
             x = coor.get(0);
             y = coor.get(1);      
-        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !new Game(b.currentPlayer, b.getBoard()).isValidMove(p, x, y));
+        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !urnew Game(b.crentPlayer, b.getBoard()).isValidMove(p, x, y));
         
         b.getBoard().addPiece(b.getCurrentPlayer(), p, x, y);
         b.getCurrentPlayer().getStock().getPieces().remove(p);
@@ -211,5 +211,6 @@ public class Blokus {
         //System.out.println(move2.toString());
         b.nextPlayer();
         b.printUI();
+        */
     }
 }
