@@ -68,27 +68,27 @@ public class Game {
         }
     }
 
-    public void getMove(ArrayList<Block> arrayList, int dest_x, int dest_y) {
+    public void getMove(ArrayList<Block> blocks, int dest_x, int dest_y) {
         ArrayList<int[]> dir = new ArrayList<int[]>();
         int[] input = new int[] {dest_x, dest_y};
 
-        for(int i = 0; i < arrayList.size(); i++) {
-            if(board.isCornerPiece(arrayList, i, dir)) {
+        for(int i = 0; i < blocks.size(); i++) {
+            if(board.isCornerPiece(blocks, i, dir)) {
                 System.out.println("yes");
                 if(dir.get(i)[0] != 0) {
                     if(dir.get(i)[2] != 0) {
-                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
+                        updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
                         System.out.println(i + " a " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                     }
                     else if(dir.get(i)[3] != 0) {
-                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
+                        updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
                         System.out.println(i + " b " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                     }
                     else {
-                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
-                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
+                        updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
+                        updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
                         System.out.println(i + " c " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
@@ -96,42 +96,42 @@ public class Game {
                 }
                 else if(dir.get(i)[1] != 0) {
                     if(dir.get(i)[2] != 0) {
-                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
+                        updateMove(input, blocks.get(i), dest_x - 1, dest_y + 1);
                         //System.out.println(i + " d " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                     }
                     else if(dir.get(i)[3] != 0) {
-                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
+                        updateMove(input, blocks.get(i), dest_x + 1, dest_y + 1);
                         //System.out.println(i + " e " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     }
                     else {
-                        updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
-                        updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
+                        updateMove(input, blocks.get(i), dest_x - 1, dest_y + 1);
+                        updateMove(input, blocks.get(i), dest_x + 1, dest_y + 1);
                         //System.out.println(i + " f " + dest_x + " " + dest_y);
                         //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                        // move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     }
                 }
                 else if(dir.get(i)[2] != 0) {
-                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
-                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
+                    updateMove(input, blocks.get(i), dest_x - 1, dest_y + 1);
+                    updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
                     //System.out.println(i + " g " + dest_x + " " + dest_y);
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                 }
                 else if(dir.get(i)[3] != 0) {
-                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
-                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
+                    updateMove(input, blocks.get(i), dest_x + 1, dest_y + 1);
+                    updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
                     //System.out.println(i + " h " + dest_x + " " + dest_y);
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                 }
                 else {
-                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y + 1);
-                    updateMove(input, arrayList.get(i), dest_x + 1, dest_y - 1);
-                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y + 1);
-                    updateMove(input, arrayList.get(i), dest_x - 1, dest_y - 1);
+                    updateMove(input, blocks.get(i), dest_x + 1, dest_y + 1);
+                    updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
+                    updateMove(input, blocks.get(i), dest_x - 1, dest_y + 1);
+                    updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
                     //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
