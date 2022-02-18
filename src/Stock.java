@@ -30,12 +30,12 @@ public class Stock {
             new Piece("N5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(2, 0), new Block(0, -1), new Block(-1, -1)))),
             new Piece("Z5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(1, 1), new Block(-1, 0), new Block(-1, -1)))),
             new Piece("T4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(-1, 0)))),
-            new Piece("P5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(1, -1), new Block(0, -1), new Block(0, -2)))),
-            new Piece("W5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(-1, 0), new Block(-1, -1)))),
-            new Piece("U5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(1, -1)))),
-            new Piece("F5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(-1, 0)))),
-            new Piece("X5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(0, -1), new Block(-1, 0)))),
-            new Piece("Y5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(2, 0), new Block(-1, 0))))
+            new Piece("P", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(1, -1), new Block(0, -1), new Block(0, -2)))),
+            new Piece("W", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(-1, 0), new Block(-1, -1)))),
+            new Piece("U", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(1, -1)))),
+            new Piece("F", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(-1, 0)))),
+            new Piece("X", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(0, -1), new Block(-1, 0)))),
+            new Piece("Y", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(2, 0), new Block(-1, 0))))
         );
     }
 

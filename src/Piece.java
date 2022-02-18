@@ -103,12 +103,12 @@ public class Piece {
         }
     }
 
-    public void manipulation(Scanner s, String color) {
+    public ArrayList<String> manipulation(Scanner s, String color) {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String instruct = s.useDelimiter("\\n").nextLine();
-            switch (instruct) {
+            String[] instruct = s.useDelimiter("\\n").nextLine().split(" ");
+            switch (instruct[0]) {
                 case "r":
                     rotatePieceClockwise();
                     printPiece(color);
@@ -118,7 +118,12 @@ public class Piece {
                     printPiece(color);
                     break;
                 case "p":
-                    return;
+                    try {
+                        return new ArrayList<String>(Arrays.asList(instruct[1], instruct[2]));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Coordinates not provided.");
+                        break; 
+                    }
                 default:
                     System.out.println("Invalid instruction");
             }

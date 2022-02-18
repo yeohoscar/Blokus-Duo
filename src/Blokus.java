@@ -15,7 +15,7 @@ public class Blokus {
     private final Board board;
     private Player currentPlayer;
     private State state;
-    private Game game;
+    private MidGame game;
 
     public Blokus(Scanner s, String firstColor, String secondColor) {
         this.players = new ArrayList<>(Arrays.asList(Player.initPlayer(firstColor, s), Player.initPlayer(secondColor, s)));
@@ -38,7 +38,7 @@ public class Blokus {
         }
     }
 
-    public Piece selectPiece(Scanner s) {
+    public ArrayList<Object> selectPiece(Scanner s) {
         if (currentPlayer.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
@@ -48,22 +48,20 @@ public class Blokus {
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
-                    p.manipulation(s, getCurrentPlayer().getColor());
-                    return p;                                
+                    return new ArrayList<>(Arrays.asList(p, p.manipulation(s, getCurrentPlayer().getColor())));                                
                 }
             }
-            System.out.println("Piece not in stock.\nSelect a piece");
+            System.out.println("Piece not in stock.\n Select a piece");
             tmp = s.useDelimiter("\\n").nextLine();
         }
     }
 
-    public ArrayList<Integer> selectSquare(Scanner s) {
+    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
         ArrayList<Integer> coord = new ArrayList<>();
-        System.out.print("Enter x coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
 
-        System.out.print("Enter y coordinate of square: ");
-        coord.add(Integer.parseInt(s.useDelimiter("\\n").nextLine()));
+        coord.add(Integer.parseInt(arr.get(0)));
+        coord.add(Integer.parseInt(arr.get(1)));
+        System.out.println(coord.get(0) + " coor " + coord.get(1));
 
         return coord;
     }
@@ -103,8 +101,10 @@ public class Blokus {
         setCurrentPlayer(getPlayers().get(0));
     }
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
+        ArrayList<Object> arr;
         Blokus b;
 
         if (args.length != 0) {
@@ -129,38 +129,48 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            Piece p = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");            
-            }
-            for(int[] m : b.getCurrentPlayer().getValidMove()) {
-                System.out.println(m[0] + " here " + m[1]);
+            arr = b.selectPiece(s);
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
+                System.out.println("Invalid move. Please enter the coordinate: ");            
+                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));          
             }
             b.nextPlayer();
             b.printUI();
 
-            p = b.selectPiece(s);
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");
+            arr = b.selectPiece(s);
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
+                System.out.println("Invalid move. Please enter the coordinate: ");            
+                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));
             }
             b.nextPlayer();
             b.printUI();
             b.setState(State.MIDGAME);
         }
 
+        
         while (b.isMidGame()) {
             b.printUI();
-            Piece p = b.selectPiece(s);
-            while(!(new Game(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");            
+            arr = b.selectPiece(s);
+            while(!(new MidGame(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
+                System.out.println("Invalid move. Please enter the coordinate: ");            
+                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));  
             }    
+            for(int[] move : b.getCurrentPlayer().getValidMove()) {
+                System.out.print(move[0] + ", " + move[1] + " | ");
+            }
+            System.out.println();
             b.nextPlayer();
             b.printUI();
 
-            p = b.selectPiece(s);
-            while(!(new Game(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
-                System.out.println("Invalid move");            
+            arr = b.selectPiece(s);
+            while(!(new MidGame(b.getCurrentPlayer(), b.getBoard(), (Piece) arr.get(0), b.selectSquare((ArrayList<String>) arr.get(1))).executeMove())) {
+                System.out.println("Invalid move. Please enter the coordinate: ");            
+                arr.set(1, new ArrayList<>(Arrays.asList(s.useDelimiter("\\n").nextLine().split(" "))));  
             }    
+            for(int[] move : b.getCurrentPlayer().getValidMove()) {
+                System.out.print(move[0] + ", " + move[1] + " | ");
+            }
+            System.out.println();
             b.nextPlayer();
             b.printUI();
             b.isGameOver();
@@ -177,7 +187,7 @@ public class Blokus {
             coor = b.selectSquare(s);
             x = coor.get(0);
             y = coor.get(1);      
-        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !new Game(b.currentPlayer, b.getBoard()).isValidMove(p, x, y));
+        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !urnew Game(b.crentPlayer, b.getBoard()).isValidMove(p, x, y));
         
         b.getBoard().addPiece(b.getCurrentPlayer(), p, x, y);
         b.getCurrentPlayer().getStock().getPieces().remove(p);

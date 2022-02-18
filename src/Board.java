@@ -88,8 +88,15 @@ public class Board {
         return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
     }
 
+    /**
+     * 
+     * @param offset
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isEmptyAt(Block offset, int dest_x, int dest_y) {
-        if(!contains(13 - dest_y, dest_x)) {
+        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x)) {
             return false;
         }
 
@@ -111,34 +118,48 @@ public class Board {
         return true;
     }
 
+    /**
+     * 
+     * @param piece
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
     }
 
+    /**
+     * 
+     * @param block
+     * @param i
+     * @param dir
+     * @return
+     */
     public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
-        for(int j = 0; j < block.size(); j++) {
-            if((block.get(i)).getX() == (block.get(j)).getX()) {
+        for (int j = 0; j < block.size(); j++) {
+            if ((block.get(i)).getX() == (block.get(j)).getX()) {
                 //System.out.println(i + " v1 " + j);
-                if((block.get(i)).getY() - (block.get(j)).getY() == 1) {
+                if ((block.get(i)).getY() - (block.get(j)).getY() == 1) {
                     //System.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
                     down++;
                 }
 
-                if((block.get(i)).getY() - (block.get(j)).getY() == -1) {
+                if ((block.get(i)).getY() - (block.get(j)).getY() == -1) {
                     //ystem.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
                     up++;
                 }
             }
 
-            if((block.get(i)).getY() == (block.get(j)).getY()) {
+            if ((block.get(i)).getY() == (block.get(j)).getY()) {
                 //System.out.println(i + " h1 " + j);
-                if((block.get(i)).getX() - (block.get(j)).getX() == 1) {
+                if ((block.get(i)).getX() - (block.get(j)).getX() == 1) {
                     //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
                     left++;
                 }
 
-                if((block.get(i)).getX() - (block.get(j)).getX() == -1) {
+                if ((block.get(i)).getX() - (block.get(j)).getX() == -1) {
                     //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
                     right++;
                 }
@@ -147,15 +168,23 @@ public class Board {
         //System.out.println(left + " " + right + " count " + up + " " + down);
         dir.add(new int[] {up, down, right, left});
 
-        if((left + right) < 2 && (up + down) < 2) {
+        if ((left + right) < 2 && (up + down) < 2) {
             return true;
         }
 
         return false;
     }
 
+    /**
+     * 
+     * @param color
+     * @param offset
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
-        System.out.println(offset.getX() + " off " + offset.getY());
+        //System.out.println(offset.getX() + " off " + offset.getY());
         if((13 - offset.getY() - dest_y + 1) >= board.length) {
             if((offset.getX() + dest_x + 1) >= board[0].length) {
                 return board[13 - offset.getY() - dest_y][offset.getX() + dest_x - 1].equals(color) ||
@@ -210,6 +239,14 @@ public class Board {
                board[13 - offset.getY() - dest_y - 1][offset.getX() + dest_x - 1].equals(color);*/
     }
 
+    /**
+     * 
+     * @param player
+     * @param piece
+     * @param dest_x
+     * @param dest_y
+     * @return
+     */
     public boolean isSide(Player player, Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isAtSide(player.getColor(), offset, dest_x, dest_y));
     }

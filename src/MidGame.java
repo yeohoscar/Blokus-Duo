@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 
 //karyen
-public class Game {
+public class MidGame {
     private final Player player;
     private final Board board;
     private final Piece piece;
     private final int originX;
     private final int originY;
 
-    public Game(Player player, Board board, Piece piece, ArrayList<Integer> coord) {
+    public MidGame(Player player, Board board, Piece piece, ArrayList<Integer> coord) {
         if (player == null || board == null || piece == null) {
             throw new IllegalArgumentException();
         }
@@ -29,23 +29,20 @@ public class Game {
         return s;
     }
 
-    /*public boolean hasAvailablePiece() {    
-    }*/
+    public boolean hasAvailablePiece() { 
+
+        return true;   
+    }
 
     public boolean isValidMove(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(offset, dest_x, dest_y));
     }
 
     public boolean isContain(Block offset, int dest_x, int dest_y) {
-        int[] input = new int[] {offset.getX() + dest_x, offset.getY() + dest_y};
-        System.out.println(input[0] + " check1 " + input[1]);
-
-        System.out.println(player.getValidMove().get(0)[0]);
-
+        //System.out.println(input[0] + " check1 " + input[1]);
         for(int[] m : player.getValidMove()) {
-            System.out.println(m[0] + " m " + m[1]);
+            //System.out.println(m[0] + " m " + m[1]);
             if(m[0] == offset.getX() + dest_x && m[1] == offset.getY() + dest_y) {
-                System.out.println("!!!");
                 return true;
             }
         }
@@ -60,9 +57,6 @@ public class Game {
         if(board.contains(dest_x + offset.getX(), dest_y + offset.getY())) {
             if(board.isEmptyAt(offset, dest_x, dest_y)) {
                 player.getValidMove().add(coor);
-                //System.out.print(dest_x + offset.getX());
-                //System.out.print(" zzz ");
-                //System.out.println(dest_y + offset.getY());
             }
         }
     }
@@ -86,20 +80,19 @@ public class Game {
 
         for(int i = 0; i < blocks.size(); i++) {
             if(board.isCornerPiece(blocks, i, dir)) {
-                System.out.println("yes");
                 if(dir.get(i)[0] != 0) {
                     if(dir.get(i)[2] != 0) {
                         updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
-                        System.out.println(i + " a " + dest_x + " " + dest_y);
+                        //System.out.println(i + " a " + dest_x + " " + dest_y);
                     }
                     else if(dir.get(i)[3] != 0) {
                         updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
-                        System.out.println(i + " b " + dest_x + " " + dest_y);
+                        //System.out.println(i + " b " + dest_x + " " + dest_y);
                     }
                     else {
                         updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
                         updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
-                        System.out.println(i + " c " + dest_x + " " + dest_y);
+                        //System.out.println(i + " c " + dest_x + " " + dest_y);
                     }
                 }
                 else if(dir.get(i)[1] != 0) {
@@ -132,10 +125,6 @@ public class Game {
                     updateMove(input, blocks.get(i), dest_x + 1, dest_y - 1);
                     updateMove(input, blocks.get(i), dest_x - 1, dest_y + 1);
                     updateMove(input, blocks.get(i), dest_x - 1, dest_y - 1);
-                    //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] + 1});
-                    //move.add(new int[] {dest_x + block.get(i)[0] + 1, dest_y + block.get(i)[1] - 1});
-                    //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] + 1});
-                    //move.add(new int[] {dest_x + block.get(i)[0] - 1, dest_y + block.get(i)[1] - 1});
                 }
             }
             else {
@@ -151,7 +140,7 @@ public class Game {
     }
 
     public boolean executeMove() {
-        if (!board.isEmptyForPiece(piece, originX, originY)  || board.isSide(player, piece, originX, originY) || isValidMove(piece, originX, originY)) {
+        if (!board.isEmptyForPiece(piece, originX, originY)  || board.isSide(player, piece, originX, originY) || !isValidMove(piece, originX, originY)) {
             return false;
         }
 
