@@ -123,8 +123,9 @@ public class Blokus {
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");            
             }
-            //new Game(b.getCurrentPlayer(), b.getBoard());
-            //System.out.println(move1.toString());
+            for(int[] m : b.getCurrentPlayer().getValidMove()) {
+                System.out.println(m[0] + " here " + m[1]);
+            }
             b.nextPlayer();
             b.printUI();
 
@@ -132,8 +133,6 @@ public class Blokus {
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), p, b.selectSquare(s)).executeMove())) {
                 System.out.println("Invalid move");
             }
-            //Game move2 = new Game(b.getCurrentPlayer(), b.getBoard());
-            //System.out.println(move2.toString());
             b.nextPlayer();
             b.printUI();
             b.setState(State.MIDGAME);

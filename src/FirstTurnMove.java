@@ -68,6 +68,7 @@ public class FirstTurnMove {
         }
         board.addPiece(player, piece, originX, originY);
         player.getStock().getPieces().remove(piece);
+        new Game(player, board).getMove(piece.getBlocks(), originX, originY);
         return true;
     }
 
