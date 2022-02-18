@@ -14,30 +14,6 @@ public class Stock {
     private List<Piece> pieces = new ArrayList<>();
 
     public Stock() {
-        setPieces();
-    }
-
-    /**
-     * Initialises pieces and adds to arraylist
-     */
-    private void setPieces() {
-        /*
-        int[] new Block(0, 0) = new int[] {0, 0};
-        int[] new Block(0, 1) = new int[] {0, 1};
-        int[] new Block(0, 2) = new int[] {0, 2};
-        int[] new Block(0, 3) = new int[] {0, 3};
-        int[] new Block(0, 4) = new int[] {0, 4};
-        int[] new Block(1, 0) = new int[] {1, 0};
-        int[] new Block(2, 0) = new int[] {2, 0};
-        int[] new Block(3, 0) = new int[] {3, 0};
-        int[] new Block(-1, 0) = new int[] {-1, 0};
-        int[] new Block(0, -1) = new int[] {0, -1};
-        int[] d2 = new int[] {0, -2};
-        int[] newBlock(1, 1) = new int[] {1, 1};
-        int[] newBlock(1, -1) = new int[] {1, -1};
-        int[] new Block(-1, -1) = new int[] {-1, -1};
-        */
-
         addPieces(
             new Piece("I1", new ArrayList<>(Arrays.asList(new Block(0, 0)))),
             new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1)))),
