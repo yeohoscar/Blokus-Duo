@@ -22,8 +22,7 @@ public class Piece {
 
     public Piece(Piece p) {
         this.name = p.getName();
-        this.blocks = new ArrayList<Block>();
-        this.blocks.addAll(p.getBlocks());
+        
     }
 
     public String getName() {
@@ -168,5 +167,7 @@ public class Piece {
             }
         }
     }
+
+    
 }
  

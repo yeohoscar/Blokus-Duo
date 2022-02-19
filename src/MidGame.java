@@ -66,10 +66,10 @@ public class MidGame implements Move{
      * @return true if it is a valid move
      */
     public boolean isValidMove(Player player, Piece piece, int dest_x, int dest_y) {
-        if(!isAtCorner(piece, dest_x, dest_y) || board.isSide(player, piece, dest_x, dest_y)) {
-            return false;
-        }
-        return true;
+        System.out.print(board.isEmptyForPiece(piece, dest_x, dest_y) + ", ");
+        System.out.print(isPieceTouchEdge(piece, dest_x, dest_y) + ", ");
+        System.out.println(!board.isSide(player, piece, dest_x, dest_y));
+        return (board.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(piece, dest_x, dest_y) && !board.isSide(player, piece, dest_x, dest_y));
     }
 
     /**
@@ -81,6 +81,7 @@ public class MidGame implements Move{
      * @return true if the piece is not able to place on the coordinates
      */
     public int checkEveryPiece(Piece p, int x, int y) {
+        System.out.println(x + " " + y);
         if(!isValidMove(player, p, x, y)) {
             return 1;
         }
@@ -98,24 +99,31 @@ public class MidGame implements Move{
     public boolean hasAvailablePiece(int[] move) { 
         int count = 0;
 
+        System.out.println(move[0] + " move " +move[1]);
         for(Piece piece : player.getStock().getPieces()) {
             int flag = 0;
-            Piece pCopy = piece;
+            Piece pCopy = new Piece(piece);
+            System.out.println(pCopy.getBlocks() +""+ piece.getBlocks());
+            pCopy.printPiece("#");
             switch(piece.getName()) {
                 case "I1":
                 case "O4":
                 case "X5":
+                    System.out.println(piece.getName());
                     flag += checkEveryPiece(piece, move[0], move[1]);
+                    System.out.println(piece.getName() + " " + flag);
                     break;
                 case "I2":
                 case "I3":
                 case "I4":
                 case "I5":
+                    System.out.println(piece.getName());
                     flag += checkEveryPiece(piece, move[0], move[1]);
                     pCopy.rotatePieceClockwise();
                     flag += checkEveryPiece(pCopy, move[0], move[1]);
+                    System.out.println(piece.getName() + " " + flag);
                     break;
-                default:
+                /*default:
                     flag += checkEveryPiece(piece, move[0], move[1]);
                     pCopy.rotatePieceClockwise();
                     flag += checkEveryPiece(pCopy, move[0], move[1]);
@@ -131,12 +139,14 @@ public class MidGame implements Move{
                     flag += checkEveryPiece(pCopy, move[0], move[1]);
                     pCopy.flipPiece();
                     flag += checkEveryPiece(pCopy, move[0], move[1]);
-                    break;
+                    System.out.println(piece.getName() + " " + flag);
+                    break;*/
             }
 
             if(flag == 1 || flag == 2 || flag == 7) {
                 count++;
             }
+            System.out.println(count + "final " + flag);
         }
 
         if(count == player.getStock().getPieces().size()) {
@@ -153,12 +163,13 @@ public class MidGame implements Move{
      * @param dest_y y coordinates on board
      * @return true if any square of the piece touch the edge of placed piece
      */
-    public boolean isAtCorner(Piece piece, int dest_x, int dest_y) {
+    public boolean isPieceTouchEdge(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(offset, dest_x, dest_y));
     }
 
     /**
-     * Check if a square of a piece touch the edge of placed pieces
+     * Check if 
+     * 
      * @param offset block offset from origin
      * @param dest_x x coordinates on board
      * @param dest_y y coordinates on board
@@ -185,6 +196,7 @@ public class MidGame implements Move{
 
         if(board.contains(dest_x + offset.getX(), dest_y + offset.getY())) {
             if(board.isEmptyAt(offset, dest_x, dest_y)) {
+                System.out.println(coor[0] + "OMG" + coor[1]);
                 player.getValidMove().add(coor);
             }
         }
@@ -198,17 +210,9 @@ public class MidGame implements Move{
         player.getValidMove().removeIf(n -> (n.equals(input)));
 
         for(int j = 0; j < player.getValidMove().size(); j++) {
-            if(player.getStock().getPieces().size() > 16) {
-                if(board.isAtSide(player.getColor(), new Block(0, 0), player.getValidMove().get(j)[0], player.getValidMove().get(j)[1])) {
-                    player.getValidMove().remove(j);
-                    j--;
-                }
-            }
-            else {
-                if(!hasAvailablePiece(player.getValidMove().get(j))) {
-                    player.getValidMove().remove(j);
-                    j--;
-                }
+            if(!hasAvailablePiece(player.getValidMove().get(j))) {
+                player.getValidMove().remove(j);
+                j--;
             }
         }
     }
@@ -287,7 +291,7 @@ public class MidGame implements Move{
      * Validate move before placing the piece on board
      */
     public boolean executeMove() {
-        if (!board.isEmptyForPiece(piece, originX, originY) || !isValidMove(player, piece, originX, originY)) {
+        if (!isValidMove(player, piece, originX, originY)) {
             return false;
         }
 

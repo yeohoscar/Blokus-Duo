@@ -147,50 +147,10 @@ public class Blokus {
             b.printUI();
             b.isGameOver();
         }
+
+        if(b.state == State.OVER) {
+            System.out.println("\nGAME OVER");
+        }
     }
 }
 
-//KarYen test
-        /*Piece p = b.selectPiece(s);
-        ArrayList<Integer> coor;
-        int x, y;
-        do {
-            
-            coor = b.selectSquare(s);
-            x = coor.get(0);
-            y = coor.get(1);      
-        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !urnew Game(b.crentPlayer, b.getBoard()).isValidMove(p, x, y));
-        
-        b.getBoard().addPiece(b.getCurrentPlayer(), p, x, y);
-        b.getCurrentPlayer().getStock().getPieces().remove(p);
-        //b.getCurrentPlayer().getValidMove().getValidMove(b.getBoard(), p.getBlocks(), x, y);
-        Game move1 = new Game(b.getCurrentPlayer(), b.getBoard());
-        move1.getMove(p.getBlocks(), x, y);
-        //b.getCurrentPlayer().getValidMove().remove(y);
-        b.nextPlayer();
-        b.printUI();
-        
-
-        p = b.selectPiece(s);
-        do {
-            
-            coor = b.selectSquare(s);
-            x = coor.get(0);
-            y = coor.get(1);      
-        } while(!b.getBoard().isEmptyForPiece(p, x, y) || b.getBoard().isSide(b.currentPlayer, p, x, y) || !new Game(b.currentPlayer, b.getBoard()).isValidMove(p, x, y));
-        
-        if(b.getBoard().isSide(b.getCurrentPlayer(), p, x, y)) {
-            System.out.println("2yes");
-        }
-        else {
-            System.out.println("2no");
-        }
-        b.getBoard().addPiece(b.getCurrentPlayer(), p, x, y);
-        b.getCurrentPlayer().getStock().getPieces().remove(p);
-        
-        Game move2 = new Game(b.getCurrentPlayer(), b.getBoard());
-        move2.getMove(p.getBlocks(), x, y);
-        //System.out.println(move2.toString());
-        b.nextPlayer();
-        b.printUI();
-    }*/

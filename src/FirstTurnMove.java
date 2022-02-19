@@ -70,10 +70,10 @@ public class FirstTurnMove implements Move {
     }
 
     public boolean executeMove() {
-        if (!isValidFirstMove(piece, originX, originY) || !board.isEmptyForPiece(piece, originX, originY)) {
+        if (!isValidFirstMove(piece, originX, originY)) {
             return false;
         }
-        
+
         board.addPiece(player, piece, originX, originY);
         for(int j = 0; j < player.getStock().getPieces().size(); j++) {
             if(player.getStock().getPieces().get(j).getName().equals(piece.getName())) {

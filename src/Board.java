@@ -100,7 +100,7 @@ public class Board {
             return false;
         }
 
-        //System.out.println(offset.getX() + " " + offset.getY());
+        //System.out.println((13 - dest_y - offset.getY()) + " " + (dest_x + offset.getX()));
         return (board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "X" && board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "O");
     }
 
@@ -244,7 +244,7 @@ public class Board {
             return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
         }
 
-        //System.out.println(" i ");
+        System.out.println("| "+isSameColor(color, x, y + 1) + ", " + isSameColor(color, x, y - 1) + ", " + (x + 1) +" "+ y + ", "+ isSameColor(color, x - 1, y) + " |");
         return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) ||
                isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
     }
