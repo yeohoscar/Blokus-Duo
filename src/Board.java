@@ -96,12 +96,12 @@ public class Board {
      * @return
      */
     public boolean isEmptyAt(Block offset, int dest_x, int dest_y) {
-        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x)) {
+        if(!contains(13 - dest_y - offset.getY(), dest_x + offset.getX())) {
             return false;
         }
 
         //System.out.println(offset.getX() + " " + offset.getY());
-        return (board[13 - offset.getY() - dest_y][offset.getX() + dest_x] != "X" && board[13 - offset.getY() - dest_y][offset.getX() + dest_x] != "O");
+        return (board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "X" && board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "O");
     }
 
     /**
@@ -183,6 +183,7 @@ public class Board {
      * @return
      */
     public boolean isSameColor(String color, int dest_x, int dest_y) {
+        //System.out.println(dest_x + " color " + dest_y);
         return board[dest_x][dest_y].equals(color);
     }
 
@@ -195,51 +196,57 @@ public class Board {
      * @return
      */
     public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
-        System.out.println(offset.getX() + " off " + offset.getY());
-        if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x + 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) || 
-                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
-        }
-        else if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x - 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
-        }       
-        else if(!contains(13 - offset.getY() - dest_y + 1, offset.getX() + dest_x)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        int x = 13 - dest_y - offset.getY();
+        int y = dest_x + offset.getX();
+
+        if(x >= 14 || x <= -1 || y >= 14 || y <= -1) {
+            return false;
         }
 
-        if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x + 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
-        }
-        else if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x - 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
-        }
-        else if(!contains(13 - offset.getY() - dest_y - 1, offset.getX() + dest_x)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x);
+        if (!contains(x + 1, y)) {
+            if (y <= 0) {
+                //System.out.println(" a ");
+                return isSameColor(color, x, y + 1) || isSameColor(color, x - 1, y);
+            }
+
+            if (y >= 13) {
+                //System.out.println("b");
+                return isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
+            }
+
+            //System.out.println(" c ");
+            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
         }
 
-        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x + 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        if(!contains(x - 1, y)) {
+            if(y <= 0) {
+                //System.out.println(" d ");
+                return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y);
+            }
+
+            if(y >= 13) {
+                //System.out.println(" e ");
+                return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
+            }
+
+            //System.out.println(" f ");
+            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
+
+        }
+        
+        if(!contains(x, y + 1)) {
+            //System.out.println(" g ");
+            return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
         }
 
-        if(!contains(13 - offset.getY() - dest_y, offset.getX() + dest_x - 1)) {
-            return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
-                   isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        if(!contains(x, y - 1)) {
+            //System.out.println(" h ");
+            return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
         }
 
-        return isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x + 1) ||
-               isSameColor(color, 13 - offset.getY() - dest_y, offset.getX() + dest_x - 1) ||
-               isSameColor(color, 13 - offset.getY() - dest_y + 1, offset.getX() + dest_x) ||
-               isSameColor(color, 13 - offset.getY() - dest_y - 1, offset.getX() + dest_x);
+        //System.out.println(" i ");
+        return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) ||
+               isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
     }
 
     /**
