@@ -183,7 +183,6 @@ public class Board {
      * @return true if the square has the same color as player's piece color
      */
     public boolean isSameColor(String color, int dest_x, int dest_y) {
-        //System.out.println(dest_x + " color " + dest_y);
         return board[dest_x][dest_y].equals(color);
     }
 
@@ -254,18 +253,4 @@ public class Board {
         return piece.getBlocks().stream().anyMatch(offset -> isAtSide(player.getColor(), offset, dest_x, dest_y));
     }
 
-    /*
-    public String getColorAt(int dest_x, int dest_y) {
-        if(!contains(13 - dest_y, dest_x)) {
-            throw new IllegalArgumentException("Position out of bound");
-        }
-
-        if(isEmptyAt(new int[] {0, 0}, dest_x, dest_y)) {
-            return null;
-        }
-
-        System.out.println("a " + board[13 - dest_y][dest_x]);
-        return board[13 - dest_y][dest_x];
-    }
-    */
 }

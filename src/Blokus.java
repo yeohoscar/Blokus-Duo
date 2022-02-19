@@ -85,7 +85,7 @@ public class Blokus {
         Blokus b;
 
         if (args.length != 0) {
-            if (args[1] == "-X") {
+            if (args[0] == "-X") {
                 b = new Blokus(s, "X", "O");
             } else if (args[0].equals("-O")) {
                 b = new Blokus(s, "O", "X");
@@ -109,22 +109,12 @@ public class Blokus {
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");     
             }
-            for(int[] move : b.getCurrentPlayer().getValidMove()) {
-                System.out.print(move[0] + ", " + move[1] + " | ");
-            }
-            System.out.println();
-
             b.nextPlayer();
             b.printUI();
 
             while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");
             }
-            for(int[] move : b.getCurrentPlayer().getValidMove()) {
-                System.out.print(move[0] + ", " + move[1] + " | ");
-            }
-            System.out.println();
-
             b.nextPlayer();
             b.printUI();
             b.setState(State.MIDGAME);
@@ -132,26 +122,23 @@ public class Blokus {
 
         
         while (b.isMidGame()) {
-            for(int[] move : b.getCurrentPlayer().getValidMove()) {
-                System.out.print(move[0] + ", " + move[1] + " | ");
-            }
-            System.out.println();
             while(!(new MidGame(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");            
             }    
-            System.out.println("a " + b.getCurrentPlayer().getValidMove().size() + "b " + b.getNextPlayer().getValidMove().size());
             b.nextPlayer();
             if(b.getCurrentPlayer().getValidMove().size() == 0) {
                 b.nextPlayer();
-                System.out.println(b.getCurrentPlayer().getName());
             }
-            b.printUI();
             b.isGameOver();
-
+            b.printUI();
         }
         
         if(b.state == State.OVER) {
-            System.out.println("\nGAME OVER");
+            System.out.println("-------------------------------");
+            b.getBoard().printBoard();
+            System.out.println(b.getPlayers().get(0).getName() + "(" + b.getPlayers().get(0).getColor() + ") gamepieces: " + b.getPlayers().get(0).getStock());
+            System.out.println(b.getPlayers().get(1).getName() + "(" + b.getPlayers().get(1).getColor() + ") gamepieces: " + b.getPlayers().get(1).getStock());
+            System.out.println("GAME OVER!");
         }
     }
 }
