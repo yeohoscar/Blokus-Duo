@@ -3,8 +3,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
-//karyen
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * MidGame class
+ *  - handles checking for valid game moves after first turn
+ */
 public class MidGame implements Move{
     private final Player player;
     private final Board board;
@@ -37,7 +44,7 @@ public class MidGame implements Move{
     }
 
     /**
-     * 
+     * Print the valid moves
      */
     @Override
     public String toString() {
@@ -49,6 +56,15 @@ public class MidGame implements Move{
         return s;
     }
 
+    /**
+     * Check if the coordinate is a valid move
+     * 
+     * @param player Current player
+     * @param piece Selected piece by player
+     * @param dest_x x coordinates on the board
+     * @param dest_y y coordinates on the board
+     * @return true if it is a valid move
+     */
     public boolean isValidMove(Player player, Piece piece, int dest_x, int dest_y) {
         if(!isAtCorner(piece, dest_x, dest_y) || board.isSide(player, piece, dest_x, dest_y)) {
             return false;
@@ -56,6 +72,14 @@ public class MidGame implements Move{
         return true;
     }
 
+    /**
+     * Check if the piece is available to place on the coordinates
+     * 
+     * @param p Piece to be check
+     * @param x x coordinates of the valid move
+     * @param y y coordinates of the valid move
+     * @return true if the piece is not able to place on the coordinates
+     */
     public int checkEveryPiece(Piece p, int x, int y) {
         if(!isValidMove(player, p, x, y)) {
             return 1;
@@ -65,17 +89,23 @@ public class MidGame implements Move{
         }
     }
 
+    /**
+     * Check if there is any available piece to put on valid moves
+     * 
+     * @param move Coordinates of valid move
+     * @return true if there is available piece
+     */
     public boolean hasAvailablePiece(int[] move) { 
-        int flag = 0;
         int count = 0;
 
         for(Piece piece : player.getStock().getPieces()) {
+            int flag = 0;
             Piece pCopy = piece;
             switch(piece.getName()) {
                 case "I1":
                 case "O4":
                 case "X5":
-                    System.out.println("skip");
+                    flag += checkEveryPiece(piece, move[0], move[1]);
                     break;
                 case "I2":
                 case "I3":
@@ -103,10 +133,10 @@ public class MidGame implements Move{
                     flag += checkEveryPiece(pCopy, move[0], move[1]);
                     break;
             }
-        }
 
-        if(flag == 2 || flag == 7) {
-            count++;
+            if(flag == 1 || flag == 2 || flag == 7) {
+                count++;
+            }
         }
 
         if(count == player.getStock().getPieces().size()) {
@@ -117,41 +147,38 @@ public class MidGame implements Move{
     }
 
     /**
-     * 
-     * @param piece
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * Check if the selected piece is at the edge of placed pieces 
+     * @param piece Selected piece by player
+     * @param dest_x x coordinates on board
+     * @param dest_y y coordinates on board
+     * @return true if any square of the piece touch the edge of placed piece
      */
     public boolean isAtCorner(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(offset, dest_x, dest_y));
     }
 
     /**
-     * 
-     * @param offset
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * Check if a square of a piece touch the edge of placed pieces
+     * @param offset block offset from origin
+     * @param dest_x x coordinates on board
+     * @param dest_y y coordinates on board
+     * @return true if the square touch the edge of placed pieces
      */
     public boolean isContain(Block offset, int dest_x, int dest_y) {
-        //System.out.println(input[0] + " check1 " + input[1]);
         for(int[] m : player.getValidMove()) {
-            //System.out.println(m[0] + " m " + m[1]);
             if(m[0] == offset.getX() + dest_x && m[1] == offset.getY() + dest_y) {
                 return true;
             }
         }
-        System.out.println("no");
 
         return false;
     }
 
     /**
-     * 
-     * @param offset
-     * @param dest_x
-     * @param dest_y
+     * Add the coordinates of valid move into the arraylist
+     * @param offset block offset from origin
+     * @param dest_x x coordinate of the edge of placed pieces 
+     * @param dest_y y coordinate of the edge of placed pieces 
      */
     public void addMove(Block offset, int dest_x, int dest_y) {
         int[] coor = new int[] {dest_x + offset.getX(), dest_y + offset.getY()};
@@ -164,8 +191,8 @@ public class MidGame implements Move{
     }
 
     /**
-     * 
-     * @param input
+     * Update the arraylist that stored the valid moves by removing selected moves and checking available pieces with valid moves
+     * @param input Coordinates of valid move entered by user
      */
     public void updateMove(int[] input) {
         player.getValidMove().removeIf(n -> (n.equals(input)));
@@ -186,6 +213,12 @@ public class MidGame implements Move{
         }
     }
 
+    /**
+     * Get the valid moves of each player
+     * @param blocks block offset from origin
+     * @param dest_x x coordinate of placed pieces 
+     * @param dest_y y coordinate of placed pieces 
+     */
     public void getMove(ArrayList<Block> blocks, int dest_x, int dest_y) {
         ArrayList<int[]> dir = new ArrayList<int[]>();
         int[] input = new int[] {dest_x, dest_y};
@@ -250,6 +283,9 @@ public class MidGame implements Move{
         System.out.println(str);
     }
 
+    /**
+     * Validate move before placing the piece on board
+     */
     public boolean executeMove() {
         if (!board.isEmptyForPiece(piece, originX, originY) || !isValidMove(player, piece, originX, originY)) {
             return false;
@@ -267,6 +303,9 @@ public class MidGame implements Move{
         return true;
     }
 
+    /**
+     * Prompts player to select and manipulate piece 
+     */
     public ArrayList<Object> selectPiece(Scanner s) {
         if (player.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
@@ -286,6 +325,11 @@ public class MidGame implements Move{
         }
     }
 
+    /**
+     * Prompts player to enter the coordinates
+     * @param arr Coordinates entered by player
+     * @return an integer arraylist that stored the coordinates
+     */
     public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
         ArrayList<Integer> coord = new ArrayList<>();
 
