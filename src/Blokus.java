@@ -32,10 +32,9 @@ public class Blokus {
     }
 
     public void isGameOver() {
-        if (players.get(0).getValidMove().size() == 0 || players.get(1).getValidMove().size() == 0 || players.get(0).getStock().getPieces().size() == 0 || players.get(1).getStock().getPieces().size() == 0) {
+        if ((players.get(0).getValidMove().size() == 0 && players.get(1).getValidMove().size() == 0) || players.get(0).getStock().getPieces().size() == 0 || players.get(1).getStock().getPieces().size() == 0) {
             setState(State.OVER);
         }
-        System.out.println("game " + state);
     }
 
     public Board getBoard() {
@@ -140,24 +139,17 @@ public class Blokus {
             while(!(new MidGame(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");            
             }    
-            System.out.println("a " + b.getPlayers().get(0).getValidMove().size() + "b " + b.getPlayers().get(1).getValidMove().size());
+            System.out.println("a " + b.getCurrentPlayer().getValidMove().size() + "b " + b.getNextPlayer().getValidMove().size());
             b.nextPlayer();
+            if(b.getCurrentPlayer().getValidMove().size() == 0) {
+                b.nextPlayer();
+                System.out.println(b.getCurrentPlayer().getName());
+            }
             b.printUI();
             b.isGameOver();
 
-            /*for(int[] move : b.getCurrentPlayer().getValidMove()) {
-                System.out.print(move[0] + ", " + move[1] + " | ");
-            }
-            System.out.println();
-            while(!(new MidGame(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
-                System.out.println("Invalid move.");            
-            }    
-            System.out.println("a " + b.getPlayers().get(0).getValidMove().size() + "b " + b.getPlayers().get(1).getValidMove().size());
-            b.nextPlayer();
-            b.printUI();
-            b.isGameOver();*/
         }
-
+        
         if(b.state == State.OVER) {
             System.out.println("\nGAME OVER");
         }
