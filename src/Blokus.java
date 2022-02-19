@@ -32,9 +32,10 @@ public class Blokus {
     }
 
     public void isGameOver() {
-        if (players.get(0).getValidMove().size() == 0 && players.get(1).getValidMove().size() == 0) {
+        if (players.get(0).getValidMove().size() == 0 || players.get(1).getValidMove().size() == 0 || players.get(0).getStock().getPieces().size() == 0 || players.get(1).getStock().getPieces().size() == 0) {
             setState(State.OVER);
         }
+        System.out.println("game " + state);
     }
 
     public Board getBoard() {
@@ -44,6 +45,14 @@ public class Blokus {
     public Player getCurrentPlayer() {
         return currentPlayer;
     } 
+
+    public Player getNextPlayer() {
+        if (currentPlayer == getPlayers().get(0)) {
+            return (getPlayers().get(1));
+        }
+
+        return (getPlayers().get(0));
+    }
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -98,7 +107,7 @@ public class Blokus {
         
         if (b.isFirstTurn()) {
             b.printUI();
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");     
             }
             for(int[] move : b.getCurrentPlayer().getValidMove()) {
@@ -109,7 +118,7 @@ public class Blokus {
             b.nextPlayer();
             b.printUI();
 
-            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
+            while(!(new FirstTurnMove(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");
             }
             for(int[] move : b.getCurrentPlayer().getValidMove()) {
@@ -124,28 +133,29 @@ public class Blokus {
 
         
         while (b.isMidGame()) {
-            b.printUI();
-            while(!(new MidGame(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
-                System.out.println("Invalid move.");            
-            }    
             for(int[] move : b.getCurrentPlayer().getValidMove()) {
                 System.out.print(move[0] + ", " + move[1] + " | ");
             }
             System.out.println();
+            while(!(new MidGame(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
+                System.out.println("Invalid move.");            
+            }    
+            System.out.println("a " + b.getPlayers().get(0).getValidMove().size() + "b " + b.getPlayers().get(1).getValidMove().size());
             b.nextPlayer();
             b.printUI();
             b.isGameOver();
 
-            while(!(new MidGame(b.getCurrentPlayer(), b.getBoard(), s).executeMove())) {
-                System.out.println("Invalid move.");            
-            }    
-            for(int[] move : b.getCurrentPlayer().getValidMove()) {
+            /*for(int[] move : b.getCurrentPlayer().getValidMove()) {
                 System.out.print(move[0] + ", " + move[1] + " | ");
             }
             System.out.println();
+            while(!(new MidGame(b.getCurrentPlayer(), b.getNextPlayer(), b.getBoard(), s).executeMove())) {
+                System.out.println("Invalid move.");            
+            }    
+            System.out.println("a " + b.getPlayers().get(0).getValidMove().size() + "b " + b.getPlayers().get(1).getValidMove().size());
             b.nextPlayer();
             b.printUI();
-            b.isGameOver();
+            b.isGameOver();*/
         }
 
         if(b.state == State.OVER) {

@@ -14,7 +14,8 @@ import java.util.Scanner;
  */
 
 public class FirstTurnMove implements Move {
-    private final Player player;
+    private final Player currentPlayer;
+    private final Player nextPlayer;
     private final Board board;
     private final Piece piece;
     private final int originX;
@@ -22,17 +23,18 @@ public class FirstTurnMove implements Move {
     private final MidGame midGame;
 
     @SuppressWarnings("unchecked")
-    public FirstTurnMove(Player player, Board board, Scanner s) {
-        if (player == null || board == null) {
+    public FirstTurnMove(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
+        if (currentPlayer == null || nextPlayer == null || board == null) {
             throw new IllegalArgumentException();
         }
-        this.player = player;
+        this.currentPlayer = currentPlayer;
+        this.nextPlayer = nextPlayer;
         this.board = board;
         List<Object> list = selectPiece(s);
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
-        this.midGame = new MidGame(player, board, piece, originX, originY);
+        this.midGame = new MidGame(currentPlayer, nextPlayer, board, piece, originX, originY);
     }
 
     public int getX() {
@@ -62,7 +64,7 @@ public class FirstTurnMove implements Move {
      * @param originY y coordinate of the block origin
      */
     private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
-        if (player.getColor() == "O") {
+        if (currentPlayer.getColor() == "O") {
             return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
         } else {
             return (offset.getX() + originX == 4 && offset.getY() + originY == 9);
@@ -74,10 +76,10 @@ public class FirstTurnMove implements Move {
             return false;
         }
 
-        board.addPiece(player, piece, originX, originY);
-        for(int j = 0; j < player.getStock().getPieces().size(); j++) {
-            if(player.getStock().getPieces().get(j).getName().equals(piece.getName())) {
-                player.getStock().getPieces().remove(j);
+        board.addPiece(currentPlayer, piece, originX, originY);
+        for(int j = 0; j < currentPlayer.getStock().getPieces().size(); j++) {
+            if(currentPlayer.getStock().getPieces().get(j).getName().equals(piece.getName())) {
+                currentPlayer.getStock().getPieces().remove(j);
             }
         }
         midGame.getMove(piece.getBlocks(), originX, originY);
@@ -85,25 +87,29 @@ public class FirstTurnMove implements Move {
         return true;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player getcurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Player getNexttPlayer() {
+        return nextPlayer;
     }
 
     public ArrayList<Object> selectPiece(Scanner s) {
-        if (player.getStock().getPieces().size() == 0) {
+        if (currentPlayer.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
         String tmp = s.useDelimiter("\\n").nextLine();
         
         while(true) {
-            for (Piece p : player.getStock().getPieces()) {
+            for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
                     Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(s, player.getColor())));                                
+                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(s, currentPlayer.getColor())));                                
                 }
             }
-            System.out.println("Piece not in stock.\n Select a piece");
+            System.out.println("Piece not in stock.\nSelect a piece");
             tmp = s.useDelimiter("\\n").nextLine();
         }
     }

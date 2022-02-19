@@ -7,6 +7,11 @@ public class Block {
         this.y = y;
     }
 
+    public Block(Block b) {
+        this.x = b.getX();
+        this.y = b.getY();
+    }
+
     public int getX() {
         return x;
     }

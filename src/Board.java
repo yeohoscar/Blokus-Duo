@@ -26,6 +26,9 @@ public class Board {
         board[9][9] = "*";
     }
 
+    /**
+     * Visualize the board by using 2D array to print the board
+     */
     public void printBoard() {
         int row = board.length - 1;
         System.out.print("BLOKUS DUO\n");
@@ -89,23 +92,23 @@ public class Board {
     }
 
     /**
+     * Checks if the square on the board is empty 
      * 
-     * @param offset
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * @param offset block offset from origin
+     * @param dest_x x coordinates
+     * @param dest_y y coordinates
+     * @return true if the square is empty
      */
     public boolean isEmptyAt(Block offset, int dest_x, int dest_y) {
         if(!contains(13 - dest_y - offset.getY(), dest_x + offset.getX())) {
             return false;
         }
 
-        //System.out.println((13 - dest_y - offset.getY()) + " " + (dest_x + offset.getX()));
         return (board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "X" && board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "O");
     }
 
     /**
-     * returns true if the board does not contains a piece
+     * @return true if the board does not contains any piece
      */
     public boolean isEmpty() {
         for(int i = 0; i < board.length; i++) {
@@ -119,53 +122,49 @@ public class Board {
     }
 
     /**
+     * Check if the input coordinate has enough space to place the piece
      * 
-     * @param piece
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * @param piece selected piece
+     * @param dest_x x coordinates
+     * @param dest_y y coordinates
+     * @return true if the coordinates are able to place the piece
      */
     public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
     }
 
     /**
+     * Check if the square of the placed piece is the edge square
      * 
-     * @param block
-     * @param i
-     * @param dir
-     * @return
+     * @param block block offset from origin
+     * @param i index of block
+     * @param dir direction of the square
+     * @return true if the square is an edge square of the piece
      */
     public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
         for (int j = 0; j < block.size(); j++) {
             if ((block.get(i)).getX() == (block.get(j)).getX()) {
-                //System.out.println(i + " v1 " + j);
                 if ((block.get(i)).getY() - (block.get(j)).getY() == 1) {
-                    //System.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
                     down++;
                 }
 
                 if ((block.get(i)).getY() - (block.get(j)).getY() == -1) {
-                    //ystem.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
                     up++;
                 }
             }
 
             if ((block.get(i)).getY() == (block.get(j)).getY()) {
-                //System.out.println(i + " h1 " + j);
                 if ((block.get(i)).getX() - (block.get(j)).getX() == 1) {
-                    //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
                     left++;
                 }
 
                 if ((block.get(i)).getX() - (block.get(j)).getX() == -1) {
-                    //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
                     right++;
                 }
             }
         }
-        //System.out.println(left + " " + right + " count " + up + " " + down);
+
         dir.add(new int[] {up, down, right, left});
 
         if ((left + right) < 2 && (up + down) < 2) {
@@ -176,11 +175,12 @@ public class Board {
     }
 
     /**
+     * Check the color of square on the board
      * 
-     * @param color
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * @param color player's piece color
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
+     * @return true if the square has the same color as player's piece color
      */
     public boolean isSameColor(String color, int dest_x, int dest_y) {
         //System.out.println(dest_x + " color " + dest_y);
@@ -188,12 +188,13 @@ public class Board {
     }
 
     /**
+     * Check if there is any placed piece at the side of selected square
      * 
-     * @param color
-     * @param offset
-     * @param dest_x
-     * @param dest_y
-     * @return
+     * @param color player's piece color
+     * @param offset block offset from origin
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
+     * @return true if there is piece from the same player at the side of the selected coordinates
      */
     public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
         int x = 13 - dest_y - offset.getY();
@@ -205,56 +206,48 @@ public class Board {
 
         if (!contains(x + 1, y)) {
             if (y <= 0) {
-                //System.out.println(" a ");
                 return isSameColor(color, x, y + 1) || isSameColor(color, x - 1, y);
             }
 
             if (y >= 13) {
-                //System.out.println("b");
                 return isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
             }
 
-            //System.out.println(" c ");
             return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
         }
 
         if(!contains(x - 1, y)) {
             if(y <= 0) {
-                //System.out.println(" d ");
                 return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y);
             }
 
             if(y >= 13) {
-                //System.out.println(" e ");
                 return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
             }
 
-            //System.out.println(" f ");
             return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
 
         }
         
         if(!contains(x, y + 1)) {
-            //System.out.println(" g ");
             return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
         }
 
         if(!contains(x, y - 1)) {
-            //System.out.println(" h ");
             return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
         }
 
-        System.out.println("| "+isSameColor(color, x, y + 1) + ", " + isSameColor(color, x, y - 1) + ", " + (x + 1) +" "+ y + ", "+ isSameColor(color, x - 1, y) + " |");
         return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) ||
                isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
     }
 
     /**
+     * Check if there is any placed piece at the side of the selected coordinates
      * 
-     * @param player
-     * @param piece
-     * @param dest_x
-     * @param dest_y
+     * @param player current player
+     * @param piece selected piece by player
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
      * @return
      */
     public boolean isSide(Player player, Piece piece, int dest_x, int dest_y) {
