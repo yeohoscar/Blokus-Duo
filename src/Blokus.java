@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -11,6 +7,10 @@ import java.util.*;
  * Main class
  *  - runs game
  */
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Blokus {
     private final List<Player> players;
@@ -82,6 +82,10 @@ public class Blokus {
         setCurrentPlayer(getPlayers().get(0));
     }
 
+    public void readFile(String fileName) {
+        
+    }
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         Blokus b;
@@ -97,23 +101,56 @@ public class Blokus {
                 }
                 b = new Blokus(s, "X", "O");
             } else if (args[0].equals("-O")) {
+                if(args.length == 2) {
+                    try {
+                        s = new Scanner(new File(args[1]));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 b = new Blokus(s, "O", "X");
             } else { 
                 if (new Random().nextInt(2) == 0) {
+                    if(args.length == 2) {
+                        try {
+                            s = new Scanner(new File(args[1]));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     b = new Blokus(s, "X", "O");
                 } else {
+                    if(args.length == 2) {
+                        try {
+                            s = new Scanner(new File(args[1]));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     b = new Blokus(s, "O", "X");
                 }
             }
         } else {
             if (new Random().nextInt(2) == 0) {
+                if(args.length == 2) {
+                    try {
+                        s = new Scanner(new File(args[1]));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 b = new Blokus(s, "X", "O");
             } else {
+                if(args.length == 2) {
+                    try {
+                        s = new Scanner(new File(args[1]));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 b = new Blokus(s, "O", "X");
             }
         }
-
-        System.out.println((b.getCurrentPlayer().getStock().getPieces().get(19).getBlocks().get(0).getX()));        
         
         if (b.isFirstTurn()) {
             b.printUI();

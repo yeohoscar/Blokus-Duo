@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -11,6 +8,9 @@ import java.util.ArrayList;
  *  - represents Blokus player
  *  - holds player name, colour and pieces
  */
+
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Player {
     private final String name; //Player name

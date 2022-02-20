@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -11,6 +9,8 @@ import java.util.*;
  *  - holds piece name and blocks that make up the piece
  *  - enable users to manipulate the piece
  */
+
+import java.util.*;
 
 public class Piece {
     private String name;
@@ -142,7 +142,7 @@ public class Piece {
 
             String[] instruct = s.useDelimiter(" |\\n").nextLine().split(" ");
             int indexOfp; // to record the index of 'p' command
-            
+
             if(instruct.length == 1 && instruct[0].equals("")) {
                 instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
             }

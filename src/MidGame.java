@@ -1,8 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -12,6 +7,11 @@ import java.util.Scanner;
  * MidGame class
  *  - handles checking for valid game moves after first turn
  */
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class MidGame {
     private final Player currentPlayer;

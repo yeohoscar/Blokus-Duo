@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -9,6 +7,8 @@ import java.util.*;
  * Auxillary class of Piece
  *  - holds and initialises all the pieces the player has
  */
+
+import java.util.*;
 
 public class Stock {
     private List<Piece> pieces = new ArrayList<>();

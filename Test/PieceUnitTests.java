@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Unit Test for Piece Class
+ *  - test the functions in Piece Class
+ */
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
