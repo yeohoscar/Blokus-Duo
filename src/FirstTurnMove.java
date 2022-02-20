@@ -100,7 +100,7 @@ public class FirstTurnMove implements Move {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.next();
+        String tmp = s.useDelimiter(" |\\n").next();
         tmp = tmp.replaceAll("(?:\\n|\\r)", "");
         
         while(true) {

@@ -15,8 +15,21 @@ public class BoardUnitTests {
         
         assertTrue(board.contains(9, 4));
         assertTrue(board.contains(5, 6));
+        assertTrue(board.contains(2, 12));
         assertFalse(board.contains(14, 14));
         assertFalse(board.contains(0, -4));
+        assertFalse(board.contains(-2, 20));
+    }
+
+    @Test
+    void testAddPiece() {
+        Board board = new Board();
+        Player player = new Player("player", "X");
+        Piece piece = new Piece("T4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(-1, 0))));
+
+        assertTrue(board.isEmpty());
+        board.addPiece(player, piece, 9, 4);
+        assertFalse(board.isEmpty());
     }
 
     @Test
@@ -24,7 +37,6 @@ public class BoardUnitTests {
         Board board = new Board();
         Player player = new Player("player", "X");
         Piece piece = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
-
 
         assertTrue(board.isEmpty());
         board.addPiece(player, piece, 9, 4);
@@ -35,11 +47,24 @@ public class BoardUnitTests {
     void testEmptySpaceForPiece() {
         Board board = new Board();
         Player player = new Player("player", "X");
-        Piece piece = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
+        Piece I2 = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
+        Piece O4 = new Piece("O4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(1, 0))));
 
-        assertTrue(board.isEmptyForPiece(piece, 9, 4));
-        board.addPiece(player, piece, 9, 4);
-        assertFalse(board.isEmptyForPiece(piece, 9, 4));
+        assertTrue(board.isEmptyForPiece(I2, 9, 4));
+        assertTrue(board.isEmptyForPiece(I2, 9, 5));
+        assertTrue(board.isEmptyForPiece(I2, 9, 6));
+        assertTrue(board.isEmptyForPiece(I2, 4, 0));
+        board.addPiece(player, I2, 9, 4);
+        assertFalse(board.isEmptyForPiece(I2, 9, 4));
+        assertFalse(board.isEmptyForPiece(I2, 9, 5));
+        assertTrue(board.isEmptyForPiece(I2, 9, 6));
+        assertTrue(board.isEmptyForPiece(I2, 4, 0));
+        board.addPiece(player, O4, 4, 0);
+        assertFalse(board.isEmptyForPiece(I2, 4, 0));
+        assertFalse(board.isEmptyForPiece(I2, 4, 1));
+        assertFalse(board.isEmptyForPiece(I2, 5, 0));
+        assertFalse(board.isEmptyForPiece(I2, 5, 1));
+
     }
 
     @Test
