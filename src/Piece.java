@@ -176,6 +176,9 @@ public class Piece {
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
             String[] instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
+            if(instruct.length == 1 && instruct[0].equals("")) {
+                instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
+            }
             int indexOfp = 0;
             for (int index = 0; index < instruct.length; index++) {
                 if (Objects.equals(instruct[index], "p")) {
