@@ -27,7 +27,7 @@ public class Stock {
             new Piece("L5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(2, 0), new Block(3, 0)))),
             new Piece("T5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2), new Block(1, 0), new Block(-1, 0)))),
             new Piece("V5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2), new Block(1, 0), new Block(2, 0)))),
-            new Piece("N5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(2, 0), new Block(0, -1), new Block(-1, -1)))),
+            new Piece("N", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(2, 0), new Block(0, -1), new Block(-1, -1)))),
             new Piece("Z5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(1, 1), new Block(-1, 0), new Block(-1, -1)))),
             new Piece("T4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(-1, 0)))),
             new Piece("P", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(1, 0), new Block(1, -1), new Block(0, -1), new Block(0, -2)))),

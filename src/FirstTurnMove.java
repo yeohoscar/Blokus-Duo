@@ -100,7 +100,9 @@ public class FirstTurnMove implements Move {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.useDelimiter("\\n").nextLine();
+        String tmp = s.useDelimiter(" |\\n|//r").nextLine();
+        //Can use replaceAll if you want to use .next(), but it will breaks on the manipulation function
+        //tmp = tmp.replaceAll("(?:\\n|\\r)", "");
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
@@ -110,7 +112,7 @@ public class FirstTurnMove implements Move {
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = s.useDelimiter("\\n").nextLine();
+            tmp = s.useDelimiter(" |\\n").nextLine();
         }
     }
 

@@ -175,7 +175,7 @@ public class Piece {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String[] instruct = s.useDelimiter("\\n").nextLine().split(" ");
+            String[] instruct = s.useDelimiter(" |\\n").nextLine().split(" ");
             int indexOfp = 0;
             for (int index = 0; index < instruct.length; index++) {
                 if (Objects.equals(instruct[index], "p")) {
@@ -195,6 +195,8 @@ public class Piece {
                         case "f":
                             flipPiece();
                             printPiece(color);
+                            break;
+                        case "":
                             break;
                         default:
                             System.out.println("Invalid instruction");

@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -85,7 +87,7 @@ public class Blokus {
         Blokus b;
 
         if (args.length != 0) {
-            if (args[0] == "-X") {
+            if (args[0].equals("-X")) {
                 b = new Blokus(s, "X", "O");
             } else if (args[0].equals("-O")) {
                 b = new Blokus(s, "O", "X");
