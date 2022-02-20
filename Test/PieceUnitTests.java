@@ -29,8 +29,8 @@ public class PieceUnitTests {
     @Test
     void testManipulation() {
         Piece p = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
-        ByteArrayInputStream in = new ByteArrayInputStream("r r f".getBytes());
-        Scanner s = new Scanner(in).useDelimiter("\\A");
+        System.setIn(new ByteArrayInputStream("r r f p 5 6".getBytes()));
+        Scanner s = new Scanner(System.in);
 
         p.flipPiece();
         assertEquals(0, p.getBlocks().get(1).getX());
@@ -44,17 +44,17 @@ public class PieceUnitTests {
         assertEquals(-1, p.getBlocks().get(1).getX());
         assertEquals(0, p.getBlocks().get(1).getY());
 
-        Piece p2 = new Piece("Z4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
+        Piece p2 = new Piece("Z4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(-1, 0))));
 
         p2.manipulation(s, "X");
-        assertEquals(0, p.getBlocks().get(1).getX());
-        assertEquals(-1, p.getBlocks().get(1).getY());
+        assertEquals(0, p2.getBlocks().get(1).getX());
+        assertEquals(-1, p2.getBlocks().get(1).getY());
 
-        assertEquals(1, p.getBlocks().get(2).getX());
-        assertEquals(-1, p.getBlocks().get(2).getY());
+        assertEquals(1, p2.getBlocks().get(2).getX());
+        assertEquals(-1, p2.getBlocks().get(2).getY());
 
-        assertEquals(-1, p.getBlocks().get(1).getX());
-        assertEquals(0, p.getBlocks().get(1).getY());
+        assertEquals(-1, p2.getBlocks().get(3).getX());
+        assertEquals(0, p2.getBlocks().get(3).getY());
         
         s.close();
     }
