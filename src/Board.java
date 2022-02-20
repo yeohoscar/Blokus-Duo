@@ -8,7 +8,6 @@
  *  - represents Blokus board
  */
 
-package src.Blokus;
 import java.util.ArrayList;
 
 public class Board {

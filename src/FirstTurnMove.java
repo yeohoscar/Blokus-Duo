@@ -1,5 +1,3 @@
-package src.Blokus;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -102,7 +100,7 @@ public class FirstTurnMove implements Move {
             System.out.println("No more pieces left.");
         }
         System.out.println("Select a piece");
-        String tmp = s.useDelimiter(" |\\n|//r").next();
+        String tmp = s.next();
         tmp = tmp.replaceAll("(?:\\n|\\r)", "");
         
         while(true) {
@@ -115,6 +113,7 @@ public class FirstTurnMove implements Move {
             System.out.println("Piece not in stock.\nSelect a piece");
             tmp = s.useDelimiter(" |\\n").next();
             tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+            s.next();
         }
     }
 

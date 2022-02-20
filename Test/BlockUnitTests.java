@@ -1,6 +1,3 @@
-package src.Test;
-import src.Blokus.Block;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 

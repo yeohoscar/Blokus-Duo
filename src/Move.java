@@ -1,5 +1,3 @@
-package src.Blokus;
-
 import java.util.*;
 
 public interface Move {

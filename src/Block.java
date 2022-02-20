@@ -1,5 +1,3 @@
-package src.Blokus;
-
 public class Block {
     private int x;
     private int y;

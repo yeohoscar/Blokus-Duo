@@ -1,5 +1,3 @@
-package src.Blokus;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;

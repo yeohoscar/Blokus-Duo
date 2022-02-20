@@ -1,9 +1,3 @@
-package src.Test;
-import src.Blokus.Block;
-import src.Blokus.Board;
-import src.Blokus.Piece;
-import src.Blokus.Player;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
