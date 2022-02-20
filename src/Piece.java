@@ -9,6 +9,7 @@ import java.util.*;
  * Piece class
  *  - represents Blokus piece
  *  - holds piece name and blocks that make up the piece
+ *  - enable users to manipulate the piece
  */
 
 public class Piece {
@@ -36,28 +37,35 @@ public class Piece {
         return blocks;
     }
 
+    /**
+     * Rotate the selected piece 90 degrees clockwise around the reference point
+     */
     public void rotatePieceClockwise() {
         int count = getBlocks().size() - 1;
 
         while(count >= 0) {
             if (getBlocks().get(count).getX() != 0) {
                 getBlocks().get(count).invertX();
-                swap(count);
             }
-            else {
-                swap(count);
-            }
-
+            swap(count);
             count--;
         }
     }
 
+    /**
+     * Swap the values of x and y
+     *
+     * @param index index of the block of the piece
+     */
     private void swap(int index) {
         int tmp = blocks.get(index).getX();
         blocks.get(index).setX(blocks.get(index).getY());
         blocks.get(index).setY(tmp);
     }
 
+    /**
+     * Flip the selected piece along the vertical axis going through the reference point
+     */
     public void flipPiece() {
         int count = getBlocks().size() - 1;
 
@@ -69,8 +77,13 @@ public class Piece {
         }
     }
 
+    /**
+     * Print gamepiece via a 2D array
+     *
+     * @param colour color of current player: 'X' or 'O'
+     */
     public void printPiece(String colour) {
-        // store piece's info into a 2D array
+        // store piece's blocks into
         int[][] displayPiece = new int[9][9];
         for (int i = 0; i < displayPiece.length; i++) {
             for (int j = 0 ; j < displayPiece[0].length; j++) {
@@ -84,7 +97,7 @@ public class Piece {
             displayPiece[4-y][4+x] = 1;
         }
     
-        // print the piece via 2D array
+        // print the piece
         for (int[] line: displayPiece) {
             if (allElementsTheSame(line)) {
                 continue;
@@ -97,80 +110,31 @@ public class Piece {
         }
     }
 
+    /**
+     * Check if all elements of the integer array are same
+     *
+     * @param array array needs to be checked
+     * @return true if all elements are same
+     */
     public static boolean allElementsTheSame(int[] array) {
-        if (array.length == 0) {
-            return true;
-        } else {
+        if (array.length != 0) {
             int first = array[0];
             for (int element : array) {
                 if (element != first) {
                     return false;
                 }
             }
-            return true;
         }
+        return true;
     }
 
-    /*public ArrayList<Integer> manipulation(Scanner s, String color) {
-        printPiece(color);
-        while (true) {
-            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String[] instruct = s.useDelimiter("\\n").nextLine().split("");
-            int indexOfp = 0;
-            for (int index = 0; index < instruct.length; index++) {
-                if (Objects.equals(instruct[index], "p")) {
-                    indexOfp = index;
-                    break;
-                } else {
-                    switch (instruct[index]) {
-                        case " ":
-                            printPiece(color);
-                            break;
-                        case "r":
-                            rotatePieceClockwise();
-                            break;
-                        case "f":
-                            flipPiece();
-                            break;
-                        default:
-                            System.out.println("Invalid instruction");
-                    }
-                }
-            }
-            try {
-                return new ArrayList<Integer>(Arrays.asList(Integer.parseInt(instruct[indexOfp+2]), Integer.parseInt(instruct[indexOfp+4])));
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Coordinates not provided.");
-            }
-        }
-    }*/
-    /*public ArrayList<Integer> manipulation(Scanner s, String color) {
-        printPiece(color);
-        while (true) {
-            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String[] instruct = s.useDelimiter("\\n").nextLine().split(" ");
-            switch (instruct[0]) {
-                case "r":
-                    rotatePieceClockwise();
-                    printPiece(color);
-                    break;
-                case "f":
-                    flipPiece();
-                    printPiece(color);
-                    break;
-                case "p":
-                    try {
-                        return new ArrayList<Integer>(Arrays.asList(Integer.parseInt(instruct[1]), Integer.parseInt(instruct[2])));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Coordinates not provided.");
-                        break; 
-                    }
-                default:
-                    System.out.println("Invalid instruction");
-            }
-        }
-    }*/
-
+    /**
+     * Manipulate the piece by specifying a single-letter command from users Until receive 'place' command
+     *
+     * @param s the user input
+     * @param color color of current player for printing pieces
+     * @return an arraylist of piece's info : properties and coordinate
+     */
     public ArrayList<Integer> manipulation(Scanner s, String color) {
         printPiece(color);
         while (true) {
@@ -179,7 +143,7 @@ public class Piece {
             if(instruct.length == 1 && instruct[0].equals("")) {
                 instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
             }
-            int indexOfp = 0;
+            int indexOfp; // to record the index of 'p' command
             for (int index = 0; index < instruct.length; index++) {
                 if (Objects.equals(instruct[index], "p")) {
                     indexOfp = index;
@@ -209,6 +173,6 @@ public class Piece {
         }
     }
 
-    
+
 }
  
