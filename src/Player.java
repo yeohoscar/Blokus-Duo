@@ -30,13 +30,7 @@ public class Player {
 
     public static Player initPlayer(String color, Scanner s) {
         System.out.println("Enter Player(" + color + ") name: ");
-<<<<<<< HEAD
-
-        String tmp = s.useDelimiter("\\n").nextLine();
-
-=======
         String tmp = s.useDelimiter("\\n| ").nextLine();
->>>>>>> 504c1c7697f23cdecc89902607ff2f34018c9919
         while(tmp == null || tmp.trim().isEmpty()) {
             System.out.println("Player name cannot be null\nEnter Player(" + color + ") name:");
             tmp = s.useDelimiter("\\n| ").nextLine();

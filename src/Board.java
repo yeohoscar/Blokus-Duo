@@ -26,6 +26,9 @@ public class Board {
         board[9][9] = "*";
     }
 
+    /**
+     * Visualize the board by using 2D array to print the board
+     */
     public void printBoard() {
         int row = board.length - 1;
         System.out.print("BLOKUS DUO\n");
@@ -73,8 +76,8 @@ public class Board {
      *  @param originY y coordinate of piece origin
      */
     public void addPiece(Player player, Piece piece, int originX, int originY) {
-        for (int[] block : piece.getBlocks()) {
-            board[13 - originY - block[1]][originX + block[0]] = player.getColor();
+        for (Block block : piece.getBlocks()) {
+            board[13 - originY - block.getY()][originX + block.getX()] = player.getColor();
         }
     }
 
@@ -88,17 +91,24 @@ public class Board {
         return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
     }
 
-    public boolean isEmptyAt(int[] offset, int dest_x, int dest_y) {
-        if(!contains(13 - dest_y, dest_x)) {
+    /**
+     * Checks if the square on the board is empty 
+     * 
+     * @param offset block offset from origin
+     * @param dest_x x coordinates
+     * @param dest_y y coordinates
+     * @return true if the square is empty
+     */
+    public boolean isEmptyAt(Block offset, int dest_x, int dest_y) {
+        if(!contains(13 - dest_y - offset.getY(), dest_x + offset.getX())) {
             return false;
         }
 
-        //System.out.println(offset[0] + " " + offset[1]);
-        return (board[13 - offset[1] - dest_y][offset[0] + dest_x] != "X" && board[13 - offset[1] - dest_y][offset[0] + dest_x] != "O");
+        return (board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "X" && board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "O");
     }
 
     /**
-     * returns true if the board does not contains a piece
+     * @return true if the board does not contains any piece
      */
     public boolean isEmpty() {
         for(int i = 0; i < board.length; i++) {
@@ -111,121 +121,136 @@ public class Board {
         return true;
     }
 
+    /**
+     * Check if the input coordinate has enough space to place the piece
+     * 
+     * @param piece selected piece
+     * @param dest_x x coordinates
+     * @param dest_y y coordinates
+     * @return true if the coordinates are able to place the piece
+     */
     public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
     }
 
-    public boolean isCornerPiece(ArrayList<int[]> block, int i, ArrayList<int[]> dir) {
+    /**
+     * Check if the square of the placed piece is the edge square
+     * 
+     * @param block block offset from origin
+     * @param i index of block
+     * @param dir direction of the square
+     * @return true if the square is an edge square of the piece
+     */
+    public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
-        for(int j = 0; j < block.size(); j++) {
-            if((block.get(i))[0] == (block.get(j))[0]) {
-                //System.out.println(i + " v1 " + j);
-                if((block.get(i))[1] - (block.get(j))[1] == 1) {
-                    //System.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
+        for (int j = 0; j < block.size(); j++) {
+            if ((block.get(i)).getX() == (block.get(j)).getX()) {
+                if ((block.get(i)).getY() - (block.get(j)).getY() == 1) {
                     down++;
                 }
 
-                if((block.get(i))[1] - (block.get(j))[1] == -1) {
-                    //ystem.out.println(block.get(i)[1] + " v2 " + block.get(j)[1]);
+                if ((block.get(i)).getY() - (block.get(j)).getY() == -1) {
                     up++;
                 }
             }
 
-            if((block.get(i))[1] == (block.get(j))[1]) {
-                //System.out.println(i + " h1 " + j);
-                if((block.get(i))[0] - (block.get(j))[0] == 1) {
-                    //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
+            if ((block.get(i)).getY() == (block.get(j)).getY()) {
+                if ((block.get(i)).getX() - (block.get(j)).getX() == 1) {
                     left++;
                 }
 
-                if((block.get(i))[0] - (block.get(j))[0] == -1) {
-                    //System.out.println(block.get(i)[0] + " h2 " + block.get(j)[0]);
+                if ((block.get(i)).getX() - (block.get(j)).getX() == -1) {
                     right++;
                 }
             }
         }
-        //System.out.println(left + " " + right + " count " + up + " " + down);
+
         dir.add(new int[] {up, down, right, left});
 
-        if((left + right) < 2 && (up + down) < 2) {
+        if ((left + right) < 2 && (up + down) < 2) {
             return true;
         }
 
         return false;
     }
 
-    public boolean isAtSide(String color, int[] offset, int dest_x, int dest_y) {
-        System.out.println(offset[0] + " off " + offset[1]);
-        if((13 - offset[1] - dest_y + 1) >= board.length) {
-            if((offset[0] + dest_x + 1) >= board[0].length) {
-                return board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-                       board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-            }
-
-            if((offset[0] + dest_x - 1) < 0) {
-                return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-                       board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-            }
-
-            return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-                   board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-                   board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-        }
-
-        if((13 - offset[1] - dest_y - 1) < 0) {
-            if((offset[0] + dest_x + 1) >= board[0].length) {
-                return board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-                       board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color);
-            }
-    
-            if((offset[0] + dest_x - 1) < 0) {
-                return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-                       board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color);
-            }
-
-            return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-                   board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-                   board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color);
-        }
-
-        if((offset[0] + dest_x + 1) >= board[0].length) {
-            return board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-                   board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color) ||
-                   board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-        }
-
-        if((offset[0] + dest_x - 1) < 0) {
-            return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-                   board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color) ||
-                   board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-        }
-        
-        return board[13 - offset[1] - dest_y][offset[0] + dest_x + 1].equals(color) ||
-               board[13 - offset[1] - dest_y][offset[0] + dest_x - 1].equals(color) ||
-               board[13 - offset[1] - dest_y + 1][offset[0] + dest_x].equals(color) ||
-               board[13 - offset[1] - dest_y - 1][offset[0] + dest_x].equals(color);
-               /*board[13 - offset[1] - dest_y + 1][offset[0] + dest_x + 1].equals(color) ||
-               board[13 - offset[1] - dest_y + 1][offset[0] + dest_x - 1].equals(color) ||
-               board[13 - offset[1] - dest_y - 1][offset[0] + dest_x + 1].equals(color) ||
-               board[13 - offset[1] - dest_y - 1][offset[0] + dest_x - 1].equals(color);*/
+    /**
+     * Check the color of square on the board
+     * 
+     * @param color player's piece color
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
+     * @return true if the square has the same color as player's piece color
+     */
+    public boolean isSameColor(String color, int dest_x, int dest_y) {
+        return board[dest_x][dest_y].equals(color);
     }
 
+    /**
+     * Check if there is any placed piece at the side of selected square
+     * 
+     * @param color player's piece color
+     * @param offset block offset from origin
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
+     * @return true if there is piece from the same player at the side of the selected coordinates
+     */
+    public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
+        int x = 13 - dest_y - offset.getY();
+        int y = dest_x + offset.getX();
+
+        if(x >= 14 || x <= -1 || y >= 14 || y <= -1) {
+            return false;
+        }
+
+        if (!contains(x + 1, y)) {
+            if (y <= 0) {
+                return isSameColor(color, x, y + 1) || isSameColor(color, x - 1, y);
+            }
+
+            if (y >= 13) {
+                return isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
+            }
+
+            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
+        }
+
+        if(!contains(x - 1, y)) {
+            if(y <= 0) {
+                return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y);
+            }
+
+            if(y >= 13) {
+                return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
+            }
+
+            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
+
+        }
+        
+        if(!contains(x, y + 1)) {
+            return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
+        }
+
+        if(!contains(x, y - 1)) {
+            return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
+        }
+
+        return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) ||
+               isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
+    }
+
+    /**
+     * Check if there is any placed piece at the side of the selected coordinates
+     * 
+     * @param player current player
+     * @param piece selected piece by player
+     * @param dest_x x coordinate
+     * @param dest_y y coordinate
+     * @return
+     */
     public boolean isSide(Player player, Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isAtSide(player.getColor(), offset, dest_x, dest_y));
     }
 
-    /*
-    public String getColorAt(int dest_x, int dest_y) {
-        if(!contains(13 - dest_y, dest_x)) {
-            throw new IllegalArgumentException("Position out of bound");
-        }
-
-        if(isEmptyAt(new int[] {0, 0}, dest_x, dest_y)) {
-            return null;
-        }
-
-        System.out.println("a " + board[13 - dest_y][dest_x]);
-        return board[13 - dest_y][dest_x];
-    }
-    */
 }
