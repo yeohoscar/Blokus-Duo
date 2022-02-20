@@ -13,7 +13,7 @@ import java.util.Scanner;
  *  - handles checking for valid first turn moves
  */
 
-public class FirstTurnMove implements Move {
+public class FirstTurnMove {
     private final Player currentPlayer;
     private final Player nextPlayer;
     private final Board board;
