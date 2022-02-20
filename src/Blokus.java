@@ -88,6 +88,13 @@ public class Blokus {
 
         if (args.length != 0) {
             if (args[0].equals("-X")) {
+                if(args.length == 2) {
+                    try {
+                        s = new Scanner(new File(args[1]));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 b = new Blokus(s, "X", "O");
             } else if (args[0].equals("-O")) {
                 b = new Blokus(s, "O", "X");
