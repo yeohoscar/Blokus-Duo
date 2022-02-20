@@ -1,3 +1,5 @@
+package src.Blokus;
+
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688

@@ -1,3 +1,5 @@
+package src.Blokus;
+
 import java.util.*;
 
 /**

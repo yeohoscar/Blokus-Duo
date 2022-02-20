@@ -1,3 +1,5 @@
+package src.Blokus;
+
 import java.util.*;
 
 /**
@@ -111,74 +113,11 @@ public class Piece {
         }
     }
 
-    /*public ArrayList<Integer> manipulation(Scanner s, String color) {
-        printPiece(color);
-        while (true) {
-            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String[] instruct = s.useDelimiter("\\n").nextLine().split("");
-            int indexOfp = 0;
-            for (int index = 0; index < instruct.length; index++) {
-                if (Objects.equals(instruct[index], "p")) {
-                    indexOfp = index;
-                    break;
-                } else {
-                    switch (instruct[index]) {
-                        case " ":
-                            printPiece(color);
-                            break;
-                        case "r":
-                            rotatePieceClockwise();
-                            break;
-                        case "f":
-                            flipPiece();
-                            break;
-                        default:
-                            System.out.println("Invalid instruction");
-                    }
-                }
-            }
-            try {
-                return new ArrayList<Integer>(Arrays.asList(Integer.parseInt(instruct[indexOfp+2]), Integer.parseInt(instruct[indexOfp+4])));
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Coordinates not provided.");
-            }
-        }
-    }*/
-    /*public ArrayList<Integer> manipulation(Scanner s, String color) {
-        printPiece(color);
-        while (true) {
-            System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-            String[] instruct = s.useDelimiter("\\n").nextLine().split(" ");
-            switch (instruct[0]) {
-                case "r":
-                    rotatePieceClockwise();
-                    printPiece(color);
-                    break;
-                case "f":
-                    flipPiece();
-                    printPiece(color);
-                    break;
-                case "p":
-                    try {
-                        return new ArrayList<Integer>(Arrays.asList(Integer.parseInt(instruct[1]), Integer.parseInt(instruct[2])));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Coordinates not provided.");
-                        break; 
-                    }
-                default:
-                    System.out.println("Invalid instruction");
-            }
-        }
-    }*/
-
     public ArrayList<Integer> manipulation(Scanner s, String color) {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
             String[] instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
-            if(instruct.length == 1 && instruct[0].equals("")) {
-                instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
-            }
             int indexOfp = 0;
             for (int index = 0; index < instruct.length; index++) {
                 if (Objects.equals(instruct[index], "p")) {

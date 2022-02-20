@@ -1,3 +1,5 @@
+package src.Blokus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -306,9 +308,7 @@ public class MidGame implements Move{
         }
         System.out.println("Select a piece");
         String tmp = s.useDelimiter(" |\\n|//r").next();
-        //Can use replaceAll if you want to use .next(), but it will breaks on the manipulation function
         tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-        System.out.println(tmp);
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {

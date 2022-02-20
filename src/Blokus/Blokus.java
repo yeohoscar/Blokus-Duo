@@ -1,3 +1,5 @@
+package src.Blokus;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -147,7 +149,7 @@ public class Blokus {
             b.getBoard().printBoard();
             System.out.println(b.getPlayers().get(0).getName() + "(" + b.getPlayers().get(0).getColor() + ") gamepieces: " + b.getPlayers().get(0).getStock());
             System.out.println(b.getPlayers().get(1).getName() + "(" + b.getPlayers().get(1).getColor() + ") gamepieces: " + b.getPlayers().get(1).getStock());
-            System.out.println("GAME OVER!");
+            System.out.println("\nGAME OVER!");
         }
     }
 }

@@ -8,6 +8,7 @@
  *  - represents Blokus board
  */
 
+package src.Blokus;
 import java.util.ArrayList;
 
 public class Board {
@@ -134,12 +135,12 @@ public class Board {
     }
 
     /**
-     * Check if the square of the placed piece is the edge square
+     * Check if the square of the placed piece is the corner square
      * 
      * @param block block offset from origin
      * @param i index of block
      * @param dir direction of the square
-     * @return true if the square is an edge square of the piece
+     * @return true if the square is an corner square of the piece
      */
     public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
