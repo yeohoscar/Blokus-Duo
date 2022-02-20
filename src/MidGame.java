@@ -12,7 +12,8 @@ import java.util.Scanner;
  * MidGame class
  *  - handles checking for valid game moves after first turn
  */
-public class MidGame implements Move{
+
+public class MidGame {
     private final Player currentPlayer;
     private final Player nextPlayer;
     private final Board board;

@@ -1,3 +1,4 @@
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,6 +31,10 @@ public class BoardUnitTests {
         assertTrue(board.isEmpty());
         board.addPiece(player, piece, 9, 4);
         assertFalse(board.isEmpty());
+
+        if (!(board.getBoard()[8][9] == "X" || board.getBoard()[9][8] == "X" || board.getBoard()[9][9] == "X" || board.getBoard()[9][10] == "X")) {
+            fail("Piece was not placed on board correctly");
+        }
     }
 
     @Test
@@ -41,6 +46,15 @@ public class BoardUnitTests {
         assertTrue(board.isEmpty());
         board.addPiece(player, piece, 9, 4);
         assertFalse(board.isEmpty());
+    }
+
+    @Test
+    void testIsSameColor() {
+        Board board = new Board();
+        board.getBoard()[1][1] = "X";
+        board.printBoard();
+        assertTrue(board.isSameColor("X", 1, 1));
+        assertFalse(board.isSameColor("O", 1, 1));
     }
 
     @Test

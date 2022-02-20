@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Auxillary class for Piece
+ *  - Represents a block in a piece
+ */
+
 public class Block {
     private int x;
     private int y;
@@ -7,9 +17,12 @@ public class Block {
         this.y = y;
     }
 
+    /**
+     * Deep copy constructor
+     * @param b is the Block object that is being copied
+     */
     public Block(Block b) {
-        this.x = b.getX();
-        this.y = b.getY();
+        this(b.getX(), b.getY());
     }
 
     public int getX() {
