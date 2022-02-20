@@ -112,6 +112,8 @@ public class Blokus {
                 b = new Blokus(s, "O", "X");
             }
         }
+
+        System.out.println((b.getCurrentPlayer().getStock().getPieces().get(19).getBlocks().get(0).getX()));        
         
         if (b.isFirstTurn()) {
             b.printUI();

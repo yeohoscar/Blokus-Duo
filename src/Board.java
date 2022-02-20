@@ -135,6 +135,7 @@ public class Board {
 
     /**
      * Check if the square of the placed piece is the corner square
+     * The arraylist dir stored the direction of the remaining square which is from the same piece
      * 
      * @param block block offset from origin
      * @param i index of block

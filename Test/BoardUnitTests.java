@@ -64,21 +64,29 @@ public class BoardUnitTests {
         assertFalse(board.isEmptyForPiece(I2, 4, 1));
         assertFalse(board.isEmptyForPiece(I2, 5, 0));
         assertFalse(board.isEmptyForPiece(I2, 5, 1));
-
     }
 
     @Test
     void testIsCornerSquareOfPiece() {
         Board board = new Board();
-        Piece piece = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
+        Piece I2 = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
+        Piece X = new Piece("X", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(0, -1), new Block(-1, 0))));
         ArrayList<int[]> dir = new ArrayList<int[]>();
 
-        assertTrue(board.isCornerPiece(piece.getBlocks(), 0, dir));
+        assertTrue(board.isCornerPiece(I2.getBlocks(), 1, dir));
         assertEquals(4, dir.get(0).length);
-        assertEquals(1, dir.get(0)[0]);
-        assertEquals(0, dir.get(0)[1]);
+        assertEquals(0, dir.get(0)[0]);
+        assertEquals(1, dir.get(0)[1]);
         assertEquals(0, dir.get(0)[2]);
         assertEquals(0, dir.get(0)[3]);
+
+        dir = new ArrayList<int[]>();
+        assertFalse(board.isCornerPiece(X.getBlocks(), 0, dir));
+        assertEquals(4, dir.get(0).length);
+        assertEquals(1, dir.get(0)[0]);
+        assertEquals(1, dir.get(0)[1]);
+        assertEquals(1, dir.get(0)[2]);
+        assertEquals(1, dir.get(0)[3]);
     }
 
     @Test
