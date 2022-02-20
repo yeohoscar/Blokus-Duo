@@ -74,15 +74,19 @@ public class BoardUnitTests {
         Piece I2 = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
         Piece O4 = new Piece("O4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(1, 0))));
 
+        //Test if method correctly detects empty space
         assertTrue(board.isEmptyForPiece(I2, 9, 4));
         assertTrue(board.isEmptyForPiece(I2, 9, 5));
         assertTrue(board.isEmptyForPiece(I2, 9, 6));
         assertTrue(board.isEmptyForPiece(I2, 4, 0));
+
+        //Test if method correctly detects that space is now filled
         board.addPiece(player, I2, 9, 4);
         assertFalse(board.isEmptyForPiece(I2, 9, 4));
         assertFalse(board.isEmptyForPiece(I2, 9, 5));
         assertTrue(board.isEmptyForPiece(I2, 9, 6));
         assertTrue(board.isEmptyForPiece(I2, 4, 0));
+
         board.addPiece(player, O4, 4, 0);
         assertFalse(board.isEmptyForPiece(I2, 4, 0));
         assertFalse(board.isEmptyForPiece(I2, 4, 1));
