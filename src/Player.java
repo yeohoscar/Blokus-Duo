@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 /**
@@ -28,6 +27,13 @@ public class Player {
         this.validMove = new ArrayList<int[]>();
     }
 
+    /**
+     * Get the name of player from users
+     *
+     * @param color color of current player
+     * @param s to read the user input
+     * @return a player object
+     */
     public static Player initPlayer(String color, Scanner s) {
         System.out.println("Enter Player(" + color + ") name: ");
         String tmp = s.useDelimiter("\\n| ").nextLine();
