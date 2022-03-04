@@ -1,4 +1,4 @@
-package com.appleplus.blokusduo; /**
+package com.appleplus.blokusduo.model; /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
  *          Oscar Yeoh  20403662
@@ -7,6 +7,9 @@ package com.appleplus.blokusduo; /**
  * Board class
  *  - represents Blokus board
  */
+
+import com.appleplus.blokusduo.model.piece.Block;
+import com.appleplus.blokusduo.model.piece.Piece;
 
 import java.util.ArrayList;
 

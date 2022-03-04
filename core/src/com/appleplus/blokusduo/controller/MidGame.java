@@ -1,4 +1,4 @@
-package com.appleplus.blokusduo; /**
+package com.appleplus.blokusduo.controller; /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
  *          Oscar Yeoh  20403662
@@ -7,6 +7,11 @@ package com.appleplus.blokusduo; /**
  * MidGame class
  *  - handles checking for valid game moves after first turn
  */
+
+import com.appleplus.blokusduo.model.Board;
+import com.appleplus.blokusduo.model.Player;
+import com.appleplus.blokusduo.model.piece.Block;
+import com.appleplus.blokusduo.model.piece.Piece;
 
 import java.util.ArrayList;
 import java.util.Arrays;

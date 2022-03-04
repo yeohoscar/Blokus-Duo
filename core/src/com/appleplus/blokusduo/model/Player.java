@@ -1,4 +1,4 @@
-package com.appleplus.blokusduo; /**
+package com.appleplus.blokusduo.model; /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
  *          Oscar Yeoh  20403662
@@ -8,6 +8,8 @@ package com.appleplus.blokusduo; /**
  *  - represents Blokus player
  *  - holds player name, colour and pieces
  */
+
+import com.appleplus.blokusduo.model.piece.Stock;
 
 import java.util.Scanner;
 import java.util.ArrayList;

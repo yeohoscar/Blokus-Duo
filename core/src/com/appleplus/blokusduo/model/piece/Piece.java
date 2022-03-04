@@ -1,4 +1,4 @@
-package com.appleplus.blokusduo; /**
+package com.appleplus.blokusduo.model.piece; /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
  *          Oscar Yeoh  20403662

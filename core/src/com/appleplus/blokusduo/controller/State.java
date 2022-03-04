@@ -1,4 +1,4 @@
-package com.appleplus.blokusduo;
+package com.appleplus.blokusduo.controller;
 
 /**
  * Team ApplePlus
