@@ -87,26 +87,6 @@ allprojects {
     }
 }
 
-project(":desktop") {
-    apply plugin: "java-library"
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-
-    }
-}
-
-project(":core") {
-    apply plugin: "java-library"
-
-    dependencies {
-        api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-
-    }
-}
 
 jar {
     manifest {
