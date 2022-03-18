@@ -13,7 +13,6 @@ import ui.UI;
 import java.io.PrintStream;
 
 public class BlokusGame extends Game {
-
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
 
@@ -25,7 +24,7 @@ public class BlokusGame extends Game {
     Skin skin;
 
     Screen nameScreen;
-    Screen StartScreen;
+    Screen startScreen;
 
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
@@ -39,7 +38,6 @@ public class BlokusGame extends Game {
     }
 
     public void create() {
-
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
         stage = new Stage(new FitViewport(WIDTH,HEIGHT,camera));
@@ -83,7 +81,7 @@ public class BlokusGame extends Game {
         if (gameControlThread != null) gameControlThread.stop();
     }
 
-    public void setGreeting(String greeting) {
-        showDialog(greeting);
+    public void setMessage(String name) {
+        showDialog("Player " + name + " goes first!");
     }
 }

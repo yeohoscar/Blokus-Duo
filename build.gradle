@@ -91,7 +91,7 @@ allprojects {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'Blokus'
+                'Main-Class': 'Main'
         )
     }
 }

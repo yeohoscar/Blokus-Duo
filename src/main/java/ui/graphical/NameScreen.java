@@ -62,7 +62,7 @@ public class NameScreen extends ScreenAdapter {
                 // send name to game control thread
                 blokusGame.uiStream.println(playerOneName);
                 blokusGame.uiStream.println(playerTwoName);
-            };
+            }
         });
     }
 

@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 public class GUI implements UI {
 
-    private PipedOutputStream pipedOutputStream;
-    private PipedInputStream pipedInputStream;
+    private final PipedOutputStream pipedOutputStream;
+    private final PipedInputStream pipedInputStream;
     private BlokusGame blokusGame;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public GUI() throws IOException {
         pipedOutputStream = new PipedOutputStream();
@@ -34,12 +34,12 @@ public class GUI implements UI {
         return scanner.next();
     }
 
-    public void displayGreeting(String greeting) {
+    public void displayFirstPlayer(String name) {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
                 blokusGame.activateStartScreen();
-                blokusGame.setGreeting(greeting);
+                blokusGame.setMessage(name);
             }
         });
     }
