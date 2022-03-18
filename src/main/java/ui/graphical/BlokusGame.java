@@ -39,7 +39,7 @@ public class BlokusGame extends Game {
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin(Gdx.files.internal("HelloGameSkin.json"));
+        skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
 
         nameScreen = new NameScreen(this);
         startScreen = new StartScreen(this);
