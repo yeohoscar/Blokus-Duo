@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class NameScreen extends ScreenAdapter {
-
     BlokusGame blokusGame;
 
     Stage stage;
@@ -28,7 +27,7 @@ public class NameScreen extends ScreenAdapter {
         table.add(title).pad(10);
         table.row();
 
-        Label label = new Label("Enter the name of Player 1:",skin,"font", Color.BLACK );
+        Label label = new Label("Enter the name of Player 1:",skin,"font", Color.BLACK);
         table.add(label).pad(10);
 
         TextField textField = new TextField(null,skin);

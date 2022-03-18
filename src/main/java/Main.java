@@ -98,7 +98,7 @@ public class Main {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         boolean xFirst = false, oFirst = false, useGUI = false;
         UI ui;
-        gameControl gameControl;
+        GameControl gameControl;
         Thread gameControlThread;
 
         if (args.length != 0) {
@@ -114,11 +114,11 @@ public class Main {
         ui = useGUI ? new GUI() : new TextUI(s);
 
         if (xFirst == oFirst) {
-            gameControl = new gameControl(ui, new Random().nextInt(2), s);
+            gameControl = new GameControl(ui, new Random().nextInt(2), s);
         } else if (xFirst) {
-            gameControl = new gameControl(ui, 1, s);
+            gameControl = new GameControl(ui, 1, s);
         } else {
-            gameControl = new gameControl(ui, 0, s);
+            gameControl = new GameControl(ui, 0, s);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();

@@ -29,18 +29,14 @@ public class BlokusGame extends Game {
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
         this.gameControlThread = gameControlThread;
-
-        // establishing communication between GameControl thread and HelloGame (libGDX thread)
-        // control -> game
-        gui.setGame(this); // for posting runnables into libGDX game loop
-        // game -> control
-        this.uiStream = new PrintStream(gui.getPipedOutputStream()) ;  // for sending text to control
+        gui.setGame(this);
+        this.uiStream = new PrintStream(gui.getPipedOutputStream());
     }
 
     public void create() {
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
-        stage = new Stage(new FitViewport(WIDTH,HEIGHT,camera));
+        stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin(Gdx.files.internal("HelloGameSkin.json"));

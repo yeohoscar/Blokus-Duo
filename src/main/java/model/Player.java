@@ -31,25 +31,6 @@ public class Player {
         this.validMove = new ArrayList<int[]>();
     }
 
-    /**
-     * Get the name of player from users
-     *
-     * @param color color of current player
-     * @param s to read the user input
-     * @return a player object
-     */
-    public static Player initPlayer(String color, Scanner s) {
-        System.out.println("Enter Player(" + color + ") name: ");
-        String tmp = s.useDelimiter("\\n| ").nextLine();
-        while(tmp == null || tmp.trim().isEmpty()) {
-            System.out.println("Player name cannot be null\nEnter Player(" + color + ") name:");
-            tmp = s.useDelimiter("\\n| ").nextLine();
-        }
-        
-        Player p = new Player(tmp, color);
-        return p;
-    }
-
     public String getName() {
         return name;
     }

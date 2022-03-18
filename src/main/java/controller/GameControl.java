@@ -6,7 +6,7 @@ import ui.UI;
 
 import java.util.*;
 
-public class gameControl implements Runnable {
+public class GameControl implements Runnable {
     UI ui;
     private List<Player> players;
     private final Board board;
@@ -15,7 +15,7 @@ public class gameControl implements Runnable {
     private final int firstPlayer;
     protected Scanner s;
 
-    public gameControl(UI ui, int firstPlayer, Scanner s) {
+    public GameControl(UI ui, int firstPlayer, Scanner s) {
         this.ui = ui;
         board = new Board();
         this.firstPlayer = firstPlayer;
