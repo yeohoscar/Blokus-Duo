@@ -24,11 +24,11 @@ public class NameScreen extends ScreenAdapter {
         table.setFillParent(true);
 
         Label title = new Label("Blokus Duo", skin, "font", Color.BLACK);
-        table.add(title).pad(10);
+        table.add(title).pad(10).colspan(3).center();
         table.row();
 
-        Label label = new Label("Enter the name of Player 1:",skin,"font", Color.BLACK);
-        table.add(label).pad(10);
+        Label label = new Label("Enter the name of Player 1:", skin,"font", Color.BLACK);
+        table.add(label).pad(10).center();
 
         TextField textField = new TextField(null,skin);
         textField.setMessageText("John");
@@ -44,7 +44,7 @@ public class NameScreen extends ScreenAdapter {
         table.row();
 
         TextButton textButton = new TextButton("Start Game",skin);
-        table.add(textButton).pad(10);
+        table.add(textButton).pad(10).colspan(3).center();
         textButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
