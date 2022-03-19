@@ -2,6 +2,7 @@ package ui.graphical;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -28,19 +29,25 @@ public class NameScreen extends ScreenAdapter {
         table.row();
 
         Label label = new Label("Enter the name of Player 1:", skin,"font", Color.BLACK);
-        table.add(label).pad(10).center();
+        table.add(label).center();
 
-        TextField textField = new TextField(null,skin);
+        ImageButton color = new ImageButton(skin, "default");
+        table.add(color).center();
+
+        TextField textField = new TextField(null, skin);
         textField.setMessageText("John");
-        table.add(textField).pad(10);
+        table.add(textField).center();
         table.row();
 
-        Label label2 = new Label("Enter the name of Player 2:",skin,"font", Color.BLACK );
-        table.add(label2).pad(10);
+        Label label2 = new Label("Enter the name of Player 2:", skin, "font", Color.BLACK);
+        table.add(label2).center();
 
-        TextField textField2 = new TextField(null,skin);
+        ImageButton color2 = new ImageButton(skin, "white");
+        table.add(color2).pad(10).center();
+
+        TextField textField2 = new TextField(null, skin);
         textField2.setMessageText("Mary");
-        table.add(textField2).pad(10);
+        table.add(textField2).center();
         table.row();
 
         TextButton textButton = new TextButton("Start Game",skin);
