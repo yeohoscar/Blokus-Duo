@@ -44,11 +44,6 @@
 		}
 	}
 },
-"com.badlogic.gdx.scenes.scene2d.ui.ColorBox": {
-	"default": {
-		"Color": "black"
-	}
-},
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
 	"default": {
 		"up": "button",
@@ -94,10 +89,12 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 	"default": {
-		"up": "button",
-		"down": "button-pressed",
-		"over": "button-over"
+		"up": "box-black"
+	},
+	"white": {
+		"up": "box-white"
 	}
+		
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
 	"default": {
