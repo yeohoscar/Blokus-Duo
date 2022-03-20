@@ -33,6 +33,6 @@ public class TextUI implements UI {
     }
 
     public void displayFirstPlayer(String name) {
-
+        System.out.println("\n" + name + " is going first!\n");
     }
 }
