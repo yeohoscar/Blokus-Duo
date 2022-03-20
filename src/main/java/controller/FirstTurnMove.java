@@ -1,5 +1,3 @@
-package controller;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -9,6 +7,8 @@ package controller;
  * Move class
  *  - handles checking for valid first turn moves
  */
+
+package controller;
 
 import model.*;
 import model.piece.*;

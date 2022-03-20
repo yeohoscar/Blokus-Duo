@@ -1,5 +1,3 @@
-package model;
-
 /**
  * Team ApplePlus
  * Members: Ao Peng     20202688
@@ -11,9 +9,10 @@ package model;
  *  - holds player name, colour and pieces
  */
 
+package model;
+
 import model.piece.Stock;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Player {

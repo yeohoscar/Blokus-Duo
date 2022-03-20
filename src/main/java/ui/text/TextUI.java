@@ -1,6 +1,15 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * TextUI class
+ *  - prompt users with text UI
+ */
+
 package ui.text;
 
-import model.Player;
 import ui.UI;
 
 import java.util.Scanner;

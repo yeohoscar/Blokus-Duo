@@ -1,8 +1,17 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * NameScreen class
+ *  - represents name screen of graphical UI
+ */
+
 package ui.graphical;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -28,7 +37,7 @@ public class NameScreen extends ScreenAdapter {
         table.add(title).pad(10).colspan(3).center();
         table.row();
 
-        Label label = new Label("Enter the name of Player 1:", skin,"font", Color.BLACK);
+        Label label = new Label("Enter the name of Player 1:", skin, "font", Color.BLACK);
         table.add(label).center();
 
         ImageButton color = new ImageButton(skin, "default");
@@ -50,7 +59,7 @@ public class NameScreen extends ScreenAdapter {
         table.add(textField2).center();
         table.row();
 
-        TextButton textButton = new TextButton("Start Game",skin);
+        TextButton textButton = new TextButton("Start Game", skin);
         table.add(textButton).pad(10).colspan(3).center();
         textButton.addListener(new ClickListener() {
             @Override
@@ -72,11 +81,17 @@ public class NameScreen extends ScreenAdapter {
         });
     }
 
+    /**
+     * Show the screen as the current screen
+     */
     public void show() {
         super.show();
         stage.addActor(table);
     }
 
+    /**
+     * To present the screen
+     */
     public void render(float delta) {
         super.render(delta);
         ScreenUtils.clear(Color.WHITE);
@@ -84,11 +99,17 @@ public class NameScreen extends ScreenAdapter {
         stage.draw();
     }
 
+    /**
+     * Hide the screen when it is no longer the current screen
+     */
     public void hide() {
         super.hide();
         stage.clear();
     }
 
+    /**
+     * Resize the screen
+     */
     public void resize(int width, int height) {
         super.resize(width,height);
         stage.getViewport().update(width, height, true);

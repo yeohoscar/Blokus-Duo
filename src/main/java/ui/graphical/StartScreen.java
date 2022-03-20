@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * StartScreen class
+ *  - represents start screen of graphical UI
+ */
+
 package ui.graphical;
 
 import com.badlogic.gdx.ScreenAdapter;
@@ -21,11 +31,17 @@ public class StartScreen extends ScreenAdapter {
         table.setFillParent(true);
     }
 
+    /**
+     * Show the screen as the current screen
+     */
     public void show() {
         super.show();
         stage.addActor(table);
     }
 
+    /**
+     * To present the screen
+     */
     public void render(float delta) {
         super.render(delta);
         ScreenUtils.clear(Color.WHITE);
@@ -33,11 +49,17 @@ public class StartScreen extends ScreenAdapter {
         stage.draw();
     }
 
+    /**
+     * Hide the screen when it is no longer the current screen
+     */
     public void hide() {
         super.hide();
         stage.clear();
     }
 
+    /**
+     * Resize the screen
+     */
     public void resize(int width, int height) {
         super.resize(width,height);
         stage.getViewport().update(width, height, true);

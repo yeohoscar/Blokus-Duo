@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * BlokusGame class
+ *  - represents Blokus board
+ */
+
 package ui.graphical;
 
 import com.badlogic.gdx.Game;
@@ -33,6 +43,9 @@ public class BlokusGame extends Game {
         this.uiStream = new PrintStream(gui.getPipedOutputStream());
     }
 
+    /**
+     * Create a window screen if user choose to have graphical UI
+     */
     public void create() {
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
@@ -46,18 +59,32 @@ public class BlokusGame extends Game {
         activateNameScreen();
     }
 
+    /**
+     * Set start screen as current screen
+     */
     public void activateStartScreen() {
         setScreen(startScreen);
     }
 
+    /**
+     * Set name screen as current screen
+     */
     public void activateNameScreen() {
         setScreen(nameScreen);
     }
 
+    /**
+     * Posts a runnable on the main loop thread
+     * @param r the runnable
+     */
     public void postRunnable(Runnable r) {
         Gdx.app.postRunnable(r);
     }
 
+    /**
+     * Show the name of player who will make the first move on a dialog window
+     * @param text message of the name of player who will make the first move
+     */
     void showDialog(String text) {
         Dialog dialog = new Dialog("Attention", skin, "default");
         dialog.text(text);
@@ -67,6 +94,9 @@ public class BlokusGame extends Game {
         dialog.show(stage);
     }
 
+    /**
+     * Destroy the screens and windows and end the graphical UI
+     */
     @Override
     public void dispose() {
         super.dispose();
