@@ -5,7 +5,7 @@
  *          KarYen Yap  20202149
  * 
  * BlokusGame class
- *  - represents Blokus board
+ *  - initialises and creates GUI
  */
 
 package ui.graphical;
@@ -25,14 +25,11 @@ import java.io.PrintStream;
 public class BlokusGame extends Game {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
-
     Thread gameControlThread;
     PrintStream uiStream;
-
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
-
     Screen nameScreen;
     Screen startScreen;
 
@@ -51,9 +48,7 @@ public class BlokusGame extends Game {
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
-
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
-
         nameScreen = new NameScreen(this);
         startScreen = new StartScreen(this);
         activateNameScreen();
@@ -107,6 +102,9 @@ public class BlokusGame extends Game {
         if (gameControlThread != null) gameControlThread.stop();
     }
 
+    /**
+     * Sets name for start screen
+     */
     public void setMessage(String name) {
         showDialog("Player " + name + " goes first!");
     }

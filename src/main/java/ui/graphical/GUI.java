@@ -1,22 +1,29 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GUI
+ *  - Connects GUI thread to gameControl thread
+ */
+
 package ui.graphical;
 
-import com.badlogic.gdx.Application;
-
 import ui.UI;
-
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Scanner;
 
 public class GUI implements UI {
-
     private final PipedOutputStream pipedOutputStream;
     private final PipedInputStream pipedInputStream;
     private BlokusGame blokusGame;
     private final Scanner scanner;
 
     public GUI() throws IOException {
+        //Connect threads
         pipedOutputStream = new PipedOutputStream();
         pipedInputStream = new PipedInputStream(pipedOutputStream);
         scanner = new Scanner(pipedInputStream);
@@ -34,6 +41,9 @@ public class GUI implements UI {
         return scanner.next();
     }
 
+    /**
+     * Change screen from nameScreen to startScreen
+     */
     public void displayFirstPlayer(String name) {
         blokusGame.postRunnable(new Runnable() {
             @Override

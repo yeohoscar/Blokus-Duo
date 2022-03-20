@@ -5,7 +5,8 @@
  *          KarYen Yap  20202149
  * 
  * Main class
- *  - runs game
+ *  - Entry point of program
+ *  - Launches application in GUI or TextUI.
  */
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;

@@ -6,6 +6,7 @@
  * 
  * StartScreen class
  *  - represents start screen of graphical UI
+ *  - Displays which player is first
  */
 
 package ui.graphical;

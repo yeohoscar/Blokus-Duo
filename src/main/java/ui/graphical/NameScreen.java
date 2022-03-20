@@ -20,7 +20,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class NameScreen extends ScreenAdapter {
     BlokusGame blokusGame;
-
     Stage stage;
     Skin skin;
     Table table;

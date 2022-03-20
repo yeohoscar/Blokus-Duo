@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GameControl class
+ *  - Controls and runs game
+ */
+
 package controller;
 
 import model.Board;
@@ -85,6 +95,7 @@ public class GameControl implements Runnable {
 
     @Override
     public void run() {
+        //Initialise players
         setPlayers(new ArrayList<>(Arrays.asList(new Player(ui.getName(), "O"), new Player(ui.getName(), "X"))));
         setCurrentPlayer(getPlayers().get(firstPlayer));
         ui.displayFirstPlayer(getCurrentPlayer().getName());
