@@ -108,4 +108,11 @@ public class BlokusGame extends Game {
     public void setMessage(String name) {
         showDialog("Player " + name + " goes first!");
     }
+
+    /**
+     * Displays results of the game
+     */
+    public void setResults(String result) {
+        showDialog(result);
+    }
 }

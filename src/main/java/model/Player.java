@@ -17,21 +17,31 @@ import java.util.ArrayList;
 
 public class Player {
     private final String name; //Player name
-    private final int score; //Player score -> calculate at end
+    private int score; //Player score -> calculate at end
     private final String color;
     private final Stock stock;
     private final ArrayList<int[]> validMove;
+    private boolean lastPieceI1;
 
     public Player(String name, String color) {
         this.name = name;
         this.color = color;
         score = 0;
         this.stock = new Stock();
-        this.validMove = new ArrayList<int[]>();
+        this.validMove = new ArrayList<>();
+        lastPieceI1 = false;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getColor() {
@@ -44,5 +54,13 @@ public class Player {
 
     public ArrayList<int[]> getValidMove() {
         return validMove;
+    }
+
+    public boolean getLastPieceI1() {
+        return lastPieceI1;
+    }
+
+    public void setLastPieceI1(boolean b) {
+        this.lastPieceI1 = b;
     }
 }

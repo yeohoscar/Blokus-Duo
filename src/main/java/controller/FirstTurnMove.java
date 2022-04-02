@@ -13,10 +13,7 @@ package controller;
 import model.*;
 import model.piece.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class FirstTurnMove {
     private final Player currentPlayer;
@@ -25,7 +22,7 @@ public class FirstTurnMove {
     private final Piece piece;
     private final int originX;
     private final int originY;
-    private final MidGame midGame;
+    private final MidGameMove midGameMove;
 
     @SuppressWarnings("unchecked")
     public FirstTurnMove(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
@@ -39,7 +36,7 @@ public class FirstTurnMove {
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
-        this.midGame = new MidGame(currentPlayer, nextPlayer, board, piece, originX, originY);
+        this.midGameMove = new MidGameMove(currentPlayer, nextPlayer, board, piece, originX, originY);
     }
 
     public int getX() {
@@ -69,7 +66,7 @@ public class FirstTurnMove {
      * @param originY y coordinate of the block origin
      */
     private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
-        if (currentPlayer.getColor() == "O") {
+        if (Objects.equals(currentPlayer.getColor(), "O")) {
             return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
         } else {
             return (offset.getX() + originX == 4 && offset.getY() + originY == 9);
@@ -82,21 +79,23 @@ public class FirstTurnMove {
         }
 
         board.addPiece(currentPlayer, piece, originX, originY);
-        for(int j = 0; j < currentPlayer.getStock().getPieces().size(); j++) {
-            if(currentPlayer.getStock().getPieces().get(j).getName().equals(piece.getName())) {
+        for (int j = 0; j < currentPlayer.getStock().getPieces().size(); j++) {
+            if (currentPlayer.getStock().getPieces().get(j).getName().equals(piece.getName())) {
+                currentPlayer.setScore(currentPlayer.getScore() + currentPlayer.getStock().getPieces().get(j).getBlocks().size());
                 currentPlayer.getStock().getPieces().remove(j);
+                currentPlayer.setLastPieceI1(piece.getName().equals("I1"));
             }
         }
-        midGame.getMove(piece.getBlocks(), originX, originY);
+        midGameMove.getMove(piece.getBlocks(), originX, originY);
 
         return true;
     }
 
-    public Player getcurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public Player getNexttPlayer() {
+    public Player getNextPlayer() {
         return nextPlayer;
     }
 

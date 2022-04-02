@@ -35,4 +35,9 @@ public class TextUI implements UI {
     public void displayFirstPlayer(String name) {
         System.out.println("\n" + name + " is going first!\n");
     }
+
+    @Override
+    public void displayResults(String result) {
+        System.out.println(result);
+    }
 }

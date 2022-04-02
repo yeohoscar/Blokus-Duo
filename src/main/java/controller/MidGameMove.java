@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class MidGame {
+public class MidGameMove {
     private final Player currentPlayer;
     private final Player nextPlayer;
     private final Board board;
@@ -26,8 +26,7 @@ public class MidGame {
     private final int originX;
     private final int originY;
 
-    @SuppressWarnings("unchecked")
-    public MidGame(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
+    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
         if (currentPlayer == null || nextPlayer == null || board == null) {
             throw new IllegalArgumentException();
         }
@@ -40,7 +39,7 @@ public class MidGame {
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
     }
 
-    public MidGame(Player currentPlayer, Player nextPlayer, Board board, Piece piece, int originX, int originY) {
+    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, Piece piece, int originX, int originY) {
         if (currentPlayer == null || nextPlayer == null || board == null || piece == null) {
             throw new IllegalArgumentException();
         }
@@ -291,7 +290,9 @@ public class MidGame {
 
         for(int j = 0; j < currentPlayer.getStock().getPieces().size(); j++) {
             if(currentPlayer.getStock().getPieces().get(j).getName().equals(piece.getName())) {
+                currentPlayer.setScore(currentPlayer.getScore() + currentPlayer.getStock().getPieces().get(j).getBlocks().size());
                 currentPlayer.getStock().getPieces().remove(j);
+                currentPlayer.setLastPieceI1(piece.getName().equals("I1"));
             }
         }
 

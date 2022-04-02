@@ -93,6 +93,17 @@ public class GameControl implements Runnable {
         this.state = state;
     }
 
+    public void calculateScore() {
+        for (Player p : getPlayers()) {
+            if (p.getStock().getPieces().size() == 0) {
+                p.setScore(p.getScore() + 15);
+                if (p.getLastPieceI1()) {
+                    p.setScore(p.getScore() + 5);
+                }
+            }
+        }
+    }
+
     @Override
     public void run() {
         //Initialise players
@@ -118,7 +129,7 @@ public class GameControl implements Runnable {
 
 
         while (isMidGame()) {
-            while(!(new MidGame(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
+            while(!(new MidGameMove(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
@@ -135,6 +146,17 @@ public class GameControl implements Runnable {
             System.out.println(getPlayers().get(0).getName() + "(" + getPlayers().get(0).getColor() + ") gamepieces: " + getPlayers().get(0).getStock());
             System.out.println(getPlayers().get(1).getName() + "(" + getPlayers().get(1).getColor() + ") gamepieces: " + getPlayers().get(1).getStock());
             System.out.println("\nGAME OVER!");
+            calculateScore();
+            if (currentPlayer.getScore() > getNextPlayer().getScore()) {
+                ui.displayResults(currentPlayer.getName() + " is the winner! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +
+                        "" + getNextPlayer().getName() + "(" + getNextPlayer().getColor() + ") " + getNextPlayer().getScore());
+            } else if (currentPlayer.getScore() < getNextPlayer().getScore()) {
+                ui.displayResults(currentPlayer.getName() + " is the winner! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +
+                        "" + getNextPlayer().getName() + "(" + getNextPlayer().getColor() + ") " + getNextPlayer().getScore());
+            } else {
+                ui.displayResults("Draw! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +
+                        "" + getNextPlayer().getName() + "(" + getNextPlayer().getColor() + ") " + getNextPlayer().getScore());
+            }
         }
     }
 }

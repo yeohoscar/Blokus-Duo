@@ -115,9 +115,9 @@ public class Board {
      * @return true if the board does not contains any piece
      */
     public boolean isEmpty() {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board.length; j++) {
-                if(board[i][j] == "X" || board[i][j] == "O") {
+        for (String[] strings : board) {
+            for (int j = 0; j < board.length; j++) {
+                if (strings[j] == "X" || strings[j] == "O") {
                     return false;
                 }
             }
