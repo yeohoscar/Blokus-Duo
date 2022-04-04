@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
 import model.piece.*;
 
 public class GraphicalGamepiece {
-    private Piece gamepiece;
-    private TextureRegion square;
+    private final Piece gamepiece;
+    private final TextureRegion square;
     private float originX; // world X coordinate of the gamepiece's origin
     private float originY; // world Y coordinate of the gamepiece's origin
 

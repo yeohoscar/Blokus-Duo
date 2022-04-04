@@ -56,7 +56,6 @@ public class BlokusGame extends Game {
     Stage stage;
     Skin skin;
     Screen nameScreen;
-    Screen startScreen;
     Screen gameScreen;
     ApplicationListener game;
 
@@ -89,17 +88,9 @@ public class BlokusGame extends Game {
         Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
         nameScreen = new NameScreen(this);
-        startScreen = new StartScreen(this);
         gameScreen = new GameScreen(this);
         activateNameScreen();
         //activateGameScreen();
-    }
-
-    /**
-     * Set start screen as current screen
-     */
-    public void activateStartScreen() {
-        setScreen(startScreen);
     }
 
     /**
@@ -140,7 +131,7 @@ public class BlokusGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        if (startScreen != null) startScreen.dispose();
+        if (gameScreen != null) gameScreen.dispose();
         if (nameScreen != null) nameScreen.dispose();
         if (skin != null) skin.dispose();
         if (stage != null) stage.dispose();
