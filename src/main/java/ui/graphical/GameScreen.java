@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import model.piece.*;
@@ -41,11 +43,13 @@ public class GameScreen extends ScreenAdapter {
     float bannerY;
     Piece gamepiece;
     GraphicalGamepiece graphicalGamepiece;
+    Stage stage;
 
     public GameScreen(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
         this.skin = blokusGame.skin;
         this.camera = blokusGame.camera;
+        this.stage = blokusGame.stage;
 
         batch = new SpriteBatch();
 
@@ -72,7 +76,15 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new EventHandler(this));
+        /* Added InputMultiplexer
+         * Combines multiple processors
+         * I combined the stage input processor with our custom one
+         * Idk if itll break anything in the future, but it fixes the dialog problem for now
+         */
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(new EventHandler(this));
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
@@ -91,6 +103,9 @@ public class GameScreen extends ScreenAdapter {
         graphicalGamepiece.draw(batch);
         helvetique.draw(batch, bannerText, bannerX, bannerY);
         batch.end();
+
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
@@ -101,7 +116,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void setBannerText(String text) {
-        bannerText = new String(text);
+        bannerText = text;
     }
 
     public Camera getCamera() {
