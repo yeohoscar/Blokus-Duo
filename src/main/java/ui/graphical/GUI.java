@@ -50,13 +50,13 @@ public class GUI implements UI {
             public void run() {
                 blokusGame.activateStartScreen();
                 blokusGame.setMessage(name);
-                //blokusGame.activateGameScreen();
+                blokusGame.activateGameScreen();
             }
         });
     }
 
     public void displayGame() {
-        
+
     }
 
     @Override
