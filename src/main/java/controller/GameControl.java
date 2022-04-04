@@ -127,7 +127,6 @@ public class GameControl implements Runnable {
             setState(State.MIDGAME);
         }
 
-
         while (isMidGame()) {
             while(!(new MidGameMove(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
                 System.out.println("Invalid move.");

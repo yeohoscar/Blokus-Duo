@@ -94,7 +94,6 @@
 	"white": {
 		"up": "box-white"
 	}
-		
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
 	"default": {

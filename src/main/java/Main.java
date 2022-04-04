@@ -13,8 +13,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
 import ui.*;
-import ui.graphical.BlokusGame;
-import ui.graphical.GUI;
+import ui.graphical.*;
 import ui.text.TextUI;
 
 import java.io.IOException;
@@ -52,10 +51,20 @@ public class Main {
 
         if (useGUI) {
             Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            int height = BlokusGame.HEIGHT;
-            int width = BlokusGame.WIDTH;
-            config.setWindowSizeLimits(width, height, width, height);
-            new Lwjgl3Application(new BlokusGame(gameControlThread,ui), config);
+            //int height = BlokusGame.HEIGHT;
+            //int width = BlokusGame.WIDTH;
+            //config.setWindowSizeLimits(width, height, width, height);
+            config.setTitle("Welcome to Blokus Duo");
+            config.setWindowedMode(GameScreen.GAME_WIDTH,GameScreen.GAME_HEIGHT);
+            config.setResizable(false);
+
+            new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);
+
+            /*Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+            config.setTitle("Welcome to Blokus Duo");
+            config.setWindowedMode(GamePlay.GAME_WIDTH,GamePlay.GAME_HEIGHT);
+            config.setResizable(false);
+            new Lwjgl3Application(new GamePlay(), config);*/
         }
     }
 }

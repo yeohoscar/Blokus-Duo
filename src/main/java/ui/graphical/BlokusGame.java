@@ -10,21 +10,46 @@
 
 package ui.graphical;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import model.piece.*;
 import ui.UI;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BlokusGame extends Game {
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 1024;
+    public static final int HEIGHT = 812;
+
+    public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
+    public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
+
     Thread gameControlThread;
     PrintStream uiStream;
     OrthographicCamera camera;
@@ -32,6 +57,20 @@ public class BlokusGame extends Game {
     Skin skin;
     Screen nameScreen;
     Screen startScreen;
+    Screen gameScreen;
+    ApplicationListener game;
+
+    /*SpriteBatch batch;
+    TiledMap tiledMap;
+    MapObjects mapObjects;
+    TiledMapRenderer mapRenderer;
+    TextureRegion blackSquare;
+    BitmapFont helvetique;
+    String bannerText;
+    float bannerX;
+    float bannerY;
+    Piece gamepiece;
+    GraphicalGamepiece graphicalGamepiece;*/
 
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
@@ -44,14 +83,16 @@ public class BlokusGame extends Game {
      * Create a window screen if user choose to have graphical UI
      */
     public void create() {
-        camera = new OrthographicCamera(WIDTH,HEIGHT);
+        camera = new OrthographicCamera(WIDTH, HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
         nameScreen = new NameScreen(this);
         startScreen = new StartScreen(this);
+        gameScreen = new GameScreen(this);
         activateNameScreen();
+        //activateGameScreen();
     }
 
     /**
@@ -66,6 +107,10 @@ public class BlokusGame extends Game {
      */
     public void activateNameScreen() {
         setScreen(nameScreen);
+    }
+
+    public void activateGameScreen() {
+        setScreen(gameScreen);
     }
 
     /**
