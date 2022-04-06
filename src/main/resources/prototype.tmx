@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="48">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="48">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="6" columns="3">
   <image source="game_squares.png" width="96" height="64"/>
  </tileset>
  <imagelayer id="5" name="Image Layer" locked="1">
   <image source="background.png" width="1024" height="768"/>
  </imagelayer>
- <layer id="1" name="Tile Layer" width="32" height="24" offsetx="2.40602" offsety="0">
+ <layer id="6" name="Tile Layer 2" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eAHtkNsKgDAMQ6eC///Jtg+BEIaINM6HFka7W06bMTragX87sEV7b1bVVMo+Q5iX3mPv4kP/Lmd/VaGcJ7Pnn6pQ/hHCsx7yjN+6+MxGzVzUDj54mpOJMycf2rO8kp9s7cnhvzKw3xfz0QfnL+dnLurmVznQOu2Ax4ELjaABVA==
+  </data>
+ </layer>
+ <layer id="1" name="Tile Layer" width="32" height="24" visible="0" offsetx="2.40602" offsety="0">
   <data encoding="base64" compression="zlib">
    eAHFkAGKQkEMQ0V3vf+R/Vl88AgdnVXBgjZN22T6T6fvxu/dnsxrprq5zIYz3/UPgvfs2th7YHSpkXK9wszGAx8wdWbwYJ5svnHX7CS7Zx5s72Dmycx9KtuvNd1rf9fXY/GVX/zsMdX4JIMzZ/yKd3YS8fcbGtvnb+H44y303vFHM5m38IZkPNI3Tk28648femTzvrnf0f6XQ6C5qY5PPPwL52ivqTdp73DWMubuZPy5P3Ngejte00y0uN14xz/zxKS9w2W//dGkx43mG+94TTOt0zXfITzfHOzZSbu587HQXDQe3Z8+95PNBSdad7fOrm80podv3+9616/n8MCXb+Ea/8yuonV365UefN5hf242l9ldv56zD7fDJdsfb/c/gSdfdNP7T6y0mu/6mYe/t7H3WtP1CrOfPmEcju+Or2u4zHnPft3rmln2XcNl51txA5ZiB7M=
   </data>

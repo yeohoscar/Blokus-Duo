@@ -52,16 +52,19 @@ public class BlokusGame extends Game {
 
     Thread gameControlThread;
     PrintStream uiStream;
+
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
     Screen nameScreen;
-    Screen gameScreen;
-    ApplicationListener game;
+    Screen playScreen;
+    //ApplicationListener game;
 
-    /*SpriteBatch batch;
+    SpriteBatch batch;
     TiledMap tiledMap;
-    MapObjects mapObjects;
+    OrthogonalTiledMapRenderer renderer;
+
+    /*MapObjects mapObjects;
     TiledMapRenderer mapRenderer;
     TextureRegion blackSquare;
     BitmapFont helvetique;
@@ -82,15 +85,25 @@ public class BlokusGame extends Game {
      * Create a window screen if user choose to have graphical UI
      */
     public void create() {
+
         camera = new OrthographicCamera(WIDTH, HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
+
+        batch = new SpriteBatch();
+
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
+
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
+
+        tiledMap = new TmxMapLoader().load("prototype.tmx");
+        //renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        //renderer.setView(camera);
+
         nameScreen = new NameScreen(this);
-        gameScreen = new GameScreen(this);
+        playScreen = new PlayScreen(this);
         activateNameScreen();
-        //activateGameScreen();
+        //activateplayScreen();
     }
 
     /**
@@ -100,8 +113,8 @@ public class BlokusGame extends Game {
         setScreen(nameScreen);
     }
 
-    public void activateGameScreen() {
-        setScreen(gameScreen);
+    public void activatePlayScreen() {
+        setScreen(playScreen);
     }
 
     /**
@@ -131,7 +144,7 @@ public class BlokusGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        if (gameScreen != null) gameScreen.dispose();
+        if (playScreen != null) playScreen.dispose();
         if (nameScreen != null) nameScreen.dispose();
         if (skin != null) skin.dispose();
         if (stage != null) stage.dispose();

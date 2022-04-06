@@ -10,11 +10,11 @@ public class EventHandler extends InputAdapter {
     public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
     public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
 
-    GameScreen game;
-    GameScreen gamePlay;
+    PlayScreen game;
+    PlayScreen gamePlay;
     GraphicalGamepiece selectedPiece;
 
-    public EventHandler(GameScreen gameScreen) {
+    public EventHandler(PlayScreen gameScreen) {
         this.game = gameScreen;
         this.selectedPiece = null;
     }

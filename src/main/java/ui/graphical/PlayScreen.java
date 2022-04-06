@@ -22,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import model.piece.*;
 
-public class GameScreen extends ScreenAdapter {
+public class PlayScreen extends ScreenAdapter {
 
     public final static int GAME_WIDTH = 1024;
     public final static int GAME_HEIGHT = 812;
@@ -45,15 +45,14 @@ public class GameScreen extends ScreenAdapter {
     GraphicalGamepiece graphicalGamepiece;
     Stage stage;
 
-    public GameScreen(BlokusGame blokusGame) {
+    public PlayScreen(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
         this.skin = blokusGame.skin;
         this.camera = blokusGame.camera;
         this.stage = blokusGame.stage;
+        this.batch = blokusGame.batch;
+        this.tiledMap = blokusGame.tiledMap;
 
-        batch = new SpriteBatch();
-
-        tiledMap = new TmxMapLoader().load("prototype.tmx");
         TiledMapImageLayer imageLayer = (TiledMapImageLayer) tiledMap.getLayers().get(0);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(1);
         MapLayer objectLayer = tiledMap.getLayers().get(2);

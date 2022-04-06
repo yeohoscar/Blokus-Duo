@@ -48,9 +48,9 @@ public class GUI implements UI {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
-                blokusGame.activateGameScreen();
+                blokusGame.activatePlayScreen();
                 blokusGame.setMessage(name);
-                blokusGame.activateGameScreen();
+                //blokusGame.activateGameScreen();
             }
         });
     }

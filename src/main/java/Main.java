@@ -55,7 +55,7 @@ public class Main {
             //int width = BlokusGame.WIDTH;
             //config.setWindowSizeLimits(width, height, width, height);
             config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(GameScreen.GAME_WIDTH,GameScreen.GAME_HEIGHT);
+            config.setWindowedMode(PlayScreen.GAME_WIDTH,PlayScreen.GAME_HEIGHT);
             config.setResizable(false);
 
             new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);
