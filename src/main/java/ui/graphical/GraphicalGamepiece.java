@@ -50,10 +50,10 @@ public class GraphicalGamepiece {
         return isHit;
     }
 
-    public void setPosition(float x, float y) {
+    /*public void setPosition(float x, float y) {
         // set new position of the gamepiece, so that the pointer coordinates
         // are in the middle of the "origin" square ( Location(0,0) ).
         originX = x - square.getRegionWidth() * 0.5f;
         originY = y - square.getRegionHeight() * 0.5f;
-    }
+    }*/
 }

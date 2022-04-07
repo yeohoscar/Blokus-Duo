@@ -56,23 +56,13 @@ public class BlokusGame extends Game {
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
-    Screen nameScreen;
-    Screen playScreen;
-    //ApplicationListener game;
+    NameScreen nameScreen;
+    PlayScreen playScreen;
+    PlayScreenInputProcessor playScrEventHandler;
 
     SpriteBatch batch;
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer renderer;
-
-    /*MapObjects mapObjects;
-    TiledMapRenderer mapRenderer;
-    TextureRegion blackSquare;
-    BitmapFont helvetique;
-    String bannerText;
-    float bannerX;
-    float bannerY;
-    Piece gamepiece;
-    GraphicalGamepiece graphicalGamepiece;*/
 
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
@@ -89,16 +79,17 @@ public class BlokusGame extends Game {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
 
-        batch = new SpriteBatch();
-
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
 
+        batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
+
         tiledMap = new TmxMapLoader().load("prototype.tmx");
-        //renderer = new OrthogonalTiledMapRenderer(tiledMap);
-        //renderer.setView(camera);
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        renderer.setView(camera);
 
         nameScreen = new NameScreen(this);
         playScreen = new PlayScreen(this);
@@ -144,10 +135,12 @@ public class BlokusGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        if (playScreen != null) playScreen.dispose();
         if (nameScreen != null) nameScreen.dispose();
+        if (playScreen != null) playScreen.dispose();
         if (skin != null) skin.dispose();
         if (stage != null) stage.dispose();
+        if (tiledMap != null) tiledMap.dispose();
+        if (batch != null) batch.dispose();
         if (gameControlThread != null) gameControlThread.stop();
     }
 

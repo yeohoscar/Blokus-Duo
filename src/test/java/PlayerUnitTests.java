@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import model.Player;
 import org.junit.jupiter.api.Test;
+
 import ui.text.TextUI;
 
 public class PlayerUnitTests {

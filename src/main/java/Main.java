@@ -12,9 +12,10 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
+import model.Player;
 import ui.*;
 import ui.graphical.*;
-import ui.text.TextUI;
+import ui.text.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -24,6 +25,7 @@ public class Main {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         boolean xFirst = false, oFirst = false, useGUI = false;
         UI ui;
+        List<Player> players;
         GameControl gameControl;
         Thread gameControlThread;
 
@@ -36,6 +38,16 @@ public class Main {
                 }
             }
         }
+
+        /*if(useGUI) {
+            ui = new GUI();
+            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer(ui.getName(), "O", (GUI)ui), new GraphicalPlayer(ui.getName(), "X", (GUI)ui)));
+        }
+        else {
+            ui = new TextUI();
+            players = new ArrayList<>(Arrays.asList(new TextPlayer(ui.getName(), "O", (TextUI)ui), new TextPlayer(ui.getName(), "X", (TextUI)ui)));
+
+        }*/
 
         ui = useGUI ? new GUI() : new TextUI(s);
 

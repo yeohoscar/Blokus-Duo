@@ -41,6 +41,10 @@ public class GUI implements UI {
         return scanner.next();
     }
 
+    public String getPiece() {
+        return scanner.next();
+    }
+
     /**
      * Change screen from nameScreen to startScreen
      */

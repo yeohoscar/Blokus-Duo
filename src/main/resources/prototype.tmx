@@ -8,7 +8,7 @@
  </imagelayer>
  <layer id="6" name="Tile Layer 2" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eAHtkNsKgDAMQ6eC///Jtg+BEIaINM6HFka7W06bMTragX87sEV7b1bVVMo+Q5iX3mPv4kP/Lmd/VaGcJ7Pnn6pQ/hHCsx7yjN+6+MxGzVzUDj54mpOJMycf2rO8kp9s7cnhvzKw3xfz0QfnL+dnLurmVznQOu2Ax4ELjaABVA==
+   eAFjYBgFoyEwuEOADeg8cjC1fEWO3SA91AKj9qPGPzMwYIkJk9Hwp04IEBPW2NRQx3bi4nqg7WfCkiZHkv8HOvyHs/3USkej5oyGAHoIAAB+AQSS
   </data>
  </layer>
  <layer id="1" name="Tile Layer" width="32" height="24" visible="0" offsetx="2.40602" offsety="0">

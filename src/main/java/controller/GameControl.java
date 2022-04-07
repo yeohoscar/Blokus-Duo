@@ -51,6 +51,10 @@ public class GameControl implements Runnable {
         return board;
     }
 
+    public int getFirstPlayer() {
+        return firstPlayer;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -107,7 +111,7 @@ public class GameControl implements Runnable {
     @Override
     public void run() {
         //Initialise players
-        setPlayers(new ArrayList<>(Arrays.asList(new Player(ui.getName(), "O"), new Player(ui.getName(), "X"))));
+        setPlayers(Arrays.asList(new Player(ui.getName(), "O"), new Player(ui.getName(), "X")));
         setCurrentPlayer(getPlayers().get(firstPlayer));
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 

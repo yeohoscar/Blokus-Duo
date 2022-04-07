@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,6 +38,7 @@ public class PlayScreen extends ScreenAdapter {
     TiledMapRenderer mapRenderer;
     Skin skin;
     TextureRegion blackSquare;
+    TextureRegion whiteSquare;
     BitmapFont helvetique;
     String bannerText;
     float bannerX;
@@ -52,18 +54,19 @@ public class PlayScreen extends ScreenAdapter {
         this.stage = blokusGame.stage;
         this.batch = blokusGame.batch;
         this.tiledMap = blokusGame.tiledMap;
+        this.mapRenderer = blokusGame.renderer;
 
         TiledMapImageLayer imageLayer = (TiledMapImageLayer) tiledMap.getLayers().get(0);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(1);
-        MapLayer objectLayer = tiledMap.getLayers().get(2);
+        MapLayer objectLayer = tiledMap.getLayers().get(3);
         mapObjects = objectLayer.getObjects();
-        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         blackSquare = skin.getRegion("game_square_black");
+        whiteSquare = skin.getRegion("game_square_white");
         helvetique = skin.getFont("font");
         bannerText = "";
         bannerX = 10.0f;
-        bannerY = imageLayer.getTextureRegion().getRegionHeight() + helvetique.getCapHeight()*1.5f;
+        bannerY = imageLayer.getTextureRegion().getRegionHeight() + helvetique.getCapHeight() * 1.5f;
         setBannerText(CLICK_AND_DRAG_MESSAGE);
 
         MapObject mapObject = mapObjects.get("0I3");
@@ -82,14 +85,15 @@ public class PlayScreen extends ScreenAdapter {
          */
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(new EventHandler(this));
+        multiplexer.addProcessor(new PlayScreenInputProcessor(blokusGame));
         Gdx.input.setInputProcessor(multiplexer);
+        //Gdx.input.setInputProcessor(blokusGame.playScrEventHandler);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        ScreenUtils.clear(1.0f, 1.0f, 1.0f, 1.0f);
+        ScreenUtils.clear(Color.WHITE);
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.update();
 
