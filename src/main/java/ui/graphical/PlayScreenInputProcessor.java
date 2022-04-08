@@ -51,7 +51,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
-    /*@Override
+    @Override
     public boolean touchDragged (int screenX, int screenY, int pointer) {
         boolean result = false;
         if (null != selectedPiece) {
@@ -60,7 +60,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
             result = true;
         }
         return result;
-    }*/
+    }
 
     Vector3 unprojectScreenCoordinates(int x, int y) {
         Vector3 screenCoordinates = new Vector3(x, y, 0);

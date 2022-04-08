@@ -91,6 +91,7 @@ public class GameControl implements Runnable {
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
+    
     public void setState(State state) {
         this.state = state;
     }
