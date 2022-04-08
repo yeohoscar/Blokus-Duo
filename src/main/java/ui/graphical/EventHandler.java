@@ -72,7 +72,7 @@ public class EventHandler extends InputAdapter {
                     eventHandled = true;
                     break;
                 case Input.Keys.R:
-                    selectedPiece.rotatePiece();
+                    //selectedPiece.rotatePiece();
                     eventHandled = true;
                     break;
             }
