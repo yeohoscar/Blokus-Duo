@@ -14,6 +14,8 @@ package model.piece;
 
 import java.util.*;
 
+import ui.UI;
+
 public class Piece {
     private final String name;
     private final ArrayList<Block> blocks;
@@ -141,8 +143,7 @@ public class Piece {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-
-            String[] instruct = s.useDelimiter(" |\\n").nextLine().split(" ");
+            String[] instruct = s.nextLine().split(" ");
             int indexOfp; // to record the index of 'p' command
 
             if(instruct.length == 1 && instruct[0].equals("")) {
@@ -155,7 +156,7 @@ public class Piece {
                     try {
                         return new ArrayList<>(Arrays.asList(Integer.parseInt(instruct[indexOfp+1]), Integer.parseInt(instruct[indexOfp+2])));
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Coordinates not provided.");
+                        System.out.println("Invalid coordinates provided.");
                     }
                     break;
                 } else {

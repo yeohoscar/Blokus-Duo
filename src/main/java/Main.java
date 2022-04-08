@@ -12,9 +12,10 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
+import model.Player;
 import ui.*;
 import ui.graphical.*;
-import ui.text.TextUI;
+import ui.text.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -37,14 +38,24 @@ public class Main {
             }
         }
 
-        ui = useGUI ? new GUI() : new TextUI(s);
+        /*if(useGUI) {
+            ui = new GUI();
+            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer(ui.getName(), "O", (GUI)ui), new GraphicalPlayer(ui.getName(), "X", (GUI)ui)));
+        }
+        else {
+            ui = new TextUI();
+            players = new ArrayList<>(Arrays.asList(new TextPlayer(ui.getName(), "O", (TextUI)ui), new TextPlayer(ui.getName(), "X", (TextUI)ui)));
+
+        }*/
+
+        ui = useGUI ? new GUI() : new TextUI();
 
         if (xFirst == oFirst) {
-            gameControl = new GameControl(ui, new Random().nextInt(2), s);
+            gameControl = new GameControl(ui, new Random().nextInt(2));
         } else if (xFirst) {
-            gameControl = new GameControl(ui, 1, s);
+            gameControl = new GameControl(ui, 1);
         } else {
-            gameControl = new GameControl(ui, 0, s);
+            gameControl = new GameControl(ui, 0);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();
@@ -55,7 +66,7 @@ public class Main {
             //int width = BlokusGame.WIDTH;
             //config.setWindowSizeLimits(width, height, width, height);
             config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(GameScreen.GAME_WIDTH,GameScreen.GAME_HEIGHT);
+            config.setWindowedMode(PlayScreen.GAME_WIDTH,PlayScreen.GAME_HEIGHT);
             config.setResizable(false);
 
             new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);

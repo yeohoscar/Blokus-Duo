@@ -14,4 +14,5 @@ public interface UI {
     String getName();
     void displayFirstPlayer(String name);
     void displayResults(String result);
+    void printCoordinateError();
 }

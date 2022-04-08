@@ -10,38 +10,22 @@
 
 package ui.graphical;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import model.piece.*;
+import model.Board;
 import ui.UI;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
@@ -52,25 +36,18 @@ public class BlokusGame extends Game {
 
     Thread gameControlThread;
     PrintStream uiStream;
+
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
-    Screen nameScreen;
-    Screen gameScreen;
-    ApplicationListener game;
-
-    /*SpriteBatch batch;
+    SpriteBatch batch;
     TiledMap tiledMap;
-    MapObjects mapObjects;
-    TiledMapRenderer mapRenderer;
-    TextureRegion blackSquare;
-    BitmapFont helvetique;
-    String bannerText;
-    float bannerX;
-    float bannerY;
-    Piece gamepiece;
-    GraphicalGamepiece graphicalGamepiece;*/
+    OrthogonalTiledMapRenderer renderer;
 
+    NameScreen nameScreen;
+    PlayScreen playScreen;
+    PlayScreenInputProcessor playScreenInputProcessor;
+    
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
         this.gameControlThread = gameControlThread;
@@ -82,15 +59,25 @@ public class BlokusGame extends Game {
      * Create a window screen if user choose to have graphical UI
      */
     public void create() {
+
         camera = new OrthographicCamera(WIDTH, HEIGHT);
         camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
+
+        batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
+
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
+
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
+        
+        tiledMap = new TmxMapLoader().load("prototype.tmx");
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        renderer.setView(camera);
+
         nameScreen = new NameScreen(this);
-        gameScreen = new GameScreen(this);
+        playScreen = new PlayScreen(this);
         activateNameScreen();
-        //activateGameScreen();
     }
 
     /**
@@ -100,8 +87,8 @@ public class BlokusGame extends Game {
         setScreen(nameScreen);
     }
 
-    public void activateGameScreen() {
-        setScreen(gameScreen);
+    public void activatePlayScreen() {
+        setScreen(playScreen);
     }
 
     /**
@@ -131,10 +118,12 @@ public class BlokusGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        if (gameScreen != null) gameScreen.dispose();
         if (nameScreen != null) nameScreen.dispose();
+        if (playScreen != null) playScreen.dispose();
         if (skin != null) skin.dispose();
         if (stage != null) stage.dispose();
+        if (tiledMap != null) tiledMap.dispose();
+        if (batch != null) batch.dispose();
         if (gameControlThread != null) gameControlThread.stop();
     }
 
@@ -150,5 +139,13 @@ public class BlokusGame extends Game {
      */
     public void setResults(String result) {
         showDialog(result);
+    }
+
+    public void updateBoard(Board board) {
+        playScreen.graphicalBoard.updateBoard(board);
+    }
+
+    public void setCurrentPlayerNo(int playerNo) {
+        playScreenInputProcessor.setCurrentPlayerNo(playerNo);
     }
 }

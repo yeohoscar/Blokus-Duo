@@ -23,7 +23,7 @@ public class Player {
     private final ArrayList<int[]> validMove;
     private boolean lastPieceI1;
 
-    public Player(String name, String color) {
+    public Player(String name, int playerNo) {
         this.name = name;
         this.color = color;
         score = 0;

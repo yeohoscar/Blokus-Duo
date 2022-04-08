@@ -15,10 +15,16 @@ import model.piece.*;
 import java.util.ArrayList;
 
 public class Board {
+    public final static int WIDTH = 14;
+    public final static int HEIGHT = 14;
+    public final static int X = 0;
+    public final static int O = 1;
+
     private String[][] board;
+    boolean[][] occupied = new boolean[WIDTH][HEIGHT];
 
     public Board() {
-        this.board = new String[14][14];
+        this.board = new String[WIDTH][HEIGHT];
         // initialize the board
         for (int i = 0; i < board.length; i++ ) {
             for (int j = 0; j < board[0].length; j++) {
@@ -28,6 +34,15 @@ public class Board {
         // Starting points
         board[4][4] = "*";
         board[9][9] = "*";
+    }
+
+    public Board(Board board) {
+        for (int i = 0; i < HEIGHT; i++ ) {
+            for (int j = 0; j < WIDTH; j++) {
+                occupied[i][j] = board.isOccupied(i, j);
+                this.board[i][j] = board.getColorOnSquare(i, j);
+            }
+        }
     }
 
     /**
@@ -71,6 +86,14 @@ public class Board {
         this.board = board;
     }
 
+    public boolean isOccupied(int x, int y) {
+        return occupied[x][y];
+    }
+
+    public String getColorOnSquare(int x, int y) {
+        return board[x][y];
+    }
+
     /**
      *  Adds piece to the board
      * 
@@ -82,6 +105,7 @@ public class Board {
     public void addPiece(Player player, Piece piece, int originX, int originY) {
         for (Block block : piece.getBlocks()) {
             board[13 - originY - block.getY()][originX + block.getX()] = player.getColor();
+            occupied[13 - originY - block.getY()][originX + block.getX()] = true;
         }
     }
 

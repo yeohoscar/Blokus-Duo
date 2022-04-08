@@ -16,8 +16,9 @@ import java.util.Scanner;
 
 public class TextUI implements UI {
     protected Scanner s;
-    public TextUI(Scanner s) {
-        this.s = s;
+    
+    public TextUI() {
+        s = new Scanner(System.in).useDelimiter("\\n| ");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class TextUI implements UI {
         System.out.println("Enter Player name: ");
         String name = s.useDelimiter("\\n| ").nextLine();
         while(name == null || name.trim().isEmpty()) {
-            System.out.println("Player name cannot be null\nEnter Player name:");
+            System.out.println("Player name cannot be null\n Enter Player name:");
             name = s.useDelimiter("\\n| ").nextLine();
         }
 
@@ -39,5 +40,14 @@ public class TextUI implements UI {
     @Override
     public void displayResults(String result) {
         System.out.println(result);
+    }
+
+    @Override
+    public void printCoordinateError() {
+        System.out.println("Invalid coordinates provided.");
+    }
+
+    public Scanner getS() {
+        return s;
     }
 }

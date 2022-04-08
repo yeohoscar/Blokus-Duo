@@ -48,20 +48,35 @@ public class GUI implements UI {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
-                blokusGame.activateGameScreen();
+                blokusGame.activatePlayScreen();
                 blokusGame.setMessage(name);
                 //blokusGame.activateGameScreen();
             }
         });
     }
 
-    public void displayGame() {
-        
-    }
-
     @Override
     public void displayResults(String result) {
         blokusGame.setResults(result);
+    }
+
+    @Override
+    public void printCoordinateError() {
+        //TODO: display "Invalid piece placement in banner"
+    }
+
+    public int getXCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public int getYCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
     }
 }
 
