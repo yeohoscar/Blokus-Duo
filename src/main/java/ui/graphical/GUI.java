@@ -50,7 +50,6 @@ public class GUI implements UI {
             public void run() {
                 blokusGame.activatePlayScreen();
                 blokusGame.setMessage(name);
-                //blokusGame.activateGameScreen();
             }
         });
     }

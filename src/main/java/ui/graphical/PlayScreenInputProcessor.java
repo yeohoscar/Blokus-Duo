@@ -80,11 +80,11 @@ public class PlayScreenInputProcessor extends InputAdapter {
         if (null != selectedPiece) {
             switch (keycode) {
                 case Input.Keys.F -> {
-                    blokusGame.uiStream.println("f");
+                    selectedPiece.flipPiece();
                     result = true;
                 }
                 case Input.Keys.R -> {
-                    blokusGame.uiStream.println("r");
+                    selectedPiece.rotatePiece();
                     result = true;
                 }
             }

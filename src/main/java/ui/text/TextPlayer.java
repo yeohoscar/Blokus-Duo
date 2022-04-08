@@ -15,8 +15,7 @@ public class TextPlayer extends Player {
     }
 
     public ArrayList<Object> getPiece() {
-        //TODO: Player
-        if (currentPlayer.getStock().getPieces().size() == 0) {
+        if (getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
 
@@ -25,10 +24,10 @@ public class TextPlayer extends Player {
         tmp = tmp.replaceAll("(?:\\n|\\r)", "");
 
         while(true) {
-            for (Piece p : currentPlayer.getStock().getPieces()) {
+            for (Piece p : getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
                     Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui.getS(), currentPlayer.getColor())));
+                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui.getS(), getColor())));
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
