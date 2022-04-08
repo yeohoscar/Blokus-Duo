@@ -11,20 +11,21 @@
 
 package model;
 
+import model.piece.Piece;
 import model.piece.Stock;
 
 import java.util.ArrayList;
 
-public class Player {
-    private final String name; //Player name
+public abstract class Player {
+    private String name; //Player name
     private int score; //Player score -> calculate at end
     private final String color;
     private final Stock stock;
     private final ArrayList<int[]> validMove;
     private boolean lastPieceI1;
 
-    public Player(String name, int playerNo) {
-        this.name = name;
+
+    public Player(String color) {
         this.color = color;
         score = 0;
         this.stock = new Stock();
@@ -34,6 +35,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScore() {
@@ -63,4 +68,6 @@ public class Player {
     public void setLastPieceI1(boolean b) {
         this.lastPieceI1 = b;
     }
+
+    public abstract ArrayList<Object> getPiece();
 }

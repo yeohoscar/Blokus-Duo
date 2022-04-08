@@ -90,7 +90,7 @@ public class PlayScreen extends ScreenAdapter {
         int player
         ) {
             for (Piece p : new Stock().getPieces()) {
-                String pieceName = String.valueOf(player) + p.getName();
+                String pieceName = player + p.getName();
                 MapObject object = objects.get(pieceName);
                 float gamepieceX = (float) object.getProperties().get("x");
                 float gamepieceY = (float) object.getProperties().get("y");

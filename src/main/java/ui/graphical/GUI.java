@@ -10,15 +10,19 @@
 
 package ui.graphical;
 
+import model.piece.Piece;
 import ui.UI;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class GUI implements UI {
     private final PipedOutputStream pipedOutputStream;
     private final PipedInputStream pipedInputStream;
+    private final BlockingQueue<Piece> pieceQueue;
     private BlokusGame blokusGame;
     private final Scanner scanner;
 
@@ -26,6 +30,7 @@ public class GUI implements UI {
         //Connect threads
         pipedOutputStream = new PipedOutputStream();
         pipedInputStream = new PipedInputStream(pipedOutputStream);
+        pieceQueue = new LinkedBlockingQueue<>();
         scanner = new Scanner(pipedInputStream);
     }
 
@@ -76,6 +81,10 @@ public class GUI implements UI {
             scanner.next();
         }
         return scanner.nextInt();
+    }
+
+    public BlockingQueue<Piece> getPieceQueue() {
+        return pieceQueue;
     }
 }
 

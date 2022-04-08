@@ -50,6 +50,11 @@ public class PlayScreenInputProcessor extends InputAdapter {
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         boolean result = false;
         if (null != selectedPiece) {
+            try {
+                blokusGame.pieceQueue.put(selectedPiece.getGamepiece());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             selectedPiece = null;
             playScreen.setBannerText(CLICK_AND_DRAG_MESSAGE);
             // I could potentially do more stuff here ;)

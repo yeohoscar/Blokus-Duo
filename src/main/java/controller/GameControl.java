@@ -13,6 +13,7 @@ package controller;
 import model.Board;
 import model.Player;
 import ui.UI;
+import ui.graphical.GUI;
 
 import java.util.*;
 
@@ -112,6 +113,8 @@ public class GameControl implements Runnable {
     public void run() {
         //Initialise players
         setPlayers(players);
+        players.get(0).setName(ui.getName());
+        players.get(1).setName(ui.getName());
         setCurrentPlayer(getPlayers().get(firstPlayer));
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 

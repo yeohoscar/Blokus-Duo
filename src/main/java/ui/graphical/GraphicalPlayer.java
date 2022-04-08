@@ -9,12 +9,18 @@ import java.util.Arrays;
 public class GraphicalPlayer extends Player {
     GUI ui;
 
-    public GraphicalPlayer(String name, int playerNo, GUI ui) {
-        super(name, playerNo);
+    public GraphicalPlayer(String color, GUI ui) {
+        super(color);
         this.ui = ui;
     }
 
-    public ArrayList<Object> getPiece(Piece p) {
+    public ArrayList<Object> getPiece() {
+        Piece p = null;
+        try {
+            p = ui.getPieceQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int x = ui.getXCoordinate();
         int y = ui.getYCoordinate();
 

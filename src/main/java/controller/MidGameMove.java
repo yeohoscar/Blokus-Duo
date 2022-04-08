@@ -37,7 +37,7 @@ public class MidGameMove {
         this.board = board;
         this.ui = ui;
         //TODO: Players -> Players.getPiece
-        List<Object> list = selectPiece();
+        List<Object> list = currentPlayer.getPiece();
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);

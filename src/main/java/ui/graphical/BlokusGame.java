@@ -23,9 +23,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import model.Board;
+import model.piece.Piece;
 import ui.UI;
 
 import java.io.PrintStream;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
@@ -36,6 +39,7 @@ public class BlokusGame extends Game {
 
     Thread gameControlThread;
     PrintStream uiStream;
+    BlockingQueue<Piece> pieceQueue;
 
     OrthographicCamera camera;
     Stage stage;
@@ -53,6 +57,7 @@ public class BlokusGame extends Game {
         this.gameControlThread = gameControlThread;
         gui.setGame(this);
         this.uiStream = new PrintStream(gui.getPipedOutputStream());
+        this.pieceQueue = gui.getPieceQueue();
     }
 
     /**

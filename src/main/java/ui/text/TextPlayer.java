@@ -9,8 +9,8 @@ import java.util.Arrays;
 public class TextPlayer extends Player {
     TextUI ui;
 
-    public TextPlayer(String name, int playerNo, TextUI ui) {
-        super(name, playerNo);
+    public TextPlayer(String color, TextUI ui) {
+        super(color);
         this.ui = ui;
     }
 
