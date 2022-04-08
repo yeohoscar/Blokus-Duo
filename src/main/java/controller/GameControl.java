@@ -23,14 +23,12 @@ public class GameControl implements Runnable {
     private Player currentPlayer;
     private State state;
     private final int firstPlayer;
-    protected Scanner s;
 
-    public GameControl(UI ui, int firstPlayer, Scanner s) {
+    public GameControl(UI ui, int firstPlayer) {
         this.ui = ui;
         board = new Board();
         this.firstPlayer = firstPlayer;
         state = State.FIRST;
-        this.s = s;
     }
 
     public boolean isFirstTurn() {
@@ -111,19 +109,19 @@ public class GameControl implements Runnable {
     @Override
     public void run() {
         //Initialise players
-        setPlayers(Arrays.asList(new Player(ui.getName(), "O"), new Player(ui.getName(), "X")));
+        setPlayers(Arrays.asList(new Player(ui.getName(), "X"), new Player(ui.getName(), "O")));
         setCurrentPlayer(getPlayers().get(firstPlayer));
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 
         if (isFirstTurn()) {
             printUI();
-            while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
+            while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
             printUI();
 
-            while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
+            while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
@@ -132,7 +130,7 @@ public class GameControl implements Runnable {
         }
 
         while (isMidGame()) {
-            while(!(new MidGameMove(getCurrentPlayer(), getNextPlayer(), getBoard(), s).executeMove())) {
+            while(!(new MidGameMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();

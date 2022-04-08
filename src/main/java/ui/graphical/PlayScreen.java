@@ -21,6 +21,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import model.Board;
 import model.piece.*;
 
 public class PlayScreen extends ScreenAdapter {
@@ -34,18 +36,20 @@ public class PlayScreen extends ScreenAdapter {
     SpriteBatch batch;
     OrthographicCamera camera;
     TiledMap tiledMap;
-    MapObjects mapObjects;
     TiledMapRenderer mapRenderer;
     Skin skin;
+    Stage stage;
+
     TextureRegion blackSquare;
     TextureRegion whiteSquare;
     BitmapFont helvetique;
     String bannerText;
     float bannerX;
     float bannerY;
+
+    ArrayList<GraphicalGamepiece> pieces;
     Piece gamepiece;
-    GraphicalGamepiece graphicalGamepiece;
-    Stage stage;
+    GraphicalBoard graphicalBoard;
 
     public PlayScreen(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
@@ -59,22 +63,43 @@ public class PlayScreen extends ScreenAdapter {
         TiledMapImageLayer imageLayer = (TiledMapImageLayer) tiledMap.getLayers().get(0);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(1);
         MapLayer objectLayer = tiledMap.getLayers().get(3);
-        mapObjects = objectLayer.getObjects();
-
-        blackSquare = skin.getRegion("game_square_black");
-        whiteSquare = skin.getRegion("game_square_white");
+        MapObjects objects = objectLayer.getObjects();
+        
         helvetique = skin.getFont("font");
         bannerText = "";
         bannerX = 10.0f;
         bannerY = imageLayer.getTextureRegion().getRegionHeight() + helvetique.getCapHeight() * 1.5f;
         setBannerText(CLICK_AND_DRAG_MESSAGE);
 
-        MapObject mapObject = mapObjects.get("0I3");
-        float gamepieceX = (float) mapObject.getProperties().get("x");
-        float gamepieceY = (float) mapObject.getProperties().get("y");
-        gamepiece = new Piece("I3", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2))));
-        graphicalGamepiece = new GraphicalGamepiece(gamepiece, blackSquare, gamepieceX, gamepieceY);
+        pieces = new ArrayList<GraphicalGamepiece>();
+        blackSquare = skin.getRegion("game_square_black");
+        whiteSquare = skin.getRegion("game_square_white");
+        addGamePiece(pieces, objects, blackSquare, 0);
+        addGamePiece(pieces, objects, whiteSquare, 1);
+
+        MapObject boardLocation = objects.get("Board");
+        float boardX = (float) boardLocation.getProperties().get("x");
+        float boardY = (float) boardLocation.getProperties().get("y");
+        float boardHeight = (float) boardLocation.getProperties().get("height");
+        float boardWidth = (float) boardLocation.getProperties().get("width");
+        graphicalBoard = new GraphicalBoard(boardX, boardY, boardWidth, boardHeight, blackSquare, whiteSquare, new Board());
+
     }
+
+    private void addGamePiece(
+        ArrayList<GraphicalGamepiece> pieces, 
+        MapObjects objects, 
+        TextureRegion square,
+        int player
+        ) {
+            for (Piece p : new Stock().getPieces()) {
+                String pieceName = String.valueOf(player) + p.getName();
+                MapObject object = objects.get(pieceName);
+                float gamepieceX = (float) object.getProperties().get("x");
+                float gamepieceY = (float) object.getProperties().get("y");
+                pieces.add(new GraphicalGamepiece(p, square, gamepieceX, gamepieceY));
+            }
+    } 
 
     @Override
     public void show() {
@@ -103,7 +128,9 @@ public class PlayScreen extends ScreenAdapter {
 
         // Next we draw the gamepiece and the banner
         batch.begin();
-        graphicalGamepiece.draw(batch);
+        for(GraphicalGamepiece p : pieces) {
+            p.draw(batch);
+        }
         helvetique.draw(batch, bannerText, bannerX, bannerY);
         batch.end();
 
@@ -126,7 +153,7 @@ public class PlayScreen extends ScreenAdapter {
         return camera;
     }
 
-    public GraphicalGamepiece getGraphicalGamepiece() {
-        return graphicalGamepiece;
+    public ArrayList<GraphicalGamepiece> getGraphicalGamepiece() {
+        return pieces;
     }
 }

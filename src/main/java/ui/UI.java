@@ -12,6 +12,8 @@ package ui;
 
 public interface UI {
     String getName();
+    String getPiece();
+    String[] getManipulation();
     void displayFirstPlayer(String name);
     void displayResults(String result);
 }

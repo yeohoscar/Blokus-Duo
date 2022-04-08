@@ -25,39 +25,41 @@ public class PlayScreenInputProcessor extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        boolean eventHandled = false;
+        boolean result = false;
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
-            GraphicalGamepiece gamepiece = playScreen.getGraphicalGamepiece();
-            if (gamepiece.isHit(coord.x, coord.y)) {
-                selectedPiece = gamepiece;
-                playScreen.setBannerText(FLIP_OR_ROTATE_MESSAGE);
-                eventHandled = true;
-            }
+            for (GraphicalGamepiece p : playScreen.getGraphicalGamepiece()) {
+                if (p.isHit(coord.x, coord.y)) {
+                    selectedPiece = p;
+                    playScreen.setBannerText(FLIP_OR_ROTATE_MESSAGE);
+                    result = true;
+                    break;
+                }
+            }            
         }
-        return eventHandled;
+        return result;
     }
 
     @Override
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
-        boolean eventHandled = false;
+        boolean result = false;
         if (null != selectedPiece) {
             selectedPiece = null;
             playScreen.setBannerText(CLICK_AND_DRAG_MESSAGE);
             // I could potentially do more stuff here ;)
         }
-        return eventHandled;
+        return result;
     }
 
     /*@Override
     public boolean touchDragged (int screenX, int screenY, int pointer) {
-        boolean eventHandled = false;
+        boolean result = false;
         if (null != selectedPiece) {
             Vector3 coord = unprojectScreenCoordinates(screenX, screenY);
             selectedPiece.setPosition(coord.x,coord.y);
-            eventHandled = true;
+            result = true;
         }
-        return eventHandled;
+        return result;
     }*/
 
     Vector3 unprojectScreenCoordinates(int x, int y) {
@@ -68,20 +70,20 @@ public class PlayScreenInputProcessor extends InputAdapter {
 
     @Override
     public boolean keyDown (int keycode) {
-        boolean eventHandled = false;
+        boolean result = false;
         if (null != selectedPiece) {
             switch(keycode) {
                 case Input.Keys.F:
                     selectedPiece.flipPiece();
-                    eventHandled = true;
+                    result = true;
                     break;
                 case Input.Keys.R:
                     selectedPiece.rotatePiece();
-                    eventHandled = true;
+                    result = true;
                     break;
             }
         }
-        return eventHandled;
+        return result;
     }
 
 }

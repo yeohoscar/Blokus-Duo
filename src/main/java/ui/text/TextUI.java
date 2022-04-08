@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class TextUI implements UI {
     protected Scanner s;
     
-    public TextUI(Scanner s) {
-        this.s = s;
+    public TextUI() {
+        s = new Scanner(System.in).useDelimiter("\\n| ");
     }
 
     @Override
@@ -26,11 +26,24 @@ public class TextUI implements UI {
         System.out.println("Enter Player name: ");
         String name = s.useDelimiter("\\n| ").nextLine();
         while(name == null || name.trim().isEmpty()) {
-            System.out.println("Player name cannot be null\nEnter Player name:");
+            System.out.println("Player name cannot be null\n Enter Player name:");
             name = s.useDelimiter("\\n| ").nextLine();
         }
 
         return name;
+    }
+
+    @Override
+    public String getPiece() {
+        String tmp = s.useDelimiter(" |\\n").next();
+        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+
+        return tmp;
+    }
+
+    @Override
+    public String[] getManipulation() {
+        return s.useDelimiter(" |\\n").nextLine().split(" ");
     }
 
     public void displayFirstPlayer(String name) {
@@ -41,4 +54,8 @@ public class TextUI implements UI {
     public void displayResults(String result) {
         System.out.println(result);
     }
+
+    
+
+    
 }

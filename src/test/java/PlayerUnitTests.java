@@ -24,7 +24,7 @@ public class PlayerUnitTests {
     void testInitPlayer() {
         ByteArrayInputStream in = new ByteArrayInputStream("a\n".getBytes());
         Scanner s = new Scanner(in);
-        TextUI tui = new TextUI(s);
+        TextUI tui = new TextUI();
         Player p = new Player(tui.getName(), "X");
 
         assertEquals("X", p.getColor());

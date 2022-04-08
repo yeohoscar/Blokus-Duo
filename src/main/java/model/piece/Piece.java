@@ -14,6 +14,8 @@ package model.piece;
 
 import java.util.*;
 
+import ui.UI;
+
 public class Piece {
     private final String name;
     private final ArrayList<Block> blocks;
@@ -137,16 +139,16 @@ public class Piece {
      * @param color color of current player for printing pieces
      * @return an arraylist of piece's info : properties and coordinate
      */
-    public ArrayList<Integer> manipulation(Scanner s, String color) {
+    public ArrayList<Integer> manipulation(UI ui, String color) {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
 
-            String[] instruct = s.useDelimiter(" |\\n").nextLine().split(" ");
+            String[] instruct = ui.getManipulation();
             int indexOfp; // to record the index of 'p' command
 
             if(instruct.length == 1 && instruct[0].equals("")) {
-                instruct = s.useDelimiter(" |\\n|\\r").nextLine().split(" ");
+                instruct = ui.getManipulation();
             }
 
             for (int index = 0; index < instruct.length; index++) {

@@ -45,6 +45,11 @@ public class GUI implements UI {
         return scanner.next();
     }
 
+    @Override
+    public String[] getManipulation() {
+        return scanner.next().split(" ");
+    }
+
     /**
      * Change screen from nameScreen to startScreen
      */

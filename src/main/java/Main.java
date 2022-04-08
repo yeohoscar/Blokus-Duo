@@ -25,7 +25,6 @@ public class Main {
         Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
         boolean xFirst = false, oFirst = false, useGUI = false;
         UI ui;
-        List<Player> players;
         GameControl gameControl;
         Thread gameControlThread;
 
@@ -49,14 +48,14 @@ public class Main {
 
         }*/
 
-        ui = useGUI ? new GUI() : new TextUI(s);
+        ui = useGUI ? new GUI() : new TextUI();
 
         if (xFirst == oFirst) {
-            gameControl = new GameControl(ui, new Random().nextInt(2), s);
+            gameControl = new GameControl(ui, new Random().nextInt(2));
         } else if (xFirst) {
-            gameControl = new GameControl(ui, 1, s);
+            gameControl = new GameControl(ui, 1);
         } else {
-            gameControl = new GameControl(ui, 0, s);
+            gameControl = new GameControl(ui, 0);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();

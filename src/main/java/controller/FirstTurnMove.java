@@ -12,10 +12,12 @@ package controller;
 
 import model.*;
 import model.piece.*;
+import ui.UI;
 
 import java.util.*;
 
 public class FirstTurnMove {
+    UI ui;
     private final Player currentPlayer;
     private final Player nextPlayer;
     private final Board board;
@@ -25,18 +27,19 @@ public class FirstTurnMove {
     private final MidGameMove midGameMove;
 
     @SuppressWarnings("unchecked")
-    public FirstTurnMove(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
+    public FirstTurnMove(Player currentPlayer, Player nextPlayer, Board board, UI ui) {
         if (currentPlayer == null || nextPlayer == null || board == null) {
             throw new IllegalArgumentException();
         }
         this.currentPlayer = currentPlayer;
         this.nextPlayer = nextPlayer;
         this.board = board;
-        List<Object> list = selectPiece(s);
+        this.ui = ui;
+        List<Object> list = selectPiece();
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
-        this.midGameMove = new MidGameMove(currentPlayer, nextPlayer, board, piece, originX, originY);
+        this.midGameMove = new MidGameMove(currentPlayer, nextPlayer, board, piece, originX, originY, ui);
     }
 
     public int getX() {
@@ -99,25 +102,23 @@ public class FirstTurnMove {
         return nextPlayer;
     }
 
-    public ArrayList<Object> selectPiece(Scanner s) {
+    public ArrayList<Object> selectPiece() {
         if (currentPlayer.getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");
         }
+
         System.out.println("Select a piece");
-        String tmp = s.useDelimiter(" |\\n").next();
-        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+        String tmp = ui.getPiece();
         
         while(true) {
             for (Piece p : currentPlayer.getStock().getPieces()) {
                 if (p.getName().equals(tmp)) {
                     Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(s, currentPlayer.getColor())));                                
+                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui, currentPlayer.getColor())));                                
                 }
             }
             System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = s.useDelimiter(" |\\n").next();
-            tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-            s.next();
+            tmp = ui.getPiece();
         }
     }
 
