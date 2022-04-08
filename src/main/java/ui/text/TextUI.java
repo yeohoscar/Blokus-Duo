@@ -33,19 +33,6 @@ public class TextUI implements UI {
         return name;
     }
 
-    @Override
-    public String getPiece() {
-        String tmp = s.useDelimiter(" |\\n").next();
-        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-
-        return tmp;
-    }
-
-    @Override
-    public String[] getManipulation() {
-        return s.useDelimiter(" |\\n").nextLine().split(" ");
-    }
-
     public void displayFirstPlayer(String name) {
         System.out.println("\n" + name + " is going first!\n");
     }
@@ -55,7 +42,12 @@ public class TextUI implements UI {
         System.out.println(result);
     }
 
-    
+    @Override
+    public void printCoordinateError() {
+        System.out.println("Invalid coordinates provided.");
+    }
 
-    
+    public Scanner getS() {
+        return s;
+    }
 }

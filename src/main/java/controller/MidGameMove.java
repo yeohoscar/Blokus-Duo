@@ -36,6 +36,7 @@ public class MidGameMove {
         this.nextPlayer = nextPlayer;
         this.board = board;
         this.ui = ui;
+        //TODO: Players -> Players.getPiece
         List<Object> list = selectPiece();
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
@@ -302,42 +303,5 @@ public class MidGameMove {
 
         getMove(piece.getBlocks(), originX, originY);
         return true;
-    }
-
-    /**
-     * Prompts player to select and manipulate piece 
-     */
-    public ArrayList<Object> selectPiece() {
-        if (currentPlayer.getStock().getPieces().size() == 0) {
-            System.out.println("No more pieces left.");
-        }
-
-        System.out.println("Select a piece");
-        String tmp = ui.getPiece();
-        
-        while(true) {
-            for (Piece p : currentPlayer.getStock().getPieces()) {
-                if (p.getName().equals(tmp)) {
-                    Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui, currentPlayer.getColor())));                                
-                }
-            }
-            System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = ui.getPiece();
-        }
-    }
-
-    /**
-     * Prompts player to enter the coordinates
-     * @param arr Coordinates entered by player
-     * @return an integer arraylist that stored the coordinates
-     */
-    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
-        ArrayList<Integer> coord = new ArrayList<>();
-
-        coord.add(Integer.parseInt(arr.get(0)));
-        coord.add(Integer.parseInt(arr.get(1)));
-
-        return coord;
     }
 }

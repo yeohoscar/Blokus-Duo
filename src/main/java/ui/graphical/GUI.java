@@ -41,15 +41,6 @@ public class GUI implements UI {
         return scanner.next();
     }
 
-    public String getPiece() {
-        return scanner.next();
-    }
-
-    @Override
-    public String[] getManipulation() {
-        return scanner.next().split(" ");
-    }
-
     /**
      * Change screen from nameScreen to startScreen
      */
@@ -71,6 +62,25 @@ public class GUI implements UI {
     @Override
     public void displayResults(String result) {
         blokusGame.setResults(result);
+    }
+
+    @Override
+    public void printCoordinateError() {
+        //TODO: display "Invalid piece placement in banner"
+    }
+
+    public int getXCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public int getYCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
     }
 }
 

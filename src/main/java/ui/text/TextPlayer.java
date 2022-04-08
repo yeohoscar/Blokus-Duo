@@ -1,14 +1,40 @@
 package ui.text;
 
 import model.Player;
+import model.piece.Piece;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TextPlayer extends Player {
-
     TextUI ui;
 
     public TextPlayer(String name, String color, TextUI ui) {
         super(name, color);
         this.ui = ui;
     }
-    
+
+    public ArrayList<Object> getPiece() {
+        //TODO: Player
+        if (currentPlayer.getStock().getPieces().size() == 0) {
+            System.out.println("No more pieces left.");
+        }
+
+        System.out.println("Select a piece");
+        String tmp = ui.getS().useDelimiter(" |\\n").next();
+        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+
+        while(true) {
+            for (Piece p : currentPlayer.getStock().getPieces()) {
+                if (p.getName().equals(tmp)) {
+                    Piece pCopy = new Piece(p);
+                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui.getS(), currentPlayer.getColor())));
+                }
+            }
+            System.out.println("Piece not in stock.\nSelect a piece");
+            tmp = ui.getS().useDelimiter(" |\\n").next();
+            tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+            ui.getS().next();
+        }
+    }
 }
