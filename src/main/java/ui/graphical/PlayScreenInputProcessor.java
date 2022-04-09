@@ -3,10 +3,8 @@ package ui.graphical;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-import controller.GameControl;
 import model.Board;
 import model.piece.Piece;
 
@@ -103,15 +101,15 @@ public class PlayScreenInputProcessor extends InputAdapter {
     public boolean keyDown (int keycode) {
         boolean result = false;
         if (null != selectedPiece) {
-            switch(keycode) {
-                case Input.Keys.F:
+            switch (keycode) {
+                case Input.Keys.F -> {
                     selectedPiece.flipPiece();
                     result = true;
-                    break;
-                case Input.Keys.R:
+                }
+                case Input.Keys.R -> {
                     selectedPiece.rotatePiece();
                     result = true;
-                    break;
+                }
             }
         }
         return result;

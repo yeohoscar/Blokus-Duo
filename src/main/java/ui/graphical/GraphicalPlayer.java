@@ -7,10 +7,8 @@ import controller.FirstTurnMove;
 import controller.MidGameMove;
 import model.*;
 import model.piece.Piece;
-import ui.text.TextUI;
 
 public class GraphicalPlayer extends Player {
-
     GUI ui;
 
     public GraphicalPlayer(String color, GUI ui) {

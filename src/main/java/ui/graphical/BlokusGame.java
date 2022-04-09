@@ -10,31 +10,16 @@
 
 package ui.graphical;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import model.Board;
@@ -42,8 +27,6 @@ import model.piece.*;
 import ui.UI;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
@@ -60,14 +43,15 @@ public class BlokusGame extends Game {
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
-    NameScreen nameScreen;
-    PlayScreen playScreen;
-    PlayScreenInputProcessor playScreenInputProcessor;
 
     SpriteBatch batch;
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer renderer;
 
+    NameScreen nameScreen;
+    PlayScreen playScreen;
+    PlayScreenInputProcessor playScreenInputProcessor;
+    
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
         this.gameControlThread = gameControlThread;

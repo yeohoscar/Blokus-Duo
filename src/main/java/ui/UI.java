@@ -10,9 +10,6 @@
 
 package ui;
 
-import model.Board;
-import model.piece.Stock;
-
 public interface UI {
     String getName();
     void displayFirstPlayer(String name);

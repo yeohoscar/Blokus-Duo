@@ -10,6 +10,7 @@
 
 package ui.graphical;
 
+import model.piece.Piece;
 import ui.UI;
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -17,10 +18,6 @@ import java.io.PipedOutputStream;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import model.Board;
-import model.piece.Piece;
-import model.piece.Stock;
 
 public class GUI implements UI {
     private final PipedOutputStream pipedOutputStream;

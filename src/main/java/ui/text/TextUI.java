@@ -15,8 +15,6 @@ import ui.UI;
 import java.util.Scanner;
 
 import controller.GameControl;
-import model.Board;
-import model.piece.Stock;
 
 public class TextUI implements UI {
     protected Scanner s;

@@ -18,8 +18,6 @@ import java.util.Scanner;
 
 import model.piece.Block;
 import model.piece.Piece;
-import ui.UI;
-import ui.text.TextUI;
 
 import org.junit.jupiter.api.Test;
 

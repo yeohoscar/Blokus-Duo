@@ -28,6 +28,7 @@ public class GameControl implements Runnable {
         this.ui = ui;
         this.players = players;
         board = new Board();
+        this.players = players;
         this.firstPlayer = firstPlayer;
         state = State.FIRST;
     }
@@ -118,7 +119,6 @@ public class GameControl implements Runnable {
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 
         if (isFirstTurn()) {
-            FirstTurnMove fMove;
             printUI();
             //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {

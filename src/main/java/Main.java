@@ -12,7 +12,6 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
-import model.Board;
 import model.Player;
 import ui.*;
 import ui.graphical.*;

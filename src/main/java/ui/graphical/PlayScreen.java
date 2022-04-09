@@ -1,9 +1,7 @@
 package ui.graphical;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
@@ -17,7 +15,6 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.*;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -93,7 +90,7 @@ public class PlayScreen extends ScreenAdapter {
         int player
         ) {
             for (Piece p : new Stock().getPieces()) {
-                String pieceName = String.valueOf(player) + p.getName();
+                String pieceName = player + p.getName();
                 MapObject object = objects.get(pieceName);
                 float gamepieceX = (float) object.getProperties().get("x");
                 float gamepieceY = (float) object.getProperties().get("y");

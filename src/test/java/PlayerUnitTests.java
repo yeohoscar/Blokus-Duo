@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-import model.Board;
 import model.Player;
 import org.junit.jupiter.api.Test;
 

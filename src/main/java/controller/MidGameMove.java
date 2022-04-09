@@ -15,9 +15,7 @@ import model.piece.*;
 import ui.UI;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class MidGameMove {
     UI ui;
@@ -28,6 +26,7 @@ public class MidGameMove {
     private final int originX;
     private final int originY;
 
+    @SuppressWarnings("unchecked")
     public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, UI ui) {
         if (currentPlayer == null || nextPlayer == null || board == null) {
             throw new IllegalArgumentException();

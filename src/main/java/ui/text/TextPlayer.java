@@ -9,7 +9,6 @@ import model.Player;
 import model.piece.Piece;
 
 public class TextPlayer extends Player {
-
     TextUI ui;
 
     public TextPlayer(String color, TextUI ui) {

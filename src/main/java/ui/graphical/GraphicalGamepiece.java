@@ -66,6 +66,10 @@ public class GraphicalGamepiece {
         gamepiece.rotatePieceClockwise();
     }
 
+    public Piece getGamepiece() {
+        return gamepiece;
+    }
+
     public boolean isHit(float x, float y) {
         boolean isHit = false;
         ArrayList<Block> blocks = gamepiece.getBlocks();
