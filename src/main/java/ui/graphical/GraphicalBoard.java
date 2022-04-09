@@ -38,11 +38,7 @@ public class GraphicalBoard {
                 if (board.isOccupied(x, y)) {
                     TextureRegion picture;
                     picture = (board.getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
-                    batch.draw(
-                            picture,
-                            boardX + x * cellWidth + cellWidth * 0.2f,
-                            boardY + y * cellHeight  + cellHeight * 0.1f
-                    );
+                    batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
                 }
             }
         }

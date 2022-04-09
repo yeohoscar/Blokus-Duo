@@ -20,11 +20,10 @@ public class Board {
     public final static int X = 0;
     public final static int O = 1;
 
-    private String[][] board;
+    private String[][] board = new String[WIDTH][HEIGHT];
     boolean[][] occupied = new boolean[WIDTH][HEIGHT];
 
     public Board() {
-        this.board = new String[WIDTH][HEIGHT];
         // initialize the board
         for (int i = 0; i < board.length; i++ ) {
             for (int j = 0; j < board[0].length; j++) {

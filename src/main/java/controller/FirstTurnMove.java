@@ -37,7 +37,6 @@ public class FirstTurnMove {
         this.ui = ui;
         List<Object> list = currentPlayer.getPiece();
         this.piece = (Piece) list.get(0);
-        System.out.println(piece.getName());
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
         this.midGameMove = new MidGameMove(currentPlayer, nextPlayer, board, piece, originX, originY, ui);

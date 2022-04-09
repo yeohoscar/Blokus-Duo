@@ -15,6 +15,7 @@ import ui.UI;
 import java.util.Scanner;
 
 import controller.GameControl;
+import model.Board;
 
 public class TextUI implements UI {
     protected Scanner s;
@@ -70,5 +71,10 @@ public class TextUI implements UI {
 
     public Scanner getS() {
         return s;
+    }
+
+    @Override
+    public void updateBoardDisplay(Board board) {
+        board.printBoard();
     }
 }

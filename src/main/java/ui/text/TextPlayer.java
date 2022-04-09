@@ -38,17 +38,4 @@ public class TextPlayer extends Player {
             ui.getS().next();
         }
     }
-
-    /*@Override
-    public FirstTurnMove FirstMove() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public MidGameMove MidMove() {
-        // TODO Auto-generated method stub
-        return null;
-    }*/
-    
 }

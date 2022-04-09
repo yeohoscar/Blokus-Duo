@@ -78,6 +78,7 @@ public class GameControl implements Runnable {
     public void printUI() {
         System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
+        ui.updateBoardDisplay(getBoard());
         getBoard().printBoard();
         System.out.println(getCurrentPlayer().getName() + "(" + getCurrentPlayer().getColor() + ") gamepieces:\n" + getCurrentPlayer().getStock());
     }
@@ -149,8 +150,6 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             printUI();
-
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {

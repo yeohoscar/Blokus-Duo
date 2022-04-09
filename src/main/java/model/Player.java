@@ -71,6 +71,6 @@ public abstract class Player {
     }
 
     public abstract ArrayList<Object> getPiece();
-    //public abstract FirstTurnMove FirstMove();
-    //public abstract MidGameMove MidMove();
+    public abstract FirstTurnMove getFirstMove();
+    public abstract MidGameMove getMidMove();
 }

@@ -25,7 +25,7 @@ import model.piece.*;
 public class PlayScreen extends ScreenAdapter {
 
     public final static int GAME_WIDTH = 1024;
-    public final static int GAME_HEIGHT = 812;
+    public final static int GAME_HEIGHT = 768;
     public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
     public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
 
@@ -80,7 +80,6 @@ public class PlayScreen extends ScreenAdapter {
         float boardHeight = (float) boardLocation.getProperties().get("height");
         float boardWidth = (float) boardLocation.getProperties().get("width");
         graphicalBoard = new GraphicalBoard(boardX, boardY, boardWidth, boardHeight, blackSquare, whiteSquare, new Board());
-
     }
 
     private void addGamePiece(
@@ -94,8 +93,7 @@ public class PlayScreen extends ScreenAdapter {
                 MapObject object = objects.get(pieceName);
                 float gamepieceX = (float) object.getProperties().get("x");
                 float gamepieceY = (float) object.getProperties().get("y");
-                System.out.println(pieceName + " " + gamepieceX + " " + gamepieceY);
-                pieces.add(new GraphicalGamepiece(p, square, gamepieceX, gamepieceY));
+                pieces.add(new GraphicalGamepiece(p, square, gamepieceX, gamepieceY, player));
             }
     } 
 
@@ -108,9 +106,8 @@ public class PlayScreen extends ScreenAdapter {
          */
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(new PlayScreenInputProcessor(blokusGame));
+        multiplexer.addProcessor(blokusGame.playScreenInputProcessor);
         Gdx.input.setInputProcessor(multiplexer);
-        //Gdx.input.setInputProcessor(blokusGame.playScrEventHandler);
     }
 
     @Override
@@ -129,6 +126,7 @@ public class PlayScreen extends ScreenAdapter {
         for(GraphicalGamepiece p : pieces) {
             p.draw(batch);
         }
+        graphicalBoard.draw(batch);
         font.draw(batch, bannerText, bannerX, bannerY);
         batch.end();
 
@@ -151,7 +149,7 @@ public class PlayScreen extends ScreenAdapter {
         return camera;
     }
 
-    public ArrayList<GraphicalGamepiece> getGraphicalGamepiece() {
+    public ArrayList<GraphicalGamepiece> getGraphicalGamepieces() {
         return pieces;
     }
 }

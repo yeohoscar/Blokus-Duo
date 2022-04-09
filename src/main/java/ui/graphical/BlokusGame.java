@@ -31,7 +31,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
-    public static final int HEIGHT = 812;
+    public static final int HEIGHT = 768;
 
     public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
     public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
@@ -83,6 +83,7 @@ public class BlokusGame extends Game {
 
         nameScreen = new NameScreen(this);
         playScreen = new PlayScreen(this);
+        playScreenInputProcessor = new PlayScreenInputProcessor(this);
         activateNameScreen();
     }
 
@@ -151,7 +152,7 @@ public class BlokusGame extends Game {
         playScreen.graphicalBoard.updateBoard(board);
     }
 
-    public void setCurrentPlayerNo(int playerNo) {
-        playScreenInputProcessor.setCurrentPlayerNo(playerNo);
+    public void setCurrentPlayerNo(String playerColor) {
+        playScreenInputProcessor.setCurrentPlayerNo(playerColor);
     }
 }

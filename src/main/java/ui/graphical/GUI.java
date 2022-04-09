@@ -10,6 +10,7 @@
 
 package ui.graphical;
 
+import model.Board;
 import model.piece.Piece;
 import ui.UI;
 import java.io.IOException;
@@ -47,20 +48,8 @@ public class GUI implements UI {
         return scanner.next();
     }
 
-   
-
-    /*@Override
-    public void printUI(Board board, String name, int playerNo, Stock stock) {
-        blokusGame.postRunnable(new Runnable() {
-            @Override
-            public void run() {
-                blokusGame.updateBoard(board);
-            }
-        });
-    }*/
-
     /**
-     * Change screen from nameScreen to startScreen
+     * Change screen from nameScreen to playScreen
      */
     public void displayFirstPlayer(String name) {
         blokusGame.postRunnable(new Runnable() {
@@ -80,6 +69,24 @@ public class GUI implements UI {
     @Override
     public void printCoordinateError() {
         //TODO: display "Invalid piece placement in banner"
+    }
+
+    public void setActivePlayerNo(String playerColor) {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.setCurrentPlayerNo(playerColor);
+            }
+        });
+    }
+
+    public void updateBoardDisplay(Board board) {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.updateBoard(board);
+            }
+        });
     }
 
     public int getXCoordinate() {
