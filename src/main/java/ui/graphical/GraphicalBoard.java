@@ -3,6 +3,7 @@ package ui.graphical;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import model.Board;
+import model.piece.Piece;
 
 public class GraphicalBoard {
     float boardX;
@@ -27,9 +28,9 @@ public class GraphicalBoard {
         cellWidth = boardWidth / Board.WIDTH;
     }
 
-    /*public void updateBoard(Board board) {
+    public void updateBoard(Board board) {
         this.board = new Board(board);
-    }*/
+    }
 
     public void draw(SpriteBatch batch) {
         for (int y = 0; y < Board.HEIGHT; y++) {
@@ -64,10 +65,15 @@ public class GraphicalBoard {
     }
 
     public boolean isHit(float x, float y) {
-        return  (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
+        return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
     }
 
+    /* take in xcoor, y coor and piece and called is emptyforpiece */
     public boolean isOccupied(int boardColumn, int boardRow) {
         return board.isOccupied(boardColumn, boardRow);
+    }
+
+    public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
+        return board.isEmptyForPiece(piece, dest_x, dest_y);
     }
 }

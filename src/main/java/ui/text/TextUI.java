@@ -14,11 +14,20 @@ import ui.UI;
 
 import java.util.Scanner;
 
+import controller.GameControl;
+import model.Board;
+import model.piece.Stock;
+
 public class TextUI implements UI {
     protected Scanner s;
+    GameControl game;
     
     public TextUI() {
         s = new Scanner(System.in).useDelimiter("\\n| ");
+    }
+
+    public void getPlayer() {
+
     }
 
     @Override
@@ -33,19 +42,20 @@ public class TextUI implements UI {
         return name;
     }
 
+    /*@Override
+    public void printUI(Board board, String name, int playerNo, Stock stock) {
+        System.out.println("-------------------------------");
+        System.out.println(name + "'s turn\n");
+        board.printBoard();
+        if (playerNo == Board.X) {
+            System.out.println(name + "(X) gamepieces:\n" + stock);       
+        } 
+        else {
+            System.out.println(name + "(O) gamepieces:\n" + stock);       
+        }
+    }*/
+
     @Override
-    public String getPiece() {
-        String tmp = s.useDelimiter(" |\\n").next();
-        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-
-        return tmp;
-    }
-
-    @Override
-    public String[] getManipulation() {
-        return s.useDelimiter(" |\\n").nextLine().split(" ");
-    }
-
     public void displayFirstPlayer(String name) {
         System.out.println("\n" + name + " is going first!\n");
     }
@@ -55,7 +65,12 @@ public class TextUI implements UI {
         System.out.println(result);
     }
 
-    
+    @Override
+    public void printCoordinateError() {
+        System.out.println("Invalid coordinates provided.");
+    }
 
-    
+    public Scanner getS() {
+        return s;
+    }
 }

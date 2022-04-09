@@ -20,6 +20,9 @@ import model.Board;
 import model.Player;
 import model.piece.Block;
 import model.piece.Piece;
+import ui.UI;
+import ui.text.TextPlayer;
+import ui.text.TextUI;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,8 +42,9 @@ public class BoardUnitTests {
 
     @Test
     void testAddPiece() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece piece = new Piece("T4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(-1, 0))));
 
         assertTrue(board.isEmpty());
@@ -54,8 +58,9 @@ public class BoardUnitTests {
 
     @Test
     void testEmptyBoard() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece piece = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
 
         assertTrue(board.isEmpty());
@@ -74,8 +79,9 @@ public class BoardUnitTests {
 
     @Test
     void testEmptySpaceForPiece() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece I2 = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
         Piece O4 = new Piece("O4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(1, 0))));
 
@@ -124,8 +130,9 @@ public class BoardUnitTests {
 
     @Test
     void testIsSide() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece I5 = new Piece("I5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2), new Block(0, 3), new Block(0, 4))));
         Piece F = new Piece("F", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(-1, 0))));
 

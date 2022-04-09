@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import controller.GameControl;
+import model.Board;
+import model.piece.Piece;
 
 public class PlayScreenInputProcessor extends InputAdapter {
     public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
@@ -14,22 +16,35 @@ public class PlayScreenInputProcessor extends InputAdapter {
 
     BlokusGame blokusGame;
     PlayScreen playScreen;
-    int currentPlayer;
+    int currentPlayerNo;
     GraphicalGamepiece selectedPiece;
+    Piece piece;
+    GraphicalBoard graphicalBoard;
 
     public PlayScreenInputProcessor(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
         playScreen = blokusGame.playScreen;
+        graphicalBoard = playScreen.graphicalBoard;
         this.selectedPiece = null;
+        this.piece = null;
+        currentPlayerNo = Board.X;
+    }
+
+    public void setCurrentPlayerNo(int playerNo) {
+        currentPlayerNo = playerNo;
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         boolean result = false;
+        if (null != selectedPiece) {
+            selectedPiece.resetLocation();
+            selectedPiece = null;
+        }
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepiece()) {
-                if (p.isHit(coord.x, coord.y)) {
+                if (p.getPlayerNo() == currentPlayerNo && p.isHit(coord.x, coord.y)) {
                     selectedPiece = p;
                     playScreen.setBannerText(FLIP_OR_ROTATE_MESSAGE);
                     result = true;
@@ -44,9 +59,25 @@ public class PlayScreenInputProcessor extends InputAdapter {
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         boolean result = false;
         if (null != selectedPiece) {
+            try {
+                blokusGame.pieceQueue.put(selectedPiece.getGamePiece());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            /*piece = selectedPiece.getGamePiece();
+            Vector3 coord = unprojectScreenCoordinates(screenX, screenY);
+            int boardColumn = graphicalBoard.getBoardColumn(coord.x);
+            int boardRow = graphicalBoard.getBoardRow(coord.y);
+
+            if (graphicalBoard.isHit(coord.x, coord.y) && graphicalBoard.isEmptyForPiece(piece, boardColumn, boardRow)) {
+                blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
+                selectedPiece.setVisible(false);
+            } else {
+                selectedPiece.resetLocation();
+            }*/
             selectedPiece = null;
             playScreen.setBannerText(CLICK_AND_DRAG_MESSAGE);
-            // I could potentially do more stuff here ;)
         }
         return result;
     }

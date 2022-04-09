@@ -42,7 +42,7 @@ public class PlayScreen extends ScreenAdapter {
 
     TextureRegion blackSquare;
     TextureRegion whiteSquare;
-    BitmapFont helvetique;
+    BitmapFont font;
     String bannerText;
     float bannerX;
     float bannerY;
@@ -65,10 +65,10 @@ public class PlayScreen extends ScreenAdapter {
         MapLayer objectLayer = tiledMap.getLayers().get(3);
         MapObjects objects = objectLayer.getObjects();
         
-        helvetique = skin.getFont("font");
+        font = skin.getFont("font");
         bannerText = "";
         bannerX = 10.0f;
-        bannerY = imageLayer.getTextureRegion().getRegionHeight() + helvetique.getCapHeight() * 1.5f;
+        bannerY = imageLayer.getTextureRegion().getRegionHeight() + font.getCapHeight() * 1.5f;
         setBannerText(CLICK_AND_DRAG_MESSAGE);
 
         pieces = new ArrayList<GraphicalGamepiece>();
@@ -97,6 +97,7 @@ public class PlayScreen extends ScreenAdapter {
                 MapObject object = objects.get(pieceName);
                 float gamepieceX = (float) object.getProperties().get("x");
                 float gamepieceY = (float) object.getProperties().get("y");
+                System.out.println(pieceName + " " + gamepieceX + " " + gamepieceY);
                 pieces.add(new GraphicalGamepiece(p, square, gamepieceX, gamepieceY));
             }
     } 
@@ -131,7 +132,7 @@ public class PlayScreen extends ScreenAdapter {
         for(GraphicalGamepiece p : pieces) {
             p.draw(batch);
         }
-        helvetique.draw(batch, bannerText, bannerX, bannerY);
+        font.draw(batch, bannerText, bannerX, bannerY);
         batch.end();
 
         stage.act(delta);

@@ -37,12 +37,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import model.Board;
 import model.piece.*;
 import ui.UI;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
@@ -53,13 +55,14 @@ public class BlokusGame extends Game {
 
     Thread gameControlThread;
     PrintStream uiStream;
+    BlockingQueue<Piece> pieceQueue;
 
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
     NameScreen nameScreen;
     PlayScreen playScreen;
-    PlayScreenInputProcessor playScrEventHandler;
+    PlayScreenInputProcessor playScreenInputProcessor;
 
     SpriteBatch batch;
     TiledMap tiledMap;
@@ -70,6 +73,7 @@ public class BlokusGame extends Game {
         this.gameControlThread = gameControlThread;
         gui.setGame(this);
         this.uiStream = new PrintStream(gui.getPipedOutputStream());
+        this.pieceQueue = gui.getPieceQueue();
     }
 
     /**
@@ -78,17 +82,17 @@ public class BlokusGame extends Game {
     public void create() {
 
         camera = new OrthographicCamera(WIDTH, HEIGHT);
-        camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
-
-        skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
-
-        stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
-        
-        Gdx.input.setInputProcessor(stage);
+        camera.setToOrtho(false,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        camera.update();
 
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
 
+        stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
+        Gdx.input.setInputProcessor(stage);
+
+        skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
+        
         tiledMap = new TmxMapLoader().load("prototype.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
         renderer.setView(camera);
@@ -96,7 +100,6 @@ public class BlokusGame extends Game {
         nameScreen = new NameScreen(this);
         playScreen = new PlayScreen(this);
         activateNameScreen();
-        //activateplayScreen();
     }
 
     /**
@@ -158,5 +161,13 @@ public class BlokusGame extends Game {
      */
     public void setResults(String result) {
         showDialog(result);
+    }
+
+    public void updateBoard(Board board) {
+        playScreen.graphicalBoard.updateBoard(board);
+    }
+
+    public void setCurrentPlayerNo(int playerNo) {
+        playScreenInputProcessor.setCurrentPlayerNo(playerNo);
     }
 }

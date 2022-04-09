@@ -12,19 +12,50 @@ public class GraphicalGamepiece {
     private final TextureRegion square;
     private float originX; // world X coordinate of the gamepiece's origin
     private float originY; // world Y coordinate of the gamepiece's origin
+    private int playerNo;
+    float currentX;
+    float currentY;
+    boolean visible;
 
     public GraphicalGamepiece(Piece gamepiece, TextureRegion square, float originX, float originY) {
         this.gamepiece = gamepiece;
         this.square = square;
         this.originX = originX;
         this.originY = originY;
+        resetLocation();
+        setVisible(true);
     }
+
+    public void resetLocation() {
+        currentX = originX;
+        currentY = originY;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
 
     public void draw(SpriteBatch batch) {
         ArrayList<Block> blocks = gamepiece.getBlocks();
         for(Block l : blocks) {
-            batch.draw(square, originX + square.getRegionWidth() * l.getX(), originY + square.getRegionHeight() * l.getY());
+            if (visible) {
+                batch.draw(square, originX + square.getRegionWidth() * l.getX(), originY + square.getRegionHeight() * l.getY());
+            }
         }
+    }
+
+    public void setLocation(float newX, float newY) {
+        currentX = newX;
+        currentY = newY;
+    }
+
+    public int getPlayerNo() {
+        return playerNo;
+    }
+
+    public Piece getGamePiece() {
+        return gamepiece;
     }
 
     public void flipPiece() {

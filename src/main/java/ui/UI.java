@@ -10,10 +10,13 @@
 
 package ui;
 
+import model.Board;
+import model.piece.Stock;
+
 public interface UI {
     String getName();
-    String getPiece();
-    String[] getManipulation();
     void displayFirstPlayer(String name);
     void displayResults(String result);
+    void printCoordinateError();
+    //void printUI(Board board, String name, int playerNo, Stock stock);
 }

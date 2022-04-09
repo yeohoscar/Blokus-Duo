@@ -15,10 +15,12 @@ import model.piece.*;
 import java.util.ArrayList;
 
 public class Board {
-    private String[][] board;
     public final static int WIDTH = 14;
     public final static int HEIGHT = 14;
+    public final static int X = 0;
+    public final static int O = 1;
 
+    private String[][] board;
     boolean[][] occupied = new boolean[WIDTH][HEIGHT];
 
     public Board() {
@@ -32,6 +34,15 @@ public class Board {
         // Starting points
         board[4][4] = "*";
         board[9][9] = "*";
+    }
+
+    public Board(Board board) {
+        for (int i = 0; i < HEIGHT; i++ ) {
+            for (int j = 0; j < WIDTH; j++) {
+                occupied[i][j] = board.isOccupied(i, j);
+                this.board[i][j] = board.getColorOnSquare(i, j);
+            }
+        }
     }
 
     /**

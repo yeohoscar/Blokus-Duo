@@ -15,10 +15,17 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import model.Board;
+import model.piece.Piece;
+import model.piece.Stock;
 
 public class GUI implements UI {
     private final PipedOutputStream pipedOutputStream;
     private final PipedInputStream pipedInputStream;
+    private final BlockingQueue<Piece> pieceQueue;
     private BlokusGame blokusGame;
     private final Scanner scanner;
 
@@ -26,6 +33,7 @@ public class GUI implements UI {
         //Connect threads
         pipedOutputStream = new PipedOutputStream();
         pipedInputStream = new PipedInputStream(pipedOutputStream);
+        pieceQueue = new LinkedBlockingQueue<>();
         scanner = new Scanner(pipedInputStream);
     }
 
@@ -37,18 +45,22 @@ public class GUI implements UI {
         return pipedOutputStream;
     }
 
+    @Override
     public String getName() {
         return scanner.next();
     }
 
-    public String getPiece() {
-        return scanner.next();
-    }
+   
 
-    @Override
-    public String[] getManipulation() {
-        return scanner.next().split(" ");
-    }
+    /*@Override
+    public void printUI(Board board, String name, int playerNo, Stock stock) {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.updateBoard(board);
+            }
+        });
+    }*/
 
     /**
      * Change screen from nameScreen to startScreen
@@ -59,18 +71,37 @@ public class GUI implements UI {
             public void run() {
                 blokusGame.activatePlayScreen();
                 blokusGame.setMessage(name);
-                //blokusGame.activateGameScreen();
             }
         });
-    }
-
-    public void displayGame() {
-
     }
 
     @Override
     public void displayResults(String result) {
         blokusGame.setResults(result);
     }
+
+    @Override
+    public void printCoordinateError() {
+        //TODO: display "Invalid piece placement in banner"
+    }
+
+    public int getXCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public int getYCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public BlockingQueue<Piece> getPieceQueue() {
+        return pieceQueue;
+    }
+    
 }
 

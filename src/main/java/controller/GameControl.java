@@ -24,8 +24,9 @@ public class GameControl implements Runnable {
     private State state;
     private final int firstPlayer;
 
-    public GameControl(UI ui, int firstPlayer) {
+    public GameControl(UI ui, int firstPlayer, List<Player> players) {
         this.ui = ui;
+        this.players = players;
         board = new Board();
         this.firstPlayer = firstPlayer;
         state = State.FIRST;
@@ -91,7 +92,7 @@ public class GameControl implements Runnable {
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
-    
+
     public void setState(State state) {
         this.state = state;
     }
@@ -110,23 +111,31 @@ public class GameControl implements Runnable {
     @Override
     public void run() {
         //Initialise players
-        setPlayers(Arrays.asList(new Player(ui.getName(), "X"), new Player(ui.getName(), "O")));
+        setPlayers(players);
+        players.get(0).setName(ui.getName());
+        players.get(1).setName(ui.getName());
         setCurrentPlayer(getPlayers().get(firstPlayer));
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 
         if (isFirstTurn()) {
+            FirstTurnMove fMove;
             printUI();
+            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
             printUI();
 
+            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
             printUI();
+
+            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
             setState(State.MIDGAME);
         }
 
@@ -140,6 +149,8 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             printUI();
+
+            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {

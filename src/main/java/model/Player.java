@@ -15,16 +15,18 @@ import model.piece.Stock;
 
 import java.util.ArrayList;
 
-public class Player {
-    private final String name; //Player name
+import controller.FirstTurnMove;
+import controller.MidGameMove;
+
+public abstract class Player {
+    private String name; //Player name
     private int score; //Player score -> calculate at end
     private final String color;
     private final Stock stock;
     private final ArrayList<int[]> validMove;
     private boolean lastPieceI1;
 
-    public Player(String name, String color) {
-        this.name = name;
+    public Player(String color) {
         this.color = color;
         score = 0;
         this.stock = new Stock();
@@ -34,6 +36,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScore() {
@@ -63,4 +69,8 @@ public class Player {
     public void setLastPieceI1(boolean b) {
         this.lastPieceI1 = b;
     }
+
+    public abstract ArrayList<Object> getPiece();
+    //public abstract FirstTurnMove FirstMove();
+    //public abstract MidGameMove MidMove();
 }

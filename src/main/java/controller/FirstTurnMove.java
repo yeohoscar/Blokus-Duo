@@ -35,7 +35,7 @@ public class FirstTurnMove {
         this.nextPlayer = nextPlayer;
         this.board = board;
         this.ui = ui;
-        List<Object> list = selectPiece();
+        List<Object> list = currentPlayer.getPiece();
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
@@ -100,34 +100,5 @@ public class FirstTurnMove {
 
     public Player getNextPlayer() {
         return nextPlayer;
-    }
-
-    public ArrayList<Object> selectPiece() {
-        if (currentPlayer.getStock().getPieces().size() == 0) {
-            System.out.println("No more pieces left.");
-        }
-
-        System.out.println("Select a piece");
-        String tmp = ui.getPiece();
-        
-        while(true) {
-            for (Piece p : currentPlayer.getStock().getPieces()) {
-                if (p.getName().equals(tmp)) {
-                    Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui, currentPlayer.getColor())));                                
-                }
-            }
-            System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = ui.getPiece();
-        }
-    }
-
-    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
-        ArrayList<Integer> coord = new ArrayList<>();
-
-        coord.add(Integer.parseInt(arr.get(0)));
-        coord.add(Integer.parseInt(arr.get(1)));
-
-        return coord;
     }
 }

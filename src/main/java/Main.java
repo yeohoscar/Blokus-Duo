@@ -12,6 +12,7 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
+import model.Board;
 import model.Player;
 import ui.*;
 import ui.graphical.*;
@@ -22,7 +23,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
+        List<Player> players;
         boolean xFirst = false, oFirst = false, useGUI = false;
         UI ui;
         GameControl gameControl;
@@ -38,24 +39,24 @@ public class Main {
             }
         }
 
-        /*if(useGUI) {
+        if(useGUI) {
             ui = new GUI();
-            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer(ui.getName(), "O", (GUI)ui), new GraphicalPlayer(ui.getName(), "X", (GUI)ui)));
+            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer("O", (GUI)ui), new GraphicalPlayer("X", (GUI)ui)));
         }
         else {
             ui = new TextUI();
-            players = new ArrayList<>(Arrays.asList(new TextPlayer(ui.getName(), "O", (TextUI)ui), new TextPlayer(ui.getName(), "X", (TextUI)ui)));
+            players = new ArrayList<>(Arrays.asList(new TextPlayer("O", (TextUI)ui), new TextPlayer("X", (TextUI)ui)));
 
-        }*/
+        }
 
-        ui = useGUI ? new GUI() : new TextUI();
+        //ui = useGUI ? new GUI() : new TextUI();
 
         if (xFirst == oFirst) {
-            gameControl = new GameControl(ui, new Random().nextInt(2));
+            gameControl = new GameControl(ui, new Random().nextInt(2), players);
         } else if (xFirst) {
-            gameControl = new GameControl(ui, 1);
+            gameControl = new GameControl(ui, 1, players);
         } else {
-            gameControl = new GameControl(ui, 0);
+            gameControl = new GameControl(ui, 0, players);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();
@@ -66,7 +67,7 @@ public class Main {
             //int width = BlokusGame.WIDTH;
             //config.setWindowSizeLimits(width, height, width, height);
             config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(PlayScreen.GAME_WIDTH,PlayScreen.GAME_HEIGHT);
+            config.setWindowedMode(PlayScreen.GAME_WIDTH, PlayScreen.GAME_HEIGHT);
             config.setResizable(false);
 
             new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);
