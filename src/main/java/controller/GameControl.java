@@ -127,12 +127,14 @@ public class GameControl implements Runnable {
 
         if (isFirstTurn()) {
             //printUI();
+            //ui.updateUI(getCurrentPlayer(), getBoard());
             ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
             //printUI();
+            //ui.updateUI(getCurrentPlayer(), getBoard());
             ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
@@ -140,6 +142,7 @@ public class GameControl implements Runnable {
             }
             nextPlayer();
             //printUI();
+            //ui.updateUI(getCurrentPlayer(), getBoard());
             ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             setState(State.MIDGAME);
         }
@@ -154,11 +157,12 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             //printUI();
+            //ui.updateUI(getCurrentPlayer(), getBoard());
             ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {
-            ui.printGameOver(board, players);
+            ui.printGameOver(getBoard(), getPlayers());
             calculateScore();
             if (currentPlayer.getScore() > getNextPlayer().getScore()) {
                 ui.displayResults(currentPlayer.getName() + " is the winner! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +

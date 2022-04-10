@@ -81,4 +81,11 @@ public class TextUI implements UI {
         return s;
     }
 
+    @Override
+    public void updateUI(Player player, Board board) {
+        System.out.println("-------------------------------");
+        System.out.println(player.getName() + "'s turn\n");
+        board.printBoard();
+        System.out.println(player.getName() + "(" + player.getColor() + ") gamepieces:\n" + player.getStock());
+    }
 }
