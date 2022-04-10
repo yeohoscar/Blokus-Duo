@@ -13,7 +13,6 @@ package ui.text;
 import model.Player;
 import ui.UI;
 
-import java.util.List;
 import java.util.Scanner;
 
 import controller.GameControl;
