@@ -8,7 +8,6 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector3;
 
 import controller.*;
-import model.Board;
 import model.piece.*;
 
 public class PlayScreenInputProcessor extends InputAdapter {

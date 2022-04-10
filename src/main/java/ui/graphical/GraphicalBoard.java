@@ -3,7 +3,6 @@ package ui.graphical;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import model.Board;
-import model.piece.Piece;
 
 public class GraphicalBoard extends Board {
     float boardX;

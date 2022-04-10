@@ -3,8 +3,6 @@ package ui.text;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import controller.FirstTurnMove;
-import controller.MidGameMove;
 import model.Player;
 import model.piece.Piece;
 
