@@ -273,8 +273,8 @@ public class Board {
      * @param dest_y y coordinate
      * @return
      */
-    public boolean isSide(Player player, Piece piece, int dest_x, int dest_y) {
-        return piece.getBlocks().stream().anyMatch(offset -> isAtSide(player.getColor(), offset, dest_x, dest_y));
+    public boolean isSide(String playerColor, Piece piece, int dest_x, int dest_y) {
+        return piece.getBlocks().stream().anyMatch(offset -> isAtSide(playerColor, offset, dest_x, dest_y));
     }
 
 }

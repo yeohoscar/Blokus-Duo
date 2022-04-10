@@ -20,7 +20,8 @@ public class GraphicalPlayer extends Player {
     public ArrayList<Object> getPiece() {
         Piece p = null;
         try {
-            ui.setActivePlayerNo(getColor());
+            ui.setCurrentPlayerColor(getColor());
+            ui.setCurrentPlayerValidMove(getValidMove());
             p = ui.getPieceQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -30,18 +31,6 @@ public class GraphicalPlayer extends Player {
         int y = ui.getYCoordinate();
 
         return new ArrayList<Object>(Arrays.asList(p, new ArrayList<>(Arrays.asList(x, y))));
-    }
-
-    @Override
-    public FirstTurnMove getFirstMove() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public MidGameMove getMidMove() {
-        // TODO Auto-generated method stub
-        return null;
     }
     
 }

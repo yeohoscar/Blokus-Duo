@@ -77,7 +77,7 @@ public class MidGameMove {
      * @return true if it is a valid move
      */
     public boolean isValidMove(Player player, Piece piece, int dest_x, int dest_y) {
-        return (board.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(player, piece, dest_x, dest_y) && !board.isSide(player, piece, dest_x, dest_y));
+        return (board.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(player, piece, dest_x, dest_y) && !board.isSide(player.getColor(), piece, dest_x, dest_y));
     }
 
     /**

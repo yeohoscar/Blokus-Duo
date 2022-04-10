@@ -11,12 +11,12 @@
 package ui;
 
 import model.Board;
+import model.Player;
 
 public interface UI {
     String getName();
     void displayFirstPlayer(String name);
-    void updateBoardDisplay(Board board);
+    void updateUI(Player player, Board board);
     void displayResults(String result);
     void printCoordinateError();
-    //void printUI(Board board, String name, int playerNo, Stock stock);
 }

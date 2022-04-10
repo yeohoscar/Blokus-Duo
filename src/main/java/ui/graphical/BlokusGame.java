@@ -27,6 +27,7 @@ import model.piece.*;
 import ui.UI;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
@@ -152,7 +153,11 @@ public class BlokusGame extends Game {
         playScreen.graphicalBoard.updateBoard(board);
     }
 
-    public void setCurrentPlayerNo(String playerColor) {
-        playScreenInputProcessor.setCurrentPlayerNo(playerColor);
+    public void setCurrentPlayerColor(String playerColor) {
+        playScreenInputProcessor.setCurrentPlayerColor(playerColor);
+    }
+
+    public void setCurrentPlayerValidMove(ArrayList<int[]> validMove) {
+        playScreenInputProcessor.setCurrentPlayerValidMove(validMove);
     }
 }

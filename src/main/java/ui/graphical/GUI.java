@@ -11,11 +11,13 @@
 package ui.graphical;
 
 import model.Board;
+import model.Player;
 import model.piece.Piece;
 import ui.UI;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -71,16 +73,25 @@ public class GUI implements UI {
         //TODO: display "Invalid piece placement in banner"
     }
 
-    public void setActivePlayerNo(String playerColor) {
+    public void setCurrentPlayerColor(String playerColor) {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
-                blokusGame.setCurrentPlayerNo(playerColor);
+                blokusGame.setCurrentPlayerColor(playerColor);
             }
         });
     }
 
-    public void updateBoardDisplay(Board board) {
+    public void setCurrentPlayerValidMove(ArrayList<int[]> validMove) {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.setCurrentPlayerValidMove(validMove);
+            }
+        });
+    }
+
+    public void updateUI(Player player, Board board) {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {

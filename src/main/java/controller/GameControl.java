@@ -78,9 +78,12 @@ public class GameControl implements Runnable {
     public void printUI() {
         System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
-        ui.updateBoardDisplay(getBoard());
         getBoard().printBoard();
         System.out.println(getCurrentPlayer().getName() + "(" + getCurrentPlayer().getColor() + ") gamepieces:\n" + getCurrentPlayer().getStock());
+        for (int[] m : getCurrentPlayer().getValidMove()) {
+            System.out.print(m[0] + " " + m[1] + " | ");
+        }
+        System.out.println();
     }
 
     public void nextPlayer() {
@@ -121,22 +124,20 @@ public class GameControl implements Runnable {
 
         if (isFirstTurn()) {
             printUI();
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
             printUI();
-
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 System.out.println("Invalid move.");
             }
             nextPlayer();
             printUI();
-
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
             setState(State.MIDGAME);
         }
 
@@ -150,6 +151,7 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             printUI();
+            ui.updateUI(getCurrentPlayer(), getBoard());
         }
 
         if(state == State.OVER) {

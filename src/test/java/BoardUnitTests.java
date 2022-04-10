@@ -137,11 +137,11 @@ public class BoardUnitTests {
         Piece F = new Piece("F", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(-1, 0))));
 
         board.addPiece(player, I5, 9, 4);
-        assertTrue(board.isSide(player, F, 9, 3));
-        assertFalse(board.isSide(player, F, 2, 2));
+        assertTrue(board.isSide(player.getColor(), F, 9, 3));
+        assertFalse(board.isSide(player.getColor(), F, 2, 2));
 
         board.addPiece(player, F, 6, 7);
-        assertTrue(board.isSide(player, I5, 5, 6));
-        assertFalse(board.isSide(player, I5, 13, 1));
+        assertTrue(board.isSide(player.getColor(), I5, 5, 6));
+        assertFalse(board.isSide(player.getColor(), I5, 13, 1));
     }
 }

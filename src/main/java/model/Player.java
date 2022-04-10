@@ -15,8 +15,6 @@ import model.piece.Stock;
 
 import java.util.ArrayList;
 
-import controller.FirstTurnMove;
-import controller.MidGameMove;
 
 public abstract class Player {
     private String name; //Player name
@@ -71,6 +69,4 @@ public abstract class Player {
     }
 
     public abstract ArrayList<Object> getPiece();
-    public abstract FirstTurnMove getFirstMove();
-    public abstract MidGameMove getMidMove();
 }

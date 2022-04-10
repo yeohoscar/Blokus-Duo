@@ -1,5 +1,7 @@
 package ui.graphical;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -20,6 +22,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
     Piece piece;
     GraphicalBoard graphicalBoard;
     State state;
+    ArrayList<int[]> validMove;
     static int count = 2;
 
     public PlayScreenInputProcessor(BlokusGame blokusGame) {
@@ -29,11 +32,24 @@ public class PlayScreenInputProcessor extends InputAdapter {
         this.selectedPiece = null;
         this.piece = null;
         currentPlayerColor = "X";
+        validMove = new ArrayList<int[]>();
         state = State.FIRST;
     }
 
-    public void setCurrentPlayerNo(String playerColor) {
+    public String getCurrentPlayerColor() {
+        return currentPlayerColor;
+    }
+
+    public void setCurrentPlayerColor(String playerColor) {
         currentPlayerColor = playerColor;
+    }
+
+    public ArrayList<int[]> getValidMove() {
+        return validMove;
+    }
+
+    public void setCurrentPlayerValidMove(ArrayList<int[]> validMove) {
+        this.validMove = validMove;
     }
 
     @Override
@@ -57,18 +73,6 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
-    private boolean isValidFirstMove(Piece piece, int originX, int originY) {
-        return piece.getBlocks().stream().anyMatch(offset -> isOnFirstMoveSquare(offset, originX, originY));
-    }
-
-    private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
-        if (currentPlayerColor.equals("O")) {
-            return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
-        } else {
-            return (offset.getX() + originX == 4 && offset.getY() + originY == 9);
-        }
-    }
-
     @Override
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         boolean result = false;
@@ -87,7 +91,6 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     }
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     count -= 1;
-                    System.out.println(boardColumn + " " + boardRow + " " + count);
                     selectedPiece.setVisible(false);
                 } else {
                     selectedPiece.resetLocation();
@@ -97,21 +100,14 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     state = State.MIDGAME;
                 }
             } else {
-                System.out.println("B\n");
-                if (graphicalBoard.isHit(coord.x, coord.y) && graphicalBoard.isEmptyForPiece(piece, boardColumn, boardRow)) {
+                if (graphicalBoard.isHit(coord.x, coord.y) && isValidMove(getCurrentPlayerColor(), piece, boardColumn, boardRow)) {
                     try {
                         blokusGame.pieceQueue.put(piece);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
-                    System.out.println(boardColumn + " " + boardRow);
                     selectedPiece.setVisible(false);
-                    for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
-                        if (p.equals(selectedPiece)) {
-                            selectedPiece.setVisible(true);;
-                        } 
-                    }
                 } else {
                     selectedPiece.resetLocation();
                 }
@@ -156,6 +152,37 @@ public class PlayScreenInputProcessor extends InputAdapter {
             }
         }
         return result;
+    }
+
+    private boolean isValidFirstMove(Piece piece, int originX, int originY) {
+        return piece.getBlocks().stream().anyMatch(offset -> isOnFirstMoveSquare(offset, originX, originY));
+    }
+
+    private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
+        if (currentPlayerColor.equals("O")) {
+            return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
+        } else {
+            return (offset.getX() + originX == 4 && offset.getY() + originY == 9);
+        }
+    }
+
+    private boolean isValidMove(String playerColor, Piece piece, int dest_x, int dest_y) {
+        return (graphicalBoard.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(playerColor, piece, dest_x, dest_y) && !graphicalBoard.isSide(playerColor, piece, dest_x, dest_y));
+    }
+
+    public boolean isPieceTouchEdge(String playerColor, Piece piece, int dest_x, int dest_y) {
+        return piece.getBlocks().stream().anyMatch(offset -> isContain(playerColor, offset, dest_x, dest_y));
+    }
+
+    public boolean isContain(String playerColor, Block offset, int dest_x, int dest_y) {
+        if (getCurrentPlayerColor().equals(playerColor)) {
+            for(int[] m : getValidMove()) {
+                if(m[0] == offset.getX() + dest_x && m[1] == offset.getY() + dest_y) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

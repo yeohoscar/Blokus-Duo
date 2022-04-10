@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import controller.GameControl;
 import model.Board;
+import model.Player;
 
 public class TextUI implements UI {
     protected Scanner s;
@@ -23,10 +24,6 @@ public class TextUI implements UI {
     
     public TextUI() {
         s = new Scanner(System.in).useDelimiter("\\n| ");
-    }
-
-    public void getPlayer() {
-
     }
 
     @Override
@@ -40,19 +37,6 @@ public class TextUI implements UI {
 
         return name;
     }
-
-    /*@Override
-    public void printUI(Board board, String name, int playerNo, Stock stock) {
-        System.out.println("-------------------------------");
-        System.out.println(name + "'s turn\n");
-        board.printBoard();
-        if (playerNo == Board.X) {
-            System.out.println(name + "(X) gamepieces:\n" + stock);       
-        } 
-        else {
-            System.out.println(name + "(O) gamepieces:\n" + stock);       
-        }
-    }*/
 
     @Override
     public void displayFirstPlayer(String name) {
@@ -74,7 +58,10 @@ public class TextUI implements UI {
     }
 
     @Override
-    public void updateBoardDisplay(Board board) {
+    public void updateUI(Player player, Board board) {
+        System.out.println("-------------------------------");
+        System.out.println(player.getName() + "'s turn\n");
         board.printBoard();
+        System.out.println(player.getName() + "(" + player.getColor() + ") gamepieces:\n" + player.getStock());
     }
 }

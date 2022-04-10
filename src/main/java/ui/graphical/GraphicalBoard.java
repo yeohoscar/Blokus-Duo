@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import model.Board;
 import model.piece.Piece;
 
-public class GraphicalBoard {
+public class GraphicalBoard extends Board {
     float boardX;
     float boardY;
     float boardWidth;
@@ -67,9 +67,5 @@ public class GraphicalBoard {
     /* take in xcoor, y coor and piece and called is emptyforpiece */
     public boolean isOccupied(int boardColumn, int boardRow) {
         return board.isOccupied(boardColumn, boardRow);
-    }
-
-    public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
-        return board.isEmptyForPiece(piece, dest_x, dest_y);
     }
 }

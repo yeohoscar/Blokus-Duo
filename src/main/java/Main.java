@@ -40,11 +40,11 @@ public class Main {
 
         if(useGUI) {
             ui = new GUI();
-            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer("O", (GUI)ui), new GraphicalPlayer("X", (GUI)ui)));
+            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer("X", (GUI)ui), new GraphicalPlayer("O", (GUI)ui)));
         }
         else {
             ui = new TextUI();
-            players = new ArrayList<>(Arrays.asList(new TextPlayer("O", (TextUI)ui), new TextPlayer("X", (TextUI)ui)));
+            players = new ArrayList<>(Arrays.asList(new TextPlayer("X", (TextUI)ui), new TextPlayer("O", (TextUI)ui)));
 
         }
 

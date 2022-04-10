@@ -134,13 +134,6 @@ public class PlayScreen extends ScreenAdapter {
         stage.draw();
     }
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-        skin.dispose();
-        tiledMap.dispose();
-    }
-
     public void setBannerText(String text) {
         bannerText = text;
     }
