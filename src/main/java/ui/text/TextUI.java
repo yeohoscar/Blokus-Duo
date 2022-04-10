@@ -10,13 +10,15 @@
 
 package ui.text;
 
+import model.Player;
+import model.piece.Stock;
 import ui.UI;
 
+import java.util.List;
 import java.util.Scanner;
 
 import controller.GameControl;
 import model.Board;
-import model.Player;
 
 public class TextUI implements UI {
     protected Scanner s;
@@ -39,6 +41,28 @@ public class TextUI implements UI {
     }
 
     @Override
+    public void printUI(Board board, Player player, Stock stock) {
+        System.out.println("-------------------------------");
+        System.out.println(player.getName() + "'s turn\n");
+        board.printBoard();
+        if (player.getColor().equals("X")) {
+            System.out.println(player.getName() + "(X) gamepieces:\n" + stock);
+        } 
+        else {
+            System.out.println(player.getName() + "(O) gamepieces:\n" + stock);
+        }
+    }
+
+    @Override
+    public void printGameOver(Board board, List<Player> players) {
+        System.out.println("-------------------------------");
+        board.printBoard();
+        System.out.println(players.get(0).getName() + "(" + players.get(0).getColor() + ") gamepieces: " + players.get(0).getStock());
+        System.out.println(players.get(1).getName() + "(" + players.get(1).getColor() + ") gamepieces: " + players.get(1).getStock());
+        System.out.println("\nGAME OVER!");
+    }
+
+    @Override
     public void displayFirstPlayer(String name) {
         System.out.println("\n" + name + " is going first!\n");
     }
@@ -57,11 +81,4 @@ public class TextUI implements UI {
         return s;
     }
 
-    @Override
-    public void updateUI(Player player, Board board) {
-        System.out.println("-------------------------------");
-        System.out.println(player.getName() + "'s turn\n");
-        board.printBoard();
-        System.out.println(player.getName() + "(" + player.getColor() + ") gamepieces:\n" + player.getStock());
-    }
 }

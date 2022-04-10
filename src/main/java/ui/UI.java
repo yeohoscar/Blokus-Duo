@@ -10,13 +10,17 @@
 
 package ui;
 
+import java.util.List;
+
 import model.Board;
 import model.Player;
+import model.piece.Stock;
 
 public interface UI {
     String getName();
     void displayFirstPlayer(String name);
-    void updateUI(Player player, Board board);
     void displayResults(String result);
     void printCoordinateError();
+    void printUI(Board board, Player player, Stock stock);
+    void printGameOver(Board board, List<Player> players);
 }
