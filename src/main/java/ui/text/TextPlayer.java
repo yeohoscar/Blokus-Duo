@@ -38,4 +38,14 @@ public class TextPlayer extends Player {
             ui.getS().next();
         }
     }
+
+    @Override
+    public FirstTurnMove getFirstMove() {
+        return null;
+    }
+
+    @Override
+    public MidGameMove getMidMove() {
+        return null;
+    }
 }

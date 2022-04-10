@@ -75,6 +75,7 @@ public class GameControl implements Runnable {
         return (getPlayers().get(0));
     }
 
+    /*
     public void printUI() {
         System.out.println("-------------------------------");
         System.out.println(getCurrentPlayer().getName() + "'s turn\n");
@@ -82,6 +83,8 @@ public class GameControl implements Runnable {
         getBoard().printBoard();
         System.out.println(getCurrentPlayer().getName() + "(" + getCurrentPlayer().getColor() + ") gamepieces:\n" + getCurrentPlayer().getStock());
     }
+
+     */
 
     public void nextPlayer() {
         if (currentPlayer == getPlayers().get(0)) {
@@ -120,44 +123,37 @@ public class GameControl implements Runnable {
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 
         if (isFirstTurn()) {
-            printUI();
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
-                System.out.println("Invalid move.");
+                ui.printCoordinateError();
             }
             nextPlayer();
-            printUI();
 
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
-                System.out.println("Invalid move.");
+                ui.printCoordinateError();
             }
             nextPlayer();
-            printUI();
 
-            //ui.printUI(getBoard(), getCurrentPlayer().getName(), getCurrentPlayer().getPlayerNo(), getCurrentPlayer().getStock());
+            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             setState(State.MIDGAME);
         }
 
         while (isMidGame()) {
             while(!(new MidGameMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
-                System.out.println("Invalid move.");
+                ui.printCoordinateError();
             }
             nextPlayer();
             if(getCurrentPlayer().getValidMove().size() == 0) {
                 nextPlayer();
             }
             isGameOver();
-            printUI();
+            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {
-            System.out.println("-------------------------------");
-            getBoard().printBoard();
-            System.out.println(getPlayers().get(0).getName() + "(" + getPlayers().get(0).getColor() + ") gamepieces: " + getPlayers().get(0).getStock());
-            System.out.println(getPlayers().get(1).getName() + "(" + getPlayers().get(1).getColor() + ") gamepieces: " + getPlayers().get(1).getStock());
-            System.out.println("\nGAME OVER!");
+            ui.printGameOver(board, players);
             calculateScore();
             if (currentPlayer.getScore() > getNextPlayer().getScore()) {
                 ui.displayResults(currentPlayer.getName() + " is the winner! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +

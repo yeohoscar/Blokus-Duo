@@ -11,11 +11,14 @@
 package ui.graphical;
 
 import model.Board;
+import model.Player;
 import model.piece.Piece;
+import model.piece.Stock;
 import ui.UI;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -69,6 +72,17 @@ public class GUI implements UI {
     @Override
     public void printCoordinateError() {
         //TODO: display "Invalid piece placement in banner"
+        blokusGame.showDialog("Invalid piece placement.");
+    }
+
+    @Override
+    public void printUI(Board board, Player player, Stock stock) {
+        blokusGame.showDialog(player.getName() + "'s turn.");
+    }
+
+    @Override
+    public void printGameOver(Board board, List<Player> players) {
+        blokusGame.showDialog("GAME OVER!");
     }
 
     public void setActivePlayerNo(String playerColor) {

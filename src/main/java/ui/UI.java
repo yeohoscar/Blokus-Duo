@@ -11,6 +11,10 @@
 package ui;
 
 import model.Board;
+import model.Player;
+import model.piece.Stock;
+
+import java.util.List;
 
 public interface UI {
     String getName();
@@ -18,5 +22,6 @@ public interface UI {
     void updateBoardDisplay(Board board);
     void displayResults(String result);
     void printCoordinateError();
-    //void printUI(Board board, String name, int playerNo, Stock stock);
+    void printUI(Board board, Player player, Stock stock);
+    void printGameOver(Board board, List<Player> players);
 }

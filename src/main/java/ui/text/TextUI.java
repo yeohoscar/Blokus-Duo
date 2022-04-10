@@ -10,8 +10,11 @@
 
 package ui.text;
 
+import model.Player;
+import model.piece.Stock;
 import ui.UI;
 
+import java.util.List;
 import java.util.Scanner;
 
 import controller.GameControl;
@@ -41,18 +44,27 @@ public class TextUI implements UI {
         return name;
     }
 
-    /*@Override
-    public void printUI(Board board, String name, int playerNo, Stock stock) {
+    @Override
+    public void printUI(Board board, Player player, Stock stock) {
         System.out.println("-------------------------------");
-        System.out.println(name + "'s turn\n");
+        System.out.println(player.getName() + "'s turn\n");
         board.printBoard();
-        if (playerNo == Board.X) {
-            System.out.println(name + "(X) gamepieces:\n" + stock);       
+        if (player.getColor().equals("X")) {
+            System.out.println(player.getName() + "(X) gamepieces:\n" + stock);
         } 
         else {
-            System.out.println(name + "(O) gamepieces:\n" + stock);       
+            System.out.println(player.getName() + "(O) gamepieces:\n" + stock);
         }
-    }*/
+    }
+
+    @Override
+    public void printGameOver(Board board, List<Player> players) {
+        System.out.println("-------------------------------");
+        board.printBoard();
+        System.out.println(players.get(0).getName() + "(" + players.get(0).getColor() + ") gamepieces: " + players.get(0).getStock());
+        System.out.println(players.get(1).getName() + "(" + players.get(1).getColor() + ") gamepieces: " + players.get(1).getStock());
+        System.out.println("\nGAME OVER!");
+    }
 
     @Override
     public void displayFirstPlayer(String name) {
