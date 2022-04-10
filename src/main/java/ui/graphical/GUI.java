@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -107,7 +106,11 @@ public class GUI implements UI {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
-                blokusGame.showMessage(player.getName() + "'s turn: \n");
+                if (player.getColor().equals("X")) {
+                    blokusGame.showMessage(player.getName() + "'s turn (BLACK): \n");
+                } else {
+                    blokusGame.showMessage(player.getName() + "'s turn (WHITE): \n");
+                }
                 blokusGame.updateBoard(board);
             }
         });
