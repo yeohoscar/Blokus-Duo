@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * PlayScreenInputProcessor class
+ *  - class to handle the event of playscreen
+ */
+
 package ui.graphical;
 
 import java.util.ArrayList;
@@ -40,7 +50,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         currentPlayerColor = playerColor;
     }
 
-    public ArrayList<int[]> getValidMove() {
+    public ArrayList<int[]> getCurrentPlayerValidMove() {
         return validMove;
     }
 
@@ -48,6 +58,9 @@ public class PlayScreenInputProcessor extends InputAdapter {
         this.validMove = validMove;
     }
 
+    /**
+     * Function to handle when game piece is touched
+     */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         boolean result = false;
@@ -60,7 +73,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
                 if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y)) {
                     selectedPiece = p;
-                    playScreen.setBannerText(playScreen.FLIP_OR_ROTATE_MESSAGE);
+                    playScreen.setBannerText(PlayScreen.FLIP_OR_ROTATE_MESSAGE);
                     result = true;
                     break;
                 }
@@ -69,6 +82,9 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
+    /**
+     * Function to handle when gamepiece is placed on board
+     */
     @Override
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         boolean result = false;
@@ -88,10 +104,10 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     count -= 1;
                     selectedPiece.setVisible(false);
-                    playScreen.setBannerText(playScreen.CLICK_AND_DRAG_MESSAGE);
+                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.resetLocation();
-                    playScreen.setBannerText("Invalid piece placement. " + playScreen.CLICK_AND_DRAG_MESSAGE);
+                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
 
                 if(count == 0) {
@@ -106,10 +122,10 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     }
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     selectedPiece.setVisible(false);
-                    playScreen.setBannerText(playScreen.CLICK_AND_DRAG_MESSAGE);
+                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.resetLocation();
-                    playScreen.setBannerText("Invalid piece placement. " + playScreen.CLICK_AND_DRAG_MESSAGE);
+                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
             }
             
@@ -118,6 +134,9 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
+    /**
+     * Function to handle when gamepiece is dragged by user
+     */
     @Override
     public boolean touchDragged (int screenX, int screenY, int pointer) {
         boolean result = false;
@@ -129,12 +148,21 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
+    /**
+     * Function to get world coordinates from screen
+     * @param x coordinate x
+     * @param y coordinate y
+     * @return world coordinate on screen
+     */
     Vector3 unprojectScreenCoordinates(int x, int y) {
         Vector3 screenCoordinates = new Vector3(x, y, 0);
         Vector3 worldCoordinates = playScreen.getCamera().unproject(screenCoordinates);
         return worldCoordinates;
     }
 
+    /**
+     * Function to manipulate piece when keys are pressed
+     */
     @Override
     public boolean keyDown (int keycode) {
         boolean result = false;
@@ -153,10 +181,24 @@ public class PlayScreenInputProcessor extends InputAdapter {
         return result;
     }
 
+    /**
+     * Function to validate the first move of each player
+     * @param piece selected piece
+     * @param originX coordinate x
+     * @param originY coordinate y
+     * @return true if it is a valid first move, otherwise false
+     */
     private boolean isValidFirstMove(Piece piece, int originX, int originY) {
         return piece.getBlocks().stream().anyMatch(offset -> isOnFirstMoveSquare(offset, originX, originY));
     }
 
+    /**
+     * Function to check if each block on piece touches the starting point on board
+     * @param offset block offset of piece
+     * @param originX coordinate x
+     * @param originY coordinate y
+     * @return true if any block on piece touched starting point, otherwise false
+     */
     private boolean isOnFirstMoveSquare(Block offset, int originX, int originY) {
         if (currentPlayerColor.equals("O")) {
             return (offset.getX() + originX == 9 && offset.getY() + originY == 4);
@@ -165,17 +207,33 @@ public class PlayScreenInputProcessor extends InputAdapter {
         }
     }
 
+    /**
+     * Function to validate players' move after first turn
+     * @param playerColor current player's color
+     * @param piece selected piece 
+     * @param dest_x coordinate x
+     * @param dest_y coordinate y
+     * @return true if it is a valid move, otherwise false
+     */
     private boolean isValidMove(String playerColor, Piece piece, int dest_x, int dest_y) {
         return (graphicalBoard.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(playerColor, piece, dest_x, dest_y) && !graphicalBoard.isSide(playerColor, piece, dest_x, dest_y));
     }
 
+    /**
+     * Function to check if selected piece is placed on the edge of current player's piece on board
+     * @param playerColor current player's color
+     * @param piece selected piece
+     * @param dest_x coordinate x
+     * @param dest_y coordinate y
+     * @return true if the selected piece touched the edge of any other pieces from same player, otherwise false 
+     */
     public boolean isPieceTouchEdge(String playerColor, Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isContain(playerColor, offset, dest_x, dest_y));
     }
 
     public boolean isContain(String playerColor, Block offset, int dest_x, int dest_y) {
         if (getCurrentPlayerColor().equals(playerColor)) {
-            for(int[] m : getValidMove()) {
+            for(int[] m : getCurrentPlayerValidMove()) {
                 if(m[0] == offset.getX() + dest_x && m[1] == offset.getY() + dest_y) {
                     return true;
                 }

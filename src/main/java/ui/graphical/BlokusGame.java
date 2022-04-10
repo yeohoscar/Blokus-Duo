@@ -149,10 +149,18 @@ public class BlokusGame extends Game {
         showDialog(result);
     }
 
+    /**
+     * Show the message on screen
+     * @param text String to be printed
+     */
     void showMessage(String text) {
         playScreen.showMessage(text);
     }
 
+    /**
+     * Update the board on gui
+     * @param board board
+     */
     public void updateBoard(Board board) {
         playScreen.graphicalBoard.updateBoard(board);
     }

@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GraphicalBoard class
+ *  - Board class for GUI
+ */
+
 package ui.graphical;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -43,11 +53,18 @@ public class GraphicalBoard extends Board {
         return result;
     }
 
-
+    /**
+     * Function to update board in gui
+     * @param board board
+     */
     public void updateBoard(Board board) {
         this.board = new Board(board);
     }
 
+    /**
+     * Draw the gamepiece on the board according to players' color
+     * @param batch spritebatch
+     */
     public void draw(SpriteBatch batch) {
         for (int y = 0; y < Board.HEIGHT; y++) {
             for (int x = 0; x < Board.WIDTH; x++) {
@@ -60,6 +77,12 @@ public class GraphicalBoard extends Board {
         }
     }
 
+    /**
+     * Check if the board is hit
+     * @param x coordinate x
+     * @param y coordinate y
+     * @return true if the board is hit, otherwise false
+     */
     public boolean isHit(float x, float y) {
         return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
     }

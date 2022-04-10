@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * PlayScreen class
+ *  - represents play screen of graphical UI
+ */
+
 package ui.graphical;
 
 import java.util.ArrayList;
@@ -93,9 +103,15 @@ public class PlayScreen extends ScreenAdapter {
         messageY = (float) msgLocation.getProperties().get("y");
         messageWidth = (float) msgLocation.getProperties().get("width");
         messageFont = skin.getFont("font1");
-        //messageFont.setColor(Color.BLACK);
     }
 
+    /**
+     * Function to construct graphical gamepiece for each player and store in an arraylist
+     * @param pieces arraylist of graphical gamepiece
+     * @param objects get object from tiled map
+     * @param square square to draw the pieces
+     * @param player current player
+     */
     private void addGamePiece(
         ArrayList<GraphicalGamepiece> pieces, 
         MapObjects objects, 
@@ -111,13 +127,11 @@ public class PlayScreen extends ScreenAdapter {
             }
     } 
 
+    /**
+     * InputMultiplexer is added to combines multiple processors
+     */
     @Override
     public void show() {
-        /* Added InputMultiplexer
-         * Combines multiple processors
-         * I combined the stage input processor with our custom one
-         * Idk if itll break anything in the future, but it fixes the dialog problem for now
-         */
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(blokusGame.playScreenInputProcessor);
@@ -131,28 +145,36 @@ public class PlayScreen extends ScreenAdapter {
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.update();
 
-        // first let's draw the tiled Map
+        // Draw the tiled map
         mapRenderer.setView(camera);
         mapRenderer.render();
 
-        // Next we draw the gamepiece and the banner
+        // Start the batch and draw the message, banner text, game pieces and board
         batch.begin();
+        messageFont.draw(batch, message, messageX, messageY, messageWidth, Align.left, true);
         font.draw(batch, bannerText, bannerX, bannerY);
         for(GraphicalGamepiece p : pieces) {
             p.draw(batch);
         }
         graphicalBoard.draw(batch);
-        messageFont.draw(batch, message, messageX, messageY, messageWidth, Align.left, true);
         batch.end();
 
         stage.act(delta);
         stage.draw();
     }
 
+    /**
+     * Set the message to show on screen
+     * @param text string to be printed on screen
+     */
     public void showMessage(String text) {
         message = text;
     }
 
+    /**
+     * Set the banner text to show on screen
+     * @param text string to be printed on screen
+     */
     public void setBannerText(String text) {
         bannerText = text;
     }

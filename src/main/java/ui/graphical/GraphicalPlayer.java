@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GraphicalPlayer class
+ *  - Player class for GUI
+ */
+
 package ui.graphical;
 
 import java.util.ArrayList;
@@ -14,6 +24,9 @@ public class GraphicalPlayer extends Player {
         this.ui = ui;
     }
 
+    /**
+     * Get piece from players in gui
+     */
     @Override
     public ArrayList<Object> getPiece() {
         Piece p = null;

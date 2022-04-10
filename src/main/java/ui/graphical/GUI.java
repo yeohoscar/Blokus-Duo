@@ -4,7 +4,7 @@
  *          Oscar Yeoh  20403662
  *          KarYen Yap  20202149
  *
- * GUI
+ * GUI class
  *  - Connects GUI thread to gameControl thread
  */
 
@@ -102,6 +102,9 @@ public class GUI implements UI {
         });
     }
 
+    /**
+     * Update the player's turn and board on graphical UI
+     */
     public void updateUI(Player player, Board board) {
         blokusGame.postRunnable(new Runnable() {
             @Override
@@ -112,12 +115,18 @@ public class GUI implements UI {
         });
     }
 
+    /**
+     * Display the winner and players's score on graphical UI
+     */
     @Override
     public void displayResults(String result) {
         blokusGame.setResults(result);
         Gdx.input.setInputProcessor(null);
     }
 
+    /**
+     * Print error message when invalid move is obtained
+     */
     @Override
     public void printCoordinateError() {
         blokusGame.postRunnable(new Runnable() {
@@ -128,6 +137,9 @@ public class GUI implements UI {
         });
     }
 
+    /**
+     * Announce game over by showing in dialog in graphical UI
+     */
     @Override
     public void printGameOver(Board board, List<Player> players) {
         blokusGame.showDialog("GAME OVER!");

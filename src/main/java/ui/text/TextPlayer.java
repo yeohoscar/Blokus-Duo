@@ -1,3 +1,13 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * TextPlayer class
+ *  - player class for text UI
+ */
+
 package ui.text;
 
 import java.util.ArrayList;
@@ -14,6 +24,9 @@ public class TextPlayer extends Player {
         this.ui = ui;
     }
 
+    /**
+     * Get piece from user and prompt for manipulation
+     */
     public ArrayList<Object> getPiece() {
         if (getStock().getPieces().size() == 0) {
             System.out.println("No more pieces left.");

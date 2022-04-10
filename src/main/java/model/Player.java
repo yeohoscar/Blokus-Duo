@@ -4,7 +4,7 @@
  *          Oscar Yeoh  20403662
  *          KarYen Yap  20202149
  * 
- * Player class
+ * Player abstract class
  *  - represents Blokus player
  *  - holds player name, colour and pieces
  */

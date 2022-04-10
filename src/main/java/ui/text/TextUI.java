@@ -43,11 +43,17 @@ public class TextUI implements UI {
         return name;
     }
 
+    /**
+     * Display the name of first player on text ui
+     */
     @Override
     public void displayFirstPlayer(String name) {
         System.out.println("\n" + name + " is going first!\n");
     }
 
+    /**
+     * Update player's turn, board and players' available pieces
+     */
     @Override
     public void updateUI(Player player, Board board) {
         System.out.println("-------------------------------");
@@ -56,16 +62,25 @@ public class TextUI implements UI {
         System.out.println(player.getName() + "(" + player.getColor() + ") gamepieces:\n" + player.getStock());
     }
 
+    /**
+     * Display the winner and players' score
+     */
     @Override
     public void displayResults(String result) {
         System.out.println(result);
     }
 
+    /**
+     * Print error message when invalid coordinate is obtained
+     */
     @Override
     public void printCoordinateError() {
         System.out.println("Invalid coordinates provided.");
     }
 
+    /**
+     * Announce game is over
+     */
     @Override
     public void printGameOver(Board board, List<Player> players) {
         System.out.println("-------------------------------");

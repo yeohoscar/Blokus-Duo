@@ -48,8 +48,6 @@ public class Main {
 
         }
 
-        //ui = useGUI ? new GUI() : new TextUI();
-
         if (xFirst == oFirst) {
             gameControl = new GameControl(ui, new Random().nextInt(2), players);
         } else if (xFirst) {
@@ -62,20 +60,11 @@ public class Main {
 
         if (useGUI) {
             Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            //int height = BlokusGame.HEIGHT;
-            //int width = BlokusGame.WIDTH;
-            //config.setWindowSizeLimits(width, height, width, height);
             config.setTitle("Welcome to Blokus Duo");
             config.setWindowedMode(PlayScreen.GAME_WIDTH, PlayScreen.GAME_HEIGHT);
             config.setResizable(false);
 
             new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);
-
-            /*Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(GamePlay.GAME_WIDTH,GamePlay.GAME_HEIGHT);
-            config.setResizable(false);
-            new Lwjgl3Application(new GamePlay(), config);*/
         }
     }
 }
