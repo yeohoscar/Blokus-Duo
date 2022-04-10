@@ -23,8 +23,6 @@ import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.badlogic.gdx.Gdx;
-
 public class GUI implements UI {
     private final PipedOutputStream pipedOutputStream;
     private final PipedInputStream pipedInputStream;
