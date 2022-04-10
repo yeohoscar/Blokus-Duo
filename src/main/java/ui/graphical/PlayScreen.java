@@ -81,7 +81,7 @@ public class PlayScreen extends ScreenAdapter {
         
         font = skin.getFont("font1");
         bannerText = "";
-        bannerX = 115.0f;
+        bannerX = 150.0f;
         bannerY = imageLayer.getTextureRegion().getRegionHeight() - (font.getCapHeight() * 0.8f);
         setBannerText(CLICK_AND_DRAG_MESSAGE);
 

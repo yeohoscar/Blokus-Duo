@@ -121,7 +121,6 @@ public class GUI implements UI {
     @Override
     public void displayResults(String result) {
         blokusGame.setResults(result);
-        Gdx.input.setInputProcessor(null);
     }
 
     /**

@@ -45,7 +45,6 @@ public class Main {
         else {
             ui = new TextUI();
             players = new ArrayList<>(Arrays.asList(new TextPlayer("X", (TextUI)ui), new TextPlayer("O", (TextUI)ui)));
-
         }
 
         if (xFirst == oFirst) {
