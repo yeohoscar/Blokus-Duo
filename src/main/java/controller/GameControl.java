@@ -127,23 +127,23 @@ public class GameControl implements Runnable {
 
         if (isFirstTurn()) {
             //printUI();
-            //ui.updateUI(getCurrentPlayer(), getBoard());
-            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
+            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
             //printUI();
-            //ui.updateUI(getCurrentPlayer(), getBoard());
-            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
+            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
             //printUI();
-            //ui.updateUI(getCurrentPlayer(), getBoard());
-            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
+            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             setState(State.MIDGAME);
         }
 
@@ -157,8 +157,8 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             //printUI();
-            //ui.updateUI(getCurrentPlayer(), getBoard());
-            ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
+            ui.updateUI(getCurrentPlayer(), getBoard());
+            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {

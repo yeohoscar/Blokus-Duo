@@ -27,30 +27,6 @@ public class GraphicalGamepiece {
         setVisible(true);
     }
 
-    public void resetLocation() {
-        currentX = originX;
-        currentY = originY;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-
-    public void draw(SpriteBatch batch) {
-        ArrayList<Block> blocks = gamepiece.getBlocks();
-        for(Block l : blocks) {
-            if (visible) {
-                batch.draw(square, currentX + square.getRegionWidth() * l.getX(), currentY + square.getRegionHeight() * l.getY());
-            }
-        }
-    }
-
-    public void setLocation(float newX, float newY) {
-        currentX = newX;
-        currentY = newY;
-    }
-
     public String getPlayerColor() {
         if (playerColor == 0) {
             return "X";
@@ -62,16 +38,42 @@ public class GraphicalGamepiece {
         return gamepiece;
     }
 
+    public void resetLocation() {
+        currentX = originX;
+        currentY = originY;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public void setLocation(float newX, float newY) {
+        currentX = newX;
+        currentY = newY;
+    }
+
+    public void setPosition(float x, float y) {
+        // set new position of the gamepiece, so that the pointer coordinates
+        // are in the middle of the "origin" square ( Location(0,0) ).
+        currentX = x - square.getRegionWidth() * 0.5f;
+        currentY = y - square.getRegionHeight() * 0.5f;
+    }
+
+    public void draw(SpriteBatch batch) {
+        ArrayList<Block> blocks = gamepiece.getBlocks();
+        for(Block l : blocks) {
+            if (visible) {
+                batch.draw(square, currentX + square.getRegionWidth() * l.getX(), currentY + square.getRegionHeight() * l.getY());
+            }
+        }
+    }
+
     public void flipPiece() {
         gamepiece.flipPiece();
     }
 
     public void rotatePiece() {
         gamepiece.rotatePieceClockwise();
-    }
-
-    public Piece getGamepiece() {
-        return gamepiece;
     }
 
     public boolean isHit(float x, float y) {
@@ -87,12 +89,5 @@ public class GraphicalGamepiece {
             }
         }
         return isHit;
-    }
-
-    public void setPosition(float x, float y) {
-        // set new position of the gamepiece, so that the pointer coordinates
-        // are in the middle of the "origin" square ( Location(0,0) ).
-        currentX = x - square.getRegionWidth() * 0.5f;
-        currentY = y - square.getRegionHeight() * 0.5f;
     }
 }

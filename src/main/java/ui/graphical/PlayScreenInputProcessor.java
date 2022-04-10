@@ -11,9 +11,6 @@ import controller.*;
 import model.piece.*;
 
 public class PlayScreenInputProcessor extends InputAdapter {
-    public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
-    public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
-
     BlokusGame blokusGame;
     PlayScreen playScreen;
     String currentPlayerColor;
@@ -63,7 +60,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
                 if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y)) {
                     selectedPiece = p;
-                    playScreen.setBannerText(FLIP_OR_ROTATE_MESSAGE);
+                    playScreen.setBannerText(playScreen.FLIP_OR_ROTATE_MESSAGE);
                     result = true;
                     break;
                 }
@@ -91,8 +88,10 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     count -= 1;
                     selectedPiece.setVisible(false);
+                    playScreen.setBannerText(playScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.resetLocation();
+                    playScreen.setBannerText("Invalid piece placement. " + playScreen.CLICK_AND_DRAG_MESSAGE);
                 }
 
                 if(count == 0) {
@@ -107,13 +106,14 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     }
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     selectedPiece.setVisible(false);
+                    playScreen.setBannerText(playScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.resetLocation();
+                    playScreen.setBannerText("Invalid piece placement. " + playScreen.CLICK_AND_DRAG_MESSAGE);
                 }
             }
             
             selectedPiece = null;
-            playScreen.setBannerText(CLICK_AND_DRAG_MESSAGE);
         }
         return result;
     }

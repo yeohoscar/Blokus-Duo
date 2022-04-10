@@ -149,6 +149,10 @@ public class BlokusGame extends Game {
         showDialog(result);
     }
 
+    void showMessage(String text) {
+        playScreen.showMessage(text);
+    }
+
     public void updateBoard(Board board) {
         playScreen.graphicalBoard.updateBoard(board);
     }

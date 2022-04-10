@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import model.Board;
@@ -44,6 +45,12 @@ public class PlayScreen extends ScreenAdapter {
     float bannerX;
     float bannerY;
 
+    String message;
+    BitmapFont messageFont;
+    float messageX;
+    float messageY;
+    float messageWidth;
+
     ArrayList<GraphicalGamepiece> pieces;
     Piece gamepiece;
     GraphicalBoard graphicalBoard;
@@ -62,10 +69,10 @@ public class PlayScreen extends ScreenAdapter {
         MapLayer objectLayer = tiledMap.getLayers().get(3);
         MapObjects objects = objectLayer.getObjects();
         
-        font = skin.getFont("font");
+        font = skin.getFont("font1");
         bannerText = "";
-        bannerX = 10.0f;
-        bannerY = imageLayer.getTextureRegion().getRegionHeight() + font.getCapHeight() * 1.5f;
+        bannerX = 115.0f;
+        bannerY = imageLayer.getTextureRegion().getRegionHeight() - (font.getCapHeight() * 0.8f);
         setBannerText(CLICK_AND_DRAG_MESSAGE);
 
         pieces = new ArrayList<GraphicalGamepiece>();
@@ -80,6 +87,13 @@ public class PlayScreen extends ScreenAdapter {
         float boardHeight = (float) boardLocation.getProperties().get("height");
         float boardWidth = (float) boardLocation.getProperties().get("width");
         graphicalBoard = new GraphicalBoard(boardX, boardY, boardWidth, boardHeight, blackSquare, whiteSquare, new Board());
+
+        MapObject msgLocation = objects.get("Message");
+        messageX = (float) msgLocation.getProperties().get("x");
+        messageY = (float) msgLocation.getProperties().get("y");
+        messageWidth = (float) msgLocation.getProperties().get("width");
+        messageFont = skin.getFont("font1");
+        //messageFont.setColor(Color.BLACK);
     }
 
     private void addGamePiece(
@@ -123,15 +137,20 @@ public class PlayScreen extends ScreenAdapter {
 
         // Next we draw the gamepiece and the banner
         batch.begin();
+        font.draw(batch, bannerText, bannerX, bannerY);
         for(GraphicalGamepiece p : pieces) {
             p.draw(batch);
         }
         graphicalBoard.draw(batch);
-        font.draw(batch, bannerText, bannerX, bannerY);
+        messageFont.draw(batch, message, messageX, messageY, messageWidth, Align.left, true);
         batch.end();
 
         stage.act(delta);
         stage.draw();
+    }
+
+    public void showMessage(String text) {
+        message = text;
     }
 
     public void setBannerText(String text) {

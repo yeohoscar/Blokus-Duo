@@ -27,22 +27,6 @@ public class GraphicalBoard extends Board {
         cellWidth = boardWidth / Board.WIDTH;
     }
 
-    public void updateBoard(Board board) {
-        this.board = new Board(board);
-    }
-
-    public void draw(SpriteBatch batch) {
-        for (int y = 0; y < Board.HEIGHT; y++) {
-            for (int x = 0; x < Board.WIDTH; x++) {
-                if (board.isOccupied(x, y)) {
-                    TextureRegion picture;
-                    picture = (board.getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
-                    batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
-                }
-            }
-        }
-    }
-
     public int getBoardColumn(float x) {
         int result = -1;
         if ((boardX < x) && ((boardX + boardWidth) > x)) {
@@ -59,12 +43,24 @@ public class GraphicalBoard extends Board {
         return result;
     }
 
-    public boolean isHit(float x, float y) {
-        return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
+
+    public void updateBoard(Board board) {
+        this.board = new Board(board);
     }
 
-    /* take in xcoor, y coor and piece and called is emptyforpiece */
-    public boolean isOccupied(int boardColumn, int boardRow) {
-        return board.isOccupied(boardColumn, boardRow);
+    public void draw(SpriteBatch batch) {
+        for (int y = 0; y < Board.HEIGHT; y++) {
+            for (int x = 0; x < Board.WIDTH; x++) {
+                if (board.isOccupied(x, y)) {
+                    TextureRegion picture;
+                    picture = (board.getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
+                    batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
+                }
+            }
+        }
+    }
+
+    public boolean isHit(float x, float y) {
+        return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
     }
 }

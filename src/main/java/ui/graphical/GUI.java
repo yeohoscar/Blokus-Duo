@@ -13,7 +13,6 @@ package ui.graphical;
 import model.Board;
 import model.Player;
 import model.piece.Piece;
-import model.piece.Stock;
 import ui.UI;
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -23,6 +22,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import com.badlogic.gdx.Gdx;
 
 public class GUI implements UI {
     private final PipedOutputStream pipedOutputStream;
@@ -47,43 +48,27 @@ public class GUI implements UI {
         return pipedOutputStream;
     }
 
+    public int getXCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public int getYCoordinate() {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    public BlockingQueue<Piece> getPieceQueue() {
+        return pieceQueue;
+    }
+
     @Override
     public String getName() {
         return scanner.next();
-    }
-
-    /**
-     * Change screen from nameScreen to playScreen
-     */
-    public void displayFirstPlayer(String name) {
-        blokusGame.postRunnable(new Runnable() {
-            @Override
-            public void run() {
-                blokusGame.activatePlayScreen();
-                blokusGame.setMessage(name);
-            }
-        });
-    }
-
-    @Override
-    public void displayResults(String result) {
-        blokusGame.setResults(result);
-    }
-
-    @Override
-    public void printCoordinateError() {
-        //TODO: display "Invalid piece placement in banner"
-        blokusGame.showDialog("Invalid piece placement.");
-    }
-
-    @Override
-    public void printUI(Board board, Player player, Stock stock) {
-        blokusGame.showDialog(player.getName() + "'s turn.");
-    }
-
-    @Override
-    public void printGameOver(Board board, List<Player> players) {
-        blokusGame.showDialog("GAME OVER!");
     }
 
     public void setCurrentPlayerColor(String playerColor) {
@@ -104,32 +89,48 @@ public class GUI implements UI {
         });
     }
 
+    /**
+     * Change screen from nameScreen to playScreen
+     */
+    public void displayFirstPlayer(String name) {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.setMessage(name);
+                blokusGame.activatePlayScreen();
+            }
+        });
+    }
+
     public void updateUI(Player player, Board board) {
         blokusGame.postRunnable(new Runnable() {
             @Override
             public void run() {
+                blokusGame.showMessage(player.getName() + "'s turn: \n");
                 blokusGame.updateBoard(board);
             }
         });
     }
 
-    public int getXCoordinate() {
-        while (!scanner.hasNextInt()) {
-            scanner.next();
-        }
-        return scanner.nextInt();
+    @Override
+    public void displayResults(String result) {
+        blokusGame.setResults(result);
+        Gdx.input.setInputProcessor(null);
     }
 
-    public int getYCoordinate() {
-        while (!scanner.hasNextInt()) {
-            scanner.next();
-        }
-        return scanner.nextInt();
+    @Override
+    public void printCoordinateError() {
+        blokusGame.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                blokusGame.showMessage("Invalid piece placement.");
+            }
+        });
     }
 
-    public BlockingQueue<Piece> getPieceQueue() {
-        return pieceQueue;
+    @Override
+    public void printGameOver(Board board, List<Player> players) {
+        blokusGame.showDialog("GAME OVER!");
     }
-    
 }
 
