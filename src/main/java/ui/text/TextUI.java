@@ -67,6 +67,7 @@ public class TextUI implements UI {
      */
     @Override
     public void displayResults(String result) {
+        System.out.println("GAME OVER!");
         System.out.println(result);
     }
 
@@ -78,15 +79,4 @@ public class TextUI implements UI {
         System.out.println("Invalid coordinates provided.");
     }
 
-    /**
-     * Announce game is over
-     */
-    @Override
-    public void printGameOver(Board board, List<Player> players) {
-        System.out.println("-------------------------------");
-        board.printBoard();
-        System.out.println(players.get(0).getName() + "(" + players.get(0).getColor() + ") gamepieces: " + players.get(0).getStock());
-        System.out.println(players.get(1).getName() + "(" + players.get(1).getColor() + ") gamepieces: " + players.get(1).getStock());
-        System.out.println("\nGAME OVER!");
-    }
 }

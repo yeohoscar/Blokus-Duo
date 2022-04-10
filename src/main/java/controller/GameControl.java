@@ -75,20 +75,6 @@ public class GameControl implements Runnable {
         return (getPlayers().get(0));
     }
 
-    /*
-    public void printUI() {
-        System.out.println("-------------------------------");
-        System.out.println(getCurrentPlayer().getName() + "'s turn\n");
-        getBoard().printBoard();
-        System.out.println(getCurrentPlayer().getName() + "(" + getCurrentPlayer().getColor() + ") gamepieces:\n" + getCurrentPlayer().getStock());
-        for (int[] m : getCurrentPlayer().getValidMove()) {
-            System.out.print(m[0] + " " + m[1] + " | ");
-        }
-        System.out.println();
-    }
-
-     */
-
     public void nextPlayer() {
         if (currentPlayer == getPlayers().get(0)) {
             setCurrentPlayer(getPlayers().get(1));
@@ -126,24 +112,18 @@ public class GameControl implements Runnable {
         ui.displayFirstPlayer(getCurrentPlayer().getName());
 
         if (isFirstTurn()) {
-            //printUI();
             ui.updateUI(getCurrentPlayer(), getBoard());
-            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
-            //printUI();
             ui.updateUI(getCurrentPlayer(), getBoard());
-            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
-            //printUI();
             ui.updateUI(getCurrentPlayer(), getBoard());
-            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
             setState(State.MIDGAME);
         }
 
@@ -156,13 +136,10 @@ public class GameControl implements Runnable {
                 nextPlayer();
             }
             isGameOver();
-            //printUI();
             ui.updateUI(getCurrentPlayer(), getBoard());
-            //ui.printUI(getBoard(), getCurrentPlayer(), getCurrentPlayer().getStock());
         }
 
         if(state == State.OVER) {
-            ui.printGameOver(getBoard(), getPlayers());
             calculateScore();
             if (currentPlayer.getScore() > getNextPlayer().getScore()) {
                 ui.displayResults(currentPlayer.getName() + " is the winner! Score: " + currentPlayer.getName() + "(" + currentPlayer.getColor() + ") " + currentPlayer.getScore() + " | " +

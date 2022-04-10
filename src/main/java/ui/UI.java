@@ -10,8 +10,6 @@
 
 package ui;
 
-import java.util.List;
-
 import model.Board;
 import model.Player;
 
@@ -21,5 +19,4 @@ public interface UI {
     void updateUI(Player player, Board board);
     void displayResults(String result);
     void printCoordinateError();
-    void printGameOver(Board board, List<Player> players);
 }

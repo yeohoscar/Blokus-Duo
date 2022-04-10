@@ -118,7 +118,7 @@ public class GUI implements UI {
      */
     @Override
     public void displayResults(String result) {
-        blokusGame.setResults(result);
+        blokusGame.setResults("Game Over!\n" + result);
     }
 
     /**
@@ -134,12 +134,5 @@ public class GUI implements UI {
         });
     }
 
-    /**
-     * Announce game over by showing in dialog in graphical UI
-     */
-    @Override
-    public void printGameOver(Board board, List<Player> players) {
-        blokusGame.showDialog("GAME OVER!");
-    }
 }
 
