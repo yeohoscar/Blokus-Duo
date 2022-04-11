@@ -99,7 +99,6 @@ public class PlayScreenInputProcessor extends InputAdapter {
             Vector3 coord = unprojectScreenCoordinates(screenX, screenY);
             int boardColumn = graphicalBoard.getBoardColumn(coord.x);
             int boardRow = graphicalBoard.getBoardRow(coord.y);
-            System.out.println(boardColumn + " " + boardRow);
 
             if(state == State.FIRST) {
                 if (isValidFirstMove(piece, boardColumn, boardRow) && graphicalBoard.isHit(coord.x, coord.y)) {

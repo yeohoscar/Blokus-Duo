@@ -128,14 +128,7 @@ public class GUI implements UI {
      * Print error message when invalid move is obtained
      */
     @Override
-    public void printCoordinateError() {
-        blokusGame.postRunnable(new Runnable() {
-            @Override
-            public void run() {
-                blokusGame.showMessage("Invalid piece placement.");
-            }
-        });
-    }
+    public void printCoordinateError() {}
 
 }
 
