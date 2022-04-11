@@ -34,9 +34,6 @@ public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
     public static final int HEIGHT = 768;
 
-    public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
-    public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
-
     Thread gameControlThread;
     PrintStream uiStream;
     BlockingQueue<Piece> pieceQueue;

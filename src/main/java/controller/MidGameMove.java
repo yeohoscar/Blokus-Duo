@@ -15,6 +15,7 @@ import model.piece.*;
 import ui.UI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MidGameMove {
@@ -111,21 +112,14 @@ public class MidGameMove {
         for(Piece piece : player.getStock().getPieces()) {
             int flag = 0;
             Piece pCopy = new Piece(piece);
-            switch(piece.getName()) {
-                case "I1":
-                case "O4":
-                case "X5":
-                    flag += checkEveryPiece(player, piece, move[0], move[1]);
-                    break;
-                case "I2":
-                case "I3":
-                case "I4":
-                case "I5":
+            switch (piece.getName()) {
+                case "I1", "O4", "X5" -> flag += checkEveryPiece(player, piece, move[0], move[1]);
+                case "I2", "I3", "I4", "I5" -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);
                     pCopy.rotatePieceClockwise();
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
-                    break;
-                default:
+                }
+                default -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);
                     pCopy.rotatePieceClockwise();
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
@@ -141,7 +135,7 @@ public class MidGameMove {
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
                     pCopy.flipPiece();
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
-                    break;
+                }
             }
 
             if(flag == 1 || flag == 2 || flag == 7) {
@@ -207,7 +201,7 @@ public class MidGameMove {
      * @param input Coordinates of valid move entered by user
      */
     public void updateMove(int[] input) {
-        currentPlayer.getValidMove().removeIf(n -> (n.equals(input)));
+        currentPlayer.getValidMove().removeIf(n -> (Arrays.equals(n, input)));
 
         for(int i = 0; i < currentPlayer.getValidMove().size(); i++) {
             if(!hasAvailablePiece(currentPlayer, currentPlayer.getValidMove().get(i))) {

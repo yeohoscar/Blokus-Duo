@@ -11,6 +11,7 @@
 package ui.graphical;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -29,6 +30,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
     GraphicalBoard graphicalBoard;
     State state;
     ArrayList<int[]> validMove;
+    ArrayList<Block> defaultOrientation;
     static int count = 2;
 
     public PlayScreenInputProcessor(BlokusGame blokusGame) {
@@ -38,7 +40,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         this.selectedPiece = null;
         this.piece = null;
         currentPlayerColor = "X";
-        validMove = new ArrayList<int[]>();
+        validMove = new ArrayList<>();
         state = State.FIRST;
     }
 
@@ -72,8 +74,16 @@ public class PlayScreenInputProcessor extends InputAdapter {
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
+<<<<<<< HEAD
                 if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y) && !p.getIsPlaced()) {
+=======
+                if (Objects.equals(p.getPlayerColor(), currentPlayerColor) && p.isHit(coord.x, coord.y)) {
+>>>>>>> f926a1da1bcc973ef66c3499abf7a7a2dc136f7c
                     selectedPiece = p;
+                    defaultOrientation = new ArrayList<>();
+                    for (Block b : selectedPiece.getGamePiece().getBlocks()) {
+                        defaultOrientation.add(new Block(b));
+                    }
                     playScreen.setBannerText(PlayScreen.FLIP_OR_ROTATE_MESSAGE);
                     result = true;
                     break;
@@ -118,6 +128,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
                         playScreen.getGraphicalGamepieces().remove(i);
                     }*/
                 } else {
+                    selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
                 }
 
@@ -135,6 +146,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     selectedPiece.setVisible(false);
                     selectedPiece.setIsPlaced(true);
                 } else {
+                    selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
                 }
             }
@@ -167,8 +179,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
      */
     Vector3 unprojectScreenCoordinates(int x, int y) {
         Vector3 screenCoordinates = new Vector3(x, y, 0);
-        Vector3 worldCoordinates = playScreen.getCamera().unproject(screenCoordinates);
-        return worldCoordinates;
+        return playScreen.getCamera().unproject(screenCoordinates);
     }
 
     /**

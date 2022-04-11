@@ -93,12 +93,4 @@ public class FirstTurnMove {
 
         return true;
     }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public Player getNextPlayer() {
-        return nextPlayer;
-    }
 }

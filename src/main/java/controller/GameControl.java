@@ -51,10 +51,6 @@ public class GameControl implements Runnable {
         return board;
     }
 
-    public int getFirstPlayer() {
-        return firstPlayer;
-    }
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

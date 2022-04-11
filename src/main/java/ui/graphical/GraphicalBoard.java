@@ -23,16 +23,15 @@ public class GraphicalBoard extends Board {
     float cellHeight;
     TextureRegion blackSquare;
     TextureRegion whiteSquare;
-    Board board;
 
-    public GraphicalBoard(float boardX, float boardY, float boardWidth, float boardHeight, TextureRegion blackSquare, TextureRegion whiteSquare, Board board) {
+    public GraphicalBoard(float boardX, float boardY, float boardWidth, float boardHeight, TextureRegion blackSquare, TextureRegion whiteSquare) {
+        super();
         this.boardX = boardX;
         this.boardY = boardY;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         this.blackSquare = blackSquare;
         this.whiteSquare = whiteSquare;
-        this.board = board;
         cellHeight = boardHeight / Board.HEIGHT;
         cellWidth = boardWidth / Board.WIDTH;
     }
@@ -58,7 +57,8 @@ public class GraphicalBoard extends Board {
      * @param board board
      */
     public void updateBoard(Board board) {
-        this.board = new Board(board);
+        super.setBoard(board.getBoard());
+        super.setOccupied(board.getOccupied());
     }
 
     /**
@@ -68,9 +68,9 @@ public class GraphicalBoard extends Board {
     public void draw(SpriteBatch batch) {
         for (int y = 0; y < Board.HEIGHT; y++) {
             for (int x = 0; x < Board.WIDTH; x++) {
-                if (board.isOccupied(x, y)) {
+                if (isOccupied(x, y)) {
                     TextureRegion picture;
-                    picture = (board.getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
+                    picture = (getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
                     batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
                 }
             }

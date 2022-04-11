@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Piece {
     private final String name;
-    private final ArrayList<Block> blocks;
+    private ArrayList<Block> blocks;
 
     public Piece(String name, ArrayList<Block> blocks) {
         this.name = name;
@@ -25,7 +25,7 @@ public class Piece {
 
     public Piece(Piece p) {
         this.name = p.getName();
-        this.blocks = new ArrayList<Block>();
+        this.blocks = new ArrayList<>();
         for (Block b : p.getBlocks()) {
             this.blocks.add(new Block(b));
         }
@@ -37,6 +37,13 @@ public class Piece {
 
     public ArrayList<Block> getBlocks() {
         return blocks;
+    }
+
+    public void setBlocks(ArrayList<Block> blocks) {
+        this.blocks = new ArrayList<>();
+        for (Block b : blocks) {
+            this.blocks.add(new Block(b));
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ public class Stock {
 
     public Stock() {
         addPieces(
-            new Piece("I1", new ArrayList<>(Arrays.asList(new Block(0, 0)))),
+            new Piece("I1", new ArrayList<>(List.of(new Block(0, 0)))),
             new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1)))),
             new Piece("I3", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2)))),
             new Piece("I4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2), new Block(0, 3)))),
@@ -42,9 +42,7 @@ public class Stock {
     }
 
     private void addPieces(Piece... p) {
-        for(Piece a : p) {
-            pieces.add(a);
-        }
+        Collections.addAll(pieces, p);
     }
 
     public List<Piece> getPieces() {

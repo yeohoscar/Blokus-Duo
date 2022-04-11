@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="48">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="49">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="6" columns="3">
   <image source="game_squares.png" width="96" height="64"/>
  </tileset>
@@ -35,6 +35,7 @@
   <object id="17" name="0V5" x="160" y="512" width="32" height="32"/>
   <object id="18" name="0L5" x="128" y="704" width="32" height="32"/>
   <object id="19" name="0W" x="320" y="64" width="32" height="32"/>
+  <object id="48" name="Message" x="3.60902" y="0" width="640" height="7.93985"/>
   <object id="20" name="0Z4" x="416" y="96" width="32" height="32"/>
   <object id="21" name="0P" x="512" y="32" width="32" height="32"/>
   <object id="22" name="0F" x="640" y="64" width="32" height="32"/>
