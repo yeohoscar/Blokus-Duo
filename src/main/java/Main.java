@@ -50,9 +50,9 @@ public class Main {
         if (xFirst == oFirst) {
             gameControl = new GameControl(ui, new Random().nextInt(2), players);
         } else if (xFirst) {
-            gameControl = new GameControl(ui, 1, players);
-        } else {
             gameControl = new GameControl(ui, 0, players);
+        } else {
+            gameControl = new GameControl(ui, 1, players);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();

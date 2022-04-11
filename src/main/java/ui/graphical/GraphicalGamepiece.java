@@ -23,6 +23,7 @@ public class GraphicalGamepiece {
     private float originX; // world X coordinate of the gamepiece's origin
     private float originY; // world Y coordinate of the gamepiece's origin
     private int playerColor;
+    private boolean isPlaced;
     float currentX;
     float currentY;
     boolean visible;
@@ -33,8 +34,13 @@ public class GraphicalGamepiece {
         this.originX = originX;
         this.originY = originY;
         this.playerColor = playerColor;
+        isPlaced = false;
         resetLocation();
         setVisible(true);
+    }
+
+    public boolean getIsPlaced() {
+        return isPlaced;
     }
 
     public String getPlayerColor() {
@@ -46,6 +52,10 @@ public class GraphicalGamepiece {
 
     public Piece getGamePiece() {
         return gamepiece;
+    }
+
+    public void setIsPlaced(boolean b) {
+        isPlaced = b;
     }
 
     /**

@@ -102,6 +102,20 @@ public class GameControl implements Runnable {
         }
     }
 
+    public void test() {
+        getBoard().printBoard();
+        System.out.print("current: ");
+        for (int[] m : getCurrentPlayer().getValidMove()) {
+            System.out.print(m[0] + " " + m[1] + " | ");
+        }
+        System.out.println();
+        System.out.print("next: ");
+        for (int[] m : getNextPlayer().getValidMove()) {
+            System.out.print(m[0] + " " + m[1] + " | ");
+        }
+        System.out.println();
+    }
+
     @Override
     public void run() {
         //Initialise players
@@ -113,17 +127,20 @@ public class GameControl implements Runnable {
 
         if (isFirstTurn()) {
             ui.updateUI(getCurrentPlayer(), getBoard());
+            test();
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
             ui.updateUI(getCurrentPlayer(), getBoard());
+            test();
 
             while(!(new FirstTurnMove(getCurrentPlayer(), getNextPlayer(), getBoard(), ui).executeMove())) {
                 ui.printCoordinateError();
             }
             nextPlayer();
             ui.updateUI(getCurrentPlayer(), getBoard());
+            test();
             setState(State.MIDGAME);
         }
 
@@ -137,6 +154,7 @@ public class GameControl implements Runnable {
             }
             isGameOver();
             ui.updateUI(getCurrentPlayer(), getBoard());
+            test();
         }
 
         if(state == State.OVER) {

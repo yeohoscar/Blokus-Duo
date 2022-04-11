@@ -99,6 +99,7 @@ public class PlayScreen extends ScreenAdapter {
         graphicalBoard = new GraphicalBoard(boardX, boardY, boardWidth, boardHeight, blackSquare, whiteSquare, new Board());
 
         MapObject msgLocation = objects.get("Message");
+        message = "";
         messageX = (float) msgLocation.getProperties().get("x");
         messageY = (float) msgLocation.getProperties().get("y");
         messageWidth = (float) msgLocation.getProperties().get("width");

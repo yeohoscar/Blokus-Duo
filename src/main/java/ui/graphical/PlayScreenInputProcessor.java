@@ -68,10 +68,11 @@ public class PlayScreenInputProcessor extends InputAdapter {
             selectedPiece.resetLocation();
             selectedPiece = null;
         }
+
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
-                if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y)) {
+                if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y) && !p.getIsPlaced()) {
                     selectedPiece = p;
                     playScreen.setBannerText(PlayScreen.FLIP_OR_ROTATE_MESSAGE);
                     result = true;
@@ -93,6 +94,8 @@ public class PlayScreenInputProcessor extends InputAdapter {
             Vector3 coord = unprojectScreenCoordinates(screenX, screenY);
             int boardColumn = graphicalBoard.getBoardColumn(coord.x);
             int boardRow = graphicalBoard.getBoardRow(coord.y);
+            System.out.println(boardColumn + " " + boardRow);
+            int i = -1;
 
             if(state == State.FIRST) {
                 if (isValidFirstMove(piece, boardColumn, boardRow) && graphicalBoard.isHit(coord.x, coord.y)) {
@@ -104,10 +107,18 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     count -= 1;
                     selectedPiece.setVisible(false);
-                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
+                    selectedPiece.setIsPlaced(true);
+                    /*for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
+                        i++;
+                        if (p.getGamePiece().equals(selectedPiece.getGamePiece())) {
+                            break; 
+                        }
+                    }
+                    if (i != -1) {
+                        playScreen.getGraphicalGamepieces().remove(i);
+                    }*/
                 } else {
                     selectedPiece.resetLocation();
-                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
 
                 if(count == 0) {
@@ -122,13 +133,13 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     }
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     selectedPiece.setVisible(false);
-                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
+                    selectedPiece.setIsPlaced(true);
                 } else {
                     selectedPiece.resetLocation();
-                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
             }
             
+            playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
             selectedPiece = null;
         }
         return result;
