@@ -113,11 +113,8 @@ public class MidGameMove {
             int flag = 0;
             Piece pCopy = new Piece(piece);
             switch (piece.getName()) {
-                case "I1", "O4", "X5" -> flag += checkEveryPiece(player, piece, move[0], move[1]);
-                case "I2", "I3", "I4", "I5" -> {
+                case "I1", "X5" -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);
-                    pCopy.rotatePieceClockwise();
-                    flag += checkEveryPiece(player, pCopy, move[0], move[1]);
                 }
                 default -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);

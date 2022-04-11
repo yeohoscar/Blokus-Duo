@@ -11,7 +11,6 @@
 package ui.graphical;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -74,11 +73,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
-<<<<<<< HEAD
                 if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y) && !p.getIsPlaced()) {
-=======
-                if (Objects.equals(p.getPlayerColor(), currentPlayerColor) && p.isHit(coord.x, coord.y)) {
->>>>>>> f926a1da1bcc973ef66c3499abf7a7a2dc136f7c
                     selectedPiece = p;
                     defaultOrientation = new ArrayList<>();
                     for (Block b : selectedPiece.getGamePiece().getBlocks()) {
@@ -105,7 +100,6 @@ public class PlayScreenInputProcessor extends InputAdapter {
             int boardColumn = graphicalBoard.getBoardColumn(coord.x);
             int boardRow = graphicalBoard.getBoardRow(coord.y);
             System.out.println(boardColumn + " " + boardRow);
-            int i = -1;
 
             if(state == State.FIRST) {
                 if (isValidFirstMove(piece, boardColumn, boardRow) && graphicalBoard.isHit(coord.x, coord.y)) {
@@ -118,15 +112,6 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     count -= 1;
                     selectedPiece.setVisible(false);
                     selectedPiece.setIsPlaced(true);
-                    /*for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
-                        i++;
-                        if (p.getGamePiece().equals(selectedPiece.getGamePiece())) {
-                            break; 
-                        }
-                    }
-                    if (i != -1) {
-                        playScreen.getGraphicalGamepieces().remove(i);
-                    }*/
                 } else {
                     selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();

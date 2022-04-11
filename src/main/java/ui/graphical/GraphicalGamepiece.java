@@ -20,16 +20,10 @@ import model.piece.*;
 public class GraphicalGamepiece {
     private final Piece gamepiece;
     private final TextureRegion square;
-<<<<<<< HEAD
     private float originX; // world X coordinate of the gamepiece's origin
     private float originY; // world Y coordinate of the gamepiece's origin
     private int playerColor;
     private boolean isPlaced;
-=======
-    private final float originX; // world X coordinate of the gamepiece's origin
-    private final float originY; // world Y coordinate of the gamepiece's origin
-    private final int playerColor;
->>>>>>> f926a1da1bcc973ef66c3499abf7a7a2dc136f7c
     float currentX;
     float currentY;
     boolean visible;
