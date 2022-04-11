@@ -41,7 +41,7 @@ public class GraphicalPlayer extends Player {
         int x = ui.getXCoordinate();
         int y = ui.getYCoordinate();
 
-        return new ArrayList<Object>(Arrays.asList(p, new ArrayList<>(Arrays.asList(x, y))));
+        return new ArrayList<>(Arrays.asList(p, new ArrayList<>(Arrays.asList(x, y))));
     }
     
 }

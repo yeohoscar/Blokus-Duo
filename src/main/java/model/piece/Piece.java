@@ -25,7 +25,7 @@ public class Piece {
 
     public Piece(Piece p) {
         this.name = p.getName();
-        this.blocks = new ArrayList<Block>();
+        this.blocks = new ArrayList<>();
         for (Block b : p.getBlocks()) {
             this.blocks.add(new Block(b));
         }

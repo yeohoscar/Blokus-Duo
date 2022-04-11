@@ -30,7 +30,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import model.Board;
 import model.piece.*;
 
 public class PlayScreen extends ScreenAdapter {
@@ -62,7 +61,6 @@ public class PlayScreen extends ScreenAdapter {
     float messageWidth;
 
     ArrayList<GraphicalGamepiece> pieces;
-    Piece gamepiece;
     GraphicalBoard graphicalBoard;
 
     public PlayScreen(BlokusGame blokusGame) {

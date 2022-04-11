@@ -11,6 +11,7 @@
 package ui.graphical;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -39,7 +40,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         this.selectedPiece = null;
         this.piece = null;
         currentPlayerColor = "X";
-        validMove = new ArrayList<int[]>();
+        validMove = new ArrayList<>();
         state = State.FIRST;
     }
 
@@ -72,7 +73,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
         if (button == Input.Buttons.LEFT) {
             Vector3 coord = unprojectScreenCoordinates(Gdx.input.getX(), Gdx.input.getY());
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
-                if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y)) {
+                if (Objects.equals(p.getPlayerColor(), currentPlayerColor) && p.isHit(coord.x, coord.y)) {
                     selectedPiece = p;
                     defaultOrientation = new ArrayList<>();
                     for (Block b : selectedPiece.getGamePiece().getBlocks()) {
@@ -163,8 +164,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
      */
     Vector3 unprojectScreenCoordinates(int x, int y) {
         Vector3 screenCoordinates = new Vector3(x, y, 0);
-        Vector3 worldCoordinates = playScreen.getCamera().unproject(screenCoordinates);
-        return worldCoordinates;
+        return playScreen.getCamera().unproject(screenCoordinates);
     }
 
     /**

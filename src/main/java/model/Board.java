@@ -165,8 +165,7 @@ public class Board {
      * @return true if the coordinates are able to place the piece
      */
     public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
-        boolean b = piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
-        return b;
+        return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
     }
 
     /**
@@ -180,23 +179,23 @@ public class Board {
      */
     public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
-        for (int j = 0; j < block.size(); j++) {
-            if ((block.get(i)).getX() == (block.get(j)).getX()) {
-                if ((block.get(i)).getY() - (block.get(j)).getY() == 1) {
+        for (Block value : block) {
+            if ((block.get(i)).getX() == value.getX()) {
+                if ((block.get(i)).getY() - value.getY() == 1) {
                     down++;
                 }
 
-                if ((block.get(i)).getY() - (block.get(j)).getY() == -1) {
+                if ((block.get(i)).getY() - value.getY() == -1) {
                     up++;
                 }
             }
 
-            if ((block.get(i)).getY() == (block.get(j)).getY()) {
-                if ((block.get(i)).getX() - (block.get(j)).getX() == 1) {
+            if ((block.get(i)).getY() == value.getY()) {
+                if ((block.get(i)).getX() - value.getX() == 1) {
                     left++;
                 }
 
-                if ((block.get(i)).getX() - (block.get(j)).getX() == -1) {
+                if ((block.get(i)).getX() - value.getX() == -1) {
                     right++;
                 }
             }
@@ -276,11 +275,11 @@ public class Board {
     /**
      * Check if there is any placed piece at the side of the selected coordinates
      * 
-     * @param player current player
+     * @param playerColor current player's color
      * @param piece selected piece by player
      * @param dest_x x coordinate
      * @param dest_y y coordinate
-     * @return
+     * @return returns true if any block is touching another piece
      */
     public boolean isSide(String playerColor, Piece piece, int dest_x, int dest_y) {
         return piece.getBlocks().stream().anyMatch(offset -> isAtSide(playerColor, offset, dest_x, dest_y));
