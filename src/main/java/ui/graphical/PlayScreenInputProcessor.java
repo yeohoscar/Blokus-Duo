@@ -112,9 +112,11 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     count -= 1;
                     selectedPiece.setVisible(false);
                     selectedPiece.setIsPlaced(true);
+                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
+                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
 
                 if(count == 0) {
@@ -130,13 +132,14 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     blokusGame.uiStream.printf("%d %d\n", boardColumn, boardRow);
                     selectedPiece.setVisible(false);
                     selectedPiece.setIsPlaced(true);
+                    playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
                     selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
+                    playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
             }
             
-            playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
             selectedPiece = null;
         }
         return result;
