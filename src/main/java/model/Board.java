@@ -21,7 +21,7 @@ public class Board {
     public final static int O = 1;
 
     private String[][] board = new String[WIDTH][HEIGHT];
-    boolean[][] occupied = new boolean[WIDTH][HEIGHT];
+    private boolean[][] occupied = new boolean[WIDTH][HEIGHT];
 
     public Board() {
         // initialize the board
@@ -83,6 +83,14 @@ public class Board {
 
     public void setBoard(String[][] board) {
         this.board = board;
+    }
+
+    public boolean[][] getOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean[][] occupied) {
+        this.occupied = occupied;
     }
 
     public boolean isOccupied(int x, int y) {
@@ -157,7 +165,8 @@ public class Board {
      * @return true if the coordinates are able to place the piece
      */
     public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
-        return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
+        boolean b = piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
+        return b;
     }
 
     /**

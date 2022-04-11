@@ -29,6 +29,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
     GraphicalBoard graphicalBoard;
     State state;
     ArrayList<int[]> validMove;
+    ArrayList<Block> defaultOrientation;
     static int count = 2;
 
     public PlayScreenInputProcessor(BlokusGame blokusGame) {
@@ -73,6 +74,10 @@ public class PlayScreenInputProcessor extends InputAdapter {
             for (GraphicalGamepiece p : playScreen.getGraphicalGamepieces()) {
                 if (p.getPlayerColor() == currentPlayerColor && p.isHit(coord.x, coord.y)) {
                     selectedPiece = p;
+                    defaultOrientation = new ArrayList<>();
+                    for (Block b : selectedPiece.getGamePiece().getBlocks()) {
+                        defaultOrientation.add(new Block(b));
+                    }
                     playScreen.setBannerText(PlayScreen.FLIP_OR_ROTATE_MESSAGE);
                     result = true;
                     break;
@@ -106,6 +111,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     selectedPiece.setVisible(false);
                     playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
+                    selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
                     playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
@@ -124,6 +130,7 @@ public class PlayScreenInputProcessor extends InputAdapter {
                     selectedPiece.setVisible(false);
                     playScreen.setBannerText(PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 } else {
+                    selectedPiece.getGamePiece().setBlocks(defaultOrientation);
                     selectedPiece.resetLocation();
                     playScreen.setBannerText("Invalid piece placement. " + PlayScreen.CLICK_AND_DRAG_MESSAGE);
                 }
