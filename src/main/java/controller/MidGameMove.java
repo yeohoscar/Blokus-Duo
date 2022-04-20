@@ -12,13 +12,14 @@ package controller;
 
 import model.*;
 import model.piece.*;
+import ui.UI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class MidGameMove {
+    UI ui;
     private final Player currentPlayer;
     private final Player nextPlayer;
     private final Board board;
@@ -26,20 +27,22 @@ public class MidGameMove {
     private final int originX;
     private final int originY;
 
-    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, Scanner s) {
+    @SuppressWarnings("unchecked")
+    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, UI ui) {
         if (currentPlayer == null || nextPlayer == null || board == null) {
             throw new IllegalArgumentException();
         }
         this.currentPlayer = currentPlayer;
         this.nextPlayer = nextPlayer;
         this.board = board;
-        List<Object> list = selectPiece(s);
+        this.ui = ui;
+        List<Object> list = currentPlayer.getPiece();
         this.piece = (Piece) list.get(0);
         this.originX = ((ArrayList<Integer>) list.get(1)).get(0);
         this.originY = ((ArrayList<Integer>) list.get(1)).get(1);
     }
 
-    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, Piece piece, int originX, int originY) {
+    public MidGameMove(Player currentPlayer, Player nextPlayer, Board board, Piece piece, int originX, int originY, UI ui) {
         if (currentPlayer == null || nextPlayer == null || board == null || piece == null) {
             throw new IllegalArgumentException();
         }
@@ -49,6 +52,7 @@ public class MidGameMove {
         this.piece = piece;
         this.originX = originX;
         this.originY = originY;
+        this.ui = ui;
     }
 
     /**
@@ -74,7 +78,7 @@ public class MidGameMove {
      * @return true if it is a valid move
      */
     public boolean isValidMove(Player player, Piece piece, int dest_x, int dest_y) {
-        return (board.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(player, piece, dest_x, dest_y) && !board.isSide(player, piece, dest_x, dest_y));
+        return (board.isEmptyForPiece(piece, dest_x, dest_y) && isPieceTouchEdge(player, piece, dest_x, dest_y) && !board.isSide(player.getColor(), piece, dest_x, dest_y));
     }
 
     /**
@@ -108,21 +112,11 @@ public class MidGameMove {
         for(Piece piece : player.getStock().getPieces()) {
             int flag = 0;
             Piece pCopy = new Piece(piece);
-            switch(piece.getName()) {
-                case "I1":
-                case "O4":
-                case "X5":
+            switch (piece.getName()) {
+                case "I1", "X5" -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);
-                    break;
-                case "I2":
-                case "I3":
-                case "I4":
-                case "I5":
-                    flag += checkEveryPiece(player, piece, move[0], move[1]);
-                    pCopy.rotatePieceClockwise();
-                    flag += checkEveryPiece(player, pCopy, move[0], move[1]);
-                    break;
-                default:
+                }
+                default -> {
                     flag += checkEveryPiece(player, piece, move[0], move[1]);
                     pCopy.rotatePieceClockwise();
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
@@ -138,7 +132,7 @@ public class MidGameMove {
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
                     pCopy.flipPiece();
                     flag += checkEveryPiece(player, pCopy, move[0], move[1]);
-                    break;
+                }
             }
 
             if(flag == 1 || flag == 2 || flag == 7) {
@@ -204,7 +198,7 @@ public class MidGameMove {
      * @param input Coordinates of valid move entered by user
      */
     public void updateMove(int[] input) {
-        currentPlayer.getValidMove().removeIf(n -> (n.equals(input)));
+        currentPlayer.getValidMove().removeIf(n -> (Arrays.equals(n, input)));
 
         for(int i = 0; i < currentPlayer.getValidMove().size(); i++) {
             if(!hasAvailablePiece(currentPlayer, currentPlayer.getValidMove().get(i))) {
@@ -298,43 +292,5 @@ public class MidGameMove {
 
         getMove(piece.getBlocks(), originX, originY);
         return true;
-    }
-
-    /**
-     * Prompts player to select and manipulate piece 
-     */
-    public ArrayList<Object> selectPiece(Scanner s) {
-        if (currentPlayer.getStock().getPieces().size() == 0) {
-            System.out.println("No more pieces left.");
-        }
-        System.out.println("Select a piece");
-        String tmp = s.useDelimiter(" |\\n|//r").next();
-        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-        
-        while(true) {
-            for (Piece p : currentPlayer.getStock().getPieces()) {
-                if (p.getName().equals(tmp)) {
-                    Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(s, currentPlayer.getColor())));                                
-                }
-            }
-            System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = s.useDelimiter(" |\\n").next();
-            tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-        }
-    }
-
-    /**
-     * Prompts player to enter the coordinates
-     * @param arr Coordinates entered by player
-     * @return an integer arraylist that stored the coordinates
-     */
-    public ArrayList<Integer> selectSquare(ArrayList<String> arr) {
-        ArrayList<Integer> coord = new ArrayList<>();
-
-        coord.add(Integer.parseInt(arr.get(0)));
-        coord.add(Integer.parseInt(arr.get(1)));
-
-        return coord;
     }
 }

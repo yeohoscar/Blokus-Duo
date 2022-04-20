@@ -13,21 +13,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-
 import model.Player;
 import org.junit.jupiter.api.Test;
-import ui.text.TextUI;
+
+import ui.UI;
+import ui.text.*;
 
 public class PlayerUnitTests {
     @Test
     void testInitPlayer() {
         ByteArrayInputStream in = new ByteArrayInputStream("a\n".getBytes());
         Scanner s = new Scanner(in);
-        TextUI tui = new TextUI(s);
-        Player p = new Player(tui.getName(), "X");
+        UI ui = new TextUI();
+        Player player = new TextPlayer("X", (TextUI)ui);
 
-        assertEquals("X", p.getColor());
-        assertEquals("a", p.getName());
+        assertEquals("X", player.getColor());
+        assertEquals("a", player.getName());
         s.close();
     }
 }

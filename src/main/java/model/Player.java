@@ -4,7 +4,7 @@
  *          Oscar Yeoh  20403662
  *          KarYen Yap  20202149
  * 
- * Player class
+ * Player abstract class
  *  - represents Blokus player
  *  - holds player name, colour and pieces
  */
@@ -15,16 +15,16 @@ import model.piece.Stock;
 
 import java.util.ArrayList;
 
-public class Player {
-    private final String name; //Player name
+
+public abstract class Player {
+    private String name; //Player name
     private int score; //Player score -> calculate at end
     private final String color;
     private final Stock stock;
     private final ArrayList<int[]> validMove;
     private boolean lastPieceI1;
 
-    public Player(String name, String color) {
-        this.name = name;
+    public Player(String color) {
         this.color = color;
         score = 0;
         this.stock = new Stock();
@@ -34,6 +34,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScore() {
@@ -63,4 +67,6 @@ public class Player {
     public void setLastPieceI1(boolean b) {
         this.lastPieceI1 = b;
     }
+
+    public abstract ArrayList<Object> getPiece();
 }

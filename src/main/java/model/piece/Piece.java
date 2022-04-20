@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Piece {
     private final String name;
-    private final ArrayList<Block> blocks;
+    private ArrayList<Block> blocks;
 
     public Piece(String name, ArrayList<Block> blocks) {
         this.name = name;
@@ -25,7 +25,7 @@ public class Piece {
 
     public Piece(Piece p) {
         this.name = p.getName();
-        this.blocks = new ArrayList<Block>();
+        this.blocks = new ArrayList<>();
         for (Block b : p.getBlocks()) {
             this.blocks.add(new Block(b));
         }
@@ -37,6 +37,13 @@ public class Piece {
 
     public ArrayList<Block> getBlocks() {
         return blocks;
+    }
+
+    public void setBlocks(ArrayList<Block> blocks) {
+        this.blocks = new ArrayList<>();
+        for (Block b : blocks) {
+            this.blocks.add(new Block(b));
+        }
     }
 
     /**
@@ -141,8 +148,7 @@ public class Piece {
         printPiece(color);
         while (true) {
             System.out.println("Enter 'r' to rotate, 'f' to flip, or 'p' to place the gamepiece:");
-
-            String[] instruct = s.useDelimiter(" |\\n").nextLine().split(" ");
+            String[] instruct = s.nextLine().split(" ");
             int indexOfp; // to record the index of 'p' command
 
             if(instruct.length == 1 && instruct[0].equals("")) {
@@ -155,7 +161,7 @@ public class Piece {
                     try {
                         return new ArrayList<>(Arrays.asList(Integer.parseInt(instruct[indexOfp+1]), Integer.parseInt(instruct[indexOfp+2])));
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Coordinates not provided.");
+                        System.out.println("Invalid coordinates provided.");
                     }
                     break;
                 } else {

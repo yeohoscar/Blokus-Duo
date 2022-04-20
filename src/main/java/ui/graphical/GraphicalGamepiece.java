@@ -1,4 +1,14 @@
-package ui.graphical;
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GraphicalGamepiece class
+ *  - Game piece class for GUI
+ */
+
+ package ui.graphical;
 
 import java.util.ArrayList;
 
@@ -12,35 +22,118 @@ public class GraphicalGamepiece {
     private final TextureRegion square;
     private float originX; // world X coordinate of the gamepiece's origin
     private float originY; // world Y coordinate of the gamepiece's origin
+    private int playerColor;
+    private boolean isPlaced;
+    float currentX;
+    float currentY;
+    boolean visible;
 
-    public GraphicalGamepiece(Piece gamepiece, TextureRegion square, float originX, float originY) {
+    public GraphicalGamepiece(Piece gamepiece, TextureRegion square, float originX, float originY, int playerColor) {
         this.gamepiece = gamepiece;
         this.square = square;
         this.originX = originX;
         this.originY = originY;
+        this.playerColor = playerColor;
+        isPlaced = false;
+        resetLocation();
+        setVisible(true);
     }
 
+    public boolean getIsPlaced() {
+        return isPlaced;
+    }
+
+    public String getPlayerColor() {
+        if (playerColor == 0) {
+            return "X";
+        }
+        return "O";
+    }
+
+    public Piece getGamePiece() {
+        return gamepiece;
+    }
+
+    public void setIsPlaced(boolean b) {
+        isPlaced = b;
+    }
+
+    /**
+     * Function to reset the location of graphical gamepiece
+     */
+    public void resetLocation() {
+        currentX = originX;
+        currentY = originY;
+    }
+
+    /**
+     * Function to set the visibility of graphical gamepiece
+     * @param visible boolean value to represent the visibility of gamepiece
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    /**
+     * Set new location for graphical gamepiece
+     * @param newX new coordinate x
+     * @param newY new coordinate y
+     */
+    public void setLocation(float newX, float newY) {
+        currentX = newX;
+        currentY = newY;
+    }
+
+    /**
+     * Function to set new position of the gamepiece
+     * so that the pointer coordinates are in the middle of the "origin" square ( Location(0,0) )
+     * @param x coordinate x
+     * @param y coordinate y
+     */
+    public void setPosition(float x, float y) {
+        currentX = x - square.getRegionWidth() * 0.5f;
+        currentY = y - square.getRegionHeight() * 0.5f;
+    }
+
+    /**
+     * Draw the graphical gamepiece
+     * @param batch spritebatch
+     */
     public void draw(SpriteBatch batch) {
         ArrayList<Block> blocks = gamepiece.getBlocks();
         for(Block l : blocks) {
-            batch.draw(square, originX + square.getRegionWidth() * l.getX(), originY + square.getRegionHeight() * l.getY());
+            if (visible) {
+                batch.draw(square, currentX + square.getRegionWidth() * l.getX(), currentY + square.getRegionHeight() * l.getY());
+            }
         }
     }
 
+    /**
+     * Flip gamepiece
+     */
     public void flipPiece() {
         gamepiece.flipPiece();
     }
 
+    /**
+     * Rotate gamepiece
+     */
     public void rotatePiece() {
         gamepiece.rotatePieceClockwise();
     }
 
+    /**
+     * Check if gamepiece is hit by user
+     * @param x coordinate x
+     * @param y coordinate y
+     * @return true if gamepiece is hitted, otherwise false
+     */
     public boolean isHit(float x, float y) {
         boolean isHit = false;
         ArrayList<Block> blocks = gamepiece.getBlocks();
         for(Block l : blocks) {
-            Rectangle rectangle = new Rectangle(originX + l.getX() * square.getRegionWidth(),
-                                                originY + l.getY() * square.getRegionHeight(),
+            Rectangle rectangle = new Rectangle(currentX + l.getX() * square.getRegionWidth(),
+                                                currentY + l.getY() * square.getRegionHeight(),
                                                 square.getRegionWidth(),
                                                 square.getRegionHeight());
             if (rectangle.contains(x, y)) {
@@ -48,12 +141,5 @@ public class GraphicalGamepiece {
             }
         }
         return isHit;
-    }
-
-    public void setPosition(float x, float y) {
-        // set new position of the gamepiece, so that the pointer coordinates
-        // are in the middle of the "origin" square ( Location(0,0) ).
-        originX = x - square.getRegionWidth() * 0.5f;
-        originY = y - square.getRegionHeight() * 0.5f;
     }
 }

@@ -2,6 +2,9 @@
 "com.badlogic.gdx.graphics.g2d.BitmapFont": {
 	"font": {
 		"file": "font-export.fnt"
+	},
+	"font1": {
+		"file": "test.fnt"
 	}
 },
 "com.badlogic.gdx.graphics.Color": {
@@ -25,15 +28,6 @@
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
-	"black": {
-		"name": "white",
-		"color": {
-			"r": 0,
-			"g": 0,
-			"b": 0,
-			"a": 1
-		}
-	},
 	"cyan": {
 		"name": "white",
 		"color": {
@@ -218,7 +212,6 @@
 		"font": "font",
 		"fontColor": "black",
 		"background": "rect",
-		"cursor": "black",
 		"selection": "cyan"
 	}
 },

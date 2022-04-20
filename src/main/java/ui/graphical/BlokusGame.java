@@ -10,75 +10,52 @@
 
 package ui.graphical;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import model.Board;
 import model.piece.*;
 import ui.UI;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
 
 public class BlokusGame extends Game {
     public static final int WIDTH = 1024;
-    public static final int HEIGHT = 812;
-
-    public final static String CLICK_AND_DRAG_MESSAGE = "Click and drag the gamepiece.";
-    public final static String FLIP_OR_ROTATE_MESSAGE = "Press 'f' to flip, or 'r' to rotate the gamepiece.";
+    public static final int HEIGHT = 768;
 
     Thread gameControlThread;
     PrintStream uiStream;
+    BlockingQueue<Piece> pieceQueue;
 
     OrthographicCamera camera;
     Stage stage;
     Skin skin;
-    Screen nameScreen;
-    Screen playScreen;
-    //ApplicationListener game;
 
     SpriteBatch batch;
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer renderer;
 
-    /*MapObjects mapObjects;
-    TiledMapRenderer mapRenderer;
-    TextureRegion blackSquare;
-    BitmapFont helvetique;
-    String bannerText;
-    float bannerX;
-    float bannerY;
-    Piece gamepiece;
-    GraphicalGamepiece graphicalGamepiece;*/
-
+    NameScreen nameScreen;
+    PlayScreen playScreen;
+    PlayScreenInputProcessor playScreenInputProcessor;
+    
     public BlokusGame(Thread gameControlThread, UI ui) {
         GUI gui = (GUI)ui;
         this.gameControlThread = gameControlThread;
         gui.setGame(this);
         this.uiStream = new PrintStream(gui.getPipedOutputStream());
+        this.pieceQueue = gui.getPieceQueue();
     }
 
     /**
@@ -87,23 +64,25 @@ public class BlokusGame extends Game {
     public void create() {
 
         camera = new OrthographicCamera(WIDTH, HEIGHT);
-        camera.position.set(WIDTH  * 0.5f, HEIGHT * 0.5f, 0.0f);
+        camera.setToOrtho(false,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        camera.update();
 
         batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
 
         stage = new Stage(new FitViewport(WIDTH, HEIGHT, camera));
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin(Gdx.files.internal("BlokusDuo.json"));
-
+        
         tiledMap = new TmxMapLoader().load("prototype.tmx");
-        //renderer = new OrthogonalTiledMapRenderer(tiledMap);
-        //renderer.setView(camera);
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        renderer.setView(camera);
 
         nameScreen = new NameScreen(this);
         playScreen = new PlayScreen(this);
+        playScreenInputProcessor = new PlayScreenInputProcessor(this);
         activateNameScreen();
-        //activateplayScreen();
     }
 
     /**
@@ -144,10 +123,12 @@ public class BlokusGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        if (playScreen != null) playScreen.dispose();
         if (nameScreen != null) nameScreen.dispose();
+        if (playScreen != null) playScreen.dispose();
         if (skin != null) skin.dispose();
         if (stage != null) stage.dispose();
+        if (tiledMap != null) tiledMap.dispose();
+        if (batch != null) batch.dispose();
         if (gameControlThread != null) gameControlThread.stop();
     }
 
@@ -163,5 +144,29 @@ public class BlokusGame extends Game {
      */
     public void setResults(String result) {
         showDialog(result);
+    }
+
+    /**
+     * Show the message on screen
+     * @param text String to be printed
+     */
+    void showMessage(String text) {
+        playScreen.showMessage(text);
+    }
+
+    /**
+     * Update the board on gui
+     * @param board board
+     */
+    public void updateBoard(Board board) {
+        playScreen.graphicalBoard.updateBoard(board);
+    }
+
+    public void setCurrentPlayerColor(String playerColor) {
+        playScreenInputProcessor.setCurrentPlayerColor(playerColor);
+    }
+
+    public void setCurrentPlayerValidMove(ArrayList<int[]> validMove) {
+        playScreenInputProcessor.setCurrentPlayerValidMove(validMove);
     }
 }

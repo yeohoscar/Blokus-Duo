@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 import model.piece.Block;
 import model.piece.Piece;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -41,9 +42,9 @@ public class PieceUnitTests {
 
     @Test
     void testManipulation() {
+        ByteArrayInputStream in = new ByteArrayInputStream("r r f p 5 6".getBytes());
+        Scanner s = new Scanner(in);
         Piece p = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
-        System.setIn(new ByteArrayInputStream("r r f p 5 6".getBytes()));
-        Scanner s = new Scanner(System.in);
 
         p.flipPiece();
         assertEquals(0, p.getBlocks().get(1).getX());
@@ -69,6 +70,5 @@ public class PieceUnitTests {
         assertEquals(-1, p2.getBlocks().get(3).getX());
         assertEquals(0, p2.getBlocks().get(3).getY());
         
-        s.close();
     }
 }

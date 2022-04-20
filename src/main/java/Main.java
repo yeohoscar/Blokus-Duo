@@ -12,16 +12,17 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import controller.*;
+import model.Player;
 import ui.*;
 import ui.graphical.*;
-import ui.text.TextUI;
+import ui.text.*;
 
 import java.io.IOException;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner s = new Scanner(System.in).useDelimiter("\\n| ");
+        List<Player> players;
         boolean xFirst = false, oFirst = false, useGUI = false;
         UI ui;
         GameControl gameControl;
@@ -37,34 +38,32 @@ public class Main {
             }
         }
 
-        ui = useGUI ? new GUI() : new TextUI(s);
+        if(useGUI) {
+            ui = new GUI();
+            players = new ArrayList<>(Arrays.asList(new GraphicalPlayer("X", (GUI)ui), new GraphicalPlayer("O", (GUI)ui)));
+        }
+        else {
+            ui = new TextUI();
+            players = new ArrayList<>(Arrays.asList(new TextPlayer("X", (TextUI)ui), new TextPlayer("O", (TextUI)ui)));
+        }
 
         if (xFirst == oFirst) {
-            gameControl = new GameControl(ui, new Random().nextInt(2), s);
+            gameControl = new GameControl(ui, new Random().nextInt(2), players);
         } else if (xFirst) {
-            gameControl = new GameControl(ui, 1, s);
+            gameControl = new GameControl(ui, 0, players);
         } else {
-            gameControl = new GameControl(ui, 0, s);
+            gameControl = new GameControl(ui, 1, players);
         }
         gameControlThread = new Thread(gameControl);
         gameControlThread.start();
 
         if (useGUI) {
             Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            //int height = BlokusGame.HEIGHT;
-            //int width = BlokusGame.WIDTH;
-            //config.setWindowSizeLimits(width, height, width, height);
             config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(PlayScreen.GAME_WIDTH,PlayScreen.GAME_HEIGHT);
+            config.setWindowedMode(PlayScreen.GAME_WIDTH, PlayScreen.GAME_HEIGHT);
             config.setResizable(false);
 
             new Lwjgl3Application(new BlokusGame(gameControlThread, ui), config);
-
-            /*Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-            config.setTitle("Welcome to Blokus Duo");
-            config.setWindowedMode(GamePlay.GAME_WIDTH,GamePlay.GAME_HEIGHT);
-            config.setResizable(false);
-            new Lwjgl3Application(new GamePlay(), config);*/
         }
     }
 }

@@ -15,10 +15,15 @@ import model.piece.*;
 import java.util.ArrayList;
 
 public class Board {
-    private String[][] board;
+    public final static int WIDTH = 14;
+    public final static int HEIGHT = 14;
+    public final static int X = 0;
+    public final static int O = 1;
+
+    private String[][] board = new String[WIDTH][HEIGHT];
+    private boolean[][] occupied = new boolean[WIDTH][HEIGHT];
 
     public Board() {
-        this.board = new String[14][14];
         // initialize the board
         for (int i = 0; i < board.length; i++ ) {
             for (int j = 0; j < board[0].length; j++) {
@@ -28,6 +33,15 @@ public class Board {
         // Starting points
         board[4][4] = "*";
         board[9][9] = "*";
+    }
+
+    public Board(Board board) {
+        for (int i = 0; i < HEIGHT; i++ ) {
+            for (int j = 0; j < WIDTH; j++) {
+                occupied[i][j] = board.isOccupied(i, j);
+                this.board[i][j] = board.getColorOnSquare(i, j);
+            }
+        }
     }
 
     /**
@@ -71,6 +85,22 @@ public class Board {
         this.board = board;
     }
 
+    public boolean[][] getOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean[][] occupied) {
+        this.occupied = occupied;
+    }
+
+    public boolean isOccupied(int x, int y) {
+        return occupied[x][y];
+    }
+
+    public String getColorOnSquare(int x, int y) {
+        return board[x][y];
+    }
+
     /**
      *  Adds piece to the board
      * 
@@ -82,6 +112,7 @@ public class Board {
     public void addPiece(Player player, Piece piece, int originX, int originY) {
         for (Block block : piece.getBlocks()) {
             board[13 - originY - block.getY()][originX + block.getX()] = player.getColor();
+            occupied[13 - originY - block.getY()][originX + block.getX()] = true;
         }
     }
 
@@ -148,23 +179,23 @@ public class Board {
      */
     public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
         int up = 0, down = 0, left = 0, right = 0;
-        for (int j = 0; j < block.size(); j++) {
-            if ((block.get(i)).getX() == (block.get(j)).getX()) {
-                if ((block.get(i)).getY() - (block.get(j)).getY() == 1) {
+        for (Block value : block) {
+            if ((block.get(i)).getX() == value.getX()) {
+                if ((block.get(i)).getY() - value.getY() == 1) {
                     down++;
                 }
 
-                if ((block.get(i)).getY() - (block.get(j)).getY() == -1) {
+                if ((block.get(i)).getY() - value.getY() == -1) {
                     up++;
                 }
             }
 
-            if ((block.get(i)).getY() == (block.get(j)).getY()) {
-                if ((block.get(i)).getX() - (block.get(j)).getX() == 1) {
+            if ((block.get(i)).getY() == value.getY()) {
+                if ((block.get(i)).getX() - value.getX() == 1) {
                     left++;
                 }
 
-                if ((block.get(i)).getX() - (block.get(j)).getX() == -1) {
+                if ((block.get(i)).getX() - value.getX() == -1) {
                     right++;
                 }
             }
@@ -244,14 +275,14 @@ public class Board {
     /**
      * Check if there is any placed piece at the side of the selected coordinates
      * 
-     * @param player current player
+     * @param playerColor current player's color
      * @param piece selected piece by player
      * @param dest_x x coordinate
      * @param dest_y y coordinate
-     * @return
+     * @return returns true if any block is touching another piece
      */
-    public boolean isSide(Player player, Piece piece, int dest_x, int dest_y) {
-        return piece.getBlocks().stream().anyMatch(offset -> isAtSide(player.getColor(), offset, dest_x, dest_y));
+    public boolean isSide(String playerColor, Piece piece, int dest_x, int dest_y) {
+        return piece.getBlocks().stream().anyMatch(offset -> isAtSide(playerColor, offset, dest_x, dest_y));
     }
 
 }

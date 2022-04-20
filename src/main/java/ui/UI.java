@@ -10,8 +10,13 @@
 
 package ui;
 
+import model.Board;
+import model.Player;
+
 public interface UI {
     String getName();
     void displayFirstPlayer(String name);
+    void updateUI(Player player, Board board);
     void displayResults(String result);
+    void printCoordinateError();
 }

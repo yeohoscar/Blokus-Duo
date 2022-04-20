@@ -1,3 +1,12 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * GraphicalBoard class
+ *  - Board class for GUI
+ */
 package ui.graphical;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,34 +22,17 @@ public class GraphicalBoard extends Board {
     float cellHeight;
     TextureRegion blackSquare;
     TextureRegion whiteSquare;
-    Board board;
 
-    public GraphicalBoard(float boardX, float boardY, float boardWidth, float boardHeight, TextureRegion blackSquare, TextureRegion whiteSquare, Board board) {
+    public GraphicalBoard(float boardX, float boardY, float boardWidth, float boardHeight, TextureRegion blackSquare, TextureRegion whiteSquare) {
+        super();
         this.boardX = boardX;
         this.boardY = boardY;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         this.blackSquare = blackSquare;
         this.whiteSquare = whiteSquare;
-        this.board = board;
         cellHeight = boardHeight / Board.HEIGHT;
         cellWidth = boardWidth / Board.WIDTH;
-    }
-
-    public void updateBoard(Board board) {
-        this.board = new Board(board);
-    }
-
-    public void draw(SpriteBatch batch) {
-        for (int y = 0; y < Board.HEIGHT; y++) {
-            for (int x = 0; x < Board.WIDTH; x++) {
-                if (board.isOccupied(x, y)) {
-                    TextureRegion picture;
-                    picture = (board.getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
-                    batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
-                }
-            }
-        }
     }
 
     public int getBoardColumn(float x) {
@@ -59,12 +51,38 @@ public class GraphicalBoard extends Board {
         return result;
     }
 
-    public boolean isHit(float x, float y) {
-        return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
+    /**
+     * Function to update board in gui
+     * @param board board
+     */
+    public void updateBoard(Board board) {
+        super.setBoard(board.getBoard());
+        super.setOccupied(board.getOccupied());
     }
 
-    /* take in xcoor, y coor and piece and called is emptyforpiece */
-    public boolean isOccupied(int boardColumn, int boardRow) {
-        return board.isOccupied(boardColumn, boardRow);
+    /**
+     * Draw the gamepiece on the board according to players' color
+     * @param batch spritebatch
+     */
+    public void draw(SpriteBatch batch) {
+        for (int y = 0; y < Board.HEIGHT; y++) {
+            for (int x = 0; x < Board.WIDTH; x++) {
+                if (isOccupied(x, y)) {
+                    TextureRegion picture;
+                    picture = (getColorOnSquare(x, y) == "X") ? blackSquare : whiteSquare;
+                    batch.draw(picture, boardX + y * cellWidth, boardY + (13 - x) * cellHeight);
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if the board is hit
+     * @param x coordinate x
+     * @param y coordinate y
+     * @return true if the board is hit, otherwise false
+     */
+    public boolean isHit(float x, float y) {
+        return (getBoardColumn(x) != -1) && (getBoardRow(y) != -1);
     }
 }

@@ -11,16 +11,20 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
- import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
- import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Arrays;
 
- import model.Board;
- import model.Player;
- import model.piece.Block;
- import model.piece.Piece;
- import org.junit.jupiter.api.Test;
+import model.Board;
+import model.Player;
+import model.piece.Block;
+import model.piece.Piece;
+import ui.UI;
+import ui.text.TextPlayer;
+import ui.text.TextUI;
+
+import org.junit.jupiter.api.Test;
 
 
 public class BoardUnitTests {
@@ -38,8 +42,9 @@ public class BoardUnitTests {
 
     @Test
     void testAddPiece() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece piece = new Piece("T4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 0), new Block(-1, 0))));
 
         assertTrue(board.isEmpty());
@@ -53,8 +58,9 @@ public class BoardUnitTests {
 
     @Test
     void testEmptyBoard() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece piece = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
 
         assertTrue(board.isEmpty());
@@ -73,8 +79,9 @@ public class BoardUnitTests {
 
     @Test
     void testEmptySpaceForPiece() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece I2 = new Piece("I2", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1))));
         Piece O4 = new Piece("O4", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(1, 0))));
 
@@ -123,17 +130,18 @@ public class BoardUnitTests {
 
     @Test
     void testIsSide() {
+        UI ui = new TextUI();
         Board board = new Board();
-        Player player = new Player("player", "X");
+        Player player = new TextPlayer("X", (TextUI)ui);
         Piece I5 = new Piece("I5", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(0, 2), new Block(0, 3), new Block(0, 4))));
         Piece F = new Piece("F", new ArrayList<>(Arrays.asList(new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(0, -1), new Block(-1, 0))));
 
         board.addPiece(player, I5, 9, 4);
-        assertTrue(board.isSide(player, F, 9, 3));
-        assertFalse(board.isSide(player, F, 2, 2));
+        assertTrue(board.isSide(player.getColor(), F, 9, 3));
+        assertFalse(board.isSide(player.getColor(), F, 2, 2));
 
         board.addPiece(player, F, 6, 7);
-        assertTrue(board.isSide(player, I5, 5, 6));
-        assertFalse(board.isSide(player, I5, 13, 1));
+        assertTrue(board.isSide(player.getColor(), I5, 5, 6));
+        assertFalse(board.isSide(player.getColor(), I5, 13, 1));
     }
 }
