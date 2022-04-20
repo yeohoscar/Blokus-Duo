@@ -7,7 +7,6 @@
  * PlayScreenInputProcessor class
  *  - class to handle the event of playscreen
  */
-
 package ui.graphical;
 
 import java.util.ArrayList;

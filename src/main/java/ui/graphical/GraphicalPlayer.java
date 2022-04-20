@@ -7,7 +7,6 @@
  * GraphicalPlayer class
  *  - Player class for GUI
  */
-
 package ui.graphical;
 
 import java.util.ArrayList;

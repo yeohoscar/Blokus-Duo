@@ -7,7 +7,6 @@
  * GraphicalBoard class
  *  - Board class for GUI
  */
-
 package ui.graphical;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
