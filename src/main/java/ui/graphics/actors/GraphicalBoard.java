@@ -23,8 +23,8 @@ public class GraphicalBoard extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        for (int row = 0; row < board.HEIGHT; row++) {
-            for (int col = 0; col < board.WIDTH; col++) {
+        for (int row = 0; row < Board.HEIGHT; row++) {
+            for (int col = 0; col < Board.WIDTH; col++) {
                 if (board.isOccupied(col,row)) {
                     batch.draw(playerSquares[board.getOccupyingPlayer(col,row)],
                                getX()+col*squareWidth,

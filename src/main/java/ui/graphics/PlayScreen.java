@@ -14,13 +14,13 @@ import ui.graphics.actors.GraphicalGamePiece;
 
 public class PlayScreen extends ScreenAdapter {
 
-    private Skin skin;
-    private Stage stage;
-    private BlokusGame blokusGame;
-    private TiledMap tiledMap;
-    private TiledMapRenderer tiledMapRenderer;
-    private OrthographicCamera camera;
-    private Array<GraphicalGamePiece> graphicalGamePieces;
+    private final Skin skin;
+    private final Stage stage;
+    private final BlokusGame blokusGame;
+    private final TiledMap tiledMap;
+    private final TiledMapRenderer tiledMapRenderer;
+    private final OrthographicCamera camera;
+    private final Array<GraphicalGamePiece> graphicalGamePieces;
 
     public PlayScreen(BlokusGame blokusGame) {
 

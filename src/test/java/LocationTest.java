@@ -62,7 +62,7 @@ public class LocationTest {
 
         class Helper {
             void runTest(Location a, Object b, boolean expectedEqual) {
-                out.printf("\tTesting for Locations %s and %s: expected equality = %b ", a.toString(), String.valueOf(b), expectedEqual);
+                out.printf("\tTesting for Locations %s and %s: expected equality = %b ", a.toString(), b, expectedEqual);
                 boolean returnedEqual = a.equals(b);
                 out.printf(", returned equality = %b)\n", returnedEqual);
                 assertEquals(expectedEqual, returnedEqual);

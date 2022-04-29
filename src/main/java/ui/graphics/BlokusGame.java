@@ -39,7 +39,7 @@ public class BlokusGame extends Game {
 
     private StartScreen startScreen;
     private PlayScreen playScreen;
-    private BlokusDuoPlay blokusDuoPlay;
+    private final BlokusDuoPlay blokusDuoPlay;
     private PrintStream pipe;
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -110,8 +110,8 @@ public class BlokusGame extends Game {
         MapObjects objects = tiledMap.getLayers().get(2).getObjects();
 
         for(String key : gamepieceSet.getPieces().keySet()) {
-            MapObject mapObject = objects.get(String.valueOf(player.getPlayerNo())+key);
-            Gamepiece gamepiece = (Gamepiece)gamepieceSet.getPieces().get(key);
+            MapObject mapObject = objects.get(player.getPlayerNo() +key);
+            Gamepiece gamepiece = gamepieceSet.getPieces().get(key);
             float x = (float)(mapObject.getProperties().get("x"));
             float y = (float)(mapObject.getProperties().get("y"));
             GraphicalGamePiece graphicalGamePiece = new GraphicalGamePiece(key,gamepiece,square,player.getPlayerNo(),x,y,this);

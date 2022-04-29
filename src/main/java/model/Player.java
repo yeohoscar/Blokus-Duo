@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Player {
-    private GamepieceSet pieces;
+    private final GamepieceSet pieces;
     private String name;
-    private int playerNo;
+    private final int playerNo;
     private boolean lastPlayedI1;
 
     public Player(int playerNo) {
@@ -38,11 +38,7 @@ public abstract class Player {
     public abstract void setUI(UI ui);
 
     public void setLastPlayedPiece(String pieceName) {
-        if (pieceName.equals("I1")) {
-            lastPlayedI1 = true;
-        } else {
-            lastPlayedI1 = false;
-        }
+        lastPlayedI1 = pieceName.equals("I1");
     }
 
     public int playerScore() {

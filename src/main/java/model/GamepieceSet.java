@@ -81,6 +81,6 @@ public class GamepieceSet{
             mapAsString.append(key + "=" + pieces.get(key) + ", ");
         }
         mapAsString.delete(mapAsString.length()-2, mapAsString.length()).append("}");
-        return super.toString() + mapAsString.toString();
+        return super.toString() + mapAsString;
     }
 }

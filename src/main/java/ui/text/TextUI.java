@@ -44,9 +44,9 @@ public class TextUI implements ui.UI {
     }
 
     private void updateBoardDisplay() {
-        for (int y=board.HEIGHT-1; y>=0; y--) {
+        for (int y = Board.HEIGHT -1; y>=0; y--) {
             System.out.printf("%2d ",y);
-            for (int x = 0; x < board.WIDTH; x++) {
+            for (int x = 0; x < Board.WIDTH; x++) {
                 if (board.isOccupied(x,y)) {
                     System.out.print(playerSymbol[board.getOccupyingPlayer(x,y)]+" ");
                 }
@@ -70,7 +70,7 @@ public class TextUI implements ui.UI {
             System.out.println();
         }
         System.out.print("  ");
-        for (int x=0; x<board.WIDTH; x++) {
+        for (int x = 0; x< Board.WIDTH; x++) {
             System.out.printf("%2d",x);
         }
         System.out.println();

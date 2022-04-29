@@ -8,9 +8,9 @@ import ui.graphics.GraphicsUI;
 
 public class BlokusDuoPlay implements Runnable {
 
-    private Board board;
-    private Player[] players;
-    private UI ui;
+    private final Board board;
+    private final Player[] players;
+    private final UI ui;
     private int activePlayer;
 
     public BlokusDuoPlay(Board board, Player[] players, UI ui, int activePlayer) {

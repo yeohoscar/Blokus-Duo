@@ -9,8 +9,8 @@ public class Board {
      public final static int WIDTH = 14;
 
      public final static Location[] startLocations = {new Location(4,9), new Location(9,4)};
-     private boolean occupied[][] = new boolean[WIDTH][HEIGHT];
-     private int occupyingPlayer[][] = new int[WIDTH][HEIGHT];
+     private final boolean[][] occupied = new boolean[WIDTH][HEIGHT];
+     private final int[][] occupyingPlayer = new int[WIDTH][HEIGHT];
 
      public Board() {
           clear();
@@ -82,8 +82,7 @@ public class Board {
      private boolean boardSquareContains(int x, int y, int playerNo) {
           if ( x < 0 || x >= occupied.length || y < 0 || y >= occupied[0].length) return false;
           if (! occupied[x][y]) return false;
-          if (occupyingPlayer[x][y] != playerNo) return false;
-          return true;
+          return occupyingPlayer[x][y] == playerNo;
      }
 
      /*
@@ -91,13 +90,10 @@ public class Board {
       ** with the specified playerNo
       */
      private boolean boardSquareTouchesAtASide(int x, int y, int playerNo) {
-          if ( boardSquareContains(x-1,y,playerNo)
-                  || boardSquareContains(x+1,y,playerNo)
-                  || boardSquareContains(x,y-1,playerNo)
-                  || boardSquareContains(x,y+1,playerNo) )
-               return true;
-          else
-               return false;
+          return boardSquareContains(x - 1, y, playerNo)
+                  || boardSquareContains(x + 1, y, playerNo)
+                  || boardSquareContains(x, y - 1, playerNo)
+                  || boardSquareContains(x, y + 1, playerNo);
      }
 
      /*
@@ -105,13 +101,10 @@ public class Board {
       ** with the specified playerNo
       */
      private boolean boardSquareTouchesAtACorner(int x, int y, int playerNo) {
-          if ( boardSquareContains(x-1,y-1,playerNo)
-                  || boardSquareContains(x+1,y-1,playerNo)
-                  || boardSquareContains(x-1,y+1,playerNo)
-                  || boardSquareContains(x+1,y+1,playerNo) )
-               return true;
-          else
-               return false;
+          return boardSquareContains(x - 1, y - 1, playerNo)
+                  || boardSquareContains(x + 1, y - 1, playerNo)
+                  || boardSquareContains(x - 1, y + 1, playerNo)
+                  || boardSquareContains(x + 1, y + 1, playerNo);
      }
 
      private boolean touchesSamePlayerPiecesOnlyAtCorners(Gamepiece gamepiece, int x, int y) {
@@ -137,9 +130,7 @@ public class Board {
 
           if ( isOutsideBoard(gamepiece,x,y) ) return false;
           if ( overlapsOtherPieces(gamepiece,x,y) ) return false;
-          if ( ! coversStartPosition(gamepiece,x,y,Board.startLocations[playerNo]) ) return false;
-
-          return true;
+          return coversStartPosition(gamepiece, x, y, Board.startLocations[playerNo]);
      }
 
      public boolean isValidSubsequentMove(Move move) {
@@ -149,9 +140,7 @@ public class Board {
 
           if ( isOutsideBoard(gamepiece,x,y) ) return false;
           if ( overlapsOtherPieces(gamepiece,x,y) ) return false;
-          if ( ! touchesSamePlayerPiecesOnlyAtCorners(gamepiece,x,y) ) return false;
-
-          return true;
+          return touchesSamePlayerPiecesOnlyAtCorners(gamepiece, x, y);
      }
 
      public void makeMove(Move move) {
@@ -277,6 +266,6 @@ public class Board {
                }
                boardAsString.append("\n");
           }
-          return super.toString() + boardAsString.toString();
+          return super.toString() + boardAsString;
      }
 }

@@ -3,10 +3,10 @@ package model;
 import com.badlogic.gdx.Game;
 
 public class Move {
-    private Player player;
+    private final Player player;
     private String gamepieceName;
-    private Gamepiece gamepiece;
-    private Location location;
+    private final Gamepiece gamepiece;
+    private final Location location;
 
     public Move(Player player, Gamepiece gamepiece, String gamepieceName, Location location) {
         this.player = player;

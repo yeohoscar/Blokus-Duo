@@ -15,10 +15,10 @@ import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 
 public class StartScreen extends ScreenAdapter {
 
-    private Skin skin;
-    private Stage stage;
-    private BlokusGame blokusGame;
-    private Table table;
+    private final Skin skin;
+    private final Stage stage;
+    private final BlokusGame blokusGame;
+    private final Table table;
 
     public StartScreen(BlokusGame blokusGame) {
 
@@ -89,7 +89,7 @@ public class StartScreen extends ScreenAdapter {
                 }
                 blokusGame.getPipe().println(p1Name);
                 blokusGame.getPipe().println(p2Name);
-            };
+            }
         });
     }
 

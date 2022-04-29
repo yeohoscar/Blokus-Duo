@@ -20,7 +20,7 @@ public class SimpleBotPlayer extends Player {
 
     public void setBoard(Board board) {
         this.board = board;
-    };
+    }
 
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
@@ -40,7 +40,7 @@ public class SimpleBotPlayer extends Player {
                     this,
                     new Gamepiece(getGamepieceSet().get("F")),
                     "F",
-                    new Location(board.startLocations[getPlayerNo()]));
+                    new Location(Board.startLocations[getPlayerNo()]));
         } else {
             // Play the first found valid move.
             // N.B.: The game control checks that we have at least one valid move before calling this method
@@ -81,8 +81,8 @@ public class SimpleBotPlayer extends Player {
     public ArrayList<Move> getMovesWithGivenOrientation(Gamepiece piece, String gamepieceName, Player player, Board board) {
         ArrayList<Move> moves = new ArrayList<Move>();
         Move move = new Move(player,piece, gamepieceName,new Location(0,0));
-        for (int x = 0; x < board.WIDTH; x++) {
-            for (int y = 0; y < board.HEIGHT; y++) {
+        for (int x = 0; x < Board.WIDTH; x++) {
+            for (int y = 0; y < Board.HEIGHT; y++) {
                 move.getLocation().setX(x);
                 move.getLocation().setY(y);
                 if (board.isValidSubsequentMove(move)) {

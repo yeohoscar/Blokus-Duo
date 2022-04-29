@@ -1,3 +1,4 @@
+import ApplePlus.ApplePlusBot;
 import SimpleBot.SimpleBotPlayer;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
@@ -47,7 +48,7 @@ public class Sprint5 {
         }
 
         for (int playerNo = 0; playerNo < players.length; playerNo++) {
-            SimpleBotPlayer botPlayer = new SimpleBotPlayer(playerNo);
+            SimpleBotPlayer botPlayer = new ApplePlusBot(playerNo);
             botPlayer.setBoard(board);
             players[playerNo] = botPlayer;
         }

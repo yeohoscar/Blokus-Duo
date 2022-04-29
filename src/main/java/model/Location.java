@@ -51,6 +51,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return super.toString()+"(x="+Integer.toString(getX())+",y="+Integer.toString(getY())+")";
+        return super.toString()+"(x="+ getX() +",y="+ getY() +")";
     }
 }

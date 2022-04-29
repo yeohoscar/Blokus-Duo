@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class Gamepiece {
 
-    Location locations[];
+    Location[] locations;
     int playerNo;
 
-    public Gamepiece(int coordinates[], int playerNo) {
+    public Gamepiece(int[] coordinates, int playerNo) {
         locations = new Location[coordinates.length / 2];
         for (int i=0; i<locations.length; i++)
         {
