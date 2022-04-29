@@ -43,7 +43,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
         double maxPoints = -1000;
         Move optimalMove = null;
         for (Move move : moves) {
-            double points = gradeMove(move);
+            double points = gradeMove(move, moves.size());
             if (maxPoints < points) {
                 maxPoints = points;
                 optimalMove = move;
@@ -52,14 +52,16 @@ public class ApplePlusBot extends SimpleBotPlayer {
         return optimalMove;
     }
 
+
+
     /**
      * Calculates how good the move is and assigns it points based on how good the move is.
      *
      * @param move move to be graded
      * @return the points the move got
      */
-    public double gradeMove(Move move) {
-        return builder(move) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
+    public double gradeMove(Move move, int numMoves) {
+        return builder(move, numMoves) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
     }
     
     private double bigPiece(Move move) {
@@ -73,16 +75,15 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @param move
      * @return
      */
-    private int builder(Move move) {
+    private int builder(Move move, int numMovesBefore) {
         Board possibleBoard = new Board(board);
         possibleBoard.makeMove(move);
 
-        int before = getPlayerMoves(this, board).size();
         getGamepieceSet().remove(move.getGamepieceName());
-        int after = getPlayerMoves(this, possibleBoard).size();
+        int numMovesAfter = getPlayerMoves(this, possibleBoard).size();
         getGamepieceSet().getPieces().put(move.getGamepieceName(), move.getGamepiece());
 
-        return after - before;
+        return numMovesAfter - numMovesBefore;
     }
 
     private int blocker(Move move) {
