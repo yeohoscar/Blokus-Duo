@@ -40,7 +40,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @return optimal move
      */
     public Move getOptimalMove(ArrayList<Move> moves) {
-        int maxPoints = 0;
+        int maxPoints = Integer.MIN_VALUE;
         Move optimalMove = null;
         for (Move move : moves) {
             int points = gradeMove(move);
