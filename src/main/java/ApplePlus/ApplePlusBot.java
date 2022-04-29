@@ -40,10 +40,10 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @return optimal move
      */
     public Move getOptimalMove(ArrayList<Move> moves) {
-        int maxPoints = 0;
+        double maxPoints = -1000;
         Move optimalMove = null;
         for (Move move : moves) {
-            int points = gradeMove(move);
+            double points = gradeMove(move);
             if (maxPoints < points) {
                 maxPoints = points;
                 optimalMove = move;
@@ -58,11 +58,11 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @param move move to be graded
      * @return the points the move got
      */
-    public int gradeMove(Move move) {
+    public double gradeMove(Move move) {
         return builder(move) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
     }
     
-    private int bigPiece(Move move) {
+    private double bigPiece(Move move) {
         return move.getGamepiece().getLocations().length / this.getGamepieceSet().getPieces().size();
     }
 
