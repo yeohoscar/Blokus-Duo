@@ -13,6 +13,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
     private int blockerWeight = 1;
     private int bigPieceWeight = 1;
     ArrayList<Double> pointList = new ArrayList<>();
+    private int index = 0;
 
     public ApplePlusBot(int playerno) {
         super(playerno);
@@ -44,8 +45,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
         /*double maxPoints = -1000;
         Move optimalMove = null;
         for (Move move : moves) {
-            double points = gradeMove(move);
-            pointList.add(points);
+            double points = gradeMove(move, moves.size());
             if (maxPoints < points) {
                 //System.out.println(moves.size());
                 maxPoints = points;
@@ -54,13 +54,25 @@ public class ApplePlusBot extends SimpleBotPlayer {
         }*/
 
         for (Move move : moves) {
-            pointList.add(gradeMove(move));
+            pointList.add(gradeMove(move, moves.size()));
         }
 
-        int index = minimax(0, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
+        double maxPoints = -1000;
+        int n = 0;
+        for (int i = 0; i < moves.size(); i++) {
+            double point = minimax(0, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
+            if (maxPoints < point) {
+                //System.out.println(moves.size());
+                maxPoints = point;
+                n = i;
+            }
+        }
 
+        System.out.println(index + " " + n);
         return moves.get(index);
     }
+
+
 
     /**
      * Calculates how good the move is and assigns it points based on how good the move is.
@@ -68,8 +80,8 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @param move move to be graded
      * @return the points the move got
      */
-    public double gradeMove(Move move) {
-        return builder(move) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
+    public double gradeMove(Move move, int numMoves) {
+        return builder(move, numMoves) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
     }
     
     private double bigPiece(Move move) {
@@ -83,16 +95,15 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @param move
      * @return
      */
-    private int builder(Move move) {
+    private int builder(Move move, int numMovesBefore) {
         Board possibleBoard = new Board(board);
         possibleBoard.makeMove(move);
 
-        int before = getPlayerMoves(this, board).size();
         getGamepieceSet().remove(move.getGamepieceName());
-        int after = getPlayerMoves(this, possibleBoard).size();
+        int numMovesAfter = getPlayerMoves(this, possibleBoard).size();
         getGamepieceSet().getPieces().put(move.getGamepieceName(), move.getGamepiece());
 
-        return after - before;
+        return numMovesAfter - numMovesBefore;
     }
 
     private int blocker(Move move) {
@@ -105,10 +116,9 @@ public class ApplePlusBot extends SimpleBotPlayer {
         return before - after;
     }
 
-    private int minimax(int position, int depth, double alpha, double beta, boolean maximizingPlayer) {
-        int idx = 0;
+    private double minimax(int position, int depth, double alpha, double beta, boolean maximizingPlayer) {
         if (depth == 0) {
-            return position;
+            return pointList.get(position);
         }
 
         if (maximizingPlayer) {
@@ -117,18 +127,16 @@ public class ApplePlusBot extends SimpleBotPlayer {
             for (int i = 0; i < 2; i++) {
                 double value = minimax(position * 2 + i, depth - 1, alpha, beta, false);
                 max = Math.max(max, value);
-                if (max == value) {
-                    idx = position;
-                }
-
                 alpha = Math.max(alpha, max);
-
+                if (max == value) {
+                    index = position;
+                }
                 if (beta <= alpha) {
                     break;
                 }
             }
 
-            return idx;
+            return max;
 
         } else {
             double min = Double.MAX_VALUE;
@@ -137,7 +145,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
                 double value = minimax(position * 2 + i, depth - 1, alpha, beta, true);
                 min = Math.min(min, value);
                 if (min == value) {
-                    idx = position;
+                    index = position;
                 }
 
                 beta = Math.min(beta, min);
@@ -147,7 +155,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
                 }
             }
 
-            return idx;
+            return min;
         }
     }
 }
