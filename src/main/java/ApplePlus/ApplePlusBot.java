@@ -12,6 +12,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
     private int builderWeight = 1;
     private int blockerWeight = 1;
     private int bigPieceWeight = 1;
+    ArrayList<Double> pointList = new ArrayList<>();
 
     public ApplePlusBot(int playerno) {
         super(playerno);
@@ -40,16 +41,25 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @return optimal move
      */
     public Move getOptimalMove(ArrayList<Move> moves) {
-        int maxPoints = Integer.MIN_VALUE;
+        /*double maxPoints = -1000;
         Move optimalMove = null;
         for (Move move : moves) {
-            int points = gradeMove(move);
+            double points = gradeMove(move);
+            pointList.add(points);
             if (maxPoints < points) {
+                //System.out.println(moves.size());
                 maxPoints = points;
                 optimalMove = move;
             }
+        }*/
+
+        for (Move move : moves) {
+            pointList.add(gradeMove(move));
         }
-        return optimalMove;
+
+        int index = minimax(0, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
+
+        return moves.get(index);
     }
 
     /**
@@ -58,11 +68,11 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @param move move to be graded
      * @return the points the move got
      */
-    public int gradeMove(Move move) {
+    public double gradeMove(Move move) {
         return builder(move) * builderWeight + blocker(move) * blockerWeight + bigPiece(move) * bigPieceWeight;
     }
     
-    private int bigPiece(Move move) {
+    private double bigPiece(Move move) {
         return move.getGamepiece().getLocations().length / this.getGamepieceSet().getPieces().size();
     }
 
@@ -93,5 +103,51 @@ public class ApplePlusBot extends SimpleBotPlayer {
         int after = getPlayerMoves(this.opponent, possibleBoard).size();
 
         return before - after;
+    }
+
+    private int minimax(int position, int depth, double alpha, double beta, boolean maximizingPlayer) {
+        int idx = 0;
+        if (depth == 0) {
+            return position;
+        }
+
+        if (maximizingPlayer) {
+            double max = Double.MIN_VALUE;
+
+            for (int i = 0; i < 2; i++) {
+                double value = minimax(position * 2 + i, depth - 1, alpha, beta, false);
+                max = Math.max(max, value);
+                if (max == value) {
+                    idx = position;
+                }
+
+                alpha = Math.max(alpha, max);
+
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+
+            return idx;
+
+        } else {
+            double min = Double.MAX_VALUE;
+
+            for (int i = 0; i < 2; i++) {
+                double value = minimax(position * 2 + i, depth - 1, alpha, beta, true);
+                min = Math.min(min, value);
+                if (min == value) {
+                    idx = position;
+                }
+
+                beta = Math.min(beta, min);
+
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+
+            return idx;
+        }
     }
 }
