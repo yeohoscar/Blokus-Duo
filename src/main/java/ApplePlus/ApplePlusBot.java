@@ -72,8 +72,6 @@ public class ApplePlusBot extends SimpleBotPlayer {
         return moves.get(index);
     }
 
-
-
     /**
      * Calculates how good the move is and assigns it points based on how good the move is.
      *
@@ -115,6 +113,8 @@ public class ApplePlusBot extends SimpleBotPlayer {
 
         return before - after;
     }
+
+    
 
     private double minimax(int position, int depth, double alpha, double beta, boolean maximizingPlayer) {
         if (depth == 0) {
