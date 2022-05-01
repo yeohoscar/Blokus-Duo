@@ -7,13 +7,75 @@ import model.Location;
 import model.Move;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ApplePlusBot extends SimpleBotPlayer {
+    protected static class Node<T> {
+        private List<Node<T>> children = new ArrayList<Node<T>>();
+        private Node<T> parent = null;
+        private T data = null;
+        private double value = 0.0;
+
+        public Node(T data, double value) {
+            this.data = data;
+            this.value = value;
+        }
+
+        public Node(T data, Node<T> parent) {
+            this.data = data;
+            this.parent = parent;
+        }
+
+        public T getData() {
+            return data;
+        }
+
+        public double getValue() {
+            return value;
+        }
+
+        public Node<T> getParent() {
+            return parent;
+        }
+
+        public List<Node<T>> getChildren() {
+            return children;
+        }
+
+        public void setData(T data, double value) {
+            this.data = data;
+            this.value = value;
+        }
+
+        public void setParent(Node<T> parent) {
+            this.parent = parent;
+        }
+
+        public void addChild(Node<T> child) {
+            child.setParent(this);
+            this.children.add(child);
+        }
+
+        public void addChild(T data, double value) {
+            this.addChild(new Node<T>(data, value));
+        }
+
+        public void addChildren(List<Node<T>> children) {
+            for (Node<T> node : children) {
+                node.setParent(this);
+            }
+            this.children.addAll(children);
+        }
+
+        public boolean isLeafNode() {
+            return this.children.isEmpty();
+        }
+    }
+
+    Node<Move> optimal = null;
     private int builderWeight = 1;
     private int blockerWeight = 1;
     private int bigPieceWeight = 1;
-    ArrayList<Double> pointList = new ArrayList<>();
-    private int index = 0;
 
     public ApplePlusBot(int playerno) {
         super(playerno);
@@ -53,23 +115,25 @@ public class ApplePlusBot extends SimpleBotPlayer {
             }
         }*/
 
-        for (Move move : moves) {
-            pointList.add(gradeMove(move, moves.size()));
-        }
+        Node<Move> root = new Node<Move>(null, 0.0);
 
-        double maxPoints = -1000;
-        int n = 0;
         for (int i = 0; i < moves.size(); i++) {
-            double point = minimax(0, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
-            if (maxPoints < point) {
-                //System.out.println(moves.size());
-                maxPoints = point;
-                n = i;
-            }
+            double point = gradeMove(moves.get(i), moves.size(), board);
+            root.addChild(moves.get(i), point);
+            /*root.addChild(moves.get(i), 0.0);
+            possible.makeMove(moves.get(i));
+            ArrayList<Move> opMove = getPlayerMoves(this.opponent, possible);
+            for (int j = 0; j < opMove.size(); j++) {
+                List<Node<Move>> child = root.getChildren();
+                double point = gradeMove(opMove.get(j), opMove.size(), possible);
+                child.get(i).addChild(opMove.get(j), point);
+            }*/
         }
 
-        System.out.println(index + " " + n);
-        return moves.get(index);
+        minimax(root, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
+
+        //System.out.println(optimal.getData().getGamepieceName() + " " + optimal.getData().getLocation().getX() + " " + optimal.getData().getLocation().getY());
+        return optimal.getData();
     }
 
     /**
@@ -114,48 +178,119 @@ public class ApplePlusBot extends SimpleBotPlayer {
         return before - after;
     }
 
-    
-
-    private double minimax(int position, int depth, double alpha, double beta, boolean maximizingPlayer) {
-        if (depth == 0) {
-            return pointList.get(position);
+    private double minimax(Node<Move> point, int depth, double alpha, double beta, boolean maximizingPlayer) {
+        if (depth == 0 || point.isLeafNode()) {
+            return point.getValue();
         }
 
         if (maximizingPlayer) {
-            double max = Double.MIN_VALUE;
+            double max = -10000;
 
-            for (int i = 0; i < 2; i++) {
-                double value = minimax(position * 2 + i, depth - 1, alpha, beta, false);
+            for (Node<Move> n : point.getChildren()) {
+                double value = minimax(n, depth - 1, alpha, beta, false);
                 max = Math.max(max, value);
-                alpha = Math.max(alpha, max);
                 if (max == value) {
-                    index = position;
+                    optimal = n;
                 }
-                if (beta <= alpha) {
+                if (max >= beta) {
                     break;
                 }
+                alpha = Math.max(alpha, max);
             }
 
             return max;
-
         } else {
             double min = Double.MAX_VALUE;
 
-            for (int i = 0; i < 2; i++) {
-                double value = minimax(position * 2 + i, depth - 1, alpha, beta, true);
+            for (Node<Move> n : point.getChildren()) {
+                double value = minimax(n, depth - 1, alpha, beta, true);
                 min = Math.min(min, value);
                 if (min == value) {
-                    index = position;
+                    optimal = n;
                 }
-
-                beta = Math.min(beta, min);
-
-                if (beta <= alpha) {
+                if (min <= alpha) {
                     break;
                 }
+                beta = Math.min(beta, min);
             }
 
             return min;
         }
     }
+
+    /*private void findMedian(ArrayList<Double> pointList, ArrayList<Move> moves) {
+        sort(pointList, moves, 0, pointList.size() - 1);
+        System.out.println("a" + pointList.size() + " " + moves.size());
+
+        int quartile = pointList.size() * 25 / 100;
+
+        for (int i = 0, j = pointList.size() - 2; i < quartile; i++, j-=2) {
+            pointList.remove(0);
+            pointList.remove(j);
+            moves.remove(0);
+            moves.remove(j);
+        }
+
+        System.out.println("b" + pointList.size() + " " + moves.size());
+    }
+
+    private void merge(ArrayList<Double> points, ArrayList<Move> moves, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        ArrayList<Double> leftPoint = new ArrayList<>();
+        ArrayList<Double> rightPoint = new ArrayList<>();
+        ArrayList<Move> leftMove = new ArrayList<>();
+        ArrayList<Move> rightMove = new ArrayList<>();
+
+        for (int i = 0; i < n1; i++) {
+            leftPoint.add(points.get(left + i));
+            leftMove.add(moves.get(left + i));
+        }
+        for (int j = 0; j < n2; j++) {
+            rightPoint.add(points.get(mid + 1 + j));
+            rightMove.add(moves.get(mid + 1 + j));
+        }
+
+        int i = 0, j = 0;
+        int k = left;
+
+        while (i < n1 && j < n2) {
+            if (leftPoint.get(i) <= rightPoint.get(j)) {
+                points.set(k, leftPoint.get(i));
+                moves.set(k, leftMove.get(i));
+                i++;
+            } else {
+                points.set(k, rightPoint.get(j));
+                moves.set(k, rightMove.get(j));
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            points.set(k, leftPoint.get(i));
+            moves.set(k, leftMove.get(i));
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            points.set(k, rightPoint.get(j));
+            moves.set(k, rightMove.get(j));
+            j++;
+            k++;
+        }
+    }
+
+    private void sort(ArrayList<Double> points, ArrayList<Move> moves, int left, int right) {
+        if (left < right) {
+            int mid = (right + left) / 2;
+
+            sort(points, moves, left, mid);
+            sort(points, moves, mid + 1, right);
+
+            merge(points, moves, left, mid, right);
+        }
+    }*/
 }
