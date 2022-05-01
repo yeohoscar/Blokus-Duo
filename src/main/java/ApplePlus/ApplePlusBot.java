@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplePlusBot extends SimpleBotPlayer {
+    // Game Tree implementation
     protected static class Node<T> {
         private List<Node<T>> children = new ArrayList<Node<T>>();
         private Node<T> parent = null;
@@ -72,7 +73,6 @@ public class ApplePlusBot extends SimpleBotPlayer {
         }
     }
 
-    Node<Move> optimal = null;
     private int builderWeight = 1;
     private int blockerWeight = 1;
     private int bigPieceWeight = 1;
@@ -117,11 +117,14 @@ public class ApplePlusBot extends SimpleBotPlayer {
 
         Node<Move> root = new Node<Move>(null, 0.0);
 
+        Board possible = new Board(board);
         for (int i = 0; i < moves.size(); i++) {
+            // Get the grade point for each possible move 
             double point = gradeMove(moves.get(i), moves.size(), board);
             root.addChild(moves.get(i), point);
-            /*root.addChild(moves.get(i), 0.0);
-            possible.makeMove(moves.get(i));
+
+            //root.addChild(moves.get(i), 0.0);
+            /*possible.makeMove(moves.get(i));
             ArrayList<Move> opMove = getPlayerMoves(this.opponent, possible);
             for (int j = 0; j < opMove.size(); j++) {
                 List<Node<Move>> child = root.getChildren();
@@ -130,9 +133,9 @@ public class ApplePlusBot extends SimpleBotPlayer {
             }*/
         }
 
-        minimax(root, 3, Double.MIN_VALUE, Double.MAX_VALUE, true);
+        // Obtain the optimal node
+        Node<Move> optimal = minimax(root, 2, Double.MIN_VALUE, Double.MAX_VALUE, true);
 
-        //System.out.println(optimal.getData().getGamepieceName() + " " + optimal.getData().getLocation().getX() + " " + optimal.getData().getLocation().getY());
         return optimal.getData();
     }
 
@@ -178,32 +181,51 @@ public class ApplePlusBot extends SimpleBotPlayer {
         return before - after;
     }
 
-    private double minimax(Node<Move> point, int depth, double alpha, double beta, boolean maximizingPlayer) {
-        if (depth == 0 || point.isLeafNode()) {
-            return point.getValue();
+    /**
+     * A searching function which implements alpha-beta pruning algorithm 
+     * that allows the program searches much faster.
+     * 
+     * @param point Node of game tree
+     * @param depth The depth to search in game tree
+     * @param alpha The best value that the maximizer currently can guarantee at that level or above
+     * @param beta The best value that the minimizer currently can guarantee at that level or above
+     * @param maximizingPlayer Check if the current player is maxiziming or minimizing player
+     * @return The optimal node
+     */
+    private Node<Move> minimax(Node<Move> point, int depth, double alpha, double beta, boolean maximizingPlayer) {
+        Node<Move> optimal = null;
+
+        // Return the current node if it is a leaf node
+        if (depth == 0 || point.isLeafNode()) { 
+            return point;
         }
 
         if (maximizingPlayer) {
             double max = -10000;
 
+            // Recur for all the children of the node
             for (Node<Move> n : point.getChildren()) {
-                double value = minimax(n, depth - 1, alpha, beta, false);
+                double value = minimax(n, depth - 1, alpha, beta, false).value;
                 max = Math.max(max, value);
+
+                // Update the optimal node
                 if (max == value) {
                     optimal = n;
                 }
+
+                // Alpha beta pruning
                 if (max >= beta) {
                     break;
                 }
                 alpha = Math.max(alpha, max);
             }
 
-            return max;
+            return optimal;
         } else {
             double min = Double.MAX_VALUE;
 
             for (Node<Move> n : point.getChildren()) {
-                double value = minimax(n, depth - 1, alpha, beta, true);
+                double value = minimax(n, depth - 1, alpha, beta, true).value;
                 min = Math.min(min, value);
                 if (min == value) {
                     optimal = n;
@@ -214,7 +236,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
                 beta = Math.min(beta, min);
             }
 
-            return min;
+            return optimal;
         }
     }
 
