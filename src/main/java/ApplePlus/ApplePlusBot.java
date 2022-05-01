@@ -73,12 +73,19 @@ public class ApplePlusBot extends SimpleBotPlayer {
     }
 
     Node<Move> optimal = null;
-    private int builderWeight = 1;
-    private int blockerWeight = 1;
-    private int bigPieceWeight = 1;
+    private double builderWeight = 1;
+    private double blockerWeight = 1;
+    private double bigPieceWeight = 1;
 
     public ApplePlusBot(int playerno) {
         super(playerno);
+    }
+
+    public ApplePlusBot(int playerno, double builderWeight, double blockerWeight, double bigPieceWeight) {
+        super(playerno);
+        this.builderWeight = builderWeight;
+        this.blockerWeight = blockerWeight;
+        this.bigPieceWeight = bigPieceWeight;
     }
 
     @Override
@@ -147,7 +154,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
     }
     
     private double bigPiece(Move move) {
-        return move.getGamepiece().getLocations().length / this.getGamepieceSet().getPieces().size();
+        return (double) move.getGamepiece().getLocations().length / this.getGamepieceSet().getPieces().size();
     }
 
     /**
@@ -184,7 +191,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
         }
 
         if (maximizingPlayer) {
-            double max = -10000;
+            double max = Double.MIN_VALUE;
 
             for (Node<Move> n : point.getChildren()) {
                 double value = minimax(n, depth - 1, alpha, beta, false);
