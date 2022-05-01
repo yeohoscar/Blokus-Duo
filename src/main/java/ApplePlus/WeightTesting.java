@@ -26,9 +26,11 @@ public class WeightTesting {
     /**
      * Generates random weights for bots and plays them against each other
      */
-    public static void main(String[] args) {
+    public static void calculateWeights() {
         Random rand = new Random();
         WeightPlayer[] weightPlayers = new WeightPlayer[NUM_PLAYERS];
+
+        //Initialise bots with random weights
         for (int i = 0; i < NUM_PLAYERS; i++) {
             double weight1 = rand.nextDouble();
             double weight2 = rand.nextDouble(1-weight1);
@@ -36,6 +38,7 @@ public class WeightTesting {
             weightPlayers[i] = new WeightPlayer(i, weight1, weight2, weight3);
         }
 
+        //Play each bot against every other bot
         for (int i = 0; i < NUM_PLAYERS - 1; i++) {
             for (int j = i + 1; j < NUM_PLAYERS; j++) {
                 for (int k = 0; k < NUM_GAMES; k++) {
@@ -44,6 +47,7 @@ public class WeightTesting {
             }
         }
 
+        //Sum results to get fitness
         for (int i = 0; i < NUM_PLAYERS; i++) {
             int sum = 0;
             for (int j = 0; j < NUM_PLAYERS; j++) {

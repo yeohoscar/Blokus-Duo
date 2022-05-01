@@ -84,9 +84,9 @@ public class ApplePlusBot extends SimpleBotPlayer {
     }
 
     Node<Move> optimal = null;
-    private double builderWeight = 1;
-    private double blockerWeight = 1;
-    private double bigPieceWeight = 1;
+    private double builderWeight = 0.383841621015268;
+    private double blockerWeight = 0.23846851026921964;
+    private double bigPieceWeight = 0.37768986871551236;
 
     public ApplePlusBot(int playerno) {
         super(playerno);
