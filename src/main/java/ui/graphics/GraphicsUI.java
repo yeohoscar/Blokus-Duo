@@ -105,7 +105,7 @@ public class GraphicsUI implements UI {
             @Override
             public void run() {
                 Player winner = players[0].playerScore() > players[1].playerScore() ? players[0] : players[1];
-                game.showDialog("GAME OVER ! Player "+winner.getName()+" has won.");
+                game.showDialog("GAME OVER ! Player "+winner.getName()+" has won.\n"+players[0].getName()+"'s score: "+ players[0].playerScore()+"\n"+players[1].getName()+"'s score: "+players[1].playerScore());
                 game.displayMessage("Game over!");
             }
         });
