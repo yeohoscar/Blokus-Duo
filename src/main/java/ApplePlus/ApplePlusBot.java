@@ -117,24 +117,43 @@ public class ApplePlusBot extends SimpleBotPlayer {
 
         Node<Move> root = new Node<Move>(null, 0.0);
 
-        Board possible = new Board(board);
+        // Temporary board to make the moves of current player
+        //Board possible = new Board(board);
+
         for (int i = 0; i < moves.size(); i++) {
             // Get the grade point for each possible move 
             double point = gradeMove(moves.get(i), moves.size(), board);
             root.addChild(moves.get(i), point);
 
-            //root.addChild(moves.get(i), 0.0);
-            /*possible.makeMove(moves.get(i));
+            /**
+             * The algorithm should check for the next few moves done by both player and pick the optimal
+             * move that the current player can make. However, the execution time is longer than we expected
+             * since the size of the list is too large. So we decided to reduce the deptth to be searched in
+             * the game tree to increase the efficiency of the algorithm.
+             * 
+             * Below is the pseudocode to evaluate the moves after few game turns. Each move is made to obtain 
+             * the possible moves of opponent player. A game tree is built with the possible moves of opponent player
+             * is the children of each move of current player. Then, the moves are graded and passed into minimax
+             * algorithm to look for the optimal move can be make by the current player.
+             */
+            /*root.addChild(moves.get(i), 0.0);
+            possible.makeMove(moves.get(i));
             ArrayList<Move> opMove = getPlayerMoves(this.opponent, possible);
+            Board possible2 = new Board(possible);
             for (int j = 0; j < opMove.size(); j++) {
                 List<Node<Move>> child = root.getChildren();
-                double point = gradeMove(opMove.get(j), opMove.size(), possible);
-                child.get(i).addChild(opMove.get(j), point);
+                child.get(i).addChild(opMove.get(j), 0.0);
+                ArrayList<Move> curMove = getPlayerMoves(this, possible2);
+                for (int k = 0; k < curMove.size(); k++) {
+                    List<Node<Move>> grandchild = child.getChildren();
+                    double point = gradeMove(curMove.get(k), curMove.size(), possible2);
+                    grandchild.get(k).addChild(curMove.get(k), point);
+                }
             }*/
         }
 
         // Obtain the optimal node
-        Node<Move> optimal = minimax(root, 2, Double.MIN_VALUE, Double.MAX_VALUE, true);
+        Node<Move> optimal = minimax(root, 1, Double.MIN_VALUE, Double.MAX_VALUE, true);
 
         return optimal.getData();
     }
