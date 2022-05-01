@@ -1,5 +1,15 @@
 package ApplePlus;
 
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * Modified version of BlokusDuoPlay
+ *  - used for weight testing
+ */
+
 import model.Board;
 import model.Move;
 import model.Player;
@@ -19,6 +29,10 @@ public class BlokusDuoWeight {
         this.activePlayer = activePlayer;
     }
 
+    /**
+     * Controls the flow of the game
+     * @return result of game
+     */
     public int run() {
 
         // Get player names
@@ -86,10 +100,6 @@ public class BlokusDuoWeight {
 
     public UI getUI() {
         return ui;
-    }
-
-    public Player[] getPlayers() {
-        return players;
     }
 }
 

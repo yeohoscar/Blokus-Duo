@@ -1,5 +1,15 @@
 package ApplePlus;
 
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * Bot class
+ *  - implementation of a smarter version of SimpleBotPlayer
+ */
+
 import SimpleBot.SimpleBotPlayer;
 import model.Board;
 import model.Gamepiece;
@@ -112,17 +122,6 @@ public class ApplePlusBot extends SimpleBotPlayer {
      * @return optimal move
      */
     private Move getOptimalMove(ArrayList<Move> moves) {
-        /*double maxPoints = -1000;
-        Move optimalMove = null;
-        for (Move move : moves) {
-            double points = gradeMove(move, moves.size());
-            if (maxPoints < points) {
-                //System.out.println(moves.size());
-                maxPoints = points;
-                optimalMove = move;
-            }
-        }*/
-
         Node<Move> root = new Node<Move>(null, 0.0);
 
         // Temporary board to make the moves of current player
@@ -175,29 +174,46 @@ public class ApplePlusBot extends SimpleBotPlayer {
     public double gradeMove(Move move, int numMoves, Board b) {
         return builder(move, numMoves, b) * builderWeight + blocker(move, b) * blockerWeight + bigPiece(move) * bigPieceWeight;
     }
-    
+
+    /**
+     * Grades move based on the value of its size in the current stage of the game
+     *
+     * @param move move to be graded
+     * @return the points the move got
+     */
     private double bigPiece(Move move) {
         return (double) move.getGamepiece().getLocations().length / this.getGamepieceSet().getPieces().size();
     }
 
     /**
-     * Grades move based on builder
-     * Not completed
+     * Grades move based on how many growth points it creates
      *
-     * @param move
-     * @return
+     * @param move move to be graded
+     * @param numMovesBefore the number of moves before this move is made
+     * @param b the current board state
+     * @return the points the move got
      */
     private int builder(Move move, int numMovesBefore, Board b) {
         Board possibleBoard = new Board(b);
         possibleBoard.makeMove(move);
 
+        //Remove piece since this piece is used in order to get the possible board
         getGamepieceSet().remove(move.getGamepieceName());
+        //Check number of possible moves after piece is placed
         int numMovesAfter = getPlayerMoves(this, possibleBoard).size();
+        //Put piece back into player's set
         getGamepieceSet().getPieces().put(move.getGamepieceName(), move.getGamepiece());
 
         return numMovesAfter - numMovesBefore;
     }
 
+    /**
+     * Grades move based on the number of the opponent's growth points the move obstructs
+     *
+     * @param move move to be graded
+     * @param b the current board state
+     * @return the points the move got
+     */
     private int blocker(Move move, Board b) {
         Board possibleBoard = new Board(b);
         possibleBoard.makeMove(move);

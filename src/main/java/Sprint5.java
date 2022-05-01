@@ -48,7 +48,7 @@ public class Sprint5 {
         }
 
         for (int playerNo = 0; playerNo < players.length; playerNo++) {
-            SimpleBotPlayer botPlayer = new ApplePlusBot(playerNo);
+            SimpleBotPlayer botPlayer = new SimpleBotPlayer(playerNo);
             botPlayer.setBoard(board);
             players[playerNo] = botPlayer;
         }
