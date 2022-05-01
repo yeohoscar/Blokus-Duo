@@ -228,7 +228,7 @@ public class ApplePlusBot extends SimpleBotPlayer {
         }
 
         if (maximizingPlayer) {
-            double max = Double.MIN_VALUE;
+            double max = -10000;
 
             // Recur for all the children of the node
             for (Node<Move> n : point.getChildren()) {
