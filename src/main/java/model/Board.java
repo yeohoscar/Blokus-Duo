@@ -1,288 +1,271 @@
 package model;
 
-/**
- * Team ApplePlus
- * Members: Ao Peng     20202688
- *          Oscar Yeoh  20403662
- *          KarYen Yap  20202149
- * 
- * Board class
- *  - represents Blokus board
- */
-
-import model.piece.*;
-
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.StringTokenizer;
 
 public class Board {
-    public final static int WIDTH = 14;
-    public final static int HEIGHT = 14;
-    public final static int X = 0;
-    public final static int O = 1;
 
-    private String[][] board = new String[WIDTH][HEIGHT];
-    private boolean[][] occupied = new boolean[WIDTH][HEIGHT];
+     public final static int HEIGHT = 14;
+     public final static int WIDTH = 14;
 
-    public Board() {
-        // initialize the board
-        for (int i = 0; i < board.length; i++ ) {
-            for (int j = 0; j < board[0].length; j++) {
-                board[i][j] = ".";
-            }
+     public final static Location[] startLocations = {new Location(4,9), new Location(9,4)};
+     private final boolean[][] occupied = new boolean[WIDTH][HEIGHT];
+     private final int[][] occupyingPlayer = new int[WIDTH][HEIGHT];
+
+     public Board() {
+          clear();
+     }
+
+     public Board(Board board) {
+          for (int y = 0; y < HEIGHT; y++) {
+               for (int x = 0; x < WIDTH; x++) {
+                    this.occupied[x][y] = board.isOccupied(x,y);
+                    this.occupyingPlayer[x][y] = board.getOccupyingPlayer(x,y);
+               }
+          }
+     }
+
+     public boolean isOccupied(int x, int y) {
+          return occupied[x][y];
+     }
+
+     public int getOccupyingPlayer(int x, int y) {
+          return occupyingPlayer[x][y];
+     }
+
+     public int getNumberOfPlayers() {
+          return startLocations.length;
+     }
+
+     public void clear() {
+          for (int y = 0; y < HEIGHT; y++) {
+               for (int x = 0; x < WIDTH; x++) {
+                    occupied[x][y] = false;
+                    occupyingPlayer[x][y] = 0;
+               }
+          }
+     }
+
+     private boolean isOutsideBoard(Gamepiece gamepiece, int x, int y) {
+          boolean result = false;
+          for (Location l : gamepiece.locations) {
+               if (((l.getX()+x) < 0) || ((l.getX()+x) >= WIDTH) || ((l.getY()+y)<0) || ((l.getY()+y)>=HEIGHT)) {
+                    result = true;
+               }
+          }
+          return result;
+     }
+
+     private boolean overlapsOtherPieces(Gamepiece gamepiece, int x, int y) {
+          boolean result = false;
+          for (Location l : gamepiece.locations) {
+               if (occupied[l.getX()+x][l.getY()+y]) {
+                    result = true;
+               }
+          }
+          return result;
+     }
+
+     private boolean coversStartPosition(Gamepiece gamepiece, int x, int y, Location start) {
+          boolean result = false;
+          for (Location l : gamepiece.locations) {
+               if (l.getX()+x == start.getX() && l.getY()+y == start.getY()) {
+                    result = true;
+               }
+          }
+          return result;
+     }
+
+     /* This function performs boundary checking and returns true only if the target square is within
+      ** board, is occupied, AND contains the specified playerNo
+      */
+     private boolean boardSquareContains(int x, int y, int playerNo) {
+          if ( x < 0 || x >= occupied.length || y < 0 || y >= occupied[0].length) return false;
+          if (! occupied[x][y]) return false;
+          return occupyingPlayer[x][y] == playerNo;
+     }
+
+     /*
+      ** Checks if at least one square at a side of the specified board location is occupied by a gamepiece
+      ** with the specified playerNo
+      */
+     private boolean boardSquareTouchesAtASide(int x, int y, int playerNo) {
+          return boardSquareContains(x - 1, y, playerNo)
+                  || boardSquareContains(x + 1, y, playerNo)
+                  || boardSquareContains(x, y - 1, playerNo)
+                  || boardSquareContains(x, y + 1, playerNo);
+     }
+
+     /*
+      ** Checks if at least one square at a corner of the specified board location is occupied by a gamepiece
+      ** with the specified playerNo
+      */
+     private boolean boardSquareTouchesAtACorner(int x, int y, int playerNo) {
+          return boardSquareContains(x - 1, y - 1, playerNo)
+                  || boardSquareContains(x + 1, y - 1, playerNo)
+                  || boardSquareContains(x - 1, y + 1, playerNo)
+                  || boardSquareContains(x + 1, y + 1, playerNo);
+     }
+
+     private boolean touchesSamePlayerPiecesOnlyAtCorners(Gamepiece gamepiece, int x, int y) {
+          boolean atLeastOneSquareTouchesAtASide = false;
+          boolean atLeastOneSquareTouchesAtCorner = false;
+          int playerNo = gamepiece.getPlayerNo();
+          for (Location l : gamepiece.locations) {
+               if (boardSquareTouchesAtACorner(l.getX() + x, l.getY() + y, playerNo)) {
+                    atLeastOneSquareTouchesAtCorner = true;
+               }
+               if (boardSquareTouchesAtASide(l.getX() + x, l.getY() + y, playerNo)) {
+                    atLeastOneSquareTouchesAtASide = true;
+               }
+          }
+          return  atLeastOneSquareTouchesAtCorner && (! atLeastOneSquareTouchesAtASide);
+     }
+
+     public boolean isValidFirstMove(Move move) {
+          Gamepiece gamepiece = move.getGamepiece();
+          int x = move.getLocation().getX();
+          int y = move.getLocation().getY();
+          int playerNo = move.getPlayer().getPlayerNo();
+
+          if ( isOutsideBoard(gamepiece,x,y) ) return false;
+          if ( overlapsOtherPieces(gamepiece,x,y) ) return false;
+          return coversStartPosition(gamepiece, x, y, Board.startLocations[playerNo]);
+     }
+
+     public boolean isValidSubsequentMove(Move move) {
+          Gamepiece gamepiece = move.getGamepiece();
+          int x = move.getLocation().getX();
+          int y = move.getLocation().getY();
+
+          if ( isOutsideBoard(gamepiece,x,y) ) return false;
+          if ( overlapsOtherPieces(gamepiece,x,y) ) return false;
+          return touchesSamePlayerPiecesOnlyAtCorners(gamepiece, x, y);
+     }
+
+     public void makeMove(Move move) {
+        Player player = move.getPlayer();
+        Gamepiece gamepiece = move.getGamepiece();
+        int x = move.getLocation().getX();
+        int y = move.getLocation().getY();
+
+        for (Location l : gamepiece.locations) {
+           occupied[l.getX() + x][l.getY() + y] = true;
+           occupyingPlayer[l.getX() + x][l.getY() + y] = player.getPlayerNo();
         }
-        // Starting points
-        board[4][4] = "*";
-        board[9][9] = "*";
-    }
+     }
 
-    public Board(Board board) {
-        for (int i = 0; i < HEIGHT; i++ ) {
-            for (int j = 0; j < WIDTH; j++) {
-                occupied[i][j] = board.isOccupied(i, j);
-                this.board[i][j] = board.getColorOnSquare(i, j);
-            }
-        }
-    }
+     public boolean playerHasMoves(Player player) {
+          boolean result = false;
+          Collection<Gamepiece> gamepieces = player.getGamepieceSet().getPieces().values();
+          for (Gamepiece gamepiece : gamepieces) {
+               if (gamepieceCanBePlaced(gamepiece,player)) {
+                    result = true;
+                    break;
+               }
+          }
+          return result;
+     }
 
-    /**
-     * Visualize the board by using 2D array to print the board
-     */
-    public void printBoard() {
-        int row = board.length - 1;
-        System.out.print("BLOKUS DUO\n");
+     private boolean gamepieceCanBePlaced(Gamepiece gamepiece,Player player) {
+          boolean result = false;
+          Gamepiece clonedPiece = new Gamepiece(gamepiece);
+          for (int i = 0; i < 4 ; i++) {
+               if (gamepieceOrientationCanBePlaced(clonedPiece,player)) {
+                    result = true;
+                    break;
+               }
+               clonedPiece.rotateRight();
+          }
+          clonedPiece.flipAlongY();
+          for (int i = 0; i < 4 ; i++) {
+               if (gamepieceOrientationCanBePlaced(clonedPiece,player)) {
+                    result = true;
+                    break;
+               }
+               clonedPiece.rotateRight();
+          }
+          return result;
+     }
 
-        for (int i = 0; i < board[0].length; i++) {
-            // column index
-            if(row > 9) {
-                System.out.print("\n" + row + " ");
-            } else {
-                System.out.print("\n " + row + " ");
-            }
-            row--;
-            // every square
-            for (int j = 0; j < board.length; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-        }
+     private boolean gamepieceOrientationCanBePlaced(Gamepiece piece, Player player) {
+          boolean result = false;
+          Move move = new Move(player,piece,"",new Location(0,0));
+          for (int x = 0; x < WIDTH; x++) {
+               for (int y = 0; y < HEIGHT; y++) {
+                    move.getLocation().setX(x);
+                    move.getLocation().setY(y);
+                    if (isValidSubsequentMove(move)) {
+                         result = true;
+                         break;
+                    }
+               }
+          }
+          return result;
+     }
 
-        // row index
-        System.out.print("\n   ");
-        for (int i = 0; i < board[0].length; i++) {
-            if (i > 9) {
-                System.out.print(i);
-            } else {
-                System.out.print(i + " ");
-            }
-        }
-        System.out.println();
-    }
+     // Test methods
 
-    public String[][] getBoard() {
-        return board;
-    }
+     public Board(String initialState) {
+          this();
+          StringTokenizer tokenizer = new StringTokenizer(initialState);
+          for(int y=(HEIGHT-1); y>=0; y--) {
+               for (int x=0; x<WIDTH; x++) {
+                    switch(tokenizer.nextToken()) {
+                         case "X":
+                              occupied[x][y]=true;
+                              occupyingPlayer[x][y]=0;
+                              break;
+                         case "O":
+                              occupied[x][y]=true;
+                              occupyingPlayer[x][y]=1;
+                              break;
+                    }
+               }
+          }
+     }
 
-    public void setBoard(String[][] board) {
-        this.board = board;
-    }
+     @Override
+     public boolean equals(Object object) {
 
-    public boolean[][] getOccupied() {
-        return occupied;
-    }
+          if (object == this) {
+               return true;
+          }
 
-    public void setOccupied(boolean[][] occupied) {
-        this.occupied = occupied;
-    }
+          if (!(object instanceof Board)) {
+               return false;
+          }
 
-    public boolean isOccupied(int x, int y) {
-        return occupied[x][y];
-    }
+          Board board = (Board) object;
 
-    public String getColorOnSquare(int x, int y) {
-        return board[x][y];
-    }
+          boolean result = true;
+          for (int y=(HEIGHT-1); y>=0; y--) {
+               for (int x=0; x<WIDTH; x++) {
+                    if ((occupied[x][y] != board.isOccupied(x, y)) ||
+                            (occupyingPlayer[x][y] != board.getOccupyingPlayer(x, y))) {
+                         result = false;
+                         break;
+                    }
+               }
+          }
+          return result;
+     }
 
-    /**
-     *  Adds piece to the board
-     * 
-     *  @param player player playing the piece
-     *  @param piece piece being placed
-     *  @param originX x coordinate originY piece origin
-     *  @param originY y coordinate of piece origin
-     */
-    public void addPiece(Player player, Piece piece, int originX, int originY) {
-        for (Block block : piece.getBlocks()) {
-            board[13 - originY - block.getY()][originX + block.getX()] = player.getColor();
-            occupied[13 - originY - block.getY()][originX + block.getX()] = true;
-        }
-    }
-
-    /**
-     * returns false if square is out of bounds
-     * 
-     * @param x x coordinate
-     * @param y y coordinate
-     */
-    public boolean contains(int x, int y) {
-        return x >= 0 && x < board[0].length && y >= 0 && y < board.length;
-    }
-
-    /**
-     * Checks if the square on the board is empty 
-     * 
-     * @param offset block offset from origin
-     * @param dest_x x coordinates
-     * @param dest_y y coordinates
-     * @return true if the square is empty
-     */
-    public boolean isEmptyAt(Block offset, int dest_x, int dest_y) {
-        if(!contains(13 - dest_y - offset.getY(), dest_x + offset.getX())) {
-            return false;
-        }
-
-        return (board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "X" && board[13 - dest_y - offset.getY()][dest_x + offset.getX()] != "O");
-    }
-
-    /**
-     * @return true if the board does not contains any piece
-     */
-    public boolean isEmpty() {
-        for (String[] strings : board) {
-            for (int j = 0; j < board.length; j++) {
-                if (strings[j] == "X" || strings[j] == "O") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Check if the input coordinate has enough space to place the piece
-     * 
-     * @param piece selected piece
-     * @param dest_x x coordinates
-     * @param dest_y y coordinates
-     * @return true if the coordinates are able to place the piece
-     */
-    public boolean isEmptyForPiece(Piece piece, int dest_x, int dest_y) {
-        return piece.getBlocks().stream().allMatch(offset -> isEmptyAt(offset, dest_x, dest_y));
-    }
-
-    /**
-     * Check if the square of the placed piece is the corner square
-     * The arraylist dir stored the direction of the remaining square which is from the same piece
-     * 
-     * @param block block offset from origin
-     * @param i index of block
-     * @param dir direction of the square
-     * @return true if the square is an corner square of the piece
-     */
-    public boolean isCornerPiece(ArrayList<Block> block, int i, ArrayList<int[]> dir) {
-        int up = 0, down = 0, left = 0, right = 0;
-        for (Block value : block) {
-            if ((block.get(i)).getX() == value.getX()) {
-                if ((block.get(i)).getY() - value.getY() == 1) {
-                    down++;
-                }
-
-                if ((block.get(i)).getY() - value.getY() == -1) {
-                    up++;
-                }
-            }
-
-            if ((block.get(i)).getY() == value.getY()) {
-                if ((block.get(i)).getX() - value.getX() == 1) {
-                    left++;
-                }
-
-                if ((block.get(i)).getX() - value.getX() == -1) {
-                    right++;
-                }
-            }
-        }
-
-        dir.add(new int[] {up, down, right, left});
-
-        return (left + right) < 2 && (up + down) < 2;
-    }
-
-    /**
-     * Check the color of square on the board
-     * 
-     * @param color player's piece color
-     * @param dest_x x coordinate
-     * @param dest_y y coordinate
-     * @return true if the square has the same color as player's piece color
-     */
-    public boolean isSameColor(String color, int dest_x, int dest_y) {
-        return board[dest_x][dest_y].equals(color);
-    }
-
-    /**
-     * Check if there is any placed piece at the side of selected square
-     * 
-     * @param color player's piece color
-     * @param offset block offset from origin
-     * @param dest_x x coordinate
-     * @param dest_y y coordinate
-     * @return true if there is piece from the same player at the side of the selected coordinates
-     */
-    public boolean isAtSide(String color, Block offset, int dest_x, int dest_y) {
-        int x = 13 - dest_y - offset.getY();
-        int y = dest_x + offset.getX();
-
-        if(x >= 14 || x <= -1 || y >= 14 || y <= -1) {
-            return false;
-        }
-
-        if (!contains(x + 1, y)) {
-            if (y <= 0) {
-                return isSameColor(color, x, y + 1) || isSameColor(color, x - 1, y);
-            }
-
-            if (y >= 13) {
-                return isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
-            }
-
-            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x - 1, y);
-        }
-
-        if(!contains(x - 1, y)) {
-            if(y <= 0) {
-                return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y);
-            }
-
-            if(y >= 13) {
-                return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
-            }
-
-            return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y);
-
-        }
-        
-        if(!contains(x, y + 1)) {
-            return isSameColor(color, x, y - 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
-        }
-
-        if(!contains(x, y - 1)) {
-            return isSameColor(color, x, y + 1) || isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
-        }
-
-        return isSameColor(color, x, y + 1) || isSameColor(color, x, y - 1) ||
-               isSameColor(color, x + 1, y) || isSameColor(color, x - 1, y);
-    }
-
-    /**
-     * Check if there is any placed piece at the side of the selected coordinates
-     * 
-     * @param playerColor current player's color
-     * @param piece selected piece by player
-     * @param dest_x x coordinate
-     * @param dest_y y coordinate
-     * @return returns true if any block is touching another piece
-     */
-    public boolean isSide(String playerColor, Piece piece, int dest_x, int dest_y) {
-        return piece.getBlocks().stream().anyMatch(offset -> isAtSide(playerColor, offset, dest_x, dest_y));
-    }
-
+     @Override
+     public String toString() {
+          StringBuilder boardAsString = new StringBuilder("\n");
+          for (int y=(HEIGHT-1); y>=0; y--) {
+               for (int x=0; x<WIDTH; x++) {
+                    if (!(occupied[x][y])) {
+                         boardAsString.append(". ");
+                    } else if (occupyingPlayer[x][y] == 0) {
+                         boardAsString.append("X ");
+                    } else {
+                         boardAsString.append("O ");
+                    }
+               }
+               boardAsString.append("\n");
+          }
+          return super.toString() + boardAsString;
+     }
 }

@@ -1,52 +1,50 @@
-/**
- * Team ApplePlus
- * Members: Ao Peng     20202688
- *          Oscar Yeoh  20403662
- *          KarYen Yap  20202149
- * 
- * TextPlayer class
- *  - player class for text UI
- */
-
 package ui.text;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import model.Player;
-import model.piece.Piece;
+import model.*;
+import ui.UI;
 
 public class TextPlayer extends Player {
-    TextUI ui;
+    TextUI textUi;
 
-    public TextPlayer(String color, TextUI ui) {
-        super(color);
-        this.ui = ui;
+    public TextPlayer(int playerNo) {
+        super(playerNo);
     }
 
-    /**
-     * Get piece from user and prompt for manipulation
-     */
-    public ArrayList<Object> getPiece() {
-        if (getStock().getPieces().size() == 0) {
-            System.out.println("No more pieces left.");
-        }
+    @Override
+    public void setUI(UI ui) {
+        this.textUi = (TextUI)ui;
+    }
 
-        System.out.println("Select a piece");
-        String tmp = ui.getS().useDelimiter(" |\\n").next();
-        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+    @Override
+    public Move makeMove(Board board) {
+        String gamepieceName;
 
-        while(true) {
-            for (Piece p : getStock().getPieces()) {
-                if (p.getName().equals(tmp)) {
-                    Piece pCopy = new Piece(p);
-                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui.getS(), getColor())));
-                }
+        for(;;) {
+            gamepieceName = textUi.getGamepieceChoice(this);
+            if (null != this.getGamepieceSet().getPieces().get(gamepieceName)) {
+                break;
             }
-            System.out.println("Piece not in stock.\nSelect a piece");
-            tmp = ui.getS().useDelimiter(" |\\n").next();
-            tmp = tmp.replaceAll("(?:\\n|\\r)", "");
-            ui.getS().next();
+            textUi.gamepieceNotFound(gamepieceName);
         }
+
+        Gamepiece chosenPiece = getGamepieceSet().get(gamepieceName);
+        Gamepiece clonedPiece = new Gamepiece(chosenPiece);
+
+        String cmd;
+        do {
+            textUi.displayGamepiece(clonedPiece);
+            cmd = textUi.getGamepieceManipulation();
+            switch(cmd) {
+                case "r" :
+                    clonedPiece.rotateRight();
+                    break;
+                case "f" :
+                    clonedPiece.flipAlongY();
+                    break;
+            }
+        } while (!cmd.contentEquals("p"));
+        Location placementLocation = textUi.getPlacementLocation();
+
+        return new Move(this, clonedPiece, gamepieceName, placementLocation);
     }
 }

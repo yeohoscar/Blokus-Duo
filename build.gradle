@@ -22,7 +22,6 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     google()
 }
 
@@ -71,27 +70,10 @@ test {
     useJUnitPlatform()
 }
 
-
-allprojects {
-    apply plugin: 'java'
-    sourceCompatibility = 1.17
-    targetCompatibility = 1.17
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-        google()
-    }
-}
-
-
 jar {
     manifest {
         attributes(
-                'Main-Class': 'Main'
+                'Main-Class': 'Sprint5'
         )
     }
 }
