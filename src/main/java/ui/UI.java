@@ -1,16 +1,22 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ *
+ * UI interface
+ *  - holds methods needed by text and graphical UIs.
+ */
+
 package ui;
 
-import model.Move;
+import model.Board;
 import model.Player;
 
 public interface UI {
-    void updateDisplay();
-
-    String getPlayerName(Player player);
-
-    void noifyBadMove(Move move);
-
-    void displayGameOverMessage();
-
-    void announcePlayerMakingFirstMove(Player player);
+    String getName();
+    void displayFirstPlayer(String name);
+    void updateUI(Player player, Board board);
+    void displayResults(String result);
+    void printCoordinateError();
 }

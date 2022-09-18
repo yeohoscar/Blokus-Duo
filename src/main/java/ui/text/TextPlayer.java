@@ -1,50 +1,52 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * TextPlayer class
+ *  - player class for text UI
+ */
+
 package ui.text;
 
-import model.*;
-import ui.UI;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import model.Player;
+import model.piece.Piece;
 
 public class TextPlayer extends Player {
-    TextUI textUi;
+    TextUI ui;
 
-    public TextPlayer(int playerNo) {
-        super(playerNo);
+    public TextPlayer(String color, TextUI ui) {
+        super(color);
+        this.ui = ui;
     }
 
-    @Override
-    public void setUI(UI ui) {
-        this.textUi = (TextUI)ui;
-    }
-
-    @Override
-    public Move makeMove(Board board) {
-        String gamepieceName;
-
-        for(;;) {
-            gamepieceName = textUi.getGamepieceChoice(this);
-            if (null != this.getGamepieceSet().getPieces().get(gamepieceName)) {
-                break;
-            }
-            textUi.gamepieceNotFound(gamepieceName);
+    /**
+     * Get piece from user and prompt for manipulation
+     */
+    public ArrayList<Object> getPiece() {
+        if (getStock().getPieces().size() == 0) {
+            System.out.println("No more pieces left.");
         }
 
-        Gamepiece chosenPiece = getGamepieceSet().get(gamepieceName);
-        Gamepiece clonedPiece = new Gamepiece(chosenPiece);
+        System.out.println("Select a piece");
+        String tmp = ui.getS().useDelimiter(" |\\n").next();
+        tmp = tmp.replaceAll("(?:\\n|\\r)", "");
 
-        String cmd;
-        do {
-            textUi.displayGamepiece(clonedPiece);
-            cmd = textUi.getGamepieceManipulation();
-            switch(cmd) {
-                case "r" :
-                    clonedPiece.rotateRight();
-                    break;
-                case "f" :
-                    clonedPiece.flipAlongY();
-                    break;
+        while(true) {
+            for (Piece p : getStock().getPieces()) {
+                if (p.getName().equals(tmp)) {
+                    Piece pCopy = new Piece(p);
+                    return new ArrayList<>(Arrays.asList(pCopy, pCopy.manipulation(ui.getS(), getColor())));
+                }
             }
-        } while (!cmd.contentEquals("p"));
-        Location placementLocation = textUi.getPlacementLocation();
-
-        return new Move(this, clonedPiece, gamepieceName, placementLocation);
+            System.out.println("Piece not in stock.\nSelect a piece");
+            tmp = ui.getS().useDelimiter(" |\\n").next();
+            tmp = tmp.replaceAll("(?:\\n|\\r)", "");
+            ui.getS().next();
+        }
     }
 }

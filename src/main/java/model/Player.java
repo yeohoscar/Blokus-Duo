@@ -1,66 +1,72 @@
+/**
+ * Team ApplePlus
+ * Members: Ao Peng     20202688
+ *          Oscar Yeoh  20403662
+ *          KarYen Yap  20202149
+ * 
+ * Player abstract class
+ *  - represents Blokus player
+ *  - holds player name, colour and pieces
+ */
+
 package model;
 
-import ui.UI;
+import model.piece.Stock;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+
 
 public abstract class Player {
-    private final GamepieceSet pieces;
-    private String name;
-    private final int playerNo;
-    private boolean lastPlayedI1;
+    private String name; //Player name
+    private int score; //Player score -> calculate at end
+    private final String color;
+    private final Stock stock;
+    private final ArrayList<int[]> validMove;
+    private boolean lastPieceI1;
 
-    public Player(int playerNo) {
-        this.pieces = new GamepieceSet(playerNo);
-        this.playerNo = playerNo;
-        this.lastPlayedI1 = false;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Player(String color) {
+        this.color = color;
+        score = 0;
+        this.stock = new Stock();
+        this.validMove = new ArrayList<>();
+        lastPieceI1 = false;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getPlayerNo() {
-        return playerNo;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public GamepieceSet getGamepieceSet() {
-        return pieces;
-    }
-
-    public abstract Move makeMove(Board board);
-
-    public abstract void setUI(UI ui);
-
-    public void setLastPlayedPiece(String pieceName) {
-        lastPlayedI1 = pieceName.equals("I1");
-    }
-
-    public int playerScore() {
-        int score = 0;
-
-        if (pieces.getPieces().size() == 0) {
-            score +=15;
-            if (lastPlayedI1) {
-                score +=5;
-            }
-        } else {
-            for (Gamepiece piece : pieces.getPieces().values() ) {
-                score -= piece.getLocations().length;
-            }
-        }
+    public int getScore() {
         return score;
     }
 
-    // Test methods
-
-    @Override
-    public String toString() {
-        return super.toString()+"(name="+getName()+",playerNo="+getPlayerNo()+",gamepieceSet="+getGamepieceSet()+")";
+    public void setScore(int score) {
+        this.score = score;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public ArrayList<int[]> getValidMove() {
+        return validMove;
+    }
+
+    public boolean getLastPieceI1() {
+        return lastPieceI1;
+    }
+
+    public void setLastPieceI1(boolean b) {
+        this.lastPieceI1 = b;
+    }
+
+    public abstract ArrayList<Object> getPiece();
 }

@@ -1,573 +1,0 @@
-<Board test: default constructor should produce empty board
-/	Testing newly created board for emptiness ...
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-	. . . . . . . . . . . . . . 
-8	Testing newly created board for number of players = 2 
-MBoard test: checking that Board correctly reacts to valid and invalid moves
-·	Testing move model.Move@163370c2(player=0,location=model.Location@dc9876b(x=6,y=8),gamepiece=model.Gamepiece@3b5fad2d(Locations =[model.Location@5e17553a(x=0,y=0), model.Location@3eb91815(x=0,y=-1), model.Location@56dc1551(x=-1,y=-1), model.Location@102cec62(x=1,y=0), model.Location@74f6c5d8(x=2,y=0)],playerNo=0))  against board: model.Board@cd1e646
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
->, returnedResult = true, resultantBoard = model.Board@cd1e646
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . . . X X X . . . . . 
-. . . . . X X . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-ø	Testing move model.Move@7ba8c737(player=0,location=model.Location@1890516e(x=-1,y=4),gamepiece=model.Gamepiece@15a04efb(Locations =[model.Location@16c069df(x=0,y=0), model.Location@2bec854f(x=0,y=1), model.Location@31edaa7d(x=0,y=2), model.Location@26adfd2d(x=1,y=0)],playerNo=0))  against board: model.Board@3336e6b6
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-@, returnedResult = false, resultantBoard = model.Board@3336e6b6
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-‰	Testing move model.Move@7c3fdb62(player=1,location=model.Location@205d38da(x=10,y=2),gamepiece=model.Gamepiece@6950ed69(Locations =[model.Location@6dd7b5a3(x=0,y=0), model.Location@6f3187b0(x=-1,y=0), model.Location@2663e964(x=-1,y=-1), model.Location@48b67364(x=0,y=1), model.Location@189cbd7c(x=1,y=1)],playerNo=1))  against board: model.Board@7bf3a5d8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-?, returnedResult = true, resultantBoard = model.Board@7bf3a5d8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . O O . . 
-. . . . . . . . . O O . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-ù	Testing move model.Move@42e25b0b(player=1,location=model.Location@39b43d60(x=4,y=10),gamepiece=model.Gamepiece@44be0077(Locations =[model.Location@2205a05d(x=0,y=0), model.Location@72ef8d15(x=0,y=1), model.Location@6aa8e115(x=1,y=0)],playerNo=1))  against board: model.Board@5e21e98f
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-@, returnedResult = false, resultantBoard = model.Board@5e21e98f
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-ú	Testing move model.Move@51a9ad5e(player=1,location=model.Location@5f20155b(x=9,y=5),gamepiece=model.Gamepiece@72ade7e3(Locations =[model.Location@239105a8(x=0,y=0), model.Location@3fce8fd9(x=0,y=1), model.Location@609bcfb6(x=1,y=0)],playerNo=1))  against board: model.Board@7d94beb9
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-@, returnedResult = false, resultantBoard = model.Board@7d94beb9
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-2Board test: checking that equals works correctly
-$	Testing board model.Board@1df8b5b8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
- against model.Board@1df8b5b8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-, expected equality = true
-$	Testing board model.Board@1df8b5b8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
- against model.Board@23202fce
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-, expected equality = true
-$	Testing board model.Board@1df8b5b8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
- against model.Board@7b993c65
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . X . . . . . . . . 
-. . . . . X X . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . O . . . 
-. . . . . . . . . . O . . . 
-. . . . . . . . . . O . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-, expected equality = false
-$	Testing board model.Board@1df8b5b8
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-- against a string, expected equality = false
-MBoard test: checking that Board correctly reacts to valid and invalid moves
-õ	Testing move model.Move@6f1c29b7(player=0,location=model.Location@4d6025c5(x=4,y=9),gamepiece=model.Gamepiece@7f284218(Locations =[model.Location@407a7f2a(x=0,y=0), model.Location@4ea5b703(x=0,y=1), model.Location@2a7ed1f(x=1,y=0)],playerNo=0))  against board: model.Board@3fa247d1
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-?, returnedResult = true, resultantBoard = model.Board@3fa247d1
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-ù	Testing move model.Move@2cb2fc20(player=0,location=model.Location@4f4c4b1a(x=-1,y=4),gamepiece=model.Gamepiece@723e88f9(Locations =[model.Location@5f0fd5a0(x=0,y=0), model.Location@64e7619d(x=0,y=1), model.Location@495ee280(x=0,y=2)],playerNo=0))  against board: model.Board@4fa1c212
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-@, returnedResult = false, resultantBoard = model.Board@4fa1c212
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-˘	Testing move model.Move@6ea2bc93(player=1,location=model.Location@3116c353(x=9,y=4),gamepiece=model.Gamepiece@f627d13(Locations =[model.Location@4e928fbf(x=0,y=0), model.Location@352ff4da(x=0,y=1)],playerNo=1))  against board: model.Board@3224a577
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-?, returnedResult = true, resultantBoard = model.Board@3224a577
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-ÿ	Testing move model.Move@2e32ccc5(player=1,location=model.Location@748741cb(x=3,y=9),gamepiece=model.Gamepiece@3e44f2a5(Locations =[model.Location@295cf707(x=0,y=0)],playerNo=1))  against board: model.Board@1130520d
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-@, returnedResult = false, resultantBoard = model.Board@1130520d
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-ZBoard test: checking that playerHasMoves() correctly analyses given board configurations
-C	Checking whether player 0 has moves on board model.Board@463fd068
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-: playerHasMoves() = true
-C	Checking whether player 1 has moves on board model.Board@463fd068
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . X X . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . X . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . O . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . 
-: playerHasMoves() = true
-B	Checking whether player 0 has moves on board model.Board@895e367
-X X O O O O X O . . O O . O 
-X X O X X X X O X O O X O O 
-O O X . O O O X X X O X O . 
-O X X X O O X O O O X O X O 
-O O X O X X X O X X X O X O 
-X . O O . . X O X O . O X O 
-X O O . X X O . O O . O X . 
-X . X X X O O O . O . O X . 
-X O O O O X O . O X X X O O 
-O X O X X X . X O O O X O O 
-O X X O O O X X . . O X . . 
-O . X X . O O X X O X O X X 
-O X O O O X X . . O . O O X 
-X X X X O X X X O O O . X X 
-: playerHasMoves() = false
-B	Checking whether player 1 has moves on board model.Board@895e367
-X X O O O O X O . . O O . O 
-X X O X X X X O X O O X O O 
-O O X . O O O X X X O X O . 
-O X X X O O X O O O X O X O 
-O O X O X X X O X X X O X O 
-X . O O . . X O X O . O X O 
-X O O . X X O . O O . O X . 
-X . X X X O O O . O . O X . 
-X O O O O X O . O X X X O O 
-O X O X X X . X O O O X O O 
-O X X O O O X X . . O X . . 
-O . X X . O O X X O X O X X 
-O X O O O X X . . O . O O X 
-X X X X O X X X O O O . X X 
-: playerHasMoves() = true
-C	Checking whether player 0 has moves on board model.Board@1b266842
-X X O O O O X O . . O O . O 
-X X O X X X X O X O O X O O 
-O O X . O O O X X X O X O . 
-O X X X O O X O O O X O X O 
-O O X O X X X O X X X O X O 
-X . O O . . X O X O . O X O 
-X O O . X X O . O O . O X . 
-X . X X X O O O . O . O X . 
-X O O O O X O . O X X X O O 
-O X O X X X . X O O O X O O 
-O X X O O O X X . . O X . . 
-O . X X . O O X X O X O X X 
-O X O O O X X O . O . O O X 
-X X X X O X X X O O O . X X 
-: playerHasMoves() = false
-C	Checking whether player 1 has moves on board model.Board@1b266842
-X X O O O O X O . . O O . O 
-X X O X X X X O X O O X O O 
-O O X . O O O X X X O X O . 
-O X X X O O X O O O X O X O 
-O O X O X X X O X X X O X O 
-X . O O . . X O X O . O X O 
-X O O . X X O . O O . O X . 
-X . X X X O O O . O . O X . 
-X O O O O X O . O X X X O O 
-O X O X X X . X O O O X O O 
-O X X O O O X X . . O X . . 
-O . X X . O O X X O X O X X 
-O X O O O X X O . O . O O X 
-X X X X O X X X O O O . X X 
-: playerHasMoves() = false
-^GamepieceSet test: check that remove() returns correct Gamepiece and removes it from the set
-Ê 	Testing for GamepieceSet(0): model.GamepieceSet@1b8a29df {T4=model.Gamepiece@1cb346ea(Locations =[model.Location@4c012563(x=0,y=0), model.Location@14a50707(x=-1,y=0), model.Location@4d518b32(x=1,y=0), model.Location@4bd31064(x=0,y=1)],playerNo=0), T5=model.Gamepiece@e3c0e40(Locations =[model.Location@329dbdbf(x=0,y=0), model.Location@7354b8c5(x=1,y=0), model.Location@20d7d6fb(x=-1,y=0), model.Location@4ef782af(x=0,y=1), model.Location@11d8ae8b(x=0,y=2)],playerNo=0), O4=model.Gamepiece@479cbee5(Locations =[model.Location@59e2d8e3(x=0,y=0), model.Location@2b72cb8a(x=0,y=1), model.Location@7f8a9499(x=1,y=1), model.Location@5d43661b(x=1,y=0)],playerNo=0), F=model.Gamepiece@12299890(Locations =[model.Location@2fba3fc4(x=0,y=0), model.Location@4bf48f6(x=-1,y=0), model.Location@420a85c4(x=0,y=-1), model.Location@1c39680d(x=0,y=1), model.Location@62833051(x=1,y=1)],playerNo=0), I1=model.Gamepiece@1c852c0f(Locations =[model.Location@a37aefe(x=0,y=0)],playerNo=0), L4=model.Gamepiece@5d99c6b5(Locations =[model.Location@266374ef(x=0,y=0), model.Location@13b3d178(x=0,y=1), model.Location@24c4ddae(x=0,y=2), model.Location@37fb0bed(x=1,y=0)],playerNo=0), I2=model.Gamepiece@a82c5f1(Locations =[model.Location@7b7fdc8(x=0,y=0), model.Location@51c693d(x=0,y=1)],playerNo=0), L5=model.Gamepiece@6a57ae10(Locations =[model.Location@766653e6(x=0,y=0), model.Location@4e07b95f(x=0,y=1), model.Location@28b46423(x=1,y=0), model.Location@7fc4780b(x=2,y=0), model.Location@3b79fd76(x=3,y=0)],playerNo=0), I3=model.Gamepiece@48c76607(Locations =[model.Location@43599640(x=0,y=0), model.Location@1f81aa00(x=0,y=1), model.Location@6b6776cb(x=0,y=2)],playerNo=0), I4=model.Gamepiece@1863d2fe(Locations =[model.Location@1787bc24(x=0,y=0), model.Location@544d57e(x=0,y=1), model.Location@55c53a33(x=0,y=2), model.Location@53b7f657(x=0,y=3)],playerNo=0), I5=model.Gamepiece@797b0699(Locations =[model.Location@5a37d3ed(x=0,y=0), model.Location@26df6e3a(x=0,y=1), model.Location@4a3631f8(x=0,y=2), model.Location@6b58b9e9(x=0,y=3), model.Location@f14a7d4(x=0,y=4)],playerNo=0), N=model.Gamepiece@52e7a6b2(Locations =[model.Location@29a5f4e7(x=0,y=0), model.Location@79c97cb(x=0,y=-1), model.Location@2d9caaeb(x=-1,y=-1), model.Location@42a15bdc(x=1,y=0), model.Location@44a59da3(x=2,y=0)],playerNo=0), P=model.Gamepiece@27e47833(Locations =[model.Location@6f6745d6(x=0,y=0), model.Location@27508c5d(x=1,y=0), model.Location@4f704591(x=0,y=-1), model.Location@4b5189ac(x=1,y=-1), model.Location@1e4d3ce5(x=0,y=-2)],playerNo=0), U=model.Gamepiece@3ddc6915(Locations =[model.Location@704deff2(x=0,y=0), model.Location@379614be(x=0,y=1), model.Location@404bbcbd(x=1,y=1), model.Location@1e81f160(x=0,y=-1), model.Location@1acaf3d(x=1,y=-1)],playerNo=0), W=model.Gamepiece@6986852(Locations =[model.Location@1bab8268(x=0,y=0), model.Location@a307a8c(x=-1,y=0), model.Location@6e01f9b0(x=-1,y=-1), model.Location@2b9ed6da(x=0,y=1), model.Location@6c61a903(x=1,y=1)],playerNo=0), X=model.Gamepiece@658c5a19(Locations =[model.Location@421e361(x=0,y=0), model.Location@59d4cd39(x=1,y=0), model.Location@389c4eb1(x=-1,y=0), model.Location@3fc79729(x=0,y=1), model.Location@34f6515b(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@4b34fff9(Locations =[model.Location@1187c9e8(x=0,y=0), model.Location@127a7a2e(x=0,y=1), model.Location@14008db3(x=1,y=0), model.Location@78a773fd(x=2,y=0), model.Location@57c03d88(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@16aa8654(Locations =[model.Location@6d7fc27(x=0,y=0), model.Location@45ac5f9b(x=0,y=1), model.Location@135606db(x=1,y=1), model.Location@518caac3(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@68034211(Locations =[model.Location@4f74980d(x=0,y=0), model.Location@6c372fe6(x=-1,y=0), model.Location@58594a11(x=-1,y=-1), model.Location@2a3888c1(x=1,y=0), model.Location@4167d97b(x=1,y=1)],playerNo=0), V3=model.Gamepiece@14fa86ae(Locations =[model.Location@6e15fe2(x=0,y=0), model.Location@68f1b17f(x=0,y=1), model.Location@1722011b(x=1,y=0)],playerNo=0), V5=model.Gamepiece@57ad2aa7(Locations =[model.Location@5b3f61ff(x=0,y=0), model.Location@3e2059ae(x=0,y=1), model.Location@398dada8(x=0,y=2), model.Location@7cb502c(x=1,y=0), model.Location@275bf9b3(x=2,y=0)],playerNo=0)}
-Í 	Testing for GamepieceSet(1): model.GamepieceSet@332729ad {T4=model.Gamepiece@4fbe37eb(Locations =[model.Location@12a94400(x=0,y=0), model.Location@6a47b187(x=-1,y=0), model.Location@2049a9c1(x=1,y=0), model.Location@1ef6d34c(x=0,y=1)],playerNo=1), T5=model.Gamepiece@46271dd6(Locations =[model.Location@11bb571c(x=0,y=0), model.Location@7c51f34b(x=1,y=0), model.Location@5495333e(x=-1,y=0), model.Location@2a225dd7(x=0,y=1), model.Location@61eaec38(x=0,y=2)],playerNo=1), O4=model.Gamepiece@125290e5(Locations =[model.Location@6fa34d52(x=0,y=0), model.Location@57576994(x=0,y=1), model.Location@616ac46a(x=1,y=1), model.Location@67b9b51a(x=1,y=0)],playerNo=1), F=model.Gamepiece@1205bd62(Locations =[model.Location@7ef27d7f(x=0,y=0), model.Location@490caf5f(x=-1,y=0), model.Location@6337c201(x=0,y=-1), model.Location@5c669da8(x=0,y=1), model.Location@31920ade(x=1,y=1)],playerNo=1), I1=model.Gamepiece@1d483de4(Locations =[model.Location@4032d386(x=0,y=0)],playerNo=1), L4=model.Gamepiece@28d18df5(Locations =[model.Location@934b6cb(x=0,y=0), model.Location@55cf0d14(x=0,y=1), model.Location@3b74ac8(x=0,y=2), model.Location@27adc16e(x=1,y=0)],playerNo=1), I2=model.Gamepiece@b83a9be(Locations =[model.Location@2609b277(x=0,y=0), model.Location@1fd14d74(x=0,y=1)],playerNo=1), L5=model.Gamepiece@563e4951(Locations =[model.Location@4066c471(x=0,y=0), model.Location@2b175c00(x=0,y=1), model.Location@3eb81efb(x=1,y=0), model.Location@1ae8bcbc(x=2,y=0), model.Location@6cdba6dc(x=3,y=0)],playerNo=1), I3=model.Gamepiece@7d3d101b(Locations =[model.Location@30c8681(x=0,y=0), model.Location@5cdec700(x=0,y=1), model.Location@6d026701(x=0,y=2)],playerNo=1), I4=model.Gamepiece@78aa1f72(Locations =[model.Location@1f75a668(x=0,y=0), model.Location@35399441(x=0,y=1), model.Location@4b7dc788(x=0,y=2), model.Location@6304101a(x=0,y=3)],playerNo=1), I5=model.Gamepiece@5170bcf4(Locations =[model.Location@2812b107(x=0,y=0), model.Location@df6620a(x=0,y=1), model.Location@4e31276e(x=0,y=2), model.Location@1a72a540(x=0,y=3), model.Location@27d5a580(x=0,y=4)],playerNo=1), N=model.Gamepiece@198d6542(Locations =[model.Location@5e403b4a(x=0,y=0), model.Location@5117dd67(x=0,y=-1), model.Location@5be49b60(x=-1,y=-1), model.Location@2931522b(x=1,y=0), model.Location@7674b62c(x=2,y=0)],playerNo=1), P=model.Gamepiece@19e7a160(Locations =[model.Location@662706a7(x=0,y=0), model.Location@45a4b042(x=1,y=0), model.Location@16b2bb0c(x=0,y=-1), model.Location@327af41b(x=1,y=-1), model.Location@6cb6decd(x=0,y=-2)],playerNo=1), U=model.Gamepiece@c7045b9(Locations =[model.Location@f99f5e0(x=0,y=0), model.Location@6aa61224(x=0,y=1), model.Location@30bce90b(x=1,y=1), model.Location@3e6f3f28(x=0,y=-1), model.Location@7e19ebf0(x=1,y=-1)],playerNo=1), W=model.Gamepiece@2474f125(Locations =[model.Location@7357a011(x=0,y=0), model.Location@3406472c(x=-1,y=0), model.Location@5717c37(x=-1,y=-1), model.Location@68f4865(x=0,y=1), model.Location@4816278d(x=1,y=1)],playerNo=1), X=model.Gamepiece@4eaf3684(Locations =[model.Location@40317ba2(x=0,y=0), model.Location@3c01cfa1(x=1,y=0), model.Location@45d2ade3(x=-1,y=0), model.Location@727eb8cb(x=0,y=1), model.Location@39d9314d(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@b978d10(Locations =[model.Location@5b7a8434(x=0,y=0), model.Location@5c45d770(x=0,y=1), model.Location@2ce6c6ec(x=1,y=0), model.Location@1bae316d(x=2,y=0), model.Location@147a5d08(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@6676f6a0(Locations =[model.Location@7cbd9d24(x=0,y=0), model.Location@1672fe87(x=0,y=1), model.Location@5026735c(x=1,y=1), model.Location@1b45c0e(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@11f0a5a1(Locations =[model.Location@10f7f7de(x=0,y=0), model.Location@73a8da0f(x=-1,y=0), model.Location@50dfbc58(x=-1,y=-1), model.Location@4416d64f(x=1,y=0), model.Location@6bf08014(x=1,y=1)],playerNo=1), V3=model.Gamepiece@5e3d57c7(Locations =[model.Location@732d0d24(x=0,y=0), model.Location@1fb19a0(x=0,y=1), model.Location@6ee4d9ab(x=1,y=0)],playerNo=1), V5=model.Gamepiece@5a5338df(Locations =[model.Location@418c5a9c(x=0,y=0), model.Location@18e36d14(x=0,y=1), model.Location@5082d622(x=0,y=2), model.Location@13d4992d(x=1,y=0), model.Location@302f7971(x=2,y=0)],playerNo=1)}
-	bGamepieceSet test: check that getPieces() returns correct set of Gamepieces after initialisation
-	Â 	Testing for GamepieceSet(0): model.GamepieceSet@babafc2 {T4=model.Gamepiece@4278284b(Locations =[model.Location@9573584(x=0,y=0), model.Location@3370f42(x=-1,y=0), model.Location@6057aebb(x=1,y=0), model.Location@63eef88a(x=0,y=1)],playerNo=0), T5=model.Gamepiece@53251a66(Locations =[model.Location@6853425f(x=0,y=0), model.Location@352c1b98(x=1,y=0), model.Location@21129f1f(x=-1,y=0), model.Location@5a9f4771(x=0,y=1), model.Location@282cb7c7(x=0,y=2)],playerNo=0), O4=model.Gamepiece@7d898981(Locations =[model.Location@48d61b48(x=0,y=0), model.Location@68d279ec(x=0,y=1), model.Location@258d79be(x=1,y=1), model.Location@14f9390f(x=1,y=0)],playerNo=0), F=model.Gamepiece@6c0d7c83(Locations =[model.Location@176b75f7(x=0,y=0), model.Location@5965be2d(x=-1,y=0), model.Location@409c54f(x=0,y=-1), model.Location@3e74829(x=0,y=1), model.Location@4f6f416f(x=1,y=1)],playerNo=0), I1=model.Gamepiece@3b8f0a79(Locations =[model.Location@71e693fa(x=0,y=0)],playerNo=0), L4=model.Gamepiece@48793bef(Locations =[model.Location@7d286fb6(x=0,y=0), model.Location@3eb77ea8(x=0,y=1), model.Location@7b8b43c7(x=0,y=2), model.Location@7aaca91a(x=1,y=0)],playerNo=0), I2=model.Gamepiece@44c73c26(Locations =[model.Location@41005828(x=0,y=0), model.Location@60b4beb4(x=0,y=1)],playerNo=0), L5=model.Gamepiece@7fcf2fc1(Locations =[model.Location@2141a12(x=0,y=0), model.Location@4196c360(x=0,y=1), model.Location@41294f8(x=1,y=0), model.Location@225129c(x=2,y=0), model.Location@20435c40(x=3,y=0)],playerNo=0), I3=model.Gamepiece@573906eb(Locations =[model.Location@479ceda0(x=0,y=0), model.Location@6d07a63d(x=0,y=1), model.Location@571c5681(x=0,y=2)],playerNo=0), I4=model.Gamepiece@488d1cd7(Locations =[model.Location@68dc098b(x=0,y=0), model.Location@38ba6ce3(x=0,y=1), model.Location@d278d2b(x=0,y=2), model.Location@2d6c53fc(x=0,y=3)],playerNo=0), I5=model.Gamepiece@25f4878b(Locations =[model.Location@4e423aa2(x=0,y=0), model.Location@7fbdb894(x=0,y=1), model.Location@3081f72c(x=0,y=2), model.Location@3148f668(x=0,y=3), model.Location@6e005dc9(x=0,y=4)],playerNo=0), N=model.Gamepiece@7ceb3185(Locations =[model.Location@436c81a3(x=0,y=0), model.Location@3561c410(x=0,y=-1), model.Location@59e32960(x=-1,y=-1), model.Location@7c214cc0(x=1,y=0), model.Location@5b67bb7e(x=2,y=0)],playerNo=0), P=model.Gamepiece@609db546(Locations =[model.Location@20f5281c(x=0,y=0), model.Location@56c4278e(x=1,y=0), model.Location@301eda63(x=0,y=-1), model.Location@3d246ea3(x=1,y=-1), model.Location@341814d3(x=0,y=-2)],playerNo=0), U=model.Gamepiece@4397ad89(Locations =[model.Location@59cba5a(x=0,y=0), model.Location@1bd39d3c(x=0,y=1), model.Location@6f19ac19(x=1,y=1), model.Location@119cbf96(x=0,y=-1), model.Location@71329995(x=1,y=-1)],playerNo=0), W=model.Gamepiece@768fc0f2(Locations =[model.Location@5454d35e(x=0,y=0), model.Location@20c0a64d(x=-1,y=0), model.Location@455b6df1(x=-1,y=-1), model.Location@4ddbbdf8(x=0,y=1), model.Location@3f67593e(x=1,y=1)],playerNo=0), X=model.Gamepiece@1ab06251(Locations =[model.Location@41ab013(x=0,y=0), model.Location@14bee915(x=1,y=0), model.Location@1115ec15(x=-1,y=0), model.Location@82ea68c(x=0,y=1), model.Location@59e505b2(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@3af0a9da(Locations =[model.Location@43b9fd5(x=0,y=0), model.Location@79dc5318(x=0,y=1), model.Location@8e50104(x=1,y=0), model.Location@37e4d7bb(x=2,y=0), model.Location@6f7923a5(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@74a6f9c1(Locations =[model.Location@54eb2b70(x=0,y=0), model.Location@45a37759(x=0,y=1), model.Location@63611043(x=1,y=1), model.Location@20ca951f(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@2d778add(Locations =[model.Location@73302995(x=0,y=0), model.Location@1838ccb8(x=-1,y=0), model.Location@6c2ed0cd(x=-1,y=-1), model.Location@7d9e8ef7(x=1,y=0), model.Location@f107c50(x=1,y=1)],playerNo=0), V3=model.Gamepiece@51133c06(Locations =[model.Location@4b213651(x=0,y=0), model.Location@4241e0f4(x=0,y=1), model.Location@4ebff610(x=1,y=0)],playerNo=0), V5=model.Gamepiece@60410cd(Locations =[model.Location@44d52de2(x=0,y=0), model.Location@95e33cc(x=0,y=1), model.Location@38604b81(x=0,y=2), model.Location@1e44b638(x=1,y=0), model.Location@7393222f(x=2,y=0)],playerNo=0)}
-	Á 	Testing for GamepieceSet(1): model.GamepieceSet@3d9c13b5 {T4=model.Gamepiece@31add175(Locations =[model.Location@ae3540e(x=0,y=0), model.Location@600b9d27(x=-1,y=0), model.Location@3688eb5b(x=1,y=0), model.Location@69f1a286(x=0,y=1)],playerNo=1), T5=model.Gamepiece@7922d892(Locations =[model.Location@457c9034(x=0,y=0), model.Location@345f69f3(x=1,y=0), model.Location@50de186c(x=-1,y=0), model.Location@3f57bcad(x=0,y=1), model.Location@1e8b7643(x=0,y=2)],playerNo=1), O4=model.Gamepiece@51549490(Locations =[model.Location@71e9ebae(x=0,y=0), model.Location@73d983ea(x=0,y=1), model.Location@36a5cabc(x=1,y=1), model.Location@432038ec(x=1,y=0)],playerNo=1), F=model.Gamepiece@7daa0fbd(Locations =[model.Location@42530531(x=0,y=0), model.Location@5a3bc7ed(x=-1,y=0), model.Location@181e731e(x=0,y=-1), model.Location@35645047(x=0,y=1), model.Location@6f44a157(x=1,y=1)],playerNo=1), I1=model.Gamepiece@6bc407fd(Locations =[model.Location@291f18(x=0,y=0)],playerNo=1), L4=model.Gamepiece@17d88132(Locations =[model.Location@5ddcc487(x=0,y=0), model.Location@16eccb2e(x=0,y=1), model.Location@5ef5c734(x=0,y=2), model.Location@d771cc9(x=1,y=0)],playerNo=1), I2=model.Gamepiece@36b4091c(Locations =[model.Location@4671115f(x=0,y=0), model.Location@36cda2c2(x=0,y=1)],playerNo=1), L5=model.Gamepiece@3697186(Locations =[model.Location@1583741e(x=0,y=0), model.Location@5b367418(x=0,y=1), model.Location@36060e(x=1,y=0), model.Location@481ba2cf(x=2,y=0), model.Location@46b61c56(x=3,y=0)],playerNo=1), I3=model.Gamepiece@2e48362c(Locations =[model.Location@1efe439d(x=0,y=0), model.Location@be68757(x=0,y=1), model.Location@7d446ed1(x=0,y=2)],playerNo=1), I4=model.Gamepiece@12d2ce03(Locations =[model.Location@7e5c856f(x=0,y=0), model.Location@413f69cc(x=0,y=1), model.Location@1f53a5dc(x=0,y=2), model.Location@1b75c2e3(x=0,y=3)],playerNo=1), I5=model.Gamepiece@1984b1f(Locations =[model.Location@3bd323e9(x=0,y=0), model.Location@39ac0c0a(x=0,y=1), model.Location@c7ba306(x=0,y=2), model.Location@4ff8d125(x=0,y=3), model.Location@6d167f58(x=0,y=4)],playerNo=1), N=model.Gamepiece@3403e2ac(Locations =[model.Location@65b104b9(x=0,y=0), model.Location@6c4980d3(x=0,y=-1), model.Location@327bcebd(x=-1,y=-1), model.Location@19c65cdc(x=1,y=0), model.Location@74bf1791(x=2,y=0)],playerNo=1), P=model.Gamepiece@54504ecd(Locations =[model.Location@38b27cdc(x=0,y=0), model.Location@1339e7aa(x=1,y=0), model.Location@1fb669c3(x=0,y=-1), model.Location@49c66ade(x=1,y=-1), model.Location@6239aba6(x=0,y=-2)],playerNo=1), U=model.Gamepiece@3e6104fc(Locations =[model.Location@12359a82(x=0,y=0), model.Location@68df9280(x=0,y=1), model.Location@479460a6(x=1,y=1), model.Location@7164ca4c(x=0,y=-1), model.Location@4f3bbf68(x=1,y=-1)],playerNo=1), W=model.Gamepiece@5be46f9d(Locations =[model.Location@3f91b517(x=0,y=0), model.Location@68702e03(x=-1,y=0), model.Location@7a220c9a(x=-1,y=-1), model.Location@2421cc4(x=0,y=1), model.Location@30c93896(x=1,y=1)],playerNo=1), X=model.Gamepiece@59a008ba(Locations =[model.Location@338c99c8(x=0,y=0), model.Location@21ba0741(x=1,y=0), model.Location@58ce9668(x=-1,y=0), model.Location@172b013(x=0,y=1), model.Location@56673b2c(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@2796aeae(Locations =[model.Location@b4711e2(x=0,y=0), model.Location@1fa1cab1(x=0,y=1), model.Location@70f02c32(x=1,y=0), model.Location@62010f5c(x=2,y=0), model.Location@51fadaff(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@401f7633(Locations =[model.Location@31ff43be(x=0,y=0), model.Location@5b6ec132(x=0,y=1), model.Location@5c44c582(x=1,y=1), model.Location@67d18ed7(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@2c78d320(Locations =[model.Location@132e0cc(x=0,y=0), model.Location@7b205dbd(x=-1,y=0), model.Location@106cc338(x=-1,y=-1), model.Location@7a67e3c6(x=1,y=0), model.Location@6cc558c6(x=1,y=1)],playerNo=1), V3=model.Gamepiece@15713d56(Locations =[model.Location@63f259c3(x=0,y=0), model.Location@26ceffa8(x=0,y=1), model.Location@600b90df(x=1,y=0)],playerNo=1), V5=model.Gamepiece@7c8c9a05(Locations =[model.Location@d41f816(x=0,y=0), model.Location@5c2375a9(x=0,y=1), model.Location@60129b9a(x=0,y=2), model.Location@78d6692f(x=1,y=0), model.Location@7a55af6b(x=2,y=0)],playerNo=1)}
-
-gGamepieceSet test: check that get() repeatedly returns correct Gamepiece or null after initialisation
-
-‚ 	Testing for GamepieceSet(0): model.GamepieceSet@76a2ddf3 {T4=model.Gamepiece@27216cd(Locations =[model.Location@558bdf1f(x=0,y=0), model.Location@8576fa0(x=-1,y=0), model.Location@7582ff54(x=1,y=0), model.Location@67545b57(x=0,y=1)],playerNo=0), T5=model.Gamepiece@6c2c1385(Locations =[model.Location@5f354bcf(x=0,y=0), model.Location@3daf7722(x=1,y=0), model.Location@78641d23(x=-1,y=0), model.Location@74589991(x=0,y=1), model.Location@146dfe6(x=0,y=2)],playerNo=0), O4=model.Gamepiece@4716be8b(Locations =[model.Location@1fc32e4f(x=0,y=0), model.Location@2f67b837(x=0,y=1), model.Location@1869fbd2(x=1,y=1), model.Location@6af9fcb2(x=1,y=0)],playerNo=0), F=model.Gamepiece@6cce16f4(Locations =[model.Location@7efaad5a(x=0,y=0), model.Location@291a7e3c(x=-1,y=0), model.Location@ca30bc1(x=0,y=-1), model.Location@1046d517(x=0,y=1), model.Location@3b7d3a38(x=1,y=1)],playerNo=0), I1=model.Gamepiece@416c58f5(Locations =[model.Location@5505ae1a(x=0,y=0)],playerNo=0), L4=model.Gamepiece@73cd37c0(Locations =[model.Location@21337f7b(x=0,y=0), model.Location@2bb3058(x=0,y=1), model.Location@7a362b6b(x=0,y=2), model.Location@60df60da(x=1,y=0)],playerNo=0), I2=model.Gamepiece@5a2d131d(Locations =[model.Location@14fc1f0(x=0,y=0), model.Location@4ae9cfc1(x=0,y=1)],playerNo=0), L5=model.Gamepiece@512baff6(Locations =[model.Location@632ceb35(x=0,y=0), model.Location@1c93f6e1(x=0,y=1), model.Location@1800a575(x=1,y=0), model.Location@1458ed9c(x=2,y=0), model.Location@10a9d961(x=3,y=0)],playerNo=0), I3=model.Gamepiece@130e116b(Locations =[model.Location@e383572(x=0,y=0), model.Location@5ddf0d24(x=0,y=1), model.Location@363a52f(x=0,y=2)],playerNo=0), I4=model.Gamepiece@60856961(Locations =[model.Location@2fd953a6(x=0,y=0), model.Location@a4add54(x=0,y=1), model.Location@141e5bef(x=0,y=2), model.Location@5f9be66c(x=0,y=3)],playerNo=0), I5=model.Gamepiece@3abada5a(Locations =[model.Location@66c61024(x=0,y=0), model.Location@61fe30(x=0,y=1), model.Location@c9d0d6(x=0,y=2), model.Location@6ccdb29f(x=0,y=3), model.Location@3adcc812(x=0,y=4)],playerNo=0), N=model.Gamepiece@35432107(Locations =[model.Location@7b420819(x=0,y=0), model.Location@7a1a14a4(x=0,y=-1), model.Location@265adfad(x=-1,y=-1), model.Location@a3d9978(x=1,y=0), model.Location@61544ae6(x=2,y=0)],playerNo=0), P=model.Gamepiece@4b41dd5c(Locations =[model.Location@3b96c42e(x=0,y=0), model.Location@5d066c7d(x=1,y=0), model.Location@1e461e41(x=0,y=-1), model.Location@5ba88be8(x=1,y=-1), model.Location@56928307(x=0,y=-2)],playerNo=0), U=model.Gamepiece@3899782c(Locations =[model.Location@1603cd68(x=0,y=0), model.Location@9ebe38b(x=0,y=1), model.Location@4b23c30a(x=1,y=1), model.Location@38089a5a(x=0,y=-1), model.Location@30e868be(x=1,y=-1)],playerNo=0), W=model.Gamepiece@66c92293(Locations =[model.Location@332796d3(x=0,y=0), model.Location@4f0100a7(x=-1,y=0), model.Location@3cdf2c61(x=-1,y=-1), model.Location@13ad5cd3(x=0,y=1), model.Location@1c33c17b(x=1,y=1)],playerNo=0), X=model.Gamepiece@5bf0fe62(Locations =[model.Location@1e097d59(x=0,y=0), model.Location@673be18f(x=1,y=0), model.Location@6581dc0a(x=-1,y=0), model.Location@39de3d36(x=0,y=1), model.Location@6ce86ce1(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@54e7df6a(Locations =[model.Location@3fed2870(x=0,y=0), model.Location@77128536(x=0,y=1), model.Location@58326051(x=1,y=0), model.Location@32c4e8b2(x=2,y=0), model.Location@64bce832(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@764faa6(Locations =[model.Location@4c1f22f3(x=0,y=0), model.Location@598bd2ba(x=0,y=1), model.Location@5a755cc1(x=1,y=1), model.Location@7ae42ce3(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@4f5991f6(Locations =[model.Location@484094a5(x=0,y=0), model.Location@38234a38(x=-1,y=0), model.Location@63fbfaeb(x=-1,y=-1), model.Location@602e0143(x=1,y=0), model.Location@2c07545f(x=1,y=1)],playerNo=0), V3=model.Gamepiece@e57b96d(Locations =[model.Location@32c726ee(x=0,y=0), model.Location@22f31dec(x=0,y=1), model.Location@34c01041(x=1,y=0)],playerNo=0), V5=model.Gamepiece@76f4b65(Locations =[model.Location@c94fd30(x=0,y=0), model.Location@36328d33(x=0,y=1), model.Location@2c4d1ac(x=0,y=2), model.Location@7f0d96f2(x=1,y=0), model.Location@545b995e(x=2,y=0)],playerNo=0)}
-
-‚ 	Testing for GamepieceSet(1): model.GamepieceSet@5443d039 {T4=model.Gamepiece@524f3b3a(Locations =[model.Location@41e68d87(x=0,y=0), model.Location@49ff7d8c(x=-1,y=0), model.Location@29526c05(x=1,y=0), model.Location@2ef14fe(x=0,y=1)],playerNo=1), T5=model.Gamepiece@77102b91(Locations =[model.Location@45312be2(x=0,y=0), model.Location@7fb95505(x=1,y=0), model.Location@58be6e8(x=-1,y=0), model.Location@7331196b(x=0,y=1), model.Location@3f9342d4(x=0,y=2)],playerNo=1), O4=model.Gamepiece@ab7395e(Locations =[model.Location@50d13246(x=0,y=0), model.Location@2bd08376(x=0,y=1), model.Location@e70f13a(x=1,y=1), model.Location@3d3e5463(x=1,y=0)],playerNo=1), F=model.Gamepiece@64a40280(Locations =[model.Location@4b40f651(x=0,y=0), model.Location@42b02722(x=-1,y=0), model.Location@d62fe5b(x=0,y=-1), model.Location@49964d75(x=0,y=1), model.Location@528c868(x=1,y=1)],playerNo=1), I1=model.Gamepiece@466276d8(Locations =[model.Location@5ce8d869(x=0,y=0)],playerNo=1), L4=model.Gamepiece@27eedb64(Locations =[model.Location@64c63c79(x=0,y=0), model.Location@31c7528f(x=0,y=1), model.Location@2b76ff4e(x=0,y=2), model.Location@7a1234bf(x=1,y=0)],playerNo=1), I2=model.Gamepiece@2f62ea70(Locations =[model.Location@24ba9639(x=0,y=0), model.Location@38aa816f(x=0,y=1)],playerNo=1), L5=model.Gamepiece@53f6fd09(Locations =[model.Location@6bffbc6d(x=0,y=0), model.Location@1b84f475(x=0,y=1), model.Location@7749bf93(x=1,y=0), model.Location@13330ac6(x=2,y=0), model.Location@539d019(x=3,y=0)],playerNo=1), I3=model.Gamepiece@39a2bb97(Locations =[model.Location@3ad2e17(x=0,y=0), model.Location@8c3619e(x=0,y=1), model.Location@4331d187(x=0,y=2)],playerNo=1), I4=model.Gamepiece@6f63b475(Locations =[model.Location@554e218(x=0,y=0), model.Location@1608bcbd(x=0,y=1), model.Location@5bf8fa12(x=0,y=2), model.Location@29ca3d04(x=0,y=3)],playerNo=1), I5=model.Gamepiece@b2c5e07(Locations =[model.Location@5812f68b(x=0,y=0), model.Location@4426bff1(x=0,y=1), model.Location@3c7c886c(x=0,y=2), model.Location@55493582(x=0,y=3), model.Location@1a20270e(x=0,y=4)],playerNo=1), N=model.Gamepiece@6b88ca8c(Locations =[model.Location@336f1079(x=0,y=0), model.Location@2f16c6b3(x=0,y=-1), model.Location@34158c08(x=-1,y=-1), model.Location@19e4fcac(x=1,y=0), model.Location@52c3cb31(x=2,y=0)],playerNo=1), P=model.Gamepiece@4b79ac84(Locations =[model.Location@53941c2f(x=0,y=0), model.Location@6dab9b6d(x=1,y=0), model.Location@21fd5faa(x=0,y=-1), model.Location@2766ca9d(x=1,y=-1), model.Location@5460cf3a(x=0,y=-2)],playerNo=1), U=model.Gamepiece@65a15628(Locations =[model.Location@2e6a5539(x=0,y=0), model.Location@3fc9504b(x=0,y=1), model.Location@6d025197(x=1,y=1), model.Location@27d4a09(x=0,y=-1), model.Location@7e4204e2(x=1,y=-1)],playerNo=1), W=model.Gamepiece@b7c4869(Locations =[model.Location@740d2e78(x=0,y=0), model.Location@1c481ff2(x=-1,y=0), model.Location@72437d8d(x=-1,y=-1), model.Location@1b955cac(x=0,y=1), model.Location@676cf48(x=1,y=1)],playerNo=1), X=model.Gamepiece@5a1de7fb(Locations =[model.Location@335b5620(x=0,y=0), model.Location@29a0cdb(x=1,y=0), model.Location@32a68f4f(x=-1,y=0), model.Location@73194df(x=0,y=1), model.Location@6eb2384f(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@3c9c0d96(Locations =[model.Location@3a4621bd(x=0,y=0), model.Location@31dadd46(x=0,y=1), model.Location@4ed5eb72(x=1,y=0), model.Location@12f9af83(x=2,y=0), model.Location@19b93fa8(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@7e6ef134(Locations =[model.Location@1f010bf0(x=0,y=0), model.Location@40db2a24(x=0,y=1), model.Location@10cf09e8(x=1,y=1), model.Location@1921ad94(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@ee86bcb(Locations =[model.Location@177bea38(x=0,y=0), model.Location@7f132176(x=-1,y=0), model.Location@6bca7e0d(x=-1,y=-1), model.Location@2631f68c(x=1,y=0), model.Location@6ed3f258(x=1,y=1)],playerNo=1), V3=model.Gamepiece@8ad6665(Locations =[model.Location@30af5b6b(x=0,y=0), model.Location@19835e64(x=0,y=1), model.Location@68b32e3e(x=1,y=0)],playerNo=1), V5=model.Gamepiece@bcef303(Locations =[model.Location@41709512(x=0,y=0), model.Location@42039326(x=0,y=1), model.Location@33308786(x=0,y=2), model.Location@4f9a2c08(x=1,y=0), model.Location@a87f8ec(x=2,y=0)],playerNo=1)}
-ÄGamepiece equality: check that equals returns correct values when comparing gamepiece with gamepiece and non-gamepiece objects
-AGamepiece test: check that getLocations() returns correct value
-	Testing for Gamepiece([],1):
-		expected Locations() = []
-		getLocations() = []
-:	Testing for Gamepiece([0, 0, 1, 0, 1, 1, 1, 2, 1, 3],0):
-ƒ		expected Locations() = [model.Location@34f22f9d(x=0,y=0), model.Location@3d1848cc(x=1,y=0), model.Location@7dda48d9(x=1,y=1), model.Location@6e4566f1(x=1,y=2), model.Location@4b6e2263(x=1,y=3)]
-æ		getLocations() = [model.Location@344f4dea(x=0,y=0), model.Location@1b7c473a(x=1,y=0), model.Location@5e4bd84a(x=1,y=1), model.Location@648c94da(x=1,y=2), model.Location@2a62b5bc(x=1,y=3)]
-ÑGamepiece test: check that Gamepiece object constructed from another Gamepiece object has the same array of locations and playerNo
-	Testing for 
-Ú		given Gamepiece   = model.Gamepiece@535779e4(Locations =[model.Location@53fd0d10(x=0,y=0), model.Location@6c0d9d86(x=1,y=0), model.Location@4ce1d6d0(x=1,y=1), model.Location@24111ef1(x=2,y=1), model.Location@1f3f02ee(x=2,y=2)],playerNo=0),
-Ú		returned Gamepiece = model.Gamepiece@1fde5d22(Locations =[model.Location@5dcb4f5f(x=0,y=0), model.Location@71812481(x=1,y=0), model.Location@16ce702d(x=1,y=1), model.Location@7b94089b(x=2,y=1), model.Location@7ca20101(x=2,y=2)],playerNo=0)
-	Testing for 
-i		given Gamepiece   = model.Gamepiece@47f9738(Locations =[model.Location@6155d082(x=0,y=0)],playerNo=1),
-j		returned Gamepiece = model.Gamepiece@3a5ecce3(Locations =[model.Location@561868a0(x=0,y=0)],playerNo=1)
-Gamepiece test: check that rotating W piece to the right produces four distinct shapes and returns back to the original shape
-	Testing for 
-Ò		given Gamepiece   = model.Gamepiece@6138e79a(Locations =[model.Location@2dcd168a(x=0,y=0), model.Location@388526fb(x=1,y=0), model.Location@21a21c64(x=1,y=1), model.Location@7803bfd(x=2,y=1), model.Location@42bc14c1(x=2,y=2)],playerNo=0),
-ı		rotated Gamepiece = model.Gamepiece@531f4093(Locations =[model.Location@62ef27a8(x=0,y=0), model.Location@6436a7db(x=0,y=-1), model.Location@460ebd80(x=1,y=-1), model.Location@6f3c660a(x=1,y=-2), model.Location@74f5ce22(x=2,y=-2)],playerNo=0)
-	Testing for 
-Ù		given Gamepiece   = model.Gamepiece@25aca718(Locations =[model.Location@16fdec90(x=0,y=0), model.Location@1afdd473(x=0,y=-1), model.Location@40238dd0(x=1,y=-1), model.Location@7776ab(x=1,y=-2), model.Location@79179359(x=2,y=-2)],playerNo=0),
-˜		rotated Gamepiece = model.Gamepiece@dbd8e44(Locations =[model.Location@51acdf2e(x=0,y=0), model.Location@6a55299e(x=-1,y=0), model.Location@2f1de2d6(x=-1,y=-1), model.Location@4eb386df(x=-2,y=-1), model.Location@79517588(x=-2,y=-2)],playerNo=0)
-	Testing for 
-˘		given Gamepiece   = model.Gamepiece@3a0baae5(Locations =[model.Location@7ac0e420(x=0,y=0), model.Location@289710d9(x=-1,y=0), model.Location@5a18cd76(x=-1,y=-1), model.Location@3da30852(x=-2,y=-1), model.Location@403f0a22(x=-2,y=-2)],playerNo=0),
-Ù		rotated Gamepiece = model.Gamepiece@503ecb24(Locations =[model.Location@4c51cf28(x=0,y=0), model.Location@6995bf68(x=0,y=1), model.Location@5143c662(x=-1,y=1), model.Location@77825085(x=-1,y=2), model.Location@3568f9d2(x=-2,y=2)],playerNo=0)
-	Testing for 
-ı		given Gamepiece   = model.Gamepiece@71c27ee8(Locations =[model.Location@3e7dd664(x=0,y=0), model.Location@5b1ebf56(x=0,y=1), model.Location@294a6b8e(x=-1,y=1), model.Location@4b1d6571(x=-1,y=2), model.Location@1b835480(x=-2,y=2)],playerNo=0),
-Ò		rotated Gamepiece = model.Gamepiece@3549bca9(Locations =[model.Location@4f25b795(x=0,y=0), model.Location@6fb365ed(x=1,y=0), model.Location@6e950bcf(x=1,y=1), model.Location@16414e40(x=2,y=1), model.Location@74bada02(x=2,y=2)],playerNo=0)
-âGamepiece test: check that flipping W piece along the vertical axis produces two distinct shapes and returns back to the original shape
-	Testing for 
-Ò		given Gamepiece   = model.Gamepiece@78383390(Locations =[model.Location@6ad3381f(x=0,y=0), model.Location@53dbe163(x=1,y=0), model.Location@db57326(x=1,y=1), model.Location@34a875b3(x=2,y=1), model.Location@4748a0f9(x=2,y=2)],playerNo=1),
-ı		rotated Gamepiece = model.Gamepiece@4b14918a(Locations =[model.Location@6d1ef78d(x=0,y=0), model.Location@1a6c1270(x=-1,y=0), model.Location@18a136ac(x=-1,y=1), model.Location@77d67cf3(x=-2,y=1), model.Location@6dee4f1b(x=-2,y=2)],playerNo=1)
-	Testing for 
-ı		given Gamepiece   = model.Gamepiece@176b3f44(Locations =[model.Location@6ee6f53(x=0,y=0), model.Location@421bba99(x=-1,y=0), model.Location@5d12a356(x=-1,y=1), model.Location@134d26af(x=-2,y=1), model.Location@66ac5762(x=-2,y=2)],playerNo=1),
-		rotated Gamepiece = model.Gamepiece@797cf65c(Locations =[model.Location@31bcf236(x=0,y=0), model.Location@4b3ed2f0(x=1,y=0), model.Location@4fad9bb2(x=1,y=1), model.Location@517d4a0d(x=2,y=1), model.Location@7862f56(x=2,y=2)],playerNo=1)
-@Gamepiece test: check that getPlayerNo() returns correct value
-@	Testing for Gamepiece([0, 0, 1, 0, 1, 1],0): getPlayerNo() = 0
-@	Testing for Gamepiece([0, 0, 1, 0, 1, 1],1): getPlayerNo() = 1
-]Location test: check that two Locaiton objects containing same coordinates compare as equal
-ì	Testing for Locations model.Location@38831718(x=1,y=1) and model.Location@38831718(x=1,y=1): expected equality = true , returned equality = true)
-ì	Testing for Locations model.Location@38831718(x=1,y=1) and model.Location@2c1156a7(x=1,y=1): expected equality = true , returned equality = true)
-ó	Testing for Locations model.Location@33fe57a9(x=-1,y=-1) and model.Location@2c1156a7(x=1,y=1): expected equality = false , returned equality = false)
-ó	Testing for Locations model.Location@38831718(x=1,y=1) and model.Location@33fe57a9(x=-1,y=-1): expected equality = false , returned equality = false)
-y	Testing for Locations model.Location@38831718(x=1,y=1) and null: expected equality = false , returned equality = false)
-uLocation test: check that the values given to Location(x,y) constructor are returned correctly by getX() and getY()
-Z	Testing for Location(2147483647,-2147483648): getX() = 2147483647, getY() = -2147483648)
-Z	Testing for Location(-2147483648,2147483647): getX() = -2147483648, getY() = 2147483647)
-4	Testing for Location(0,0): getX() = 0, getY() = 0)
-6	Testing for Location(11,9): getX() = 11, getY() = 9)
-mLocation test: check that Location object constructed from another location object has the same coordinates
-m	Testing for Location model.Location@4f1bfe23(x=1,y=2), returned Location = model.Location@e19bb76(x=1,y=2))
-uLocation test: check that the values given to Location(x,y) constructor are returned correctly by getX() and getY()
-Z	Testing for Location(2147483647,-2147483648): getX() = 2147483647, getY() = -2147483648)
-Z	Testing for Location(-2147483648,2147483647): getX() = -2147483648, getY() = 2147483647)
-4	Testing for Location(0,0): getX() = 0, getY() = 0)
-6	Testing for Location(11,9): getX() = 11, getY() = 9)
-|Move test: check that the values given to Move(player,gamepiece,gamepieceName, location) are returned correctly by getters
-£D	Testing for Move(TestPlayer@61a88b8c(name=null,playerNo=0,gamepieceSet=model.GamepieceSet@6399551e {T4=model.Gamepiece@41d426b5(Locations =[model.Location@8dbfffb(x=0,y=0), model.Location@f316aeb(x=-1,y=0), model.Location@6aa3a905(x=1,y=0), model.Location@a22cb6a(x=0,y=1)],playerNo=0), T5=model.Gamepiece@5dd1c9f2(Locations =[model.Location@59b38691(x=0,y=0), model.Location@2e2ff723(x=1,y=0), model.Location@324a0017(x=-1,y=0), model.Location@6187d1f5(x=0,y=1), model.Location@2445445a(x=0,y=2)],playerNo=0), O4=model.Gamepiece@7502291e(Locations =[model.Location@17aad511(x=0,y=0), model.Location@487db668(x=0,y=1), model.Location@46944ca9(x=1,y=1), model.Location@22bac7bc(x=1,y=0)],playerNo=0), F=model.Gamepiece@63798ca7(Locations =[model.Location@4612b856(x=0,y=0), model.Location@22875539(x=-1,y=0), model.Location@5674e1f2(x=0,y=-1), model.Location@79c7532f(x=0,y=1), model.Location@2a448449(x=1,y=1)],playerNo=0), I1=model.Gamepiece@32f232a5(Locations =[model.Location@43f82e78(x=0,y=0)],playerNo=0), L4=model.Gamepiece@e54303(Locations =[model.Location@e8df99a(x=0,y=0), model.Location@2dc995f4(x=0,y=1), model.Location@2f40e5db(x=0,y=2), model.Location@517566b(x=1,y=0)],playerNo=0), I2=model.Gamepiece@64b73e7a(Locations =[model.Location@530712d(x=0,y=0), model.Location@2df6226d(x=0,y=1)],playerNo=0), L5=model.Gamepiece@12ed9db6(Locations =[model.Location@4ff4357f(x=0,y=0), model.Location@49cb9cb5(x=0,y=1), model.Location@55322aab(x=1,y=0), model.Location@2b4c1d96(x=2,y=0), model.Location@45fd9a4d(x=3,y=0)],playerNo=0), I3=model.Gamepiece@50468873(Locations =[model.Location@146587a2(x=0,y=0), model.Location@5f0e9815(x=0,y=1), model.Location@76884e4b(x=0,y=2)],playerNo=0), I4=model.Gamepiece@126945f9(Locations =[model.Location@2a898881(x=0,y=0), model.Location@16c63f5(x=0,y=1), model.Location@35229f85(x=0,y=2), model.Location@6d3c5255(x=0,y=3)],playerNo=0), I5=model.Gamepiece@b1712f3(Locations =[model.Location@6986bbaf(x=0,y=0), model.Location@4879dfad(x=0,y=1), model.Location@4758820d(x=0,y=2), model.Location@74eb909f(x=0,y=3), model.Location@28ec166e(x=0,y=4)],playerNo=0), N=model.Gamepiece@2eee3069(Locations =[model.Location@2da59753(x=0,y=0), model.Location@5629510(x=0,y=-1), model.Location@4df5bcb4(x=-1,y=-1), model.Location@12c7a01b(x=1,y=0), model.Location@13d9b21f(x=2,y=0)],playerNo=0), P=model.Gamepiece@2826f61(Locations =[model.Location@62727399(x=0,y=0), model.Location@4d9ac0b4(x=1,y=0), model.Location@130dca52(x=0,y=-1), model.Location@2654635(x=1,y=-1), model.Location@737a135b(x=0,y=-2)],playerNo=0), U=model.Gamepiece@687ef2e0(Locations =[model.Location@15dcfae7(x=0,y=0), model.Location@3da05287(x=0,y=1), model.Location@1e636ea3(x=1,y=1), model.Location@115667d(x=0,y=-1), model.Location@736caf7a(x=1,y=-1)],playerNo=0), W=model.Gamepiece@4ce7fffa(Locations =[model.Location@497486b3(x=0,y=0), model.Location@63f8276e(x=-1,y=0), model.Location@75f95314(x=-1,y=-1), model.Location@6127a7e(x=0,y=1), model.Location@6bbe2511(x=1,y=1)],playerNo=0), X=model.Gamepiece@495fac5f(Locations =[model.Location@76012793(x=0,y=0), model.Location@635572a7(x=1,y=0), model.Location@79d94571(x=-1,y=0), model.Location@4dd02341(x=0,y=1), model.Location@3212a8d7(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@7a1a3478(Locations =[model.Location@495b0487(x=0,y=0), model.Location@55dfcc6(x=0,y=1), model.Location@222eb8aa(x=1,y=0), model.Location@93cf163(x=2,y=0), model.Location@1852a3ff(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@7203c7ff(Locations =[model.Location@25bfcafd(x=0,y=0), model.Location@4b6690c0(x=0,y=1), model.Location@46268f08(x=1,y=1), model.Location@2a76840c(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@71454b9d(Locations =[model.Location@eda25e5(x=0,y=0), model.Location@7cf6a5f9(x=-1,y=0), model.Location@623e088f(x=-1,y=-1), model.Location@39fcbef6(x=1,y=0), model.Location@66565121(x=1,y=1)],playerNo=0), V3=model.Gamepiece@2fc6f97f(Locations =[model.Location@3d2ee678(x=0,y=0), model.Location@6179e425(x=0,y=1), model.Location@35f26e72(x=1,y=0)],playerNo=0), V5=model.Gamepiece@2d6764b2(Locations =[model.Location@67304a40(x=0,y=0), model.Location@49c6c24f(x=0,y=1), model.Location@6fe1b4fb(x=0,y=2), model.Location@79351f41(x=1,y=0), model.Location@1c32386d(x=2,y=0)],playerNo=0)}),model.Gamepiece@32f232a5(Locations =[model.Location@43f82e78(x=0,y=0)],playerNo=0),model.Location@13d73fa(x=4,y=9)): getPlayer() = TestPlayer@61a88b8c(name=null,playerNo=0,gamepieceSet=model.GamepieceSet@6399551e {T4=model.Gamepiece@41d426b5(Locations =[model.Location@8dbfffb(x=0,y=0), model.Location@f316aeb(x=-1,y=0), model.Location@6aa3a905(x=1,y=0), model.Location@a22cb6a(x=0,y=1)],playerNo=0), T5=model.Gamepiece@5dd1c9f2(Locations =[model.Location@59b38691(x=0,y=0), model.Location@2e2ff723(x=1,y=0), model.Location@324a0017(x=-1,y=0), model.Location@6187d1f5(x=0,y=1), model.Location@2445445a(x=0,y=2)],playerNo=0), O4=model.Gamepiece@7502291e(Locations =[model.Location@17aad511(x=0,y=0), model.Location@487db668(x=0,y=1), model.Location@46944ca9(x=1,y=1), model.Location@22bac7bc(x=1,y=0)],playerNo=0), F=model.Gamepiece@63798ca7(Locations =[model.Location@4612b856(x=0,y=0), model.Location@22875539(x=-1,y=0), model.Location@5674e1f2(x=0,y=-1), model.Location@79c7532f(x=0,y=1), model.Location@2a448449(x=1,y=1)],playerNo=0), I1=model.Gamepiece@32f232a5(Locations =[model.Location@43f82e78(x=0,y=0)],playerNo=0), L4=model.Gamepiece@e54303(Locations =[model.Location@e8df99a(x=0,y=0), model.Location@2dc995f4(x=0,y=1), model.Location@2f40e5db(x=0,y=2), model.Location@517566b(x=1,y=0)],playerNo=0), I2=model.Gamepiece@64b73e7a(Locations =[model.Location@530712d(x=0,y=0), model.Location@2df6226d(x=0,y=1)],playerNo=0), L5=model.Gamepiece@12ed9db6(Locations =[model.Location@4ff4357f(x=0,y=0), model.Location@49cb9cb5(x=0,y=1), model.Location@55322aab(x=1,y=0), model.Location@2b4c1d96(x=2,y=0), model.Location@45fd9a4d(x=3,y=0)],playerNo=0), I3=model.Gamepiece@50468873(Locations =[model.Location@146587a2(x=0,y=0), model.Location@5f0e9815(x=0,y=1), model.Location@76884e4b(x=0,y=2)],playerNo=0), I4=model.Gamepiece@126945f9(Locations =[model.Location@2a898881(x=0,y=0), model.Location@16c63f5(x=0,y=1), model.Location@35229f85(x=0,y=2), model.Location@6d3c5255(x=0,y=3)],playerNo=0), I5=model.Gamepiece@b1712f3(Locations =[model.Location@6986bbaf(x=0,y=0), model.Location@4879dfad(x=0,y=1), model.Location@4758820d(x=0,y=2), model.Location@74eb909f(x=0,y=3), model.Location@28ec166e(x=0,y=4)],playerNo=0), N=model.Gamepiece@2eee3069(Locations =[model.Location@2da59753(x=0,y=0), model.Location@5629510(x=0,y=-1), model.Location@4df5bcb4(x=-1,y=-1), model.Location@12c7a01b(x=1,y=0), model.Location@13d9b21f(x=2,y=0)],playerNo=0), P=model.Gamepiece@2826f61(Locations =[model.Location@62727399(x=0,y=0), model.Location@4d9ac0b4(x=1,y=0), model.Location@130dca52(x=0,y=-1), model.Location@2654635(x=1,y=-1), model.Location@737a135b(x=0,y=-2)],playerNo=0), U=model.Gamepiece@687ef2e0(Locations =[model.Location@15dcfae7(x=0,y=0), model.Location@3da05287(x=0,y=1), model.Location@1e636ea3(x=1,y=1), model.Location@115667d(x=0,y=-1), model.Location@736caf7a(x=1,y=-1)],playerNo=0), W=model.Gamepiece@4ce7fffa(Locations =[model.Location@497486b3(x=0,y=0), model.Location@63f8276e(x=-1,y=0), model.Location@75f95314(x=-1,y=-1), model.Location@6127a7e(x=0,y=1), model.Location@6bbe2511(x=1,y=1)],playerNo=0), X=model.Gamepiece@495fac5f(Locations =[model.Location@76012793(x=0,y=0), model.Location@635572a7(x=1,y=0), model.Location@79d94571(x=-1,y=0), model.Location@4dd02341(x=0,y=1), model.Location@3212a8d7(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@7a1a3478(Locations =[model.Location@495b0487(x=0,y=0), model.Location@55dfcc6(x=0,y=1), model.Location@222eb8aa(x=1,y=0), model.Location@93cf163(x=2,y=0), model.Location@1852a3ff(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@7203c7ff(Locations =[model.Location@25bfcafd(x=0,y=0), model.Location@4b6690c0(x=0,y=1), model.Location@46268f08(x=1,y=1), model.Location@2a76840c(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@71454b9d(Locations =[model.Location@eda25e5(x=0,y=0), model.Location@7cf6a5f9(x=-1,y=0), model.Location@623e088f(x=-1,y=-1), model.Location@39fcbef6(x=1,y=0), model.Location@66565121(x=1,y=1)],playerNo=0), V3=model.Gamepiece@2fc6f97f(Locations =[model.Location@3d2ee678(x=0,y=0), model.Location@6179e425(x=0,y=1), model.Location@35f26e72(x=1,y=0)],playerNo=0), V5=model.Gamepiece@2d6764b2(Locations =[model.Location@67304a40(x=0,y=0), model.Location@49c6c24f(x=0,y=1), model.Location@6fe1b4fb(x=0,y=2), model.Location@79351f41(x=1,y=0), model.Location@1c32386d(x=2,y=0)],playerNo=0)}), getGamepiece() = model.Gamepiece@32f232a5(Locations =[model.Location@43f82e78(x=0,y=0)],playerNo=0), getLocation() = model.Location@13d73fa(x=4,y=9)
-≠E	Testing for Move(TestPlayer@5023bb8b(name=null,playerNo=1,gamepieceSet=model.GamepieceSet@5ccbeb64 {T4=model.Gamepiece@5d5f10b2(Locations =[model.Location@74c79fa2(x=0,y=0), model.Location@1e0f9063(x=-1,y=0), model.Location@53bd8fca(x=1,y=0), model.Location@7642df8f(x=0,y=1)],playerNo=1), T5=model.Gamepiece@3e30646a(Locations =[model.Location@5cde6747(x=0,y=0), model.Location@63a270c9(x=1,y=0), model.Location@37c7595(x=-1,y=0), model.Location@3ed242a4(x=0,y=1), model.Location@1199fe66(x=0,y=2)],playerNo=1), O4=model.Gamepiece@614df0a4(Locations =[model.Location@1fdf1c5(x=0,y=0), model.Location@2d96543c(x=0,y=1), model.Location@73a2e526(x=1,y=1), model.Location@7d64e326(x=1,y=0)],playerNo=1), F=model.Gamepiece@13f95696(Locations =[model.Location@cd1d761(x=0,y=0), model.Location@68be8808(x=-1,y=0), model.Location@32193bea(x=0,y=-1), model.Location@6b8d96d9(x=0,y=1), model.Location@69653e16(x=1,y=1)],playerNo=1), I1=model.Gamepiece@758705fa(Locations =[model.Location@ebaa6cb(x=0,y=0)],playerNo=1), L4=model.Gamepiece@906d29b(Locations =[model.Location@49d3c823(x=0,y=0), model.Location@436bc36(x=0,y=1), model.Location@5fe1ce85(x=0,y=2), model.Location@604c5de8(x=1,y=0)],playerNo=1), I2=model.Gamepiece@37091312(Locations =[model.Location@66fdec9(x=0,y=0), model.Location@57abad67(x=0,y=1)],playerNo=1), L5=model.Gamepiece@550a1967(Locations =[model.Location@2a640157(x=0,y=0), model.Location@52851b44(x=0,y=1), model.Location@584f54e6(x=1,y=0), model.Location@5d8bafa9(x=2,y=0), model.Location@576f63f6(x=3,y=0)],playerNo=1), I3=model.Gamepiece@2dca0d64(Locations =[model.Location@f80945f(x=0,y=0), model.Location@ff684e1(x=0,y=1), model.Location@23aa363a(x=0,y=2)],playerNo=1), I4=model.Gamepiece@5ef6ae06(Locations =[model.Location@55dfebeb(x=0,y=0), model.Location@6e35bc3d(x=0,y=1), model.Location@1cdc4c27(x=0,y=2), model.Location@77b14724(x=0,y=3)],playerNo=1), I5=model.Gamepiece@5d9b7a8a(Locations =[model.Location@1e8ce150(x=0,y=0), model.Location@604f2bd2(x=0,y=1), model.Location@1d3ac898(x=0,y=2), model.Location@1b73be9f(x=0,y=3), model.Location@628c4ac0(x=0,y=4)],playerNo=1), N=model.Gamepiece@7b84fcf8(Locations =[model.Location@30b19518(x=0,y=0), model.Location@363042d7(x=0,y=-1), model.Location@366ac49b(x=-1,y=-1), model.Location@6ad59d92(x=1,y=0), model.Location@56f0cc85(x=2,y=0)],playerNo=1), P=model.Gamepiece@62e20a76(Locations =[model.Location@2cc44ad(x=0,y=0), model.Location@44b3606b(x=1,y=0), model.Location@1477089c(x=0,y=-1), model.Location@663411de(x=1,y=-1), model.Location@63dd899(x=0,y=-2)],playerNo=1), U=model.Gamepiece@59d2400d(Locations =[model.Location@75cd8043(x=0,y=0), model.Location@33b1c5c5(x=0,y=1), model.Location@5b202a3a(x=1,y=1), model.Location@10b9db7b(x=0,y=-1), model.Location@9ef8eb7(x=1,y=-1)],playerNo=1), W=model.Gamepiece@34cdeda2(Locations =[model.Location@6ee660fb(x=0,y=0), model.Location@305a0c5f(x=-1,y=0), model.Location@4535b6d5(x=-1,y=-1), model.Location@1ecee32c(x=0,y=1), model.Location@4372b9b6(x=1,y=1)],playerNo=1), X=model.Gamepiece@232a7d73(Locations =[model.Location@4b41e4dd(x=0,y=0), model.Location@22ffa91a(x=1,y=0), model.Location@74960bfa(x=-1,y=0), model.Location@42721fe(x=0,y=1), model.Location@40844aab(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@1f6c9cd8(Locations =[model.Location@5b619d14(x=0,y=0), model.Location@66746f57(x=0,y=1), model.Location@447a020(x=1,y=0), model.Location@7f36662c(x=2,y=0), model.Location@28e8dde3(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@6d23017e(Locations =[model.Location@54dcfa5a(x=0,y=0), model.Location@1817f1eb(x=0,y=1), model.Location@767e20cf(x=1,y=1), model.Location@3a3e78f(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@301ec38b(Locations =[model.Location@17a1e4ca(x=0,y=0), model.Location@10ded6a9(x=-1,y=0), model.Location@c5dc4a2(x=-1,y=-1), model.Location@4a194c39(x=1,y=0), model.Location@52066604(x=1,y=1)],playerNo=1), V3=model.Gamepiece@340b9973(Locations =[model.Location@56113384(x=0,y=0), model.Location@5669c5fb(x=0,y=1), model.Location@373ebf74(x=1,y=0)],playerNo=1), V5=model.Gamepiece@5f9678e1(Locations =[model.Location@c4ed84(x=0,y=0), model.Location@189aa67a(x=0,y=1), model.Location@5a9d6f02(x=0,y=2), model.Location@362045c0(x=1,y=0), model.Location@112f364d(x=2,y=0)],playerNo=1)}),model.Gamepiece@340b9973(Locations =[model.Location@56113384(x=0,y=0), model.Location@5669c5fb(x=0,y=1), model.Location@373ebf74(x=1,y=0)],playerNo=1),model.Location@6d9f7a80(x=0,y=0)): getPlayer() = TestPlayer@5023bb8b(name=null,playerNo=1,gamepieceSet=model.GamepieceSet@5ccbeb64 {T4=model.Gamepiece@5d5f10b2(Locations =[model.Location@74c79fa2(x=0,y=0), model.Location@1e0f9063(x=-1,y=0), model.Location@53bd8fca(x=1,y=0), model.Location@7642df8f(x=0,y=1)],playerNo=1), T5=model.Gamepiece@3e30646a(Locations =[model.Location@5cde6747(x=0,y=0), model.Location@63a270c9(x=1,y=0), model.Location@37c7595(x=-1,y=0), model.Location@3ed242a4(x=0,y=1), model.Location@1199fe66(x=0,y=2)],playerNo=1), O4=model.Gamepiece@614df0a4(Locations =[model.Location@1fdf1c5(x=0,y=0), model.Location@2d96543c(x=0,y=1), model.Location@73a2e526(x=1,y=1), model.Location@7d64e326(x=1,y=0)],playerNo=1), F=model.Gamepiece@13f95696(Locations =[model.Location@cd1d761(x=0,y=0), model.Location@68be8808(x=-1,y=0), model.Location@32193bea(x=0,y=-1), model.Location@6b8d96d9(x=0,y=1), model.Location@69653e16(x=1,y=1)],playerNo=1), I1=model.Gamepiece@758705fa(Locations =[model.Location@ebaa6cb(x=0,y=0)],playerNo=1), L4=model.Gamepiece@906d29b(Locations =[model.Location@49d3c823(x=0,y=0), model.Location@436bc36(x=0,y=1), model.Location@5fe1ce85(x=0,y=2), model.Location@604c5de8(x=1,y=0)],playerNo=1), I2=model.Gamepiece@37091312(Locations =[model.Location@66fdec9(x=0,y=0), model.Location@57abad67(x=0,y=1)],playerNo=1), L5=model.Gamepiece@550a1967(Locations =[model.Location@2a640157(x=0,y=0), model.Location@52851b44(x=0,y=1), model.Location@584f54e6(x=1,y=0), model.Location@5d8bafa9(x=2,y=0), model.Location@576f63f6(x=3,y=0)],playerNo=1), I3=model.Gamepiece@2dca0d64(Locations =[model.Location@f80945f(x=0,y=0), model.Location@ff684e1(x=0,y=1), model.Location@23aa363a(x=0,y=2)],playerNo=1), I4=model.Gamepiece@5ef6ae06(Locations =[model.Location@55dfebeb(x=0,y=0), model.Location@6e35bc3d(x=0,y=1), model.Location@1cdc4c27(x=0,y=2), model.Location@77b14724(x=0,y=3)],playerNo=1), I5=model.Gamepiece@5d9b7a8a(Locations =[model.Location@1e8ce150(x=0,y=0), model.Location@604f2bd2(x=0,y=1), model.Location@1d3ac898(x=0,y=2), model.Location@1b73be9f(x=0,y=3), model.Location@628c4ac0(x=0,y=4)],playerNo=1), N=model.Gamepiece@7b84fcf8(Locations =[model.Location@30b19518(x=0,y=0), model.Location@363042d7(x=0,y=-1), model.Location@366ac49b(x=-1,y=-1), model.Location@6ad59d92(x=1,y=0), model.Location@56f0cc85(x=2,y=0)],playerNo=1), P=model.Gamepiece@62e20a76(Locations =[model.Location@2cc44ad(x=0,y=0), model.Location@44b3606b(x=1,y=0), model.Location@1477089c(x=0,y=-1), model.Location@663411de(x=1,y=-1), model.Location@63dd899(x=0,y=-2)],playerNo=1), U=model.Gamepiece@59d2400d(Locations =[model.Location@75cd8043(x=0,y=0), model.Location@33b1c5c5(x=0,y=1), model.Location@5b202a3a(x=1,y=1), model.Location@10b9db7b(x=0,y=-1), model.Location@9ef8eb7(x=1,y=-1)],playerNo=1), W=model.Gamepiece@34cdeda2(Locations =[model.Location@6ee660fb(x=0,y=0), model.Location@305a0c5f(x=-1,y=0), model.Location@4535b6d5(x=-1,y=-1), model.Location@1ecee32c(x=0,y=1), model.Location@4372b9b6(x=1,y=1)],playerNo=1), X=model.Gamepiece@232a7d73(Locations =[model.Location@4b41e4dd(x=0,y=0), model.Location@22ffa91a(x=1,y=0), model.Location@74960bfa(x=-1,y=0), model.Location@42721fe(x=0,y=1), model.Location@40844aab(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@1f6c9cd8(Locations =[model.Location@5b619d14(x=0,y=0), model.Location@66746f57(x=0,y=1), model.Location@447a020(x=1,y=0), model.Location@7f36662c(x=2,y=0), model.Location@28e8dde3(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@6d23017e(Locations =[model.Location@54dcfa5a(x=0,y=0), model.Location@1817f1eb(x=0,y=1), model.Location@767e20cf(x=1,y=1), model.Location@3a3e78f(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@301ec38b(Locations =[model.Location@17a1e4ca(x=0,y=0), model.Location@10ded6a9(x=-1,y=0), model.Location@c5dc4a2(x=-1,y=-1), model.Location@4a194c39(x=1,y=0), model.Location@52066604(x=1,y=1)],playerNo=1), V3=model.Gamepiece@340b9973(Locations =[model.Location@56113384(x=0,y=0), model.Location@5669c5fb(x=0,y=1), model.Location@373ebf74(x=1,y=0)],playerNo=1), V5=model.Gamepiece@5f9678e1(Locations =[model.Location@c4ed84(x=0,y=0), model.Location@189aa67a(x=0,y=1), model.Location@5a9d6f02(x=0,y=2), model.Location@362045c0(x=1,y=0), model.Location@112f364d(x=2,y=0)],playerNo=1)}), getGamepiece() = model.Gamepiece@340b9973(Locations =[model.Location@56113384(x=0,y=0), model.Location@5669c5fb(x=0,y=1), model.Location@373ebf74(x=1,y=0)],playerNo=1), getLocation() = model.Location@6d9f7a80(x=0,y=0)
-zMove test: check that the name of the gamepiece given in setGamepieceName(gamepieceName) is returned correctly by getter
-∏"	Testing for Move(TestPlayer@31d0e481(name=null,playerNo=0,gamepieceSet=model.GamepieceSet@44040454 {T4=model.Gamepiece@3243b914(Locations =[model.Location@241e8ea6(x=0,y=0), model.Location@542e560f(x=-1,y=0), model.Location@626c44e7(x=1,y=0), model.Location@4dc8caa7(x=0,y=1)],playerNo=0), T5=model.Gamepiece@1d730606(Locations =[model.Location@3bcbb589(x=0,y=0), model.Location@3b00856b(x=1,y=0), model.Location@3016fd5e(x=-1,y=0), model.Location@35d08e6c(x=0,y=1), model.Location@53d102a2(x=0,y=2)],playerNo=0), O4=model.Gamepiece@6c45ee6e(Locations =[model.Location@6b3e12b5(x=0,y=0), model.Location@5aac4250(x=0,y=1), model.Location@1338fb5(x=1,y=1), model.Location@42463763(x=1,y=0)],playerNo=0), F=model.Gamepiece@59f63e24(Locations =[model.Location@61f05988(x=0,y=0), model.Location@7ca33c24(x=-1,y=0), model.Location@fade1fc(x=0,y=-1), model.Location@67c2e933(x=0,y=1), model.Location@41dd05a(x=1,y=1)],playerNo=0), I1=model.Gamepiece@613a8ee1(Locations =[model.Location@178213b(x=0,y=0)],playerNo=0), L4=model.Gamepiece@7103cb56(Locations =[model.Location@1b765a2c(x=0,y=0), model.Location@2e8e8225(x=0,y=1), model.Location@6ebf0f36(x=0,y=2), model.Location@18920cc(x=1,y=0)],playerNo=0), I2=model.Gamepiece@2807bdeb(Locations =[model.Location@72c28d64(x=0,y=0), model.Location@6492fab5(x=0,y=1)],playerNo=0), L5=model.Gamepiece@2c5529ab(Locations =[model.Location@39a8312f(x=0,y=0), model.Location@5f6722d3(x=0,y=1), model.Location@2c532cd8(x=1,y=0), model.Location@294e5088(x=2,y=0), model.Location@51972dc7(x=3,y=0)],playerNo=0), I3=model.Gamepiece@3700ec9c(Locations =[model.Location@2002348(x=0,y=0), model.Location@5911e990(x=0,y=1), model.Location@31000e60(x=0,y=2)],playerNo=0), I4=model.Gamepiece@1d470d0(Locations =[model.Location@24d09c1(x=0,y=0), model.Location@54c62d71(x=0,y=1), model.Location@65045a87(x=0,y=2), model.Location@47f4e407(x=0,y=3)],playerNo=0), I5=model.Gamepiece@2d1dee39(Locations =[model.Location@48d5f34e(x=0,y=0), model.Location@fc258b1(x=0,y=1), model.Location@6ff65192(x=0,y=2), model.Location@2dd80673(x=0,y=3), model.Location@4af0df05(x=0,y=4)],playerNo=0), N=model.Gamepiece@57ea113a(Locations =[model.Location@acdb094(x=0,y=0), model.Location@674bd420(x=0,y=-1), model.Location@2b0f373b(x=-1,y=-1), model.Location@2ceb80a1(x=1,y=0), model.Location@4b45dcb8(x=2,y=0)],playerNo=0), P=model.Gamepiece@7216fb24(Locations =[model.Location@2072acb2(x=0,y=0), model.Location@50ecde95(x=1,y=0), model.Location@35a9782c(x=0,y=-1), model.Location@70a36a66(x=1,y=-1), model.Location@45815ffc(x=0,y=-2)],playerNo=0), U=model.Gamepiece@732f29af(Locations =[model.Location@d3957fe(x=0,y=0), model.Location@6622fc65(x=0,y=1), model.Location@299321e2(x=1,y=1), model.Location@23fb172e(x=0,y=-1), model.Location@64ba3208(x=1,y=-1)],playerNo=0), W=model.Gamepiece@158a3b2e(Locations =[model.Location@25a6944c(x=0,y=0), model.Location@5e1fa5b1(x=-1,y=0), model.Location@6b00f608(x=-1,y=-1), model.Location@2f17e30d(x=0,y=1), model.Location@3e821657(x=1,y=1)],playerNo=0), X=model.Gamepiece@1d131e1b(Locations =[model.Location@71cf1b07(x=0,y=0), model.Location@615091b8(x=1,y=0), model.Location@4fce136b(x=-1,y=0), model.Location@4aa83f4f(x=0,y=1), model.Location@43b6123e(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@260e86a1(Locations =[model.Location@19648c40(x=0,y=0), model.Location@12bd8a64(x=0,y=1), model.Location@61e94def(x=1,y=0), model.Location@3300f4fd(x=2,y=0), model.Location@ebb6851(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@70ab2d48(Locations =[model.Location@5b068087(x=0,y=0), model.Location@6f152006(x=0,y=1), model.Location@3a393455(x=1,y=1), model.Location@13518f37(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@7cbc3762(Locations =[model.Location@3a6f2de3(x=0,y=0), model.Location@49872d67(x=-1,y=0), model.Location@56303b57(x=-1,y=-1), model.Location@4b2a01d4(x=1,y=0), model.Location@8692d67(x=1,y=1)],playerNo=0), V3=model.Gamepiece@78f5c518(Locations =[model.Location@2f48b3d2(x=0,y=0), model.Location@34f7234e(x=0,y=1), model.Location@753432a2(x=1,y=0)],playerNo=0), V5=model.Gamepiece@23bff419(Locations =[model.Location@4983159f(x=0,y=0), model.Location@44e3a2b2(x=0,y=1), model.Location@101639ae(x=0,y=2), model.Location@4c550889(x=1,y=0), model.Location@1d2bd371(x=2,y=0)],playerNo=0)}),model.Gamepiece@613a8ee1(Locations =[model.Location@178213b(x=0,y=0)],playerNo=0),"",model.Location@65fe9e33(x=4,y=9)).setGamepieceName(I1): getGamepieceName() = I1
-˘"	Testing for Move(TestPlayer@18bc345(name=null,playerNo=1,gamepieceSet=model.GamepieceSet@704f1591 {T4=model.Gamepiece@42f8285e(Locations =[model.Location@26bab2f1(x=0,y=0), model.Location@3724af13(x=-1,y=0), model.Location@68ead359(x=1,y=0), model.Location@6b53bcc2(x=0,y=1)],playerNo=1), T5=model.Gamepiece@180da663(Locations =[model.Location@a43ce46(x=0,y=0), model.Location@340da44c(x=1,y=0), model.Location@424ebba3(x=-1,y=0), model.Location@37052337(x=0,y=1), model.Location@2320fa6f(x=0,y=2)],playerNo=1), O4=model.Gamepiece@7a560583(Locations =[model.Location@4d722ac9(x=0,y=0), model.Location@53f0a4cb(x=0,y=1), model.Location@77a7cf58(x=1,y=1), model.Location@3d97a632(x=1,y=0)],playerNo=1), F=model.Gamepiece@616fe72b(Locations =[model.Location@37efd131(x=0,y=0), model.Location@7e7b159b(x=-1,y=0), model.Location@7e5d9a50(x=0,y=-1), model.Location@60957c0f(x=0,y=1), model.Location@293a5f75(x=1,y=1)],playerNo=1), I1=model.Gamepiece@fcb4004(Locations =[model.Location@1dd6d4b7(x=0,y=0)],playerNo=1), L4=model.Gamepiece@56e8b606(Locations =[model.Location@2dd29a59(x=0,y=0), model.Location@784c3487(x=0,y=1), model.Location@53142455(x=0,y=2), model.Location@40dff0b7(x=1,y=0)],playerNo=1), I2=model.Gamepiece@7966baa7(Locations =[model.Location@60975100(x=0,y=0), model.Location@1253e7cb(x=0,y=1)],playerNo=1), L5=model.Gamepiece@2d36e77e(Locations =[model.Location@61c9c3fd(x=0,y=0), model.Location@3b0c9195(x=0,y=1), model.Location@366c4480(x=1,y=0), model.Location@2c7b5824(x=2,y=0), model.Location@302a07d(x=3,y=0)],playerNo=1), I3=model.Gamepiece@5cdd09b1(Locations =[model.Location@8c11eee(x=0,y=0), model.Location@7e8dcdaa(x=0,y=1), model.Location@681a8b4e(x=0,y=2)],playerNo=1), I4=model.Gamepiece@5cbe877d(Locations =[model.Location@5c08c46a(x=0,y=0), model.Location@4cf8b2dc(x=0,y=1), model.Location@708400f6(x=0,y=2), model.Location@5829e4f4(x=0,y=3)],playerNo=1), I5=model.Gamepiece@4218500f(Locations =[model.Location@4bff64c2(x=0,y=0), model.Location@1b2c4efb(x=0,y=1), model.Location@c35172e(x=0,y=2), model.Location@c2db68f(x=0,y=3), model.Location@3cc41abc(x=0,y=4)],playerNo=1), N=model.Gamepiece@4566d049(Locations =[model.Location@61ce23ac(x=0,y=0), model.Location@3668d4(x=0,y=-1), model.Location@1c3b9394(x=-1,y=-1), model.Location@6f2cfcc2(x=1,y=0), model.Location@7f6f61c8(x=2,y=0)],playerNo=1), P=model.Gamepiece@4c2cc639(Locations =[model.Location@ccb4b1b(x=0,y=0), model.Location@4097cac(x=1,y=0), model.Location@ec2cc4(x=0,y=-1), model.Location@2a5b3fee(x=1,y=-1), model.Location@7c1e2a2d(x=0,y=-2)],playerNo=1), U=model.Gamepiece@333dd51e(Locations =[model.Location@52d645b1(x=0,y=0), model.Location@2101b44a(x=0,y=1), model.Location@2cc3ad05(x=1,y=1), model.Location@710b18a6(x=0,y=-1), model.Location@119020fb(x=1,y=-1)],playerNo=1), W=model.Gamepiece@3d9f6567(Locations =[model.Location@c055c54(x=0,y=0), model.Location@25e2ab5a(x=-1,y=0), model.Location@35e5d0e5(x=-1,y=-1), model.Location@73173f63(x=0,y=1), model.Location@55562aa9(x=1,y=1)],playerNo=1), X=model.Gamepiece@655ef322(Locations =[model.Location@7e276594(x=0,y=0), model.Location@3401a114(x=1,y=0), model.Location@5066d65f(x=-1,y=0), model.Location@4233e892(x=0,y=1), model.Location@77d2e85(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@3ecd267f(Locations =[model.Location@58ffcbd7(x=0,y=0), model.Location@555cf22(x=0,y=1), model.Location@6bb2d00b(x=1,y=0), model.Location@3c9bfddc(x=2,y=0), model.Location@1a9c38eb(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@319bc845(Locations =[model.Location@4c5474f5(x=0,y=0), model.Location@2f4205be(x=0,y=1), model.Location@54e22bdd(x=1,y=1), model.Location@3bd418e4(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@544820b7(Locations =[model.Location@6b98a075(x=0,y=0), model.Location@2e61d218(x=-1,y=0), model.Location@3569fc08(x=-1,y=-1), model.Location@20b12f8a(x=1,y=0), model.Location@e84a8e1(x=1,y=1)],playerNo=1), V3=model.Gamepiece@2e554a3b(Locations =[model.Location@54a67a45(x=0,y=0), model.Location@7d42c224(x=0,y=1), model.Location@56aaaecd(x=1,y=0)],playerNo=1), V5=model.Gamepiece@522a32b1(Locations =[model.Location@35390ee3(x=0,y=0), model.Location@5e01a982(x=0,y=1), model.Location@5ddea849(x=0,y=2), model.Location@5ee2b6f9(x=1,y=0), model.Location@23d1e5d0(x=2,y=0)],playerNo=1)}),model.Gamepiece@2e554a3b(Locations =[model.Location@54a67a45(x=0,y=0), model.Location@7d42c224(x=0,y=1), model.Location@56aaaecd(x=1,y=0)],playerNo=1),"",model.Location@58fb7731(x=0,y=0)).setGamepieceName(V3): getGamepieceName() = V3
-pPlayer test: check that the values set by Player(playerNo) and setName(name) are returned correctly by getters
-¢!	Testing for Player(0): getPlayerName() = Mary, getPlayerNo() = 0, getGamepieceSet() = model.GamepieceSet@4ba302e0 {T4=model.Gamepiece@3fb6cf60(Locations =[model.Location@37ddb69a(x=0,y=0), model.Location@349c1daf(x=-1,y=0), model.Location@dfddc9a(x=1,y=0), model.Location@4b9df8a(x=0,y=1)],playerNo=0), T5=model.Gamepiece@5e8ac0e1(Locations =[model.Location@aafcffa(x=0,y=0), model.Location@6955cb39(x=1,y=0), model.Location@235a0c16(x=-1,y=0), model.Location@2b5f4d54(x=0,y=1), model.Location@5f7b97da(x=0,y=2)],playerNo=0), O4=model.Gamepiece@18b0930f(Locations =[model.Location@6b7906b3(x=0,y=0), model.Location@3a1dd365(x=0,y=1), model.Location@395b56bb(x=1,y=1), model.Location@256f8274(x=1,y=0)],playerNo=0), F=model.Gamepiece@68044f4(Locations =[model.Location@52d239ba(x=0,y=0), model.Location@315f43d5(x=-1,y=0), model.Location@68fa0ba8(x=0,y=-1), model.Location@6c5945a7(x=0,y=1), model.Location@2f05be7f(x=1,y=1)],playerNo=0), I1=model.Gamepiece@640f11a1(Locations =[model.Location@5c10f1c3(x=0,y=0)],playerNo=0), L4=model.Gamepiece@7ac2e39b(Locations =[model.Location@78365cfa(x=0,y=0), model.Location@64a8c844(x=0,y=1), model.Location@3f6db3fb(x=0,y=2), model.Location@52de51b6(x=1,y=0)],playerNo=0), I2=model.Gamepiece@18c5069b(Locations =[model.Location@3a0d172f(x=0,y=0), model.Location@68ad99fe(x=0,y=1)],playerNo=0), L5=model.Gamepiece@485e36bc(Locations =[model.Location@781f10f2(x=0,y=0), model.Location@2a79d4b1(x=0,y=1), model.Location@2e9fda69(x=1,y=0), model.Location@17cdf2d0(x=2,y=0), model.Location@1755e85b(x=3,y=0)],playerNo=0), I3=model.Gamepiece@736d6a5c(Locations =[model.Location@2371aaca(x=0,y=0), model.Location@5b529706(x=0,y=1), model.Location@63fdab07(x=0,y=2)],playerNo=0), I4=model.Gamepiece@7b5a12ae(Locations =[model.Location@5553d0f5(x=0,y=0), model.Location@1af687fe(x=0,y=1), model.Location@14dda234(x=0,y=2), model.Location@3f390d63(x=0,y=3)],playerNo=0), I5=model.Gamepiece@74a6a609(Locations =[model.Location@5a411614(x=0,y=0), model.Location@2374d36a(x=0,y=1), model.Location@54d18072(x=0,y=2), model.Location@1506f20f(x=0,y=3), model.Location@47a5b70d(x=0,y=4)],playerNo=0), N=model.Gamepiece@424fd310(Locations =[model.Location@1a45193b(x=0,y=0), model.Location@38f116f6(x=0,y=-1), model.Location@5286c33a(x=-1,y=-1), model.Location@6e6d5d29(x=1,y=0), model.Location@5c530d1e(x=2,y=0)],playerNo=0), P=model.Gamepiece@6c25e6c4(Locations =[model.Location@85e6769(x=0,y=0), model.Location@c5ee75e(x=1,y=0), model.Location@48a12036(x=0,y=-1), model.Location@bf1ec20(x=1,y=-1), model.Location@70efb718(x=0,y=-2)],playerNo=0), U=model.Gamepiece@b70da4c(Locations =[model.Location@4a11eb84(x=0,y=0), model.Location@4e858e0a(x=0,y=1), model.Location@435fb7b5(x=1,y=1), model.Location@4e70a728(x=0,y=-1), model.Location@b7838a9(x=1,y=-1)],playerNo=0), W=model.Gamepiece@696f0212(Locations =[model.Location@5733f295(x=0,y=0), model.Location@1c3146bc(x=-1,y=0), model.Location@56c698e3(x=-1,y=-1), model.Location@47a86fbb(x=0,y=1), model.Location@f478a81(x=1,y=1)],playerNo=0), X=model.Gamepiece@19553973(Locations =[model.Location@7bb6ab3a(x=0,y=0), model.Location@7fe7c640(x=1,y=0), model.Location@4c4748bf(x=-1,y=0), model.Location@7ce97ee5(x=0,y=1), model.Location@32c8e539(x=0,y=-1)],playerNo=0), Y=model.Gamepiece@73dce0e6(Locations =[model.Location@5a85c92(x=0,y=0), model.Location@32811494(x=0,y=1), model.Location@4795ded0(x=1,y=0), model.Location@53dacd14(x=2,y=0), model.Location@14d14731(x=-1,y=0)],playerNo=0), Z4=model.Gamepiece@2eced48b(Locations =[model.Location@47c4ecdc(x=0,y=0), model.Location@42f33b5d(x=0,y=1), model.Location@5c8504fd(x=1,y=1), model.Location@4b7e96a(x=-1,y=0)],playerNo=0), Z5=model.Gamepiece@6475472c(Locations =[model.Location@3f07b12c(x=0,y=0), model.Location@4bd1f8dd(x=-1,y=0), model.Location@7096b474(x=-1,y=-1), model.Location@3e14c16d(x=1,y=0), model.Location@3c989952(x=1,y=1)],playerNo=0), V3=model.Gamepiece@784b990c(Locations =[model.Location@3d3ba765(x=0,y=0), model.Location@25bc0606(x=0,y=1), model.Location@5d1659ea(x=1,y=0)],playerNo=0), V5=model.Gamepiece@793138bd(Locations =[model.Location@1951b871(x=0,y=0), model.Location@5c18016b(x=0,y=1), model.Location@33aeca0b(x=0,y=2), model.Location@43aaf813(x=1,y=0), model.Location@57ac5227(x=2,y=0)],playerNo=0)}
-ü!	Testing for Player(1): getPlayerName() = John, getPlayerNo() = 1, getGamepieceSet() = model.GamepieceSet@1cbf6e72 {T4=model.Gamepiece@e98770d(Locations =[model.Location@1ae67cad(x=0,y=0), model.Location@2f6e28bc(x=-1,y=0), model.Location@7c098bb3(x=1,y=0), model.Location@31e4bb20(x=0,y=1)],playerNo=1), T5=model.Gamepiece@18cebaa5(Locations =[model.Location@463b4ac8(x=0,y=0), model.Location@765f05af(x=1,y=0), model.Location@62f68dff(x=-1,y=0), model.Location@f001896(x=0,y=1), model.Location@13f17eb4(x=0,y=2)],playerNo=1), O4=model.Gamepiece@1d0d6318(Locations =[model.Location@4bc28c33(x=0,y=0), model.Location@4409e975(x=0,y=1), model.Location@5c153b9e(x=1,y=1), model.Location@2a7686a7(x=1,y=0)],playerNo=1), F=model.Gamepiece@758a34ce(Locations =[model.Location@7ec3394b(x=0,y=0), model.Location@bff34c6(x=-1,y=0), model.Location@1522d8a0(x=0,y=-1), model.Location@312ab28e(x=0,y=1), model.Location@5644dc81(x=1,y=1)],playerNo=1), I1=model.Gamepiece@246f8b8b(Locations =[model.Location@278bb07e(x=0,y=0)],playerNo=1), L4=model.Gamepiece@4351c8c3(Locations =[model.Location@3381b4fc(x=0,y=0), model.Location@6bea52d4(x=0,y=1), model.Location@11981797(x=0,y=2), model.Location@5c42d2b7(x=1,y=0)],playerNo=1), I2=model.Gamepiece@625abb97(Locations =[model.Location@5b1f29fa(x=0,y=0), model.Location@aeab9a1(x=0,y=1)],playerNo=1), L5=model.Gamepiece@40f70521(Locations =[model.Location@774698ab(x=0,y=0), model.Location@55342f40(x=0,y=1), model.Location@a4ca3f6(x=1,y=0), model.Location@72ea6193(x=2,y=0), model.Location@31aa3ca5(x=3,y=0)],playerNo=1), I3=model.Gamepiece@45905bff(Locations =[model.Location@2a2c13a8(x=0,y=0), model.Location@b6b1987(x=0,y=1), model.Location@6b44435b(x=0,y=2)],playerNo=1), I4=model.Gamepiece@2ccca26f(Locations =[model.Location@66b7550d(x=0,y=0), model.Location@3543df7d(x=0,y=1), model.Location@7c541c15(x=0,y=2), model.Location@3542162a(x=0,y=3)],playerNo=1), I5=model.Gamepiece@698122b2(Locations =[model.Location@4212a0c8(x=0,y=0), model.Location@1e7aa82b(x=0,y=1), model.Location@3b2c0e88(x=0,y=2), model.Location@5bd82fed(x=0,y=3), model.Location@c1bd0be(x=0,y=4)],playerNo=1), N=model.Gamepiece@476b0ae6(Locations =[model.Location@1c6804cd(x=0,y=0), model.Location@655f7ea(x=0,y=-1), model.Location@549949be(x=-1,y=-1), model.Location@4b3a45f1(x=1,y=0), model.Location@17a87e37(x=2,y=0)],playerNo=1), P=model.Gamepiece@3eeb318f(Locations =[model.Location@20a14b55(x=0,y=0), model.Location@39ad977d(x=1,y=0), model.Location@6da00fb9(x=0,y=-1), model.Location@a202ccb(x=1,y=-1), model.Location@20f12539(x=0,y=-2)],playerNo=1), U=model.Gamepiece@75b25825(Locations =[model.Location@18025ced(x=0,y=0), model.Location@13cf7d52(x=0,y=1), model.Location@3a3e4aff(x=1,y=1), model.Location@5d2a4eed(x=0,y=-1), model.Location@57459491(x=1,y=-1)],playerNo=1), W=model.Gamepiece@3f0846c6(Locations =[model.Location@77a98a6a(x=0,y=0), model.Location@78fbff54(x=-1,y=0), model.Location@3e10dc6(x=-1,y=-1), model.Location@7e22550a(x=0,y=1), model.Location@45e37a7e(x=1,y=1)],playerNo=1), X=model.Gamepiece@62452cc9(Locations =[model.Location@6941827a(x=0,y=0), model.Location@5a7005d(x=1,y=0), model.Location@5bc9ba1d(x=-1,y=0), model.Location@1021f6c9(x=0,y=1), model.Location@7516e4e5(x=0,y=-1)],playerNo=1), Y=model.Gamepiece@488eb7f2(Locations =[model.Location@5e81e5ac(x=0,y=0), model.Location@4189d70b(x=0,y=1), model.Location@3fa2213(x=1,y=0), model.Location@3e7634b9(x=2,y=0), model.Location@6f0b0a5e(x=-1,y=0)],playerNo=1), Z4=model.Gamepiece@6035b93b(Locations =[model.Location@320de594(x=0,y=0), model.Location@3dd1dc90(x=0,y=1), model.Location@abf688e(x=1,y=1), model.Location@478ee483(x=-1,y=0)],playerNo=1), Z5=model.Gamepiece@1a7288a3(Locations =[model.Location@2974f221(x=0,y=0), model.Location@58fe0499(x=-1,y=0), model.Location@686449f9(x=-1,y=-1), model.Location@665df3c6(x=1,y=0), model.Location@68b6f0d6(x=1,y=1)],playerNo=1), V3=model.Gamepiece@4044fb95(Locations =[model.Location@aa549e5(x=0,y=0), model.Location@36f48b4(x=0,y=1), model.Location@5c00384f(x=1,y=0)],playerNo=1), V5=model.Gamepiece@3b7ff809(Locations =[model.Location@1bb564e2(x=0,y=0), model.Location@62e6b5c8(x=0,y=1), model.Location@3f792b9b(x=0,y=2), model.Location@7b8233cd(x=1,y=0), model.Location@4b20ca2b(x=2,y=0)],playerNo=1)}
